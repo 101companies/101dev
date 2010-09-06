@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ASCII"?>
+<Company xmlns="http://www.company.com">
+  <depts name="Research">
+    <manager salary="61728.0">
+      <person name="Craig" address="Redmond"/>
+    </manager>
+    <subunits>
+      <pu salary="6172.5" mentor="//@depts.0/@manager">
+        <person name="Erik" address="Utrecht"/>
+      </pu>
+    </subunits>
+    <subunits>
+      <pu salary="617.0" mentor="//@depts.0/@subunits.0/@pu">
+        <person name="Ralf" address="Koblenz"/>
+      </pu>
+    </subunits>
+  </depts>
+  <depts name="Development">
+    <manager salary="117283.5">
+      <person name="Ray" address="Redmond"/>
+    </manager>
+    <subunits>
+      <du name="Dev1">
+        <manager salary="11728.0" mentor="//@depts.1/@manager">
+          <person name="Klaus" address="Boston"/>
+        </manager>
+        <subunits>
+          <du name="Dev1.1">
+            <manager salary="1172.5" mentor="//@depts.1/@subunits.0/@du/@manager">
+              <person name="Karl" address="Riga"/>
+            </manager>
+            <subunits>
+              <pu salary="1172.0" mentor="//@depts.1/@subunits.0/@du/@manager">
+                <person name="Joe" address="Wifi City"/>
+              </pu>
+            </subunits>
+          </du>
+        </subunits>
+      </du>
+    </subunits>
+  </depts>
+</Company>

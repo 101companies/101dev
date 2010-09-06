@@ -1,0 +1,14 @@
+We make use of the EMF Plugin.
+Update-Site: http://download.eclipse.org/modeling/emf/updates/releases/
+
+With the "ecore-xmi-2.2.3" jar we get XMIResourceFactory and XMLResourceFactory implementations.
+Available here: http://www.docjar.com/jar_detail/ecore-xmi-2.2.3.jar.html 
+
+The scenarios are concerned with the "company" data structure.
+That is, there are hierarchically organized departments.
+There are managers and other employees.
+Those have names and they receive a salary.
+
+We use EMF's Ecore to model the company's structure and derive an object model.
+In Main in the cutAndTotal package we deserialize a company (represented in XMI) into 
+java objects, total and cut salaries and serialize the manipulated objects back into XML representation.  
