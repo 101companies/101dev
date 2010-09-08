@@ -2,6 +2,10 @@ package cutAndTotal;
 
 import company.*;
 
+/**
+ * Total all salaries.
+ * 
+ */
 public class Total {
 
 	public static double totalCompany(Company company) {

@@ -2,6 +2,10 @@ package cutAndTotal;
 
 import company.*;
 
+/**
+ * Cut all salaries by half.
+ * 
+ */
 public class Cut {
 
 	public static void cutCompany(Company company) {
