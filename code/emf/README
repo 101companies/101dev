@@ -17,5 +17,5 @@ In the cutAndTotal package we implement functionalities to cut and total salarie
 We demonstrate the use of those classes in Main. 
 By making use of EMF's Resource and ResourceSet classes and implementations of XMIResourceFactory and XMLResourceFactory we can:
   - deserialize XMI data to company objects
-  - total and cut salaries on those object
+  - total and cut salaries on those objects
   - serialize the manipulated objects to XML data.	
