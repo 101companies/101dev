@@ -1,8 +1,10 @@
+// A variation that involves subtyping
+
 package org.softlang.code.jaxb;
 
-import org.softlang.company.*;
+import org.softlang.company2.*;
 
-public class Cut {
+public class Cut2 {
 	
 	public static void visit(Company c) {
 		if (c.getDept() != null)
@@ -23,9 +25,13 @@ public class Cut {
 		if (e != null)
 			e.setSalary(e.getSalary() / 2);
 	}
-	
+		
+	// This is where subtyping kicks in.
 	public static void visit(Subunit s) {
-		visit(s.getDu());
-		visit(s.getPu());
+		if (s instanceof Pu)
+			visit((Pu)s);
+		if (s instanceof Du)
+			visit((Du)s);
+		throw new IllegalArgumentException();		
 	}
 }

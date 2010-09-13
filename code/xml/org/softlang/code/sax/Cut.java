@@ -2,7 +2,6 @@ package org.softlang.code.sax;
 
 import static org.softlang.code.Constants.*;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;

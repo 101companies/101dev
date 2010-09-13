@@ -8,3 +8,4 @@ none:
 
 generate:
 	cd ../../../..; ${java-prefix}xjc org/softlang/data/xsd/company.xsd
+	cd ../../../..; ${java-prefix}xjc org/softlang/data/xsd/company2.xsd
