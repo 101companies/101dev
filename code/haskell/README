@@ -1,0 +1,5 @@
+We implement some "company" scenarios in Haskell.
+There is a function "total" to total all salaries in a company.
+There is a function "cut" to cut all salaries in half.
+We use "Scrap your boilerplate" style of generic programming.
+See the Makefile for running the tests.
