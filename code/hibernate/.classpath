@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="lib/" kind="src" path=""/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/JarPool/hibernate/asm.jar"/>
+	<classpathentry kind="lib" path="/JarPool/hibernate/asm-attrs.jar"/>
+	<classpathentry kind="lib" path="/JarPool/hibernate/cglib-2.1.3.jar"/>
+	<classpathentry kind="lib" path="/JarPool/hibernate/commons-collections-2.1.1.jar"/>
+	<classpathentry kind="lib" path="/JarPool/hibernate/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="/JarPool/hibernate/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="/JarPool/hibernate/ehcache-1.2.3.jar"/>
+	<classpathentry kind="lib" path="/JarPool/hibernate/hibernate3.jar"/>
+	<classpathentry kind="lib" path="/JarPool/hibernate/hsqldb.jar"/>
+	<classpathentry kind="lib" path="/JarPool/hibernate/jta.jar"/>
+	<classpathentry kind="lib" path="/JarPool/hibernate/log4j-1.2.11.jar"/>
+	<classpathentry kind="lib" path="/JarPool/hibernate/antlr-2.7.6.jar"/>
+	<classpathentry kind="output" path=""/>
+</classpath>
