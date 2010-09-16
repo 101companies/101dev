@@ -6,9 +6,9 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		// Comment out the following to just initialize the database
-
 		HibernateConnectivity hc = new HibernateConnectivity();
+		
+		// Comment out the following lines to just initialize the database
 
 		System.out.println("Loading company...");
 		Company company = hc.loadCompany();
@@ -29,5 +29,7 @@ public class Main {
 		System.out.println("Done.");
 
 		System.out.println("New total salary = " + Total.totalCompany(company));
+		
+		//
 	}
 }
