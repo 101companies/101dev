@@ -1,5 +1,6 @@
 :- ['Total.pro']. 
 :- ['Cut.pro']. 
+:- ['Depth.pro']. 
 :- ['Sample.pro']. 
 
 :-
@@ -8,7 +9,9 @@
    format('total = ~w~n',[R1]),
    cut(C1,C2),
    total(C2,R2),
-   format('cut = ~w~n',[R2]).
+   format('cut = ~w~n',[R2]),
+   depth(C1,R3),
+   format('depth = ~w~n',[R3]).
    
  :- halt.
  
