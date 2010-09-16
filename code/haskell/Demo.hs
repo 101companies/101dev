@@ -8,5 +8,5 @@ import Sample
 main 
  = do
       print $ company == read (show company)
-      print $ total company == 399747
-      print $ total (cut company) == 199873.5
+      print $ total company
+      print $ total (cut company)
