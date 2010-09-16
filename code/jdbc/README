@@ -1,0 +1,22 @@
+We make use of an appropriate JDBC Driver for MySQL:
+http://dev.mysql.com/downloads/connector/j/
+
+
+The scenarios are concerned with the "company" data structure.
+That is, there are hierarchically organized departments.
+There are managers and other employees.
+Those have names and they receive a salary.
+
+
+Relational Schema (DDL):
+In org.softlang.scripts we describe the company's relational schema in DDL.
+The package also provides a script to populate the tables with a sample company.  
+
+Plain JDBC:
+In org.softlang.plain we use plain SQL-statements to cut and total salaries directly in the database.
+
+Simple JDBC-based OR mapping:
+The package org.softlang.or.company contains an object model, which represents the company's structure in a compositional way.
+Given a database connection ObjectFactory in org.softlang.or constructs a company by using the tables' primary keys.  
+With the PersistenceTool we map from company objects back to SQL data. This is, we are able to perform both sides of the OR Mapping. 
+We test the persistence functionality, Total and Cut in org.softlang.or.testing.
