@@ -1,0 +1,14 @@
+See https://sourceforge.net/projects/developers/
+Contributors: Ralf Lämmel, Thomas Schmorleiz, Jürgen Starek
+
+Acknowledgement: 
+
+We have used several resources:
+
+The Hibernate Tutorial:
+http://www.hibernate.org/hib_docs/v3/reference/en/html/tutorial.html
+by Red Hat Middleware LLC
+
+Christian Bauer, Gavin King:
+Java Persistence with Hibernate
+Manning Publications, 2006
