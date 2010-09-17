@@ -1,5 +1,7 @@
-We make use of an appropriate JDBC Driver for MySQL:
-http://dev.mysql.com/downloads/connector/j/
+Requirements:
+-We make use of an appropriate JDBC Driver for MySQL:
+  (see library Project @ Sourceforge: 
+   http://developers.svn.sourceforge.net/svnroot/developers/repository/101companies/code/library/jdbc) 
 
 
 The scenarios are concerned with the "company" data structure.

@@ -2,8 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/JarPool/jdbc/mysql-connector-java-5.1.13/mysql-connector-java-5.1.13-bin.jar"/>
+	<classpathentry kind="lib" path="/library/jdbc/mysql-connector-java-5.1.13/mysql-connector-java-5.1.13-bin.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="/JarPool/hibernate/hsqldb.jar"/>
+	<classpathentry kind="lib" path="/library/hibernate/hsqldb.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>

@@ -1,8 +1,9 @@
 We make use of the EMF Plugin.
 Update-Site: http://download.eclipse.org/modeling/emf/updates/releases/
 
-With the "ecore-xmi-2.2.3" jar we get XMIResourceFactory and XMLResourceFactory implementations.
-Available here: http://www.docjar.com/jar_detail/ecore-xmi-2.2.3.jar.html 
+Requirements
+- With the "ecore-xmi-2.2.3.jar" we get XMIResourceFactory and XMLResourceFactory implementations.(see library Project @ Sourceforge: 
+  http://developers.svn.sourceforge.net/svnroot/developers/repository/101companies/code/library/emf) 
 
 The scenarios are concerned with the "company" data structure.
 That is, there are hierarchically organized departments.

@@ -11,7 +11,7 @@ none:
 
 start-db:
 	mkdir -p data
-	cd data; java -cp ../../JarPool/hibernate/hsqldb.jar org.hsqldb.Server &
+	cd data; java -cp ../../library/hibernate/hsqldb.jar org.hsqldb.Server &
 
 
 ###################################################################
@@ -22,7 +22,7 @@ start-db:
 
 start-gui:
 	@echo "Remember: Select 'HSQL Database Engine Server'!"
-	java -cp ../JarPool/hibernate/hsqldb.jar org.hsqldb.util.DatabaseManagerSwing &
+	java -cp ../library/hibernate/hsqldb.jar org.hsqldb.util.DatabaseManagerSwing &
 
 ###################################################################
 # Change Hibernate configuration post table creation

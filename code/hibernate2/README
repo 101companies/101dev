@@ -22,8 +22,8 @@ Prerequisites
 ###############################################################
 
 Requirements
-- The hsqldb distribution and a minimal set of Hibernate .jar's (see JarPool Project @ Sourceforge: 
-  http://developers.svn.sourceforge.net/svnroot/developers/repository/101companies/code/JarPool/hibernate)
+- The hsqldb distribution and a minimal set of Hibernate .jar's (see library Project @ Sourceforge: 
+  http://developers.svn.sourceforge.net/svnroot/developers/repository/101companies/code/library/hibernate)
 
 ###############################################################
 
@@ -60,7 +60,7 @@ Start it from the command line.
 It is a Java program.
 Go to the data dir of the distribution.
 Run the following command:
-> java -classpath ../../JarPool/hibernate/hsqldb.jar org.hsqldb.Server 
+> java -classpath ../../library/hibernate/hsqldb.jar org.hsqldb.Server 
 You can also send it to the background if you like.
 
 You can also go to the root dir and run a "make start-db".
@@ -81,7 +81,7 @@ How and why to start the database monitor?
 Start it from the command line.
 It is a Java program.
 Run the following command:
-> java -classpath ../JarPool/hibernate/hsqldb.jar org.hsqldb.util.DatabaseManagerSwing
+> java -classpath ../library/hibernate/hsqldb.jar org.hsqldb.util.DatabaseManagerSwing
 You can also send it to the background if you like.
 
 You can also go to the root dir and run a "make start-gui".
