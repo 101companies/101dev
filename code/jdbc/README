@@ -1,9 +1,23 @@
 Requirements:
--We make use of an appropriate JDBC Driver for MySQL:
+- We make use of an appropriate JDBC Driver for MySQL:
   (see library Project @ Sourceforge: 
    http://developers.svn.sourceforge.net/svnroot/developers/repository/101companies/code/library/jdbc) 
 
+Setting up a local database Server:
+- XAMPP:
+ - Download from http://www.apachefriends.org/en/xampp.html
+ - Extract/install
+ - To create a new database and execute scripts one might use: http://dev.mysql.com/downloads//gui-tools/5.0.html
+ - Open the "XAMPP Control Panel" in XAMPP's home directory and start "Apache" and "Mysql". A local MySQL Server is now running.
+ 	> Server Host : "localhost"
+ 	> Port : 3306
+ 	> Username : "root"
+ 	> Password : "" (no password)
+ - Create Database "company". 
 
+#############################################
+   
+   
 The scenarios are concerned with the "company" data structure.
 That is, there are hierarchically organized departments.
 There are managers and other employees.
@@ -16,6 +30,7 @@ The package also provides a script to populate the tables with a sample company.
 
 Plain JDBC:
 In org.softlang.plain we use plain SQL-statements to cut and total salaries directly in the database.
+org.softlang.plain.testing provides a TestCase.
 
 Simple JDBC-based OR mapping:
 The package org.softlang.or.company contains an object model, which represents the company's structure in a compositional way.

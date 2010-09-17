@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.softlang.or.*;
 import org.softlang.or.company.*;

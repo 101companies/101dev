@@ -15,9 +15,10 @@ public class CutAndTotalTest {
 
 	@Test
 	public void testTotalAndCut() throws SQLException {
-		MyConnection myConnection = new MyConnection(
-				"mysqlhost.uni-koblenz.de", "company", 3306, "tschmorleiz",
-				"stacky");
+		
+		MyConnection myConnection = new MyConnection("localhost",
+				"company", 3306, "root", "");
+		
 		myConnection.connect();
 		double preCutTotal = Total.total(myConnection);
 		Cut.cut(myConnection);
