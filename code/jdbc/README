@@ -13,7 +13,7 @@ Setting up a local database Server:
  	> Port : 3306
  	> Username : "root"
  	> Password : "" (no password)
- - Create Database "company". 
+ - Create database "company". 
 
 #############################################
    
