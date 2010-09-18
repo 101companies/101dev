@@ -1,10 +1,11 @@
 :- ['Total.pro']. 
 :- ['Cut.pro']. 
 :- ['Depth.pro']. 
-:- ['Sample.pro']. 
 
 :-
-   company(C1),
+   see('Sample.pro'),
+   read(C1),
+   seen,
    total(C1,R1),
    format('total = ~w~n',[R1]),
    cut(C1,C2),
