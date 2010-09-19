@@ -9,25 +9,26 @@ import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import org.softlang.company.*;
+
+import org.softlang.company.Employee;
+import org.softlang.company.Subunit;
 
 public class SubunitView implements View {
-
+	
 	private Subunit sub;
-	JFrame frame;
+	JFrame frame, prevFrame;
 	JPanel panel;
 	int line = 0;
-	
-	public SubunitView(Subunit sub) {
-		this.setSub(sub);
+
+	public SubunitView(Subunit subunit, JFrame frame) {
+		this.sub = subunit;
+		this.prevFrame = frame;
+		setConfig();
 		createGui();
 	}
 
 	@Override
 	public void createGui() {
-
-		setConfig();
-		
 		createEmployee(sub.getPu());
 		
 		if (sub.getDu() != null) {
@@ -35,7 +36,8 @@ public class SubunitView implements View {
 			jbn1.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					new DeptView(sub.getDu());
+					new DeptView(sub.getDu(), frame);
+					frame.setVisible(false);
 				}
 			});
 			jbn1.setBounds(10, (line += 30), 150, 30);
@@ -46,6 +48,7 @@ public class SubunitView implements View {
 		jbn2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				prevFrame.setVisible(true);
 				frame.setVisible(false);
 			}
 		});
@@ -56,19 +59,21 @@ public class SubunitView implements View {
 		this.frame.getContentPane().add(this.panel, BorderLayout.CENTER);
 		this.frame.setVisible(true);
 	}
-	
+
 	private void createEmployee(final Employee pu) {
 		JButton button = new JButton("PU");
 		button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new EmployeeView(pu);
+				new EmployeeView(pu, frame);
+				frame.setVisible(false);
 			}
 		});
 		button.setBounds(10, (line += 30), 150, 30);
-		this.panel.add(button);
+		this.panel.add(button);		
 	}
 
+	@Override
 	public void setConfig() {
 		this.frame = new JFrame("Subunit-ID: " + sub.getSubunitid());
 		this.frame.setSize(200, 200);
@@ -78,15 +83,5 @@ public class SubunitView implements View {
 			}
 		});
 		this.panel = new JPanel();
-		
 	}
-	
-	public void setSub(Subunit sub) {
-		this.sub = sub;
-	}
-
-	public Subunit getSub() {
-		return sub;
-	}
-
 }

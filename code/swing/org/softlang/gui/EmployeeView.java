@@ -12,25 +12,25 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import org.softlang.company.*;
+import org.softlang.company.Employee;
 
 public class EmployeeView implements View {
 
 	private Employee empl;
-	JFrame frame;
-	JPanel panel;
 	int line = 0;
-	
-	public EmployeeView(Employee empl) {
-		this.setE(empl);
+	JFrame frame, prevFrame;
+	JPanel panel;
+
+	public EmployeeView(Employee empl, JFrame frame) {
+		this.empl = empl;
+		this.prevFrame = frame;
+		setConfig();
 		createGui();
+
 	}
 
 	@Override
 	public void createGui() {
-		
-		setConfig();
-		
 		JLabel label1 = new JLabel("Employee:");
 		label1.setBounds(10, (line += 20), 150, 20);
 		this.panel.add(label1);
@@ -77,7 +77,7 @@ public class EmployeeView implements View {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Integer salary = Integer.valueOf(tf3.getText());
+				int salary = Integer.valueOf(tf3.getText());
 				empl.setSalary(salary);
 				System.out.println("Salary of " + empl.getPerson().getName() + " updated " + salary);
 			}			
@@ -88,6 +88,7 @@ public class EmployeeView implements View {
 		jbn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				prevFrame.setVisible(true);
 				frame.setVisible(false);
 				System.out.println("back!");
 			}
@@ -98,7 +99,8 @@ public class EmployeeView implements View {
 		this.frame.getContentPane().add(this.panel, BorderLayout.CENTER);
 		this.frame.setVisible(true);
 	}
-	
+
+	@Override
 	public void setConfig() {
 		this.frame = new JFrame("Employee-ID: " + empl.getEmployeeid());
 		this.frame.setSize(200, 210);
@@ -108,14 +110,6 @@ public class EmployeeView implements View {
 			}
 		});
 		this.panel = new JPanel();
-	}
-
-	public void setE(Employee e) {
-		this.empl = e;
-	}
-
-	public Employee getE() {
-		return empl;
 	}
 
 }
