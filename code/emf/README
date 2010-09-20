@@ -14,9 +14,9 @@ In a new "Empty EMF Project" we model the company's structure with EMF's Ecore.
 We can now ask Eclipse to derive the EMF Generator File (Right-click on the Ecore file in the Package Explorer ->  Eugenia -> Generate EMF GenModel),
 with which we are able to generate the company's object model (Right-click on top tree-node in the EMF Editor -> Generate Model Code).
 
-In the cutAndTotal package we implement functionalities to cut and total salaries in a given company.
-We demonstrate the use of those classes in Main. 
-By making use of EMF's Resource and ResourceSet classes and implementations of XMIResourceFactory and XMLResourceFactory we can:
+In the cutAndTotal package we implement functionality to cut and total salaries in a given company.
+We test these classes in Tests. 
+By making use of EMF's Resource and ResourceSet classes and implementations of XMIResourceFactory and XMLResourceFactory we are able to:
   - deserialize XMI data to company objects
   - total and cut salaries on those objects
   - serialize the manipulated objects to XML data.	
