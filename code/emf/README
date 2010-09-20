@@ -19,4 +19,4 @@ We test these classes in Tests.
 By making use of EMF's Resource and ResourceSet classes and implementations of XMIResourceFactory and XMLResourceFactory we are able to:
   - deserialize XMI data to company objects
   - total and cut salaries on those objects
-  - serialize the manipulated objects to XML data.	
+  - serialize the manipulated objects to XML data.
