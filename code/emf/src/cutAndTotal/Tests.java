@@ -1,5 +1,7 @@
 package cutAndTotal;
 
+import static org.junit.Assert.*;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -9,23 +11,27 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceFactoryImpl;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import company.Company;
 import company.CompanyPackage;
 
-public class Main {
+public class Tests {
 
-	public static String XMIYEAR2008 = "samples" + File.separatorChar
+	public String XMIYEAR2008 = "samples" + File.separatorChar
 			+ "sampleCompany2008.xmi";
 
-	public static String XMLYEAR2009 = "samples" + File.separatorChar
+	public String XMLYEAR2009 = "samples" + File.separatorChar
 			+ "sampleCompany2009.xml";
 
-	public static String XSD = "model" + File.separatorChar + "Company.xsd";
+	public ResourceSet resourceSet = new ResourceSetImpl();
 
-	public static void main(String[] args) throws IOException {
+	public Company company;
 
-		ResourceSet resourceSet = new ResourceSetImpl();
+	@Before
+	public void setUp() throws IOException {
 		resourceSet.getPackageRegistry().put(CompanyPackage.eNS_URI,
 				CompanyPackage.eINSTANCE);
 
@@ -39,20 +45,32 @@ public class Main {
 		Resource input = resourceSet.createResource(URI
 				.createFileURI(XMIYEAR2008));
 		input.load(null);
-		Company company = (Company) input.getContents().get(0);
+		company = (Company) input.getContents().get(0);
 
+	}
+
+	@Test
+	public void testCutAndTotal() {
+		
 		// total and cut
-		System.out.println("Total salary = " + Total.totalCompany(company));
+		double preCutTotal = Total.totalCompany(company);
+		System.out.println("Total salary = " + preCutTotal);
 		System.out.println("Cutting...");
 		Cut.cutCompany(company);
-		System.out.println("New total salary = " + Total.totalCompany(company));
-		
+		double newTotal = Total.totalCompany(company);
+		System.out.println("New total salary = " + newTotal);
 
+		assertEquals(preCutTotal / 2, newTotal, 0.0);
+
+	}
+
+	@After
+	public void serilize() throws IOException {
 		// serialize
 		Resource resource = resourceSet.createResource(URI
 				.createFileURI(XMLYEAR2009));
 		resource.getContents().add(company);
 		resource.save(null);
-
 	}
+
 }
