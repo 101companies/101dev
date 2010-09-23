@@ -25,6 +25,7 @@ public class Subunit {
 
 	public void setPu(Employee pu) {
 		this.pu = pu;
+		this.du = null;
 	}
 
 	public Dept getDu() {
@@ -32,6 +33,7 @@ public class Subunit {
 	}
 
 	public void setDu(Dept du) {
+		this.pu = null;
 		this.du = du;
 	}
 
