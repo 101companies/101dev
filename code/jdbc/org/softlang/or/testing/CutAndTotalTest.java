@@ -2,7 +2,6 @@ package org.softlang.or.testing;
 
 import static org.junit.Assert.*;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.junit.Test;
@@ -27,28 +26,17 @@ public class CutAndTotalTest {
 	@Test
 	public void testTotal() throws SQLException {
 		double total = Total.totalCompany(company);
-
-		// get expected total from database
-		ResultSet salaries = myConnection.getConn().prepareStatement(
-				"SELECT salary FROM employee").executeQuery();
-		double expectedTotal = 0.0;
-		while (salaries.next())
-			expectedTotal += salaries.getDouble("salary");
-
-		assertEquals(expectedTotal, total, 0.0);
+		assertEquals(399747, total, 0.0);
 	}
 
 	@Test
 	public void testCut() {
+		double preCutTotal = Total.totalCompany(company);
 		Cut.cutCompany(company);
-		double newTotal = Total.totalCompany(company);
-		// persist the company
+		// persist and reload company
 		persistenceTool.persistCompany(company);
-		// reload it
-		company = factory.createCompany();
-		double loadedTotal = Total.totalCompany(company);
-
-		assertEquals(newTotal, loadedTotal, 0.0);
+		double newTotal = Total.totalCompany(factory.createCompany());
+		assertEquals(preCutTotal / 2, newTotal, 0.0);
 	}
 
 }
