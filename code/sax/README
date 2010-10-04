@@ -1,7 +1,8 @@
 We use SAX for XML processing.
-We exercise some scenarios for companies.
-We compute the total for companies.
-We cut the salaries in half. 
+We exercise some company scenarios.
+There is one SAX handler to total all salaries.
+There is another SAX handler to cut all salaries in halt.
+The latter handler also leverages XMLStreamWriter.
 We also perform validation and tracing for SAX parsing.
 
 See the Tests class for test cases.
