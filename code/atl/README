@@ -1,0 +1,18 @@
+We make use of the ATL Plugin:
+Update-Site: http://download.eclipse.org/modeling/m2m/updates/site.xml
+
+The scenarios are concerned with the "company" data structure.
+That is, there are hierarchically organized departments.
+There are managers and other employees.
+Those have names and they receive a salary.
+
+We start by modeling with Ecore.
+The Company metamodel describes the company's hierarchical structure. 
+The Total metamodel is basically a wrapper for a double value. (both metamodels in "org/softlang/ecore")
+
+We use ATL (in "org/softlang") to cut and total company salaries.
+With Cut.atl we transform the company metamodel to itself. The transformation basically copies a given company, but cuts all salaries by half.
+Total.alt transforms the company metamodel to the total metamodel. It executes a query on all Employees, collects their salaries and adds them up.
+   
+To run the transformations click "Run As..." after selecting an ATL file in the package explorer.
+Then enter the paths to the metamodel(s), the sourcemodel (sample in /data) and the targetmodel (free choice) and click "Run".
