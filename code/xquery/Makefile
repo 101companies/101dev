@@ -9,6 +9,9 @@ test:
 	${javasix} -classpath ${basex} org.basex.BaseX cut.xq -i${input} > cut.result.xml
 	${javasix} -classpath ${basex} org.basex.BaseX total.xq -icut.result.xml | xpath "/result/text()" 2> /dev/null > cut.result
 	diff cut.result cut.baseline
+	${javasix} -classpath ${basex} org.basex.BaseX depth.xq -i${input} > depth.result.xml
+	xpath depth.result.xml "/result/text()" 2> /dev/null > depth.result
+	diff depth.result depth.baseline
 
 clean:
 	rm -f *~ *.result *.result.xml
