@@ -3,7 +3,7 @@
 :- ['Depth.pro']. 
 
 :-
-   see('Sample.pro'),
+   see('sampleCompany.trm'),
    read(C1),
    seen,
    total(C1,R1),
