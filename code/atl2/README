@@ -1,4 +1,2 @@
 In comparison to "atl" this project's company metamodel illustrates subtyping. (Employee -> Subunit; Dept -> Subunit)
 "cut2.launch" and "total2.launch" provide configurations to run both transformations.
-
-
