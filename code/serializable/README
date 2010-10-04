@@ -1,1 +1,9 @@
-...
+Object Serialization
+
+The scenarios are concerned with the "company" data structure.
+Each company consists at least of one department.
+A department has a manager and Subunits.
+A Subunit can be a sub-department or a person-unit.
+
+We use OS to make an obect-model persitent. 
+All classes of the obect-model must implement the empty interface Serializable.
