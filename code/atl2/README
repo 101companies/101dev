@@ -1,1 +1,0 @@
-In comparison to "atl" this project's company metamodel illustrates subtyping. (Employee -> Subunit; Dept -> Subunit)
