@@ -1,0 +1,6 @@
+Swing
+
+This project represents the company-model on a gui-surface.
+There is a hierarchically organized representation of the company-model.
+The departments and subunits are shown in several JLists.
+Manager, department-names and employees (name, address, salary) are editable.
