@@ -1,3 +1,5 @@
+-- @path Company=/atl/Company.ecore
+
 module Cut;
 
 create OUT: Company from IN: Company;

@@ -1,3 +1,6 @@
+-- @path Company=/atl/Company.ecore
+-- @path Total=/atl/Total.ecore
+
 module Total;
 
 create OUT: Total from IN: Company;
