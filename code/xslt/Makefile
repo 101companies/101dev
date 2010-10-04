@@ -1,4 +1,5 @@
 input = Year2008.xml
+saxon = ../library/saxon/saxon9he.jar
 
 test:
 	xsltproc total.xslt ${input} > total.result
@@ -10,12 +11,12 @@ test:
 	diff depth.result depth.baseline
 
 test-saxon:
-	java -jar ../library/saxon9he.jar -s:${input} -xsl:total.xslt >total.result
+	java -jar ${saxon} -s:${input} -xsl:total.xslt >total.result
 	diff total.result total.baseline
-	java -jar ../library/saxon9he.jar -s:${input} -xsl:cut.xslt >cut.result.xml
-	java -jar ../library/saxon9he.jar -s:cut.result.xml -xsl:total.xslt >cut.result
+	java -jar ${saxon} -s:${input} -xsl:cut.xslt >cut.result.xml
+	java -jar ${saxon} -s:cut.result.xml -xsl:total.xslt >cut.result
 	diff cut.result cut.baseline
-	java -jar ../library/saxon9he.jar -s:${input} -xsl:depth.xslt >depth.result
+	java -jar ${saxon} -s:${input} -xsl:depth.xslt >depth.result
 	diff depth.result depth.baseline
 
 clean:
