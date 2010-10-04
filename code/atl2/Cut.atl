@@ -1,4 +1,4 @@
--- @path Company=/atl/Company.ecore
+-- @path Company=/atl2/Company.ecore
 
 module Cut;
 
