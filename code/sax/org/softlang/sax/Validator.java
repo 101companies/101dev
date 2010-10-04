@@ -1,7 +1,6 @@
 package org.softlang.sax;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.*;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
