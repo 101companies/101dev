@@ -1,4 +1,4 @@
-module Sample where
+module SampleCompany where
 
 import Company
 

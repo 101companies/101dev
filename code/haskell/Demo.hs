@@ -4,7 +4,7 @@ import Company
 import Total
 import Cut
 import Depth
-import Sample
+import SampleCompany
 
 main 
  = do
