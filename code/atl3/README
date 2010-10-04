@@ -1,5 +1,5 @@
 In comparison to "atl2" we start by modeling with KM3. Again we make use of subtyping.
-We then convert them to Ecore metamodels (Right-click on the KM3 file in the Package Explorer -> Inject KM3 to Ecore metamodel).
+We then convert the KM3 metamodels to Ecore metamodels (Right-click on the KM3 file in the Package Explorer -> Inject KM3 to Ecore metamodel).
 "cut3.launch" and "total3.launch" provide configurations to run both transformations.
 
 ##############
