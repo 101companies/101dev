@@ -13,10 +13,13 @@ It uses the metamodel Company.ecore for the input.
 It uses the trivial metamodel Total.ecore for the output.
 
 Running the transformations
-- Select the ATL file in the package explorer.
-- Right click "Run As" -> Run Configurations ..."
-- Select the ATL item.
-- Create a new run configuration.
-- Fill in the values to point to metamodels and models.
 
-(The target model is usually a new file.)
+Steps:
+- Select the ATL file in the package explorer.
+- Right click 
+- Select "Run As" -> "ATL Transformation"
+- Fill in the values to point to input and output models.
+
+Comments:
+- The locations for the metamodels are taken from the .atl files.
+- You can also specific a "run configuration" as usual.
