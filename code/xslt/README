@@ -9,3 +9,15 @@ Using libxml 20703, libxslt 10124 and libexslt 813
 xsltproc was compiled against libxml 20703, libxslt 10124 and libexslt 813
 libxslt 10124 was compiled against libxml 20703
 libexslt 813 was compiled against libxml 20703
+
+Also possible to work with Saxon from:
+	http://saxon.sourceforge.net/ or http://www.saxonica.com/
+
+Tested with this version of Saxon:
+
+$ java -jar ../library/saxon/saxon9he.jar
+No source file name
+Saxon-HE 9.2.1.2J from Saxonica
+Usage: see http://www.saxonica.com/documentation/using-xsl/commandline.html
+Options: 
+   ...

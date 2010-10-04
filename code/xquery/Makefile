@@ -3,7 +3,7 @@ saxon = ../library/saxon/saxon9he.jar
 basex = ../library/basex/BaseX61.jar
 javasix = /System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Commands/java
 
-test:
+test-basex:
 	${javasix} -classpath ${basex} org.basex.BaseX total.xq -i${input} > total.result.xml
 	xpath total.result.xml "/result/text()" 2> /dev/null > total.result
 	diff total.result total.baseline

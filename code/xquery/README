@@ -20,3 +20,15 @@ Usage: BaseX [-dioqsvVxz] [query] [-c]
   -w         wrap query result to xml
   -z         skip query output
 
+The version without the update facility (has a different cut implementation)
+uses Saxon from:
+	http://saxon.sourceforge.net/ or http://www.saxonica.com/
+
+Tested with this version of Saxon:
+
+$ java -jar ../library/saxon/saxon9he.jar
+No source file name
+Saxon-HE 9.2.1.2J from Saxonica
+Usage: see http://www.saxonica.com/documentation/using-xsl/commandline.html
+Options: 
+   ...
