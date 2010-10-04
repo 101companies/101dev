@@ -1,0 +1,11 @@
+We address the 101companies scenarios with XSLT.
+See the Makefile for running some tests.
+We use the xsltproc implementation available on OS X, Linux et al.
+
+Tested with this version of xsltproc:
+
+$ xsltproc -V
+Using libxml 20703, libxslt 10124 and libexslt 813
+xsltproc was compiled against libxml 20703, libxslt 10124 and libexslt 813
+libxslt 10124 was compiled against libxml 20703
+libexslt 813 was compiled against libxml 20703
