@@ -1,0 +1,22 @@
+We address the 101companies scenarios with XQuery.
+See the Makefile for running some tests.
+We use the BaseX implementation available for Java platform from:
+	http://www.inf.uni-konstanz.de/dbis/basex/index
+Requires Java 6.
+
+Tested with this version of BaseX:
+
+$ java -cp ../library/basex/BaseX61.jar org.basex.BaseX -h
+BaseX 6.1; DBIS, University of Konstanz
+Usage: BaseX [-dioqsvVxz] [query] [-c]
+  [query]    query file
+  -c<cmd>    database commands
+  -d         debug mode
+  -i<file>   XML input
+  -o<file>   output file
+  -q<expr>   query expression
+  -s<pars>   serialization parameters
+  -v/V       show (all) process info
+  -w         wrap query result to xml
+  -z         skip query output
+
