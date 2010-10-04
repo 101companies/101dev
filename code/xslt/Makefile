@@ -1,4 +1,4 @@
-input = Year2008.xml
+input = sampleCompany.xml
 saxon = ../library/saxon/saxon9he.jar
 
 test:
