@@ -25,5 +25,8 @@ test-saxon:
 	xpath depth.result.xml "/result/text()" 2> /dev/null > depth.result
 	diff depth.result depth.baseline
 
+gui:
+	${javasix} -classpath ${basex} org.basex.BaseXWin
+
 clean:
 	rm -f *~ *.result *.result.xml
