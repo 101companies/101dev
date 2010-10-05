@@ -36,6 +36,7 @@ public class Subunit implements Serializable {
 
 	public void setPu(Employee pu) {
 		this.pu = pu;
+		this.du = null;
 	}
 
 	public Dept getDu() {
@@ -44,5 +45,6 @@ public class Subunit implements Serializable {
 
 	public void setDu(Dept du) {
 		this.du = du;
+		this.pu = null;
 	}
 }
