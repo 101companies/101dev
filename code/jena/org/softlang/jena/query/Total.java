@@ -1,21 +1,19 @@
-package org.softlang.arq;
+package org.softlang.jena.query;
 
-import org.softlang.util.CompanyConstants;
-
+import org.softlang.company.CompanyModel;
 import com.hp.hpl.jena.query.*;
-import com.hp.hpl.jena.rdf.model.Model;
 
 public class Total {
 
-	public static double total(Model model){
+	public static double total(CompanyModel c){
 		String queryString = 
 			"SELECT sum(?salary)" +
 			"WHERE " +
-				"{?e"   + " <" + CompanyConstants.SALARY	+ "> " + "?salary"  + "}";
+				"{?e"   + " <" + c.SALARY	+ "> " + "?salary"  + "}";
 		
 		// We need some "syntax extension" here
 		Query query = QueryFactory.create(queryString, Syntax.syntaxARQ);
-		QueryExecution qe = QueryExecutionFactory.create(query, model);
+		QueryExecution qe = QueryExecutionFactory.create(query, c.getModel());
 		ResultSet rs = qe.execSelect();
 		double ttl = rs.next().getLiteral(rs.getResultVars().get(0))
 				.getDouble();

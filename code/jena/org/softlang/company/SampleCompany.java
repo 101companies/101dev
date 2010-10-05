@@ -1,14 +1,16 @@
-package org.softlang.util;
+package org.softlang.company;
 
 import com.hp.hpl.jena.rdf.model.*;
 
-public class SampleCompanyHolder {
+/**
+ * Construct a sample RDF company.
+ * This simple also gets saved in sampleCompany.rdf. 
+ */
+public class SampleCompany {
 
 	public static Model getSample() {
 
-		RDFCompanyBuilder builder = new RDFCompanyBuilder();
-
-		// Building the company model
+		CompanyModel builder = new CompanyModel();
 
 		builder
 				.createCompany(builder
@@ -17,12 +19,12 @@ public class SampleCompanyHolder {
 						.add(
 								builder
 										.createDept(
-												CompanyConstants.NS_COMPANY
+												builder.NS_COMPANY
 														+ "research",
 												"Research",
 												builder
 														.createEmployee(
-																CompanyConstants.NS_COMPANY
+																builder.NS_COMPANY
 																		+ "craig",
 																builder
 																		.createPerson(
@@ -35,7 +37,7 @@ public class SampleCompanyHolder {
 														.add(
 																builder
 																		.createEmployee(
-																				CompanyConstants.NS_COMPANY
+																				builder.NS_COMPANY
 																						+ "erik",
 																				builder
 																						.createPerson(
@@ -45,12 +47,12 @@ public class SampleCompanyHolder {
 																				builder
 																						.getModel()
 																						.getResource(
-																								CompanyConstants.NS_COMPANY
+																								builder.NS_COMPANY
 																										+ "craig")))
 														.add(
 																builder
 																		.createEmployee(
-																				CompanyConstants.NS_COMPANY
+																				builder.NS_COMPANY
 																						+ "ralf",
 																				builder
 																						.createPerson(
@@ -60,18 +62,18 @@ public class SampleCompanyHolder {
 																				builder
 																						.getModel()
 																						.getResource(
-																								CompanyConstants.NS_COMPANY
+																								builder.NS_COMPANY
 																										+ "erik"))),
 												builder.getModel().createBag()))
 						.add(
 								builder
 										.createDept(
-												CompanyConstants.NS_COMPANY
+												builder.NS_COMPANY
 														+ "development",
 												"Development",
 												builder
 														.createEmployee(
-																CompanyConstants.NS_COMPANY
+																builder.NS_COMPANY
 																		+ "ray",
 																builder
 																		.createPerson(
@@ -85,12 +87,12 @@ public class SampleCompanyHolder {
 														.add(
 																builder
 																		.createDept(
-																				CompanyConstants.NS_COMPANY
+																				builder.NS_COMPANY
 																						+ "Dev1",
 																				"Dev1",
 																				builder
 																						.createEmployee(
-																								CompanyConstants.NS_COMPANY
+																								builder.NS_COMPANY
 																										+ "klaus",
 																								builder
 																										.createPerson(
@@ -100,7 +102,7 @@ public class SampleCompanyHolder {
 																								builder
 																										.getModel()
 																										.getResource(
-																												CompanyConstants.NS_COMPANY
+																												builder.NS_COMPANY
 																														+ "ray")),
 																				builder
 																						.getModel()
@@ -111,12 +113,12 @@ public class SampleCompanyHolder {
 																						.add(
 																								builder
 																										.createDept(
-																												CompanyConstants.NS_COMPANY
+																												builder.NS_COMPANY
 																														+ "Dev1.1",
 																												"Dev1.1",
 																												builder
 																														.createEmployee(
-																																CompanyConstants.NS_COMPANY
+																																builder.NS_COMPANY
 																																		+ "karl",
 																																builder
 																																		.createPerson(
@@ -126,7 +128,7 @@ public class SampleCompanyHolder {
 																																builder
 																																		.getModel()
 																																		.getResource(
-																																				CompanyConstants.NS_COMPANY
+																																				builder.NS_COMPANY
 																																						+ "klaus")),
 																												builder
 																														.getModel()
@@ -134,7 +136,7 @@ public class SampleCompanyHolder {
 																														.add(
 																																builder
 																																		.createEmployee(
-																																				CompanyConstants.NS_COMPANY
+																																				builder.NS_COMPANY
 																																						+ "joe",
 																																				builder
 																																						.createPerson(
@@ -144,7 +146,7 @@ public class SampleCompanyHolder {
 																																				builder
 																																						.getModel()
 																																						.getResource(
-																																								CompanyConstants.NS_COMPANY
+																																								builder.NS_COMPANY
 																																										+ "karl"))),
 																												builder
 																														.getModel()

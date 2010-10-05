@@ -1,18 +1,18 @@
-package org.softlang.pureJena;
+package org.softlang.jena.rdf;
 
+import org.softlang.company.CompanyModel;
+import com.hp.hpl.jena.rdf.model.*;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.softlang.util.CompanyConstants;
-
-import com.hp.hpl.jena.rdf.model.*;
-
 public class SalaryCheck {
 
-	public static boolean checkSalaries(Model model) {
+	public static boolean checkSalaries(CompanyModel c) {
 
-		StmtIterator stmtit = model.listStatements(new SimpleSelector(null,
-				CompanyConstants.DEPTS, (RDFNode) null));
+		StmtIterator stmtit = c.getModel().listStatements(
+				new SimpleSelector(
+						null,
+						c.DEPTS, (RDFNode) null));
 
 		List<Resource> depts = new LinkedList<Resource>();
 
@@ -23,13 +23,13 @@ public class SalaryCheck {
 		}
 		for (Resource dept : depts) {
 			// get manager's salary
-			double managerSalary = dept.getProperty(CompanyConstants.MANAGER)
-					.getProperty(CompanyConstants.SALARY).getDouble();
+			double managerSalary = dept.getProperty(c.MANAGER)
+					.getProperty(c.SALARY).getDouble();
 			NodeIterator employeeIt = dept.getProperty(
-					CompanyConstants.EMPLOYEES).getBag().iterator();
+					c.EMPLOYEES).getBag().iterator();
 			while (employeeIt.hasNext())
 				if (!(employeeIt.next().asResource().getProperty(
-						CompanyConstants.SALARY).getDouble() < managerSalary))
+						c.SALARY).getDouble() < managerSalary))
 					return false;
 		}
 

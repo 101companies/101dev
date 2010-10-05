@@ -1,17 +1,27 @@
-We make use of jena jars:
+We use Jena for RDF processing.
+Jena is a Java framework for building Semantic Web applications.
 http://jena.sourceforge.net/downloads.html
+We exercise some company scenarios.
 
-The scenarios are concerned with the "company" data structure.
-That is, there are hierarchically organized departments.
-There are managers and other employees.
-Those have names and they receive a salary.
 
-In org.softlang.util lives "RDFCompanyBuilder" to build company models. 
-This package also contains "CompanyConstants", where we collect rdf properties and namespace URIs.
+Package ...jena.rdf
 
-In org.softlang.pureJena we make use of a statement iterator to total and cut company salaries and check certain constraints.
+We leverage Jena's basic RDF API (package com.hp.hpl.jena.rdf.model).
+We use statement iterators to iterate over RDF resources.
+In this manner, we total salaries, cut salaries, and check certain constraints.
+ 
+ 
+Package ...jena.query
 
-org.softlang.arq contains the same functionalities, but we use SPARQL and Jena's query engine ARQ to implement them.
+We leverage Jena's query engine and ARQ (SPARQL) support.
+We implement some of the above scenarions.
 
-Demo code can be found in org.softlang.(pureJena|arq).main .
 
+Package ...company
+
+We provide a builder for comany RDF models.
+We also show construction code for a sample company.
+The rest of the code uses the sample stored in .rdf file stored in the root dir.
+
+
+See the Tests.java classes for JUnit test cases in the packages.

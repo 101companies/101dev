@@ -1,19 +1,16 @@
-package org.softlang.arg.main;
+package org.softlang.jena.rdf;
 
+import org.softlang.company.CompanyModel;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import org.softlang.arq.*;
-
-import com.hp.hpl.jena.rdf.model.*;
-
-public class Main {
+public class Tests {
 
 	public static final String sampleCompany = "sampleCompany.rdf";
 
 	public static void main(String[] args) throws FileNotFoundException {
-		Model sample = ModelFactory.createDefaultModel();
-		sample.read(new FileInputStream(sampleCompany), null);
+		CompanyModel sample = new CompanyModel();
+		sample.getModel().read(new FileInputStream(sampleCompany), null);
 
 		System.out.println("> No \"unfair\" salaries? \n"
 				+ SalaryCheck.checkSalaries(sample));
