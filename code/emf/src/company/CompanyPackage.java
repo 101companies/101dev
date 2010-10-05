@@ -49,7 +49,7 @@ public interface CompanyPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "";
+	String eNS_PREFIX = "com";
 
 	/**
 	 * The singleton instance of the package.
