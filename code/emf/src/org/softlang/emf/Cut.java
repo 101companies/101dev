@@ -1,4 +1,4 @@
-package cutAndTotal;
+package org.softlang.emf;
 
 import company.*;
 
