@@ -9,7 +9,7 @@ import org.w3c.dom.NodeList; // Lists of DOM subtrees
  */
 public class Total {
 
-    public static double aggregate(Document doc) {
+    public static double getTotal(Document doc) {
 	    
 	    // The aggregation variable 
 	    double total = 0;

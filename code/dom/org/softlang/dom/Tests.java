@@ -10,7 +10,7 @@ public class Tests {
     @Test
 	public void testTotal() throws Exception {
     	Document doc = DOMUtilities.loadDocument("sampleCompany.xml");
-    	double total = Total.aggregate(doc);
+    	double total = Total.getTotal(doc);
     	assertEquals(399747, total, 0);
  	}
 	
@@ -18,7 +18,7 @@ public class Tests {
     public void testCut() throws Exception {
     	Document doc = DOMUtilities.loadDocument("sampleCompany.xml");
     	Cut.transform(doc);
-    	double total = Total.aggregate(doc);
+    	double total = Total.getTotal(doc);
     	assertEquals(199873.5, total, 0);
     }    
 }
