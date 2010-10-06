@@ -20,24 +20,24 @@ public class Tests {
 				JAXBContext.newInstance("org.softlang.company");
 	}
 		
-	public static Company readFile(String file)
+	public static Company readFile(File input)
 	throws JAXBException 
 	{
 		initializeJaxbContext();
 		Unmarshaller unMarshaller = jaxbContext.createUnmarshaller();
-		return (Company) unMarshaller.unmarshal(new File(file));		
+		return (Company) unMarshaller.unmarshal(input);		
 	}
 
-	public static void writeFile(String file, Company c)
+	public static void writeFile(File output, Company c)
 	throws 	JAXBException,
 			FileNotFoundException,
 			XMLStreamException 
 	{
 		initializeJaxbContext();
-	    OutputStream output = new FileOutputStream("Year2009.xml");
+	    OutputStream os = new FileOutputStream(output);
 		Marshaller marshaller = jaxbContext.createMarshaller();
 	    XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
-        XMLStreamWriter writer = outputFactory.createXMLStreamWriter(output);
+        XMLStreamWriter writer = outputFactory.createXMLStreamWriter(os);
 		marshaller.marshal(c, writer); // need a stream writer that does indentation		
 	}
 	
@@ -48,15 +48,16 @@ public class Tests {
 		FileNotFoundException,
 		XMLStreamException 
 	{
-		Company c;
-		double total;
-		c = readFile("Year2008.xml");		
-	    total = Total.aggregate(c);
+		File sample = new File("sampleCompany.xml");
+		File tmp = new File("sampleCompany.tmp");
+		Company c = readFile(sample);		
+		double total = Total.getTotal(c);
 	    assertEquals(399747, total, 0);
 	    Cut.transform(c);
-		writeFile("Year2009.xml", c);		
-		c = readFile("Year2009.xml");		
-	    total = Total.aggregate(c);
+		writeFile(tmp, c);		
+		c = readFile(tmp);		
+	    total = Total.getTotal(c);
 	    assertEquals(199873.5, total, 0);
+	    tmp.delete();
 	}
 }

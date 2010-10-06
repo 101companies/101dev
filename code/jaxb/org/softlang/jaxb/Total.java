@@ -4,36 +4,36 @@ import org.softlang.company.*;
 
 public class Total {
 	
-	public static double aggregate(Company c) {
+	public static double getTotal(Company c) {
 		double total = 0;
 		if (c.getDept() != null)
 			for (Dept d : c.getDept())
-				total += aggregate(d);
+				total += getTotal(d);
 		return total;
 	}
 	
-	public static double aggregate(Dept d) {
+	public static double getTotal(Dept d) {
 		double total = 0;
 		if (d != null) {
-			total += aggregate(d.getManager());
+			total += getTotal(d.getManager());
 			if (d.getSubunit() != null)
 				for (Subunit s : d.getSubunit())
-					total += aggregate(s);
+					total += getTotal(s);
 		}
 		return total;		
 	}
 	
-	public static double aggregate(Employee e) {
+	public static double getTotal(Employee e) {
 		double total = 0;
 		if (e != null)
 			total += e.getSalary();
 		return total;
 	}
 	
-	public static double aggregate(Subunit s) {
+	public static double getTotal(Subunit s) {
 		double total = 0;
-		total += aggregate(s.getDu());
-		total += aggregate(s.getPu());
+		total += getTotal(s.getDu());
+		total += getTotal(s.getPu());
 		return total;
 	}
 }
