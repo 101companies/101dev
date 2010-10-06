@@ -1,12 +1,19 @@
 package org.softlang.jaxb;
 
 import org.softlang.company.*;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import java.io.*;
-
-import javax.xml.bind.*;
-import javax.xml.stream.*;
 
 public class Tests {
 
@@ -38,7 +45,7 @@ public class Tests {
 		Marshaller marshaller = jaxbContext.createMarshaller();
 	    XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
         XMLStreamWriter writer = outputFactory.createXMLStreamWriter(os);
-		marshaller.marshal(c, writer); // need a stream writer that does indentation		
+		marshaller.marshal(c, writer); // TODO: need a stream writer that does indentation		
 	}
 	
 	@Test
