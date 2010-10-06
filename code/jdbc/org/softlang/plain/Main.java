@@ -10,7 +10,7 @@ public class Main {
 
 		myConnection.connect();
 
-		System.out.println("Total = " + Total.total(myConnection));
+		System.out.println("Total = " + Total.getTotal(myConnection));
 		System.out.println("Company depth = "
 				+ CompanyDepth.depthCompany(myConnection));
 
@@ -18,7 +18,7 @@ public class Main {
 		Cut.cut(myConnection);
 		System.out.println("Done");
 
-		System.out.println("New total = " + Total.total(myConnection));
+		System.out.println("New total = " + Total.getTotal(myConnection));
 
 	}
 

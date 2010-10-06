@@ -20,10 +20,10 @@ public class CutAndTotalTest {
 				3306, "root", "");
 
 		myConnection.connect();
-		double preCutTotal = Total.total(myConnection);
+		double preCutTotal = Total.getTotal(myConnection);
 		assertEquals(399747, preCutTotal, 0.0);
 		Cut.cut(myConnection);
-		double newTotal = Total.total(myConnection);
+		double newTotal = Total.getTotal(myConnection);
 		assertEquals(preCutTotal / 2, newTotal, 0.0);
 	}
 
