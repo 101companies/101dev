@@ -1,27 +1,32 @@
-package org.softlang.plain.testing;
-
-import static org.junit.Assert.*;
+package org.softlang.jdbc;
 
 import java.sql.SQLException;
 import org.junit.Test;
-import org.softlang.plain.*;
+import static org.junit.Assert.*;
 
 /**
- * Testing Cut and Total. Please execute the scripts "CreateTables.sql" and
- * "PopulateTables.sql" before running this UnitTest.
- * 
+ * Testing the company scenarios.
+ * See the README. 
  */
-public class CutAndTotalTest {
+public class Tests {
 
 	@Test
 	public void testTotalAndCut() throws SQLException {
 
-		MyConnection myConnection = new MyConnection("localhost", "company",
-				3306, "root", "");
+		MyConnection myConnection =
+			new MyConnection(
+					"localhost",
+					"company",
+					3306,
+					"root", "");
 
 		myConnection.connect();
+		
+		// Test scenario "total"
 		double preCutTotal = Total.getTotal(myConnection);
 		assertEquals(399747, preCutTotal, 0.0);
+		
+		// Test scenario "cut"
 		Cut.cut(myConnection);
 		double newTotal = Total.getTotal(myConnection);
 		assertEquals(preCutTotal / 2, newTotal, 0.0);

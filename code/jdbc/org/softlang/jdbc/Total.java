@@ -1,4 +1,4 @@
-package org.softlang.plain;
+package org.softlang.jdbc;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

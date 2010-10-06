@@ -1,10 +1,10 @@
-package org.softlang.plain;
+package org.softlang.jdbc;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CompanyDepth {
+public class Depth {
 
 	public static int depthCompany(MyConnection myConnection) {
 		int maxDepth = 0;

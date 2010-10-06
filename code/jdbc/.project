@@ -3,6 +3,8 @@
 	<name>jdbc</name>
 	<comment></comment>
 	<projects>
+		<project>library</project>
+		<project>sql</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

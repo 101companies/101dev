@@ -1,39 +1,17 @@
-Requirements:
-- We make use of an appropriate JDBC Driver for MySQL:
-  (see library Project @ Sourceforge: 
-   http://developers.svn.sourceforge.net/svnroot/developers/repository/101companies/code/library/jdbc) 
+We use JDBC/SQL for data processing.
+We exercise some company scenarios.
+That is, we use embedded SQL in Java.
 
-Setting up a local database Server:
-- XAMPP:
- - Download from http://www.apachefriends.org/en/xampp.html
- - Extract/install
- - To create a new database and execute scripts one might use: http://dev.mysql.com/downloads//gui-tools/5.0.html
- - Open the "XAMPP Control Panel" in XAMPP's home directory and start "Apache" and "Mysql". A local MySQL Server is now running.
- 	> Server Host : "localhost"
- 	> Port : 3306
- 	> Username : "root"
- 	> Password : "" (no password)
- - Create database "company". 
+See the Tests class for test cases.
 
-#############################################
-   
-   
-The scenarios are concerned with the "company" data structure.
-That is, there are hierarchically organized departments.
-There are managers and other employees.
-Those have names and they receive a salary.
+Prerequisites:
 
+- A suitable company database.
+  Please use project "sql" to set up the company database.
+  That is, we assume that you have an initial database image.
+  Tests will only succeed for an initial database image.
+  Corollary: tests will succeed at most once.
 
-Relational Schema (DDL):
-In org.softlang.scripts we describe the company's relational schema in DDL.
-The package also provides a script to populate the tables with a sample company.  
-
-Plain JDBC:
-In org.softlang.plain we use plain SQL-statements to cut and total salaries directly in the database.
-org.softlang.plain.testing provides a TestCase.
-
-Simple JDBC-based OR mapping:
-The package org.softlang.or.company contains an object model, which represents the company's structure in a compositional way.
-Given a database connection ObjectFactory in org.softlang.or constructs a company by using the tables' primary keys.  
-With the PersistenceTool we map from company objects back to SQL data. This is, we are able to perform both sides of the OR Mapping. 
-We test the persistence functionality, Total and Cut in org.softlang.or.testing.
+- A suitable JDBC Driver for MySQL:
+  An appropriate driver is available through the project "library".
+  See the corresponding JAR in the build path of the present project. 
