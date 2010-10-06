@@ -8,30 +8,14 @@ import java.io.Serializable;
  */
 public class Person implements Serializable {
 
-	private static final long serialVersionUID = -538392287385455559L;
-	private int id;
+	private static final long serialVersionUID = -200889592677165150L;
+
 	private String name;
 	private String address;
 
 	public Person() {
-		id = 0;
-	}
-
-	public Person(int id) {
-		this.id = id;
-	}
-
-	public Person(String name) {
-		this.setName(name);
-	}
-
-	public int getPersonid() {
-		return id;
-	}
-
-	public void setPersonid(int id) {
-		if (this.id == 0)
-			this.id = id;
+		name = "";
+		address = "";
 	}
 
 	public String getName() {
@@ -49,4 +33,5 @@ public class Person implements Serializable {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 }

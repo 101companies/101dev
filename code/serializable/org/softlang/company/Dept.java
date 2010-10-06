@@ -10,29 +10,14 @@ import java.util.List;
  */
 public class Dept implements Serializable {
 
-	private static final long serialVersionUID = 3286725847863678814L;
-	private int id;
+	private static final long serialVersionUID = -2008895922177165250L;
 	private String name;
 	private Employee manager;
 	private List<Subunit> subunits;
 
 	public Dept() {
-		id = 0;
+		name = "";
 		subunits = new LinkedList<Subunit>();
-	}
-
-	public Dept(int id) {
-		this.id = id;
-		subunits = new LinkedList<Subunit>();
-	}
-
-	public int getDeptid() {
-		return id;
-	}
-
-	public void setDeptid(int id) {
-		if (this.id == 0)
-			this.id = id;
 	}
 
 	public String getName() {
@@ -55,11 +40,4 @@ public class Dept implements Serializable {
 		return subunits;
 	}
 
-	public void addSubunit(Subunit subunit) {
-		subunits.add(subunit);
-	}
-
-	public void removeSubunit(int index) {
-		subunits.remove(index);
-	}
 }

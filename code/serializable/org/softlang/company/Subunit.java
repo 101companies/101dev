@@ -8,35 +8,18 @@ import java.io.Serializable;
  */
 public class Subunit implements Serializable {
 
-	private static final long serialVersionUID = 4404891368793247786L;
-	private int id;
+	private static final long serialVersionUID = -2008895922137165250L;
+
 	private Employee pu;
 	private Dept du;
-
-	public Subunit() {
-		id = 0;
-	}
-
-	public Subunit(int id) {
-		this.id = id;
-	}
-
-	public int getSubunitid() {
-		return id;
-	}
-
-	public void setSubunitid(int id) {
-		if (this.id == 0)
-			this.id = id;
-	}
 
 	public Employee getPu() {
 		return pu;
 	}
 
 	public void setPu(Employee pu) {
+		du = null;
 		this.pu = pu;
-		this.du = null;
 	}
 
 	public Dept getDu() {
@@ -44,7 +27,8 @@ public class Subunit implements Serializable {
 	}
 
 	public void setDu(Dept du) {
+		pu = null;
 		this.du = du;
-		this.pu = null;
 	}
+
 }

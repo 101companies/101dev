@@ -8,33 +8,10 @@ import java.io.Serializable;
  */
 public class Employee implements Serializable {
 
-	private static final long serialVersionUID = -5270894415042869399L;
-	private int id;
+	private static final long serialVersionUID = -210889592677165250L;
+
 	private Person person;
 	private double salary;
-
-	public Employee() {
-		id = 0;
-	}
-
-	public Employee(int id) {
-		this.id = id;
-	}
-
-	public Employee(int salary, Person p) {
-		id = 0;
-		this.setSalary(salary);
-		this.setPerson(p);
-	}
-
-	public int getEmployeeid() {
-		return id;
-	}
-
-	public void setEmploeeid(int id) {
-		if (this.id == 0)
-			this.id = id;
-	}
 
 	public Person getPerson() {
 		return person;
@@ -51,4 +28,5 @@ public class Employee implements Serializable {
 	public void setSalary(double salary) {
 		this.salary = salary;
 	}
+
 }
