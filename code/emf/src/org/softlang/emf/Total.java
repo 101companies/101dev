@@ -8,29 +8,29 @@ import company.*;
  */
 public class Total {
 
-	public static double totalCompany(Company company) {
-		double ttl = 0;
+	public static double getTotal(Company company) {
+		double total = 0;
 		for (Dept dept : company.getDepts())
-			ttl += totalDept(dept);
-		return ttl;
+			total += getTotal(dept);
+		return total;
 	}
 
-	private static double totalDept(Dept dept) {
-		double ttl = totalEmployee(dept.getManager());
+	private static double getTotal(Dept dept) {
+		double total = getTotal(dept.getManager());
 		for (Subunit subunit : dept.getSubunits())
-			ttl += totalSubunit(subunit);
-		return ttl;
+			total += getTotal(subunit);
+		return total;
 
 	}
 
-	private static double totalSubunit(Subunit subunit) {
+	private static double getTotal(Subunit subunit) {
 		if (subunit.getPu() != null)
-			return totalEmployee(subunit.getPu());
+			return getTotal(subunit.getPu());
 		else
-			return totalDept(subunit.getDu());
+			return getTotal(subunit.getDu());
 	}
 
-	private static double totalEmployee(Employee employee) {
+	private static double getTotal(Employee employee) {
 		return employee.getSalary();
 
 	}
