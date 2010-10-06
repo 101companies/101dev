@@ -1,9 +1,7 @@
 package org.softlang.swing;
 
-import java.util.Stack;
-
-import org.soflang.swing.view.*;
 import org.softlang.company.*;
+import java.util.Stack;
 
 public class Controller {
 
