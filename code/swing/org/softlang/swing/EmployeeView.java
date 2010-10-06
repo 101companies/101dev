@@ -1,4 +1,4 @@
-package org.soflang.swing.view;
+package org.softlang.swing;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import org.softlang.company.Employee;
-import org.softlang.swing.controller.Controller;
 
 public class EmployeeView {
 

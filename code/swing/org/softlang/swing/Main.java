@@ -1,18 +1,13 @@
-package org.softlang.swing.test;
+package org.softlang.swing;
 
 
-import org.soflang.swing.view.DeptView;
-import org.soflang.swing.view.EmployeeView;
 import org.softlang.company.*;
-import org.softlang.swing.controller.Controller;
 
 public class Main {
 
 	public static Company createCompany() {
 
 		Company com = new Company();
-
-		
 		
 		Person craig = new Person("Craig");
 		craig.setAddress("Redmond");

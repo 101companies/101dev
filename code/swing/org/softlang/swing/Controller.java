@@ -1,4 +1,4 @@
-package org.softlang.swing.controller;
+package org.softlang.swing;
 
 import java.util.Stack;
 

@@ -1,4 +1,4 @@
-package org.soflang.swing.view;
+package org.softlang.swing;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -21,13 +21,11 @@ import javax.swing.event.ListSelectionListener;
 import org.softlang.company.Company;
 import org.softlang.company.Dept;
 import org.softlang.company.Subunit;
-import org.softlang.swing.controller.Controller;
 
 public class DeptView {
 
 	private final Controller controller;
-	private final JPanel namePanel, managerPanel, employeePanel, subDeptPanel,
-			navPanel;
+	private final JPanel namePanel, managerPanel, employeePanel, subDeptPanel, navPanel;
 	private final JFrame frame;
 	private final JTextField nameField;
 	private JButton managerButton;

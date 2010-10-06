@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 
 import org.softlang.company.Company;
 import org.softlang.company.Dept;
-import org.softlang.swing.test.Main;
 
 public class CompanyGUI {
 
