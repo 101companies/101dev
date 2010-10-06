@@ -1,6 +1,7 @@
 package org.softlang.client.company;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Company implements Serializable {
@@ -9,28 +10,10 @@ public class Company implements Serializable {
 	private List<Dept> depts;
 
 	public Company() {
-	}
-
-	public Company(List<Dept> depts) {
-		this.depts = depts;
+		depts = new LinkedList<Dept>();
 	}
 
 	public List<Dept> getDepts() {
 		return depts;
 	}
-
-	public void setDepts(List<Dept> depts) {
-		this.depts = depts;
-	}
-
-	public boolean equals(Object o) {
-		Company that = (Company) o;
-		if (this.getDepts().size() != that.getDepts().size())
-			return false;
-		for (int i = 0; i < this.getDepts().size(); i++)
-			if (!this.getDepts().get(i).equals(that.getDepts().get(i)))
-				return false;
-		return true;
-	}
-
 }

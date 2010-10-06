@@ -1,8 +1,13 @@
 package org.softlang.client.company;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * A department has a name, a manager and a list of subunits
+ * 
+ */
 public class Dept implements Serializable {
 
 	private static final long serialVersionUID = -2008895922177165250L;
@@ -11,12 +16,8 @@ public class Dept implements Serializable {
 	private List<Subunit> subunits;
 
 	public Dept() {
-	}
-
-	public Dept(String name, Employee manager, List<Subunit> subunits) {
-		this.name = name;
-		this.manager = manager;
-		this.subunits = subunits;
+		name = "";
+		subunits = new LinkedList<Subunit>();
 	}
 
 	public String getName() {
@@ -37,28 +38,6 @@ public class Dept implements Serializable {
 
 	public List<Subunit> getSubunits() {
 		return subunits;
-	}
-
-	public void setSubunits(List<Subunit> subunits) {
-		this.subunits = subunits;
-	}
-
-	public boolean equals(Object o) {
-		Dept that = (Dept) o;
-		if (this.getManager() == null) {
-			if (that.getManager() != null)
-				return false;
-		} else if (that.getManager() == null)
-			return false;
-		else if (!this.getManager().equals(that.getManager()))
-			return false;
-
-		if (this.getSubunits().size() != that.getSubunits().size())
-			return false;
-		for (int i = 0; i < this.getSubunits().size(); i++)
-			if (!this.getSubunits().get(i).equals(that.getSubunits().get(i)))
-				return false;
-		return true;
 	}
 
 }

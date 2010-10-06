@@ -1,7 +1,5 @@
 package org.softlang.server;
 
-import java.util.LinkedList;
-
 import org.softlang.client.*;
 import org.softlang.client.company.*;
 import org.softlang.client.util.ResultPair;
@@ -17,38 +15,88 @@ public class ServiceImpl extends RemoteServiceServlet implements Service {
 	private Company company;
 
 	public ServiceImpl() {
-		Company company = new Company(new LinkedList<Dept>());
 
-		Dept research = new Dept("Research", new Employee(new Person("Craig",
-				"Redmond"), 123456.0), new LinkedList<Subunit>());
-		research.getSubunits().add(
-				new Subunit(
-						new Employee(new Person("Erik", "Utrecht"), 12345.0)));
-		research.getSubunits()
-				.add(
-						new Subunit(new Employee(new Person("Ralf", "Koblenz"),
-								1234.0)));
+		Company company = new Company();
+
+		Person craig = new Person();
+		craig.setName("Craig");
+		craig.setAddress("Redmond");
+		Person erik = new Person();
+		erik.setName("Erik");
+		erik.setAddress("Utrecht");
+		Person ralf = new Person();
+		ralf.setName("Ralf");
+		ralf.setAddress("Koblenz");
+		Person ray = new Person();
+		ray.setName("Ray");
+		ray.setAddress("Redmond");
+		Person klaus = new Person();
+		klaus.setName("Klaus");
+		klaus.setAddress("Boston");
+		Person karl = new Person();
+		karl.setName("Karl");
+		karl.setAddress("Riga");
+		Person joe = new Person();
+		joe.setName("Joe");
+		joe.setAddress("Wifi City");
+
+		Employee eCraig = new Employee();
+		Employee eErik = new Employee();
+		Employee eRalf = new Employee();
+		Employee eRay = new Employee();
+		Employee eKlaus = new Employee();
+		Employee eKarl = new Employee();
+		Employee eJoe = new Employee();
+
+		eCraig.setPerson(craig);
+		eErik.setPerson(erik);
+		eRalf.setPerson(ralf);
+		eRay.setPerson(ray);
+		eKlaus.setPerson(klaus);
+		eKarl.setPerson(karl);
+		eJoe.setPerson(joe);
+
+		eCraig.setSalary(123456);
+		eErik.setSalary(12345);
+		eRalf.setSalary(1234);
+		eRay.setSalary(234567);
+		eKlaus.setSalary(23456);
+		eKarl.setSalary(2345);
+		eJoe.setSalary(2344);
+
+		Dept research = new Dept();
+		Subunit s01 = new Subunit();
+		Subunit s02 = new Subunit();
+
+		research.setManager(eCraig);
+		research.setName("Research");
+		research.getSubunits().add(s01);
+		research.getSubunits().add(s02);
+		s01.setPu(eErik);
+		s02.setPu(eRalf);
+
+		Dept development = new Dept();
+		development.setManager(eRay);
+		development.setName("Development");
+		Subunit s11 = new Subunit();
+		development.getSubunits().add(s11);
+		Dept d11 = new Dept();
+		d11.setName("Dev1");
+		d11.setManager(eKlaus);
+		s11.setDu(d11);
+		Subunit s111 = new Subunit();
+		d11.getSubunits().add(s111);
+		Dept d111 = new Dept();
+		d111.setName("Dev1.1");
+		d111.setManager(eKarl);
+		s111.setDu(d111);
+		Subunit s1111 = new Subunit();
+		s1111.setPu(eJoe);
+		d111.getSubunits().add(s1111);
+
 		company.getDepts().add(research);
-
-		Dept development = new Dept("Development", new Employee(new Person(
-				"Ray", "Redmond"), 234567.0), new LinkedList<Subunit>());
-
-		Dept dev1 = new Dept("Dev1", new Employee(
-				new Person("Klaus", "Boston"), 23456.0),
-				new LinkedList<Subunit>());
-
-		Dept dev11 = new Dept("Dev1.1", new Employee(
-				new Person("Karl", "Riga"), 2345.0), new LinkedList<Subunit>());
-		dev11.getSubunits().add(
-				new Subunit(
-						new Employee(new Person("Joe", "Wifi City"), 2344.0)));
-		dev1.getSubunits().add(new Subunit(dev11));
-		development.getSubunits().add(new Subunit(dev1));
-		development.getSubunits().add(
-				new Subunit(new Employee(new Person("William", "New York"),
-						234566.0)));
-
 		company.getDepts().add(development);
+
 		this.company = company;
 
 	}

@@ -1,6 +1,5 @@
 package org.softlang.client;
 
-import java.util.LinkedList;
 import java.util.Stack;
 
 import org.softlang.client.company.*;
@@ -113,7 +112,7 @@ public class Gwt implements EntryPoint {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				Dept newDept = new Dept("", null, new LinkedList<Subunit>());
+				Dept newDept = new Dept();
 				company.getDepts().add(newDept);
 				saved = false;
 				all.clear();
@@ -227,7 +226,9 @@ public class Gwt implements EntryPoint {
 					showCompany();
 				} else {
 					Dept upperDept = deptStack.pop();
-					upperDept.getSubunits().remove(new Subunit(dept));
+					for (Subunit subunit : upperDept.getSubunits())
+						if (subunit.getDu() == dept)
+							upperDept.getSubunits().remove(subunit);
 					showDept(upperDept);
 				}
 
@@ -313,7 +314,8 @@ public class Gwt implements EntryPoint {
 				public void onClick(ClickEvent event) {
 					all.clear();
 					deptStack.push(dept);
-					Employee manager = new Employee(new Person("", ""), 0.0);
+					Employee manager = new Employee();
+					manager.setPerson(new Person());
 					dept.setManager(manager);
 					saved = false;
 					showEmployee(manager);
@@ -338,8 +340,11 @@ public class Gwt implements EntryPoint {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				Employee newEmployee = new Employee(new Person("", ""), 0.0);
-				dept.getSubunits().add(new Subunit(newEmployee));
+				Employee newEmployee = new Employee();
+				newEmployee.setPerson(new Person());
+				Subunit newSubunit = new Subunit();
+				newSubunit.setPu(newEmployee);
+				dept.getSubunits().add(newSubunit);
 				deptStack.push(dept);
 				saved = false;
 				all.clear();
@@ -391,8 +396,10 @@ public class Gwt implements EntryPoint {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				Dept newDept = new Dept("", null, new LinkedList<Subunit>());
-				dept.getSubunits().add(new Subunit(newDept));
+				Dept newDept = new Dept();
+				Subunit newSubunit = new Subunit();
+				newSubunit.setDu(newDept);
+				dept.getSubunits().add(newSubunit);
 				deptStack.push(dept);
 				saved = false;
 				all.clear();
@@ -462,7 +469,8 @@ public class Gwt implements EntryPoint {
 						saveButton.setEnabled(true);
 						dept.setManager(result.getT().getManager());
 						dept.setName(result.getT().getName());
-						dept.setSubunits(result.getT().getSubunits());
+						dept.getSubunits().clear();
+						dept.getSubunits().addAll(result.getT().getSubunits());
 						salaryInfoValue.setText("Total salary = "
 								+ result.getNewSalary() + " $");
 					}
@@ -518,12 +526,14 @@ public class Gwt implements EntryPoint {
 			@Override
 			public void onClick(ClickEvent event) {
 				Dept upperDept = deptStack.pop();
-				boolean isManager = !upperDept.getSubunits().contains(
-						new Subunit(employee));
+				boolean isManager = true;
+				for (Subunit subunit : upperDept.getSubunits())
+					if (subunit.getPu() == employee) {
+						upperDept.getSubunits().remove(subunit);
+						isManager = false;
+					}
 				if (isManager)
 					upperDept.setManager(null);
-				else
-					upperDept.getSubunits().remove(new Subunit(employee));
 				all.clear();
 				saved = false;
 				showDept(upperDept);

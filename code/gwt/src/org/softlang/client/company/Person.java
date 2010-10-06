@@ -2,6 +2,10 @@ package org.softlang.client.company;
 
 import java.io.Serializable;
 
+/**
+ * A person has a name and an address
+ * 
+ */
 public class Person implements Serializable {
 
 	private static final long serialVersionUID = -200889592677165150L;
@@ -10,12 +14,8 @@ public class Person implements Serializable {
 	private String address;
 
 	public Person() {
-
-	}
-
-	public Person(String name, String address) {
-		this.name = name;
-		this.address = address;
+		name = "";
+		address = "";
 	}
 
 	public String getName() {
@@ -32,12 +32,6 @@ public class Person implements Serializable {
 
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	public boolean equals(Object o) {
-		Person that = (Person) o;
-		return (this.getName().equals(that.getName()) && this.getAddress()
-				.equals(that.getAddress()));
 	}
 
 }
