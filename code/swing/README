@@ -2,12 +2,17 @@ Requirements:
  - The "serializable" project is required.
    > SVN : http://developers.svn.sourceforge.net/svnroot/developers/repository/101companies/code/serializable/
 
-A minimalistic GUI for companies is provided.
-The GUI provides the following gestures:
+The present project provides a very simple GUI for companies.
+Specifically, the GUI provides the following gestures:
 - Navigate hierarchical structure of departmental nesting.
 - Edit all fields of types string and number.
 
-The project uses a poormen's MVC architecture.
+Run Test.java to start the GUI for the sample company.
+
+The project uses a poorman's MVC architecture.
 Project "serializable" provides the model for the present project.
 We do not assume any change-notification services on the model.
-The GUI 
+There are two views: one for departments (and companies) and another for employees.
+The controller provides services that push effect of gestures into the model.
+The views delegates event handlers to the controller.
+The controller calls into the model and the view.

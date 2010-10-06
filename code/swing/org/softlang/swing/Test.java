@@ -3,7 +3,7 @@ package org.softlang.swing;
 
 import org.softlang.company.*;
 
-public class Main {
+public class Test {
 
 	public static Company createCompany() {
 
@@ -85,11 +85,6 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		Controller controller = new Controller(createCompany());
-		DeptView deptView = new DeptView(controller);
-		EmployeeView employeeView = new EmployeeView(controller);
-		controller.setDeptView(deptView);
-		controller.setEmployeeView(employeeView);
-		controller.go();
+		new GUI(createCompany());
 	}
 }
