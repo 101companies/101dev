@@ -9,7 +9,7 @@ Prerequisites:
 - A suitable company database.
   Please use project "sql" to set up the company database.
   That is, we assume that you have an initial database image.
-  Tests will only succeed for an initial database image.
+  Tests will only succeed for an *initial* database image.
   Corollary: tests will succeed at most once.
 
 - A suitable JDBC Driver for MySQL:
