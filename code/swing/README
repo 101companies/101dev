@@ -1,0 +1,13 @@
+Requirements:
+ - The "serializable" project is required.
+   > SVN : http://developers.svn.sourceforge.net/svnroot/developers/repository/101companies/code/serializable/
+
+
+The scenarios are concerned with the "company" data structure.
+That is, there are hierarchically organized departments.
+There are managers and other employees.
+Those have names and they receive a salary.
+
+This project represents companies in a Swing-GUI.
+That is, one can navigate through the hierarchical structure 
+and edit primitive field values (department names, employee addresses etc.).
