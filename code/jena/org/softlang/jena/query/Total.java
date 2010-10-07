@@ -3,6 +3,11 @@ package org.softlang.jena.query;
 import org.softlang.company.CompanyModel;
 import com.hp.hpl.jena.query.*;
 
+/**
+ * 
+ * Total all salaries in a company.
+ * 
+ */
 public class Total {
 
 	public static double total(CompanyModel c){

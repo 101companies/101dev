@@ -11,7 +11,7 @@ public class CompanyModel {
 
 	private Model model;
 
-	public static final String NS_COMPANY = "http://www.company.com/ns#";
+	public final String NS_COMPANY = "http://www.company.com/ns#";
 
 	public final Property DEPTS;
 	public final Property DNAME;
@@ -45,11 +45,11 @@ public class CompanyModel {
 		return model;
 	}
 	
-	public Resource createCompany(Container deptsBag) {
+	public Resource createCompany(Container depts) {
 		return model.createResource().
 			addProperty(
 					DEPTS, 
-					deptsBag);
+					depts);
 	}
 	
 	public Resource createDept(String uri,String dName, Resource manager, Container employees, Container depts){
