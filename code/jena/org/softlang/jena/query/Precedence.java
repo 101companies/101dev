@@ -13,7 +13,7 @@ import com.hp.hpl.jena.vocabulary.RDFS;
  * Check that salaries increase with rank in hierarchy.
  * 
  */
-public class PrecedenceCheck {
+public class Precedence {
 
 	public static boolean checkPrecedence(CompanyModel c){
 		String queryString = 

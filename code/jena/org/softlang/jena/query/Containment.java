@@ -12,7 +12,7 @@ import com.hp.hpl.jena.vocabulary.RDFS;
  * Check that employees and department are not referenced twice.
  *
  */
-public class ContainmentCheck {
+public class Containment {
 
 	public static boolean checkContainment(CompanyModel c){
 		String queryString = 
