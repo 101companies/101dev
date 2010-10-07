@@ -4,10 +4,6 @@ module Cut;
 
 create OUT: Company from IN: Company;
 
-
-helper context Company!Subunit def: isPu() : Boolean =
-	not self.pu.oclIsUndefined();
-
 rule Company2Company {
 	from
 	 s : Company!Company 
@@ -29,6 +25,9 @@ rule Dept2Dept {
 	 )
 	 
 }
+
+helper context Company!Subunit def: isPu() : Boolean =
+	not self.pu.oclIsUndefined();
 
 rule Subunit2Subunit_Pu {
 	from
