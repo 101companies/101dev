@@ -1,4 +1,4 @@
-package org.softlang.jena.rdf;
+package org.softlang.jena.tests;
 
 import static org.junit.Assert.*;
 
@@ -9,10 +9,12 @@ import java.sql.SQLException;
 import org.junit.Before;
 import org.junit.Test;
 import org.softlang.company.CompanyModel;
+import org.softlang.jena.query.Containment;
+import org.softlang.jena.query.Total;
 
 import com.hp.hpl.jena.rdf.model.Resource;
 
-public class Tests {
+public class QueryScenarios {
 
 	public final String filename = "sampleCompany.rdf";
 	public CompanyModel sampleCompany = new CompanyModel();
@@ -23,23 +25,9 @@ public class Tests {
 	}
 
 	@Test
-	public void testTotalAndCut() throws SQLException {
+	public void testTotal() throws SQLException {
 		double preCutTotal = Total.total(sampleCompany);
 		assertEquals(399747, preCutTotal, 0.0);
-		Cut.cut(sampleCompany);
-		double newTotal = Total.total(sampleCompany);
-		assertEquals(preCutTotal / 2, newTotal, 0.0);
-	}
-
-	@Test
-	public void testPrecedence() {
-		assertTrue(Precedence.checkPrecedence(sampleCompany));
-		// set erik's salary equal to his manager's salary
-		sampleCompany.getModel()
-				.getResource(sampleCompany.NS_COMPANY + "erik")
-					.removeAll(sampleCompany.SALARY)
-					.addLiteral(sampleCompany.SALARY, 123456.0);
-		assertFalse(Precedence.checkPrecedence(sampleCompany));
 	}
 
 	@Test

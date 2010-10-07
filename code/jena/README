@@ -14,7 +14,7 @@ In this manner, we total salaries, cut salaries, and check certain constraints.
 Package ...jena.query
 
 We leverage Jena's query engine and ARQ (SPARQL) support.
-We implement some of the above scenarions.
+We implement some of the above scenarios.
 
 
 Package ...company
@@ -24,4 +24,4 @@ We also show construction code for a sample company.
 The rest of the code uses the sample stored in .rdf file stored in the root dir.
 
 
-See the Tests.java classes for JUnit test cases in the packages.
+See the ...tests package for JUnit test cases.

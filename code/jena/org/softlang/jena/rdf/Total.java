@@ -13,10 +13,10 @@ public class Total {
 	public static double total(CompanyModel c) {
 		StmtIterator stmtit = c.getModel().listStatements(
 				new SimpleSelector(null, c.SALARY, (RDFNode) null));
-		double ttl = 0;
+		double total = 0;
 		while (stmtit.hasNext()) {
-			ttl += stmtit.nextStatement().getDouble();
+			total += stmtit.nextStatement().getDouble();
 		}
-		return ttl;
+		return total;
 	}
 }

@@ -1,18 +1,17 @@
-package org.softlang.jena.query;
+package org.softlang.jena.tests;
 
-import static org.junit.Assert.*;
-
+import org.softlang.company.CompanyModel;
+import org.softlang.jena.rdf.Containment;
+import org.softlang.jena.rdf.*;
+import com.hp.hpl.jena.rdf.model.Resource;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
-
 import org.junit.Before;
 import org.junit.Test;
-import org.softlang.company.CompanyModel;
+import static org.junit.Assert.*;
 
-import com.hp.hpl.jena.rdf.model.Resource;
-
-public class Tests {
+public class RdfScenarios {
 
 	public final String filename = "sampleCompany.rdf";
 	public CompanyModel sampleCompany = new CompanyModel();
@@ -23,9 +22,12 @@ public class Tests {
 	}
 
 	@Test
-	public void testTotal() throws SQLException {
+	public void testTotalAndCut() throws SQLException {
 		double preCutTotal = Total.total(sampleCompany);
 		assertEquals(399747, preCutTotal, 0.0);
+		Cut.cut(sampleCompany);
+		double newTotal = Total.total(sampleCompany);
+		assertEquals(preCutTotal / 2, newTotal, 0.0);
 	}
 
 	@Test
