@@ -1,12 +1,16 @@
 package org.softlang.swing;
 
+import java.io.File;
 
-import org.softlang.serialization.SerializationTool;
+import org.softlang.company.Company;
 
 public class Test {
-
 	public static void main(String[] args) {
-		SerializationTool SerializationTool = new SerializationTool();
-		new GUI(SerializationTool.load("sampleCompany"));
+		new GUI(Company.readObject(
+					".."
+				+ 	File.separatorChar
+				+	"serializable"
+				+ 	File.separatorChar
+				+	"sampleCompany.ser"));
 	}
 }
