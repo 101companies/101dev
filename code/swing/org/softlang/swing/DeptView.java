@@ -5,15 +5,19 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
+import javax.swing.AbstractAction;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -25,7 +29,8 @@ import org.softlang.company.Subunit;
 public class DeptView {
 
 	private final Controller controller;
-	private final JPanel namePanel, managerPanel, employeePanel, subDeptPanel, salaryPanel, navPanel;
+	private final JPanel namePanel, managerPanel, employeePanel, subDeptPanel,
+			salaryPanel, buttonPanel;
 	private final JFrame frame;
 	private final JTextField nameField;
 	private final JButton managerButton, cutButton;
@@ -38,12 +43,12 @@ public class DeptView {
 	public DeptView(Controller controller) {
 		this.controller = controller;
 		frame = new JFrame();
-		namePanel = new JPanel(new GridLayout(1, 2, 0, 10));
-		managerPanel = new JPanel(new GridLayout(1, 2, 66, 10));
-		employeePanel = new JPanel(new GridLayout(1, 2, 30, 10));
-		subDeptPanel = new JPanel(new GridLayout(1, 2, 30, 10));
+		namePanel = new JPanel(new GridLayout(1, 2, 0, 0));
+		managerPanel = new JPanel(new GridLayout(1, 2, 66, 0));
+		employeePanel = new JPanel(new GridLayout(1, 2, 30, 0));
+		subDeptPanel = new JPanel(new GridLayout(1, 2, 30, 0));
 		salaryPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 0));
-		navPanel = new JPanel(new GridLayout(1, 2, 30, 10));
+		buttonPanel = new JPanel(new GridLayout(1, 3, 20, 0));
 		subDeptLabel = new JLabel();
 		salaryLabel = new JLabel();
 		cutButton = new JButton();
@@ -63,7 +68,7 @@ public class DeptView {
 		frame.setTitle("Company");
 		salaryLabel.setText("Total salary = " + Double.toString(total) + " $");
 		cutButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.cutCompanyClicked();
@@ -86,7 +91,7 @@ public class DeptView {
 		subDeptLabel.setText("Sub departments: ");
 		nameField.setText(dept.getName());
 		cutButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.cutDeptClicked();
@@ -124,7 +129,7 @@ public class DeptView {
 		namePanel.setVisible(visibility);
 		managerPanel.setVisible(visibility);
 		employeePanel.setVisible(visibility);
-		navPanel.setVisible(visibility);
+		buttonPanel.setVisible(visibility);
 	}
 
 	private void addSubunit(final Subunit subunit) {
@@ -171,7 +176,17 @@ public class DeptView {
 	private void init() {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 30));
+		frame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+				KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false), "ESCAPE");
+		frame.getRootPane().getActionMap().put("ESCAPE", new AbstractAction() {
 
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.deptOrCompanyClosed();
+			}
+		});
 		JLabel nameLabel = new JLabel("Name:");
 		namePanel.add(nameLabel);
 		nameField.setColumns(10);
@@ -206,26 +221,36 @@ public class DeptView {
 		cutButton.setSize(new Dimension(10, 25));
 		salaryPanel.add(cutButton);
 		panel.add(salaryPanel);
-		
-		JButton backCancelButton = new JButton("Up & Save");
-		backCancelButton.addActionListener(new ActionListener() {
+
+		JButton saveButton = new JButton("Save");
+		saveButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				controller.backDeptClicked();
+				controller.saveDeptClicked(nameField.getText());
 			}
 		});
-		navPanel.add(backCancelButton);
-		JButton backSaveButton = new JButton("Up & Cancel");
-		backSaveButton.addActionListener(new ActionListener() {
+		buttonPanel.add(saveButton);
+		JButton okButton = new JButton("Ok");
+		okButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controller.storeBackDeptClicked(nameField.getText());
+				controller.okDeptClicked(nameField.getText());
 			}
 		});
-		navPanel.add(backSaveButton);
-		panel.add(navPanel);
+		buttonPanel.add(okButton);
+		JButton cancelButton = new JButton("Cancel");
+		cancelButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				controller.cancelDeptClicked();
+
+			}
+		});
+		buttonPanel.add(cancelButton);
+		panel.add(buttonPanel);
 
 		frame.getContentPane().add(panel);
 		frame.setLocation(170, 250);

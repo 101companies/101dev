@@ -47,16 +47,12 @@ public class Controller {
 		deptView.showDept(dept, dept.total());
 	}
 
-	public void backDeptClicked() {
-		if (deptStack.isEmpty()) {
-			openDept = null;
-			deptView.showCompany(company, company.total());
-		} else {
-			showDept(deptStack.pop(), false);
-		}
+	public void saveDeptClicked(String name) {
+		openDept.setName(name);
+		showDept(openDept, false);
 	}
 
-	public void storeBackDeptClicked(String name) {
+	public void okDeptClicked(String name) {
 		openDept.setName(name);
 		if (deptStack.isEmpty()) {
 			openDept = null;
@@ -65,11 +61,26 @@ public class Controller {
 			showDept(deptStack.pop(), false);
 	}
 
+	public void cancelDeptClicked() {
+		if (deptStack.isEmpty()) {
+			openDept = null;
+			deptView.showCompany(company, company.total());
+		} else {
+			showDept(deptStack.pop(), false);
+		}
+	}
+
 	public void employeeClicked(Employee employee) {
 		showEmployee(employee);
 	}
 
+	public void deptOrCompanyClosed() {
+		System.exit(0);
+	}
+
 	public void employeeClosed() {
+		employeeView.setVisibility(false);
+		showDept(openDept, false);
 		openEmployee = null;
 	}
 
@@ -78,13 +89,30 @@ public class Controller {
 		employeeView.showEmployee(employee);
 	}
 
-	public void storeEmployeeClicked(String name, String address, double salary) {
+	public void saveEmployeeClicked(String name, String address, double salary) {
 		if (openEmployee != null) {
 			openEmployee.getPerson().setName(name);
 			openEmployee.getPerson().setAddress(address);
 			openEmployee.setSalary(salary);
 		}
-		deptView.showDept(openDept, openDept.total());
+		showDept(openDept, false);
+		showEmployee(openEmployee);
+	}
+
+	public void okEmployeeClicked(String name, String address, double salary) {
+		if (openEmployee != null) {
+			openEmployee.getPerson().setName(name);
+			openEmployee.getPerson().setAddress(address);
+			openEmployee.setSalary(salary);
+		}
+		employeeView.setVisibility(false);
+		showDept(openDept, false);
+		openEmployee = null;
+	}
+
+	public void cancelEmployeeClicked() {
+		employeeView.setVisibility(false);
+		openEmployee = null;
 	}
 
 	public void cutCompanyClicked() {
