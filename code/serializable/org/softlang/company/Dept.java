@@ -40,4 +40,17 @@ public class Dept implements Serializable {
 		return subunits;
 	}
 
+	public double total() {
+		double total = 0;
+		total += getManager().total();
+		for (Subunit s : getSubunits())
+			total += s.total();
+		return total;		
+	}	
+	
+	public void cut() {
+		getManager().cut();
+		for (Subunit s : getSubunits())
+			s.cut();
+	}	
 }

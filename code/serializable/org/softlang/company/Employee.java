@@ -29,4 +29,11 @@ public class Employee implements Serializable {
 		this.salary = salary;
 	}
 
+	public double total() {
+		return getSalary();
+	}	
+	
+	public void cut() {
+		setSalary(getSalary() / 2);
+	}	
 }

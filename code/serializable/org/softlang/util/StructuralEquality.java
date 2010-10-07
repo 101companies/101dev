@@ -1,68 +1,16 @@
-package org.softlang.serialization;
+package org.softlang.util;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.LinkedList;
 
-import org.softlang.company.*;
+/*
+ * Limited implementation of structural equality.
+ * The implementation is based on reflection.
+ * The implementation is complete enough to deal with our companies.
+ */
+public class StructuralEquality {
 
-
-public class SerializationTool {
-
-	/**
-	 * loads a company-object
-	 */
-	public Company load(String filename) {
-
-		Company com = null;
-		FileInputStream fis = null;
-		ObjectInputStream in = null;
-
-		try {
-			fis = new FileInputStream(filename);
-			in = new ObjectInputStream(fis);
-			
-			com = (Company) in.readObject();
-			
-			in.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return com;
-	}
-	
-	/**
-	 * makes a company-object persistent.
-	 */
-	public boolean create(String filename, Company com) {
-
-		FileOutputStream fos = null;
-		ObjectOutputStream out = null;
-
-		try {
-			fos = new FileOutputStream(filename);
-			out = new ObjectOutputStream(fos);
-			
-			out.writeObject(com);
-			
-			out.close();
-			return true;
-		} catch (IOException ex) {
-			ex.printStackTrace();
-			return false;
-		}
-	}
-
-	/**
-	 * compares two objects using reflection
-	 */
-	public boolean compare(Object o1, Object o2) {
+	public static boolean structurallyEqual(Object o1, Object o2) {
 
 		try {
 			if (o1.getClass().getName().equals(o2.getClass().getName())) {
@@ -100,7 +48,7 @@ public class SerializationTool {
 												.getName())) {
 									// check if the class is Double,Integer or
 									// String
-									if (this.check(f1[i].get(o1).getClass()
+									if (check(f1[i].get(o1).getClass()
 											.getName())) {
 										// compare values
 										if (!(f1[i].get(o1).equals(f2[i]
@@ -113,13 +61,13 @@ public class SerializationTool {
 										// list
 										if (f1[i].get(o1).getClass().getName()
 												.equals("java.util.LinkedList")) {
-											if (!(this.handleLinkedList(f1[i],
+											if (!(handleLinkedList(f1[i],
 													o1, f2[i], o2))) {
 												return false;
 											}
 										} else {
 											// otherwise, compare the objects
-											this.compare(f1[i].get(o1),
+											structurallyEqual(f1[i].get(o1),
 													f2[i].get(o2));
 										}
 									}
@@ -154,20 +102,19 @@ public class SerializationTool {
 		return true;
 	}
 
-	private boolean check(String s) {
+	private static boolean check(String s) {
 		return (s.equals("java.lang.String") || s.equals("java.lang.Integer")
 				|| s.equals("java.lang.Double") || s.equals("java.lang.Float"));
 
 	}
 
-	private boolean handleLinkedList(Field f1, Object o1, Field f2, Object o2) {
-
+	private static boolean handleLinkedList(Field f1, Object o1, Field f2, Object o2) {
 		try {
 			LinkedList<?> l1 = (LinkedList<?>) f1.get(o1);
 			LinkedList<?> l2 = (LinkedList<?>) f2.get(o2);
 			int length = l1.size();
 			for (int i = 0; i < length; i++) {
-				if (!(this.compare(l1.get(i), l2.get(i)))) {
+				if (!(structurallyEqual(l1.get(i), l2.get(i)))) {
 					return false;
 				}
 			}
@@ -176,7 +123,6 @@ public class SerializationTool {
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		}
-
 		return true;
 	}
 }

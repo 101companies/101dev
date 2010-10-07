@@ -1,16 +1,19 @@
-package org.softlang.serialization.test;
+package org.softlang.serializable.tests;
 
-import junit.framework.Assert;
-
+import org.softlang.company.*;
+import static org.softlang.util.SerializationUtilities.*;
+import static org.softlang.util.StructuralEquality.*;
 import org.junit.Test;
-import org.softlang.company.Company;
-import org.softlang.company.Dept;
-import org.softlang.company.Employee;
-import org.softlang.company.Person;
-import org.softlang.company.Subunit;
-import org.softlang.serialization.SerializationTool;
+import static org.junit.Assert.*;
 
-public class SerializationTest {
+/**
+ * We do a round-tripping test for de-/serialization.
+ * That is, first, we create an object in memory.
+ * Then, we write (say, serialize) the object.
+ * Then, we read (say, de-serialize) the object.
+ * Finally, we compare original and read object for structural equality.
+ */
+public class Serialization {
 
 	public static Company createCompany() {
 		Company company = new Company();
@@ -102,13 +105,9 @@ public class SerializationTest {
 
 	@Test
 	public void testLoadAndCreate() {
-		SerializationTool st = new SerializationTool();
-	
 		Company sampleCompany = createCompany(); 
-		st.create("sampleCompany", sampleCompany);
-		
-		Company loadedCompany = st.load("sampleCompany");
-		
-		Assert.assertTrue(st.compare(sampleCompany, loadedCompany));
+		writeObject("sampleCompany.ser", sampleCompany);
+		Company loadedCompany = (Company)readObject("sampleCompany.ser");
+		assertTrue(structurallyEqual(sampleCompany, loadedCompany));
 	}
 }

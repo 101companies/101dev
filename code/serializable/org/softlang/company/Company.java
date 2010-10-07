@@ -16,4 +16,16 @@ public class Company implements Serializable {
 	public List<Dept> getDepts() {
 		return depts;
 	}
+	
+	public Double total() {
+		double total = 0;
+		for (Dept d : getDepts())
+			total += d.total();
+		return total;
+	}
+	
+	public void cut() {
+		for (Dept d : getDepts())
+			d.cut();
+	}	
 }

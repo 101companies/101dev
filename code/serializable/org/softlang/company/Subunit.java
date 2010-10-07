@@ -31,4 +31,15 @@ public class Subunit implements Serializable {
 		this.du = du;
 	}
 
+	public double total() {
+		double total = 0;
+		total += getDu() == null ? 0 : getDu().total();
+		total += getPu() == null ? 0 : getPu().total();
+		return total;	
+	}	
+	
+	public void cut() {
+		if (getDu() != null) getDu().cut();
+		if (getPu() != null) getPu().cut();
+	}	
 }
