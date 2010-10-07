@@ -1,5 +1,6 @@
 package org.softlang.swing;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -24,6 +25,7 @@ public class EmployeeView {
 	private final JTextField nameField;
 	private final JTextField addressField;
 	private final JTextField salaryField;
+	private final JButton cutButton;
 
 	public EmployeeView(Controller controller) {
 		this.controller = controller;
@@ -31,6 +33,7 @@ public class EmployeeView {
 		nameField = new JTextField();
 		addressField = new JTextField();
 		salaryField = new JTextField();
+		cutButton = new JButton();
 		init();
 	}
 
@@ -39,6 +42,16 @@ public class EmployeeView {
 		nameField.setText(employee.getPerson().getName());
 		addressField.setText(employee.getPerson().getAddress());
 		salaryField.setText(Double.toString(employee.getSalary()));
+		for (ActionListener al : cutButton.getActionListeners())
+			cutButton.removeActionListener(al);
+		cutButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.cutEmployeeClicked();
+
+			}
+		});
 		frame.setVisible(true);
 	}
 
@@ -49,8 +62,8 @@ public class EmployeeView {
 				frame.setVisible(false);
 			}
 		});
-		JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 30));
-		JPanel infoPanel = new JPanel(new GridLayout(3, 1, 30, 30));
+		JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 10));
+		JPanel infoPanel = new JPanel(new GridLayout(4, 1, 30, 30));
 
 		JPanel namePanel = new JPanel(new GridLayout(1, 2, 0, 10));
 		JLabel nameLabel = new JLabel("Name:");
@@ -71,9 +84,16 @@ public class EmployeeView {
 		salaryPanel.add(salaryLabel);
 		salaryPanel.add(salaryField);
 		salaryField.setColumns(10);
+		cutButton.setText("Cut");
+		cutButton.setSize(new Dimension(10, 10));
 		infoPanel.add(salaryPanel);
-
 		panel.add(infoPanel);
+
+		JPanel cutPanel = new JPanel(new GridLayout(1, 1, 0, 0));
+		cutPanel.add(cutButton);
+		cutButton.setPreferredSize(new Dimension(30, 30));
+		cutPanel.setPreferredSize(new Dimension(110, 20));
+		panel.add(cutPanel);
 
 		JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 30, 30));
 		JButton cancelButton = new JButton("Cancel");
@@ -107,8 +127,8 @@ public class EmployeeView {
 		panel.add(buttonPanel);
 
 		frame.getContentPane().add(panel);
-		frame.setSize(290, 250);
-		frame.setLocation(200, 200);
+		frame.setSize(290, 350);
+		frame.setLocation(200, 250);
 		frame.setResizable(false);
 
 	}

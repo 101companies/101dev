@@ -29,7 +29,11 @@ public class Controller {
 	//
 
 	public void go() {
-		deptView.showCompany(company);
+		showCompany();
+	}
+
+	private void showCompany() {
+		deptView.showCompany(company, company.total());
 	}
 
 	public void deptClicked(Dept dept) {
@@ -40,13 +44,13 @@ public class Controller {
 		if (openDept != null && deeper)
 			deptStack.push(openDept);
 		openDept = dept;
-		deptView.showDept(dept);
+		deptView.showDept(dept, dept.total());
 	}
 
 	public void backDeptClicked() {
 		if (deptStack.isEmpty()) {
 			openDept = null;
-			deptView.showCompany(company);
+			deptView.showCompany(company, company.total());
 		} else {
 			showDept(deptStack.pop(), false);
 		}
@@ -56,7 +60,7 @@ public class Controller {
 		openDept.setName(name);
 		if (deptStack.isEmpty()) {
 			openDept = null;
-			deptView.showCompany(company);
+			deptView.showCompany(company, company.total());
 		} else
 			showDept(deptStack.pop(), false);
 	}
@@ -80,7 +84,27 @@ public class Controller {
 			openEmployee.getPerson().setAddress(address);
 			openEmployee.setSalary(salary);
 		}
-		deptView.showDept(openDept);
+		deptView.showDept(openDept, openDept.total());
+	}
+
+	public void cutCompanyClicked() {
+		company.cut();
+		showCompany();
+		if (openEmployee != null)
+			showEmployee(openEmployee);
+	}
+
+	public void cutDeptClicked() {
+		openDept.cut();
+		showDept(openDept, false);
+		if (openEmployee != null)
+			showEmployee(openEmployee);
+	}
+
+	public void cutEmployeeClicked() {
+		openEmployee.cut();
+		showEmployee(openEmployee);
+		showDept(openDept, false);
 	}
 
 }

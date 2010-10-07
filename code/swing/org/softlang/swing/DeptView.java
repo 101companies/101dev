@@ -25,13 +25,13 @@ import org.softlang.company.Subunit;
 public class DeptView {
 
 	private final Controller controller;
-	private final JPanel namePanel, managerPanel, employeePanel, subDeptPanel, navPanel;
+	private final JPanel namePanel, managerPanel, employeePanel, subDeptPanel, salaryPanel, navPanel;
 	private final JFrame frame;
 	private final JTextField nameField;
-	private JButton managerButton;
+	private final JButton managerButton, cutButton;
 	private final JList employeeList;
 	private final DefaultListModel employeeListModel;
-	private final JLabel subDeptLabel;
+	private final JLabel subDeptLabel, salaryLabel;
 	private final JList subDeptList;
 	private final DefaultListModel subDeptListModel;
 
@@ -42,8 +42,11 @@ public class DeptView {
 		managerPanel = new JPanel(new GridLayout(1, 2, 66, 10));
 		employeePanel = new JPanel(new GridLayout(1, 2, 30, 10));
 		subDeptPanel = new JPanel(new GridLayout(1, 2, 30, 10));
+		salaryPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 0));
 		navPanel = new JPanel(new GridLayout(1, 2, 30, 10));
 		subDeptLabel = new JLabel();
+		salaryLabel = new JLabel();
+		cutButton = new JButton();
 		nameField = new JTextField();
 		managerButton = new JButton();
 		employeeListModel = new DefaultListModel();
@@ -53,11 +56,19 @@ public class DeptView {
 		init();
 	}
 
-	public void showCompany(final Company company) {
+	public void showCompany(final Company company, double total) {
 		setNonTopPanelVisibilty(false);
 		removeListener();
 		subDeptListModel.clear();
 		frame.setTitle("Company");
+		salaryLabel.setText("Total salary = " + Double.toString(total) + " $");
+		cutButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.cutCompanyClicked();
+			}
+		});
 		subDeptLabel.setText("Top departments: ");
 		for (Dept dept : company.getDepts())
 			addDept(dept);
@@ -65,14 +76,22 @@ public class DeptView {
 
 	}
 
-	public void showDept(final Dept dept) {
+	public void showDept(final Dept dept, double total) {
 		setNonTopPanelVisibilty(true);
 		removeListener();
 		employeeListModel.clear();
 		subDeptListModel.clear();
 		frame.setTitle("Department  \"" + dept.getName() + "\"");
+		salaryLabel.setText("Total salary = " + Double.toString(total) + " $");
 		subDeptLabel.setText("Sub departments: ");
 		nameField.setText(dept.getName());
+		cutButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.cutDeptClicked();
+			}
+		});
 		managerButton.setText(dept.getManager().getPerson().getName());
 		if (managerButton.getActionListeners().length != 0)
 			managerButton.removeActionListener(managerButton
@@ -89,6 +108,8 @@ public class DeptView {
 	}
 
 	private void removeListener() {
+		for (ActionListener al : cutButton.getActionListeners())
+			cutButton.removeActionListener(al);
 		for (ActionListener al : managerButton.getActionListeners())
 			managerButton.removeActionListener(al);
 		for (ListSelectionListener lsl : employeeList
@@ -148,7 +169,6 @@ public class DeptView {
 	}
 
 	private void init() {
-		frame.setSize(300, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 30));
 
@@ -180,6 +200,13 @@ public class DeptView {
 		subDeptPanel.add(subDeptScrollPane);
 		panel.add(subDeptPanel);
 
+		salaryLabel.setSize(10, 10);
+		salaryPanel.add(salaryLabel);
+		cutButton.setText("Cut");
+		cutButton.setSize(new Dimension(10, 25));
+		salaryPanel.add(cutButton);
+		panel.add(salaryPanel);
+		
 		JButton backCancelButton = new JButton("Up & Save");
 		backCancelButton.addActionListener(new ActionListener() {
 
@@ -202,7 +229,7 @@ public class DeptView {
 
 		frame.getContentPane().add(panel);
 		frame.setLocation(170, 250);
-		frame.setSize(290, 500);
+		frame.setSize(290, 550);
 		frame.setResizable(false);
 	}
 
