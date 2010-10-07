@@ -8,26 +8,26 @@ import org.softlang.company.*;
  */
 public class Total {
 
-	public static double totalCompany(Company company) {
+	public static double total(Company company) {
 		double ttl = 0;
 		// total all salaries in all top departments
 		for (Dept dept : company.getDepts())
-			ttl += totalDept(dept);
+			ttl += total(dept);
 		return ttl;
 	}
 
-	public static double totalDept(Dept dept) {
+	public static double total(Dept dept) {
 		double ttl = 0;
 		// total all department's employees' salaries
 		for (Employee employee : dept.getEmployees())
-			ttl += totalEmployee(employee);
+			ttl += total(employee);
 		// total all salaries in all sub departments
 		for (Dept subDepartment : dept.getSubDepartments())
-			ttl += totalDept(subDepartment);
+			ttl += total(subDepartment);
 		return ttl;
 	}
 
-	public static double totalEmployee(Employee employee) {
+	public static double total(Employee employee) {
 		return employee.getSalary();
 	}
 

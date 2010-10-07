@@ -26,17 +26,17 @@ public class Scenarios {
 
 	@Test
 	public void testTotal() throws SQLException {
-		double total = Total.totalCompany(company);
+		double total = Total.total(company);
 		assertEquals(399747, total, 0.0);
 	}
 
 	@Test
 	public void testCut() {
-		double preCutTotal = Total.totalCompany(company);
+		double preCutTotal = Total.total(company);
 		Cut.cutCompany(company);
 		// persist and reload company
 		persistenceTool.persistCompany(company);
-		double newTotal = Total.totalCompany(factory.createCompany());
+		double newTotal = Total.total(factory.createCompany());
 		assertEquals(preCutTotal / 2, newTotal, 0.0);
 	}
 }

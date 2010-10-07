@@ -6,26 +6,26 @@ import org.softlang.company.*;
 
 public class Total {
 	
-	public static double aggregate(Company c) {
+	public static double total(Company c) {
 		double total = 0;
 		if (c.getDept() != null)
 			for (Dept d : c.getDept())
-				total += aggregate(d);
+				total += total(d);
 		return total;
 	}
 	
-	public static double aggregate(Dept d) {
+	public static double total(Dept d) {
 		double total = 0;
 		if (d != null) {
-			total += aggregate(d.getManager());
+			total += total(d.getManager());
 			if (d.getSubunit() != null)
 				for (Subunit s : d.getSubunit())
-					total += aggregate(s);
+					total += total(s);
 		}
 		return total;		
 	}
 	
-	public static double aggregate(Employee e) {
+	public static double total(Employee e) {
 		double total = 0;
 		if (e != null)
 			total += e.getSalary();
@@ -33,11 +33,11 @@ public class Total {
 	}
 
 	// This is where subtyping kicks in.
-	public static double aggregate(Subunit s) {
+	public static double total(Subunit s) {
 		if (s instanceof Pu)
-			return aggregate(((Pu)s).getEmployee());
+			return total(((Pu)s).getEmployee());
 		if (s instanceof Du)
-			return aggregate(((Du)s).getDept());
+			return total(((Du)s).getDept());
 		throw new IllegalArgumentException();
 	}
 }

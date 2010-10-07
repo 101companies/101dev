@@ -52,12 +52,12 @@ public class Tests {
 	@Test
 	public void testCutAndTotal() {
 		// total and cut
-		double preCutTotal = Total.getTotal(company);
+		double preCutTotal = Total.total(company);
 		assertEquals(399747, preCutTotal, 0.0);
 		System.out.println("Total salary = " + preCutTotal);
 		System.out.println("Cutting...");
 		Cut.cutCompany(company);
-		double newTotal = Total.getTotal(company);
+		double newTotal = Total.total(company);
 		System.out.println("New total salary = " + newTotal);
 
 		assertEquals(preCutTotal / 2, newTotal, 0.0);

@@ -58,12 +58,12 @@ public class Tests {
 		File sample = new File("sampleCompany.xml");
 		File tmp = new File("sampleCompany.tmp");
 		Company c = readFile(sample);		
-		double total = Total.getTotal(c);
+		double total = Total.total(c);
 	    assertEquals(399747, total, 0);
-	    Cut.transform(c);
+	    Cut.cut(c);
 		writeFile(tmp, c);		
 		c = readFile(tmp);		
-	    total = Total.getTotal(c);
+	    total = Total.total(c);
 	    assertEquals(199873.5, total, 0);
 	    tmp.delete();
 	}

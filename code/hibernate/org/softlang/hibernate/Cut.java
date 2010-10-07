@@ -1,4 +1,4 @@
-package org.softlang;
+package org.softlang.hibernate;
 
 import org.softlang.om.*;
 
@@ -8,22 +8,22 @@ import org.softlang.om.*;
  */
 public class Cut {
 
-	public static void cutCompany(Company company) {
+	public static void cut(Company company) {
 		// cut all salaries in all top departments
 		for (Dept dept : company.getDepts())
-			cutDept(dept);
+			cut(dept);
 	}
 
-	public static void cutDept(Dept dept) {
+	public static void cut(Dept dept) {
 		// cut all employees' salaries
 		for (Employee employee : dept.getEmployees())
-			cutEmployee(employee);
+			cut(employee);
 		// cut all salaries in all sub departments
 		for (Dept subDepartment : dept.getSubDepartments())
-			cutDept(subDepartment);
+			cut(subDepartment);
 	}
 
-	public static void cutEmployee(Employee employee) {
+	public static void cut(Employee employee) {
 		// cut employee's salary by half
 		employee.setSalary(employee.getSalary() / 2);
 	}

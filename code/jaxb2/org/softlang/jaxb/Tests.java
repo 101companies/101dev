@@ -51,12 +51,12 @@ public class Tests {
 		Company c;
 		double total;
 		c = readFile("Year2008.xml");		
-	    total = Total.aggregate(c);
+	    total = Total.total(c);
 	    assertEquals(399747, total, 0);
-	    Cut.transform(c);
+	    Cut.cut(c);
 		writeFile("Year2009.xml", c);		
 		c = readFile("Year2009.xml");		
-	    total = Total.aggregate(c);
+	    total = Total.total(c);
 	    assertEquals(199873.5, total, 0);
 	}
 }

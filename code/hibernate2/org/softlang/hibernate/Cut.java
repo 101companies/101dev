@@ -1,14 +1,10 @@
-package org.softlang.emf;
+package org.softlang.hibernate;
 
-import company.*;
+import org.softlang.om.*;
 
-/**
- * Cut all salaries by half.
- * 
- */
 public class Cut {
 
-	public static void cutCompany(Company company) {
+	public static void cut(Company company) {
 		for (Dept dept : company.getDepts())
 			cut(dept);
 	}

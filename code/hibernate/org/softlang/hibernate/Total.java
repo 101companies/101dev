@@ -1,4 +1,4 @@
-package org.softlang;
+package org.softlang.hibernate;
 
 import org.softlang.om.*;
 
@@ -8,26 +8,26 @@ import org.softlang.om.*;
  */
 public class Total {
 
-	public static double totalCompany(Company company) {
-		double ttl = 0;
+	public static double total(Company company) {
+		double total = 0;
 		// total all salaries in all top departments
 		for (Dept dept : company.getDepts())
-			ttl += totalDept(dept);
-		return ttl;
+			total += total(dept);
+		return total;
 	}
 
-	public static double totalDept(Dept dept) {
-		double ttl = 0;
+	public static double total(Dept dept) {
+		double total = 0;
 		// total all department's employees' salaries
 		for (Employee employee : dept.getEmployees())
-			ttl += totalEmployee(employee);
+			total += total(employee);
 		// total all salaries in all sub departments
 		for (Dept subDepartment : dept.getSubDepartments())
-			ttl += totalDept(subDepartment);
-		return ttl;
+			total += total(subDepartment);
+		return total;
 	}
 
-	public static double totalEmployee(Employee employee) {
+	public static double total(Employee employee) {
 		return employee.getSalary();
 	}
 

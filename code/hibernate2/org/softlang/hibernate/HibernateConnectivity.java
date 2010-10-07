@@ -1,4 +1,4 @@
-package org.softlang;
+package org.softlang.hibernate;
 
 import java.util.List;
 import org.hibernate.Session;

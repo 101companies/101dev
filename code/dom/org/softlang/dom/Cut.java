@@ -9,7 +9,7 @@ import org.w3c.dom.NodeList; // Lists of DOM subtrees
  */
 public class Cut {
 
-    public static void transform(Document doc) {
+    public static void cut(Document doc) {
 	    	    
         // Get the matching elements
         NodeList nodelist = doc.getElementsByTagName("salary");

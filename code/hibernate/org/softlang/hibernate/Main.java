@@ -1,4 +1,4 @@
-package org.softlang;
+package org.softlang.hibernate;
 
 import org.softlang.om.*;
 
@@ -14,10 +14,10 @@ public class Main {
 		Company company = hc.loadCompany();
 		System.out.println("Done.");
 
-		System.out.println("Total salary = " + Total.totalCompany(company));
+		System.out.println("Total salary = " + Total.total(company));
 
 		System.out.println("Cutting...");
-		Cut.cutCompany(company);
+		Cut.cut(company);
 		System.out.println("Done.");
 
 		System.out.println("Save company...");
@@ -28,7 +28,7 @@ public class Main {
 		company = hc.loadCompany();
 		System.out.println("Done.");
 
-		System.out.println("New total salary = " + Total.totalCompany(company));
+		System.out.println("New total salary = " + Total.total(company));
 		
 		//
 	}

@@ -6,32 +6,32 @@ import org.softlang.company.*;
 
 public class Cut {
 	
-	public static void transform(Company c) {
+	public static void cut(Company c) {
 		if (c.getDept() != null)
 			for (Dept d : c.getDept())
-				transform(d);
+				cut(d);
 	}
 	
-	public static void transform(Dept d) {
+	public static void cut(Dept d) {
 		if (d != null) {
-			transform(d.getManager());
+			cut(d.getManager());
 			if (d.getSubunit() != null)
 				for (Subunit s : d.getSubunit())
-					transform(s);
+					cut(s);
 		}
 	}
 	
-	public static void transform(Employee e) {
+	public static void cut(Employee e) {
 		if (e != null)
 			e.setSalary(e.getSalary() / 2);
 	}
 		
 	// This is where subtyping kicks in.
-	public static void transform(Subunit s) {
+	public static void cut(Subunit s) {
 		if (s instanceof Pu)
-			transform(((Pu)s).getEmployee());
+			cut(((Pu)s).getEmployee());
 		else if (s instanceof Du)
-			transform(((Du)s).getDept());
+			cut(((Du)s).getDept());
 		else
 			throw new IllegalArgumentException();		
 	}

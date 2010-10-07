@@ -1,11 +1,7 @@
-package org.softlang.emf;
+package org.softlang.hibernate;
 
-import company.*;
+import org.softlang.om.*;
 
-/**
- * Total all salaries.
- * 
- */
 public class Total {
 
 	public static double total(Company company) {
@@ -32,7 +28,5 @@ public class Total {
 
 	private static double total(Employee employee) {
 		return employee.getSalary();
-
 	}
-
 }
