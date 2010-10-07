@@ -33,18 +33,18 @@ public class Tests {
 
 	@Test
 	public void testPrecedence() {
-		assertTrue(PrecedenceCheck.checkPrecedence(sampleCompany));
+		assertTrue(Precedence.checkPrecedence(sampleCompany));
 		// set erik's salary equal to his manager's salary
 		sampleCompany.getModel()
 				.getResource(sampleCompany.NS_COMPANY + "erik")
 					.removeAll(sampleCompany.SALARY)
 					.addLiteral(sampleCompany.SALARY, 123456.0);
-		assertFalse(PrecedenceCheck.checkPrecedence(sampleCompany));
+		assertFalse(Precedence.checkPrecedence(sampleCompany));
 	}
 
 	@Test
 	public void testContainment() {
-		assertTrue(ContainmentCheck.checkContainment(sampleCompany));
+		assertTrue(Containment.checkContainment(sampleCompany));
 		// add the manager of the research department also to the development
 		// department (as employee)
 		Resource craig = sampleCompany.getModel()
@@ -55,7 +55,7 @@ public class Tests {
 						.getBag()
 							.add(craig);
 		
-		assertFalse(ContainmentCheck.checkContainment(sampleCompany));
+		assertFalse(Containment.checkContainment(sampleCompany));
 	}
 
 }

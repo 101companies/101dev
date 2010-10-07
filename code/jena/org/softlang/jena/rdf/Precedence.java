@@ -16,7 +16,7 @@ import com.hp.hpl.jena.rdf.model.StmtIterator;
  * Check that salaries increase with rank in hierarchy.
  * 
  */
-public class PrecedenceCheck {
+public class Precedence {
 
 	public static boolean checkPrecedence(CompanyModel c) {
 

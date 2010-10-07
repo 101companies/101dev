@@ -11,7 +11,7 @@ import java.util.Set;
  * Check that employees and department are not referenced twice.
  * 
  */
-public class ContainmentCheck {
+public class Containment {
 
 	public static boolean checkContainment(CompanyModel c) {
 
