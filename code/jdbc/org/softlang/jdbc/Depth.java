@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class Depth {
 
-	public static int depthCompany(MyConnection myConnection) {
+	public static int depth(MyConnection myConnection) {
 		int maxDepth = 0;
 		try {
 			// get top departments
@@ -16,7 +16,7 @@ public class Depth {
 			ResultSet deptIds = pstmt.executeQuery();
 			// get depth of the "deepest" department
 			while (deptIds.next()) {
-				maxDepth = 1 + Math.max(maxDepth, depthDept(myConnection,
+				maxDepth = 1 + Math.max(maxDepth, depth(myConnection,
 						deptIds.getInt("deptId")));
 			}
 		} catch (SQLException e) {
@@ -25,7 +25,7 @@ public class Depth {
 		return maxDepth;
 	}
 
-	private static int depthDept(MyConnection myConnection, int deptId) {
+	private static int depth(MyConnection myConnection, int deptId) {
 		int maxDepth = 0;
 		try {
 			// get all sub department
@@ -36,7 +36,7 @@ public class Depth {
 			ResultSet subunitIds = pstmt.executeQuery();
 			// get deepest path
 			while (subunitIds.next()) {
-				maxDepth = 1 + Math.max(maxDepth, depthDept(myConnection,
+				maxDepth = 1 + Math.max(maxDepth, depth(myConnection,
 						subunitIds.getInt("deptId")));
 			}
 		} catch (SQLException e) {

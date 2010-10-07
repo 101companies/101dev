@@ -23,13 +23,13 @@ public class Tests {
 		myConnection.connect();
 		
 		// Test scenario "total"
-		double preCutTotal = Total.getTotal(myConnection);
-		assertEquals(399747, preCutTotal, 0.0);
+		double oldTotal = Total.total(myConnection);
+		assertEquals(399747, oldTotal, 0.0);
 		
 		// Test scenario "cut"
 		Cut.cut(myConnection);
-		double newTotal = Total.getTotal(myConnection);
-		assertEquals(preCutTotal / 2, newTotal, 0.0);
+		double newTotal = Total.total(myConnection);
+		assertEquals(oldTotal / 2, newTotal, 0.0);
 	}
 
 }

@@ -6,19 +6,18 @@ import java.sql.SQLException;
 
 public class Total {
 
-	public static double getTotal(MyConnection myConnection) {
+	public static double total(MyConnection myConnection)
+			throws SQLException {
 		double total = 0;
-		try {
-			// get all salaries and total 
-			String sqlSalaries = "SELECT salary FROM employee";
-			PreparedStatement pstmtEmployees = myConnection.getConn()
-					.prepareStatement(sqlSalaries);
-			ResultSet salaries = pstmtEmployees.executeQuery();
-			while (salaries.next())
-				total += salaries.getDouble("salary");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		String sqlSalaries =
+			"SELECT salary FROM employee";
+		PreparedStatement pstmtEmployees =
+			myConnection
+				.getConn()
+				.prepareStatement(sqlSalaries);
+		ResultSet salaries = pstmtEmployees.executeQuery();
+		while (salaries.next())
+			total += salaries.getDouble("salary");
 		return total;
 	}
 }
