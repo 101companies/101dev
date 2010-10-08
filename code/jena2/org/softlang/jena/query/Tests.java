@@ -1,7 +1,8 @@
-package org.softlang.jena.tests;
+package org.softlang.jena.query;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
@@ -14,9 +15,12 @@ import org.softlang.jena.query.Total;
 
 import com.hp.hpl.jena.rdf.model.Resource;
 
-public class QueryScenarios {
+public class Tests {
 
-	public final String filename = "sampleCompany.rdf";
+	public final String filename =
+		  ".." + File.separatorChar
+		+ "jena" + File.separatorChar
+		+ "sampleCompany.rdf";
 	public CompanyModel sampleCompany = new CompanyModel();
 
 	@Before
@@ -45,5 +49,4 @@ public class QueryScenarios {
 		
 		assertFalse(Containment.checkContainment(sampleCompany));
 	}
-
 }

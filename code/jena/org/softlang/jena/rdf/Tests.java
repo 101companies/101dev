@@ -1,4 +1,4 @@
-package org.softlang.jena.tests;
+package org.softlang.jena.rdf;
 
 import org.softlang.company.CompanyModel;
 import org.softlang.jena.rdf.Containment;
@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class RdfScenarios {
+public class Tests {
 
 	public final String filename = "sampleCompany.rdf";
 	public CompanyModel sampleCompany = new CompanyModel();
