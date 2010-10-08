@@ -1,16 +1,35 @@
 package org.softlang.jaxb;
 
 import org.softlang.company.*;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import org.junit.Test;
+import org.junit.Before;
 import static org.junit.Assert.*;
-import java.io.*;
-
-import javax.xml.bind.*;
-import javax.xml.stream.*;
 
 public class Tests {
 
+	private static String sampleCompany =
+		"sampleCompany.xml";
+	
 	private static JAXBContext jaxbContext;
+
+	private Company c;
+	
+	@Before
+	public void initCompany() throws JAXBException {
+		File sample = new File(sampleCompany);
+		c = readFile(sample);		
+	}
 	
 	public static void initializeJaxbContext()
 	throws JAXBException
@@ -20,43 +39,51 @@ public class Tests {
 				JAXBContext.newInstance("org.softlang.company");
 	}
 		
-	public static Company readFile(String file)
+	public static Company readFile(File input)
 	throws JAXBException 
 	{
 		initializeJaxbContext();
 		Unmarshaller unMarshaller = jaxbContext.createUnmarshaller();
-		return (Company) unMarshaller.unmarshal(new File(file));		
+		return (Company) unMarshaller.unmarshal(input);		
 	}
 
-	public static void writeFile(String file, Company c)
+	public static void writeFile(File output, Company c)
 	throws 	JAXBException,
 			FileNotFoundException,
 			XMLStreamException 
 	{
 		initializeJaxbContext();
-	    OutputStream output = new FileOutputStream("Year2009.xml");
+	    OutputStream os = new FileOutputStream(output);
 		Marshaller marshaller = jaxbContext.createMarshaller();
 	    XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
-        XMLStreamWriter writer = outputFactory.createXMLStreamWriter(output);
-		marshaller.marshal(c, writer); // need a stream writer that does indentation		
+        XMLStreamWriter writer = outputFactory.createXMLStreamWriter(os);
+		marshaller.marshal(c, writer); // TODO: need a stream writer that does indentation		
 	}
 	
 	@Test
-	public void testAll() 
+	public void testTotal() 
 	throws 
 		JAXBException,
 		FileNotFoundException,
 		XMLStreamException 
 	{
-		Company c;
-		double total;
-		c = readFile("Year2008.xml");		
-	    total = Total.total(c);
+		double total = Total.total(c);
 	    assertEquals(399747, total, 0);
+	}	    
+	    
+	@Test
+	public void testCut() 
+	throws 
+		JAXBException,
+		FileNotFoundException,
+		XMLStreamException 
+	{
 	    Cut.cut(c);
-		writeFile("Year2009.xml", c);		
-		c = readFile("Year2009.xml");		
-	    total = Total.total(c);
+		File tmp = new File("sampleCompany.tmp");
+		writeFile(tmp, c);		
+		c = readFile(tmp);		
+	    Double total = Total.total(c);
 	    assertEquals(199873.5, total, 0);
+	    tmp.delete();
 	}
 }

@@ -13,11 +13,25 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import org.junit.Test;
+import org.junit.Before;
 import static org.junit.Assert.*;
 
 public class Tests {
 
+	private static String sampleCompany =
+		  ".." + File.separatorChar
+		+ "sax" + File.separatorChar
+		+ "sampleCompany.xml";
+	
 	private static JAXBContext jaxbContext;
+
+	private Company c;
+	
+	@Before
+	public void initCompany() throws JAXBException {
+		File sample = new File(sampleCompany);
+		c = readFile(sample);		
+	}
 	
 	public static void initializeJaxbContext()
 	throws JAXBException
@@ -49,21 +63,28 @@ public class Tests {
 	}
 	
 	@Test
-	public void testAll() 
+	public void testTotal() 
 	throws 
 		JAXBException,
 		FileNotFoundException,
 		XMLStreamException 
 	{
-		File sample = new File("sampleCompany.xml");
-		File tmp = new File("sampleCompany.tmp");
-		Company c = readFile(sample);		
 		double total = Total.total(c);
 	    assertEquals(399747, total, 0);
+	}	    
+	    
+	@Test
+	public void testCut() 
+	throws 
+		JAXBException,
+		FileNotFoundException,
+		XMLStreamException 
+	{
 	    Cut.cut(c);
+		File tmp = new File("sampleCompany.tmp");
 		writeFile(tmp, c);		
 		c = readFile(tmp);		
-	    total = Total.total(c);
+	    Double total = Total.total(c);
 	    assertEquals(199873.5, total, 0);
 	    tmp.delete();
 	}

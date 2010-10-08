@@ -1,4 +1,4 @@
-input = sampleCompany.xml
+input = ../sax/sampleCompany.xml
 saxon = ../library/saxon/saxon9he.jar
 basex = ../library/basex/BaseX61.jar
 javasix = /System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Commands/java

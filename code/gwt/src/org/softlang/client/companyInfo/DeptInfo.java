@@ -1,4 +1,4 @@
-package org.softlang.client.company;
+package org.softlang.client.companyInfo;
 
 import java.io.Serializable;
 import java.util.LinkedList;

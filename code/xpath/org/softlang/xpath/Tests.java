@@ -1,4 +1,6 @@
-package org.softlang.dom;
+package org.softlang.xpath;
+
+import java.io.File;
 
 import org.junit.Test;
 import org.w3c.dom.Document;
@@ -6,17 +8,22 @@ import org.w3c.dom.Document;
 import static org.junit.Assert.*;
 
 public class Tests {
-		
+
+	private static String sampleCompany =
+		  ".." + File.separatorChar
+		+ "sax" + File.separatorChar
+		+ "sampleCompany.xml";
+
     @Test
 	public void testTotal() throws Exception {
-    	Document doc = DOMUtilities.loadDocument("Year2008.xml");
+    	Document doc = DOMUtilities.loadDocument(sampleCompany);
     	double total = Total.aggregate(doc);
     	assertEquals(399747, total, 0);
  	}
 	
     @Test
     public void testCut() throws Exception {
-    	Document doc = DOMUtilities.loadDocument("Year2008.xml");
+    	Document doc = DOMUtilities.loadDocument(sampleCompany);
     	Cut.transform(doc);
     	double total = Total.aggregate(doc);
     	assertEquals(199873.5, total, 0);
@@ -24,7 +31,7 @@ public class Tests {
 
     @Test
     public void testCutManagers() throws Exception {
-    	Document doc = DOMUtilities.loadDocument("Year2008.xml");
+    	Document doc = DOMUtilities.loadDocument(sampleCompany);
     	CutManagers.transform(doc);
     	double total = Total.aggregate(doc);
     	assertEquals(207835.0, total, 0);

@@ -3,7 +3,7 @@ package org.softlang.server;
 import java.util.HashMap;
 
 import org.softlang.client.*;
-import org.softlang.client.company.*;
+import org.softlang.client.companyInfo.*;
 import org.softlang.server.company.*;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -22,10 +22,10 @@ public class ServiceImpl extends RemoteServiceServlet implements Service {
 
 	public ServiceImpl() {
 		this.company = SampleCompany.getSampleCompany();
-		Index companyFlater = new Index();
-		companyFlater.index(company);
-		this.deptMap = companyFlater.getDeptMap();
-		this.employeeMap = companyFlater.getEmployeeMap();
+		Index index = new Index();
+		index.index(company);
+		this.deptMap = index.getDeptMap();
+		this.employeeMap = index.getEmployeeMap();
 	}
 
 	@Override

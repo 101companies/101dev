@@ -1,4 +1,4 @@
-input = sampleCompany.xml
+input = ../sax/sampleCompany.xml
 saxon = ../library/saxon/saxon9he.jar
 
 test-xsltproc:

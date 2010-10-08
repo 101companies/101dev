@@ -1,4 +1,4 @@
-package org.softlang.dom;
+package org.softlang.xpath;
 
 import java.io.File;
 import java.io.IOException;

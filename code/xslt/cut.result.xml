@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <company xmlns="http://www.softlang.org/company.xsd">
 	<dept>
 		<name>Research</name>
@@ -7,7 +7,7 @@
 				<name>Craig</name>
 				<address>Redmond</address>
 			</person>
-			<salary>123456</salary>
+			<salary>61728</salary>
 		</manager>
 		<subunit>
 			<pu>
@@ -15,7 +15,7 @@
 					<name>Erik</name>
 					<address>Utrecht</address>
 				</person>
-				<salary>12345</salary>
+				<salary>6172.5</salary>
 			</pu>
 		</subunit>
 		<subunit>
@@ -24,7 +24,7 @@
 					<name>Ralf</name>
 					<address>Koblenz</address>
 				</person>
-				<salary>1234</salary>
+				<salary>617</salary>
 			</pu>
 		</subunit>
 	</dept>
@@ -35,7 +35,7 @@
 				<name>Ray</name>
 				<address>Redmond</address>
 			</person>
-			<salary>234567</salary>
+			<salary>117283.5</salary>
 		</manager>
 		<subunit>
 			<du>
@@ -45,7 +45,7 @@
 						<name>Klaus</name>
 						<address>Boston</address>
 					</person>
-					<salary>23456</salary>
+					<salary>11728</salary>
 				</manager>
 				<subunit>
 					<du>
@@ -55,7 +55,7 @@
 								<name>Karl</name>
 								<address>Riga</address>
 							</person>
-							<salary>2345</salary>
+							<salary>1172.5</salary>
 						</manager>
 						<subunit>
 							<pu>
@@ -63,7 +63,7 @@
 									<name>Joe</name>
 									<address>Wifi City</address>
 								</person>
-								<salary>2344</salary>
+								<salary>1172</salary>
 							</pu>
 						</subunit>
 					</du>

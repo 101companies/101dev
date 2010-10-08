@@ -2,7 +2,7 @@ package org.softlang.client;
 
 import java.util.Stack;
 
-import org.softlang.client.company.*;
+import org.softlang.client.companyInfo.*;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
