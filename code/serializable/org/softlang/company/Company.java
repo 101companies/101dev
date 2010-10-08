@@ -24,12 +24,10 @@ public class Company implements Serializable {
 	public static Company readObject(String filename) {
 
 		Object o = null;
-		FileInputStream fis = null;
-		ObjectInputStream in = null;
 
 		try {
-			fis = new FileInputStream(filename);
-			in = new ObjectInputStream(fis);
+			FileInputStream fis = new FileInputStream(filename);
+			ObjectInputStream in = new ObjectInputStream(fis);
 			o = in.readObject();
 			in.close();
 		} catch (IOException e) {
