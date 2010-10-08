@@ -1,4 +1,4 @@
-package org.softlang.client.shallowCompany;
+package org.softlang.client.company;
 
 import java.io.Serializable;
 

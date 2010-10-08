@@ -3,7 +3,7 @@ package org.softlang.server;
 import java.util.HashMap;
 
 import org.softlang.client.*;
-import org.softlang.client.shallowCompany.*;
+import org.softlang.client.company.*;
 import org.softlang.server.company.*;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;

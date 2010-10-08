@@ -1,6 +1,6 @@
 package org.softlang.client;
 
-import org.softlang.client.shallowCompany.*;
+import org.softlang.client.company.*;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;

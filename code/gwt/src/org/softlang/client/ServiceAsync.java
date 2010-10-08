@@ -1,8 +1,8 @@
 package org.softlang.client;
 
-import org.softlang.client.shallowCompany.CompanyInfo;
-import org.softlang.client.shallowCompany.DeptInfo;
-import org.softlang.client.shallowCompany.EmployeeInfo;
+import org.softlang.client.company.CompanyInfo;
+import org.softlang.client.company.DeptInfo;
+import org.softlang.client.company.EmployeeInfo;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
