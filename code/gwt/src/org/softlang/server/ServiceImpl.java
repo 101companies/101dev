@@ -21,9 +21,9 @@ public class ServiceImpl extends RemoteServiceServlet implements Service {
 	private HashMap<String, Employee> employeeMap;
 
 	public ServiceImpl() {
-		this.company = SampleCompanyHolder.getSampleCompany();
-		CompanyFlater companyFlater = new CompanyFlater();
-		companyFlater.flatCompany(company);
+		this.company = SampleCompany.getSampleCompany();
+		Index companyFlater = new Index();
+		companyFlater.index(company);
 		this.deptMap = companyFlater.getDeptMap();
 		this.employeeMap = companyFlater.getEmployeeMap();
 	}

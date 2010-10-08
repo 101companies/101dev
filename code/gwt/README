@@ -29,6 +29,8 @@ Server classes are to be found in the server package.
 See org.softlang.server.
 We use an object model for companies very much like in project serializable.
 (We use a cloned object model for the sake of a simple build for this GWT project.)
+The server maintains an index (see class Index.java) between shallow and proper objects.
+That is, departments and employees are identifiable by their ids (say, names).
  
 The communication between client and server is modeled by the Service interface.
 See the client package.

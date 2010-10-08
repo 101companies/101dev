@@ -1,12 +1,8 @@
 package org.softlang.server;
 
-import org.softlang.server.company.Company;
-import org.softlang.server.company.Dept;
-import org.softlang.server.company.Employee;
-import org.softlang.server.company.Person;
-import org.softlang.server.company.Subunit;
+import org.softlang.server.company.*;
 
-public class SampleCompanyHolder {
+public class SampleCompany {
 
 	public static Company getSampleCompany() {
 		Company company = new Company();
