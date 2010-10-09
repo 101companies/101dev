@@ -4,7 +4,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class SimpleFlaggedList<T> implements Iterable<T> {
+import org.softlang.company.Loadable;
+
+public class SimpleFlaggedList<T extends Loadable> implements Iterable<T> {
 
 	/**
 	 * Simple list with a flag for changes
@@ -25,7 +27,9 @@ public class SimpleFlaggedList<T> implements Iterable<T> {
 	}
 
 	public T get(int index) {
-		return inner.get(index);
+		T t = inner.get(index);
+		t.load();
+		return t;
 	}
 
 	public T set(int index, T element) {
@@ -40,11 +44,15 @@ public class SimpleFlaggedList<T> implements Iterable<T> {
 
 	public T remove(int index) {
 		changed = true;
-		return inner.remove(index);
+		T t = inner.remove(index);
+		t.load();
+		return t;
 	}
 
 	@Override
 	public Iterator<T> iterator() {
+		for (T t : inner)
+			t.load();
 		return inner.iterator();
 	}
 
