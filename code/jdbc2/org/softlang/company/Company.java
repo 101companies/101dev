@@ -24,10 +24,10 @@ public class Company {
 		changed = false;
 	}
 
-	public boolean wasChanged() {
+	public boolean isChanged() {
 		boolean deptsChanged = depts.wasChanged();
 		for (Dept dept : depts)
-			deptsChanged |= dept.wasChanged();
+			deptsChanged |= dept.isChanged();
 		return deptsChanged || this.changed;
 	}
 

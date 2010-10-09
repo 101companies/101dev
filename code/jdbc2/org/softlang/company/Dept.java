@@ -6,7 +6,7 @@ import org.softlang.util.SimpleFlaggedList;
  * A department has a name, a manager and a list of subunits
  * 
  */
-public class Dept {
+public class Dept implements Loadable {
 
 	private int deptid;
 	private String name;
@@ -14,18 +14,41 @@ public class Dept {
 	private SimpleFlaggedList<Dept> subDepartments;
 	private SimpleFlaggedList<Employee> employees;
 	private boolean changed;
+	private boolean loaded;
+	private ObjectFactory objectFactory;
 
 	public Dept() {
 		deptid = 0;
 		subDepartments = new SimpleFlaggedList<Dept>();
 		employees = new SimpleFlaggedList<Employee>();
 		changed = true;
+		loaded = true;
 	}
 
 	public Dept(int deptid) {
 		this.deptid = deptid;
 		subDepartments = new SimpleFlaggedList<Dept>();
 		employees = new SimpleFlaggedList<Employee>();
+		loaded = false;
+	}
+
+	public ObjectFactory getObjectFactory() {
+		return objectFactory;
+	}
+
+	public void setObjectFactory(ObjectFactory objectFactory) {
+		this.objectFactory = objectFactory;
+	}
+
+	public void setLoaded(boolean loaded) {
+		this.loaded = loaded;
+	}
+
+	public void load() {
+		if (objectFactory != null && !loaded) {
+			objectFactory.loadDept(this);
+			loaded = true;
+		}
 	}
 
 	public int getDeptid() {
@@ -47,6 +70,7 @@ public class Dept {
 	}
 
 	public Employee getManager() {
+		manager.load();
 		return manager;
 	}
 
@@ -77,14 +101,14 @@ public class Dept {
 		changed = false;
 	}
 
-	public boolean wasChanged() {
+	public boolean isChanged() {
 		boolean employeesChanged = employees.wasChanged();
 		for (Employee employee : employees)
-			employeesChanged |= employee.wasChanged();
+			employeesChanged |= employee.isChanged();
 		boolean subDeptsChanged = subDepartments.wasChanged();
 		for (Dept dept : subDepartments)
-			subDeptsChanged |= dept.wasChanged();
-		return manager.wasChanged() || employeesChanged || subDeptsChanged
+			subDeptsChanged |= dept.isChanged();
+		return manager.isChanged() || employeesChanged || subDeptsChanged
 				|| this.changed;
 	}
 

@@ -58,7 +58,7 @@ public class PersistenceTool {
 	}
 
 	public void persistCompany(Company company) {
-		if (company.wasChanged()) {
+		if (company.isChanged()) {
 			deptIds = new HashSet<Integer>();
 			employeeIds = new HashSet<Integer>();
 			// save all top departments
@@ -76,7 +76,7 @@ public class PersistenceTool {
 	}
 
 	private void persistDept(Dept dept, Integer upperDeptId) {
-		if (dept.wasChanged()) {
+		if (dept.isChanged()) {
 			try {
 				if (dept.getDeptid() == 0) {
 					// insert new department entry
@@ -98,8 +98,7 @@ public class PersistenceTool {
 					idR.next();
 					dept.setDeptid(idR.getInt("deptId"));
 					// save manager
-					persistEmployee(dept.getManager(), dept
-							.getDeptid());
+					persistEmployee(dept.getManager(), dept.getDeptid());
 					// now that the manager got an id we can store it the
 					// department table
 					String sqlUpdateManager = "UPDATE dept SET managerId = ? WHERE deptId = ?";
@@ -121,8 +120,7 @@ public class PersistenceTool {
 						pstmtUpdate.setNull(2, Types.INTEGER);
 					pstmtUpdate.setInt(3, dept.getDeptid());
 					pstmtUpdate.executeUpdate();
-					persistEmployee(dept.getManager(), dept
-							.getDeptid());
+					persistEmployee(dept.getManager(), dept.getDeptid());
 					// now that the manager got an id we can store it the
 					// department table
 					String sqlUpdateManager = "UPDATE dept SET managerId = ? WHERE deptId = ?";
@@ -155,7 +153,7 @@ public class PersistenceTool {
 	}
 
 	private void persistEmployee(Employee employee, Integer deptId) {
-		if (employee.wasChanged()) {
+		if (employee.isChanged()) {
 			try {
 				if (employee.getEmployeeid() == 0) {
 					// save person

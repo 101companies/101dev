@@ -4,13 +4,15 @@ package org.softlang.company;
  * An Employee has a salary and some person information
  * 
  */
-public class Employee {
+public class Employee implements Loadable {
 
 	private int employeeid;
 	private String name;
 	private String address;
 	private double salary;
 	private boolean changed;
+	private boolean loaded;
+	private ObjectFactory objectFactory;
 
 	public Employee() {
 		employeeid = 0;
@@ -19,6 +21,25 @@ public class Employee {
 
 	public Employee(int employeeid) {
 		this.employeeid = employeeid;
+	}
+
+	public ObjectFactory getObjectFactory() {
+		return objectFactory;
+	}
+
+	public void setObjectFactory(ObjectFactory objectFactory) {
+		this.objectFactory = objectFactory;
+	}
+
+	public void setLoaded(boolean loaded) {
+		this.loaded = loaded;
+	}
+
+	public void load() {
+		if (objectFactory != null && !loaded) {
+			objectFactory.loadEmployee(this);
+			loaded = true;
+		}
 	}
 
 	public int getEmployeeid() {
@@ -61,7 +82,7 @@ public class Employee {
 		changed = false;
 	}
 
-	public boolean wasChanged() {
+	public boolean isChanged() {
 		return changed;
 	}
 
