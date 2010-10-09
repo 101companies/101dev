@@ -1,3 +1,4 @@
+:- ['Company.pro']. 
 :- ['Total.pro']. 
 :- ['Cut.pro']. 
 :- ['Depth.pro']. 
@@ -6,6 +7,7 @@
    see('sampleCompany.trm'),
    read(C1),
    seen,
+   isCompany(C1),
    total(C1,R1),
    format('total = ~w~n',[R1]),
    cut(C1,C2),

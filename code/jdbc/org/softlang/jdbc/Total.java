@@ -9,12 +9,12 @@ public class Total {
 	public static double total(MyConnection myConnection)
 			throws SQLException {
 		double total = 0;
-		String sqlSalaries =
+		String query =
 			"SELECT salary FROM employee";
 		PreparedStatement pstmtEmployees =
 			myConnection
 				.getConn()
-				.prepareStatement(sqlSalaries);
+				.prepareStatement(query);
 		ResultSet salaries = pstmtEmployees.executeQuery();
 		while (salaries.next())
 			total += salaries.getDouble("salary");

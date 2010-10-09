@@ -4,6 +4,4 @@ import Company
 import Data.Generics
 
 cut :: Company -> Company
-cut = everywhere (mkT modifySalary)
- where
-  modifySalary (Salary s)  = Salary (s/2)
+cut = everywhere (mkT (/(2::Float)))

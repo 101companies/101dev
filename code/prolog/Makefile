@@ -1,5 +1,5 @@
 test:
-	swipl -q -f Demo.pro > log
+	swipl -q -f Tests.pro > log
 	diff log baseline
 	rm log
 

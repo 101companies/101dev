@@ -2,7 +2,6 @@ package org.softlang.jena.rdf;
 
 import org.softlang.company.CompanyModel;
 import org.softlang.jena.rdf.Containment;
-import org.softlang.jena.rdf.*;
 import com.hp.hpl.jena.rdf.model.Resource;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

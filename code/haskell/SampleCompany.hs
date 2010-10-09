@@ -4,18 +4,18 @@ import Company
 
 company = [research, dev]
  where
-  research = Dept "Research" (Manager craig) [PU erik, PU ralf]
+  research = Dept "Research" craig [PU erik, PU ralf]
    where
-    craig = Employee (Person "Craig" "Redmond") (Salary 123456)
-    erik  = Employee (Person "Erik" "Utrecht") (Salary 12345)
-    ralf  = Employee (Person "Ralf" "Koblenz") (Salary 1234)
-  dev = Dept "Development" (Manager ray) [DU dev1]
+    craig = Employee "Craig" "Redmond" 123456
+    erik  = Employee "Erik" "Utrecht" 12345
+    ralf  = Employee "Ralf" "Koblenz" 1234
+  dev = Dept "Development" ray [DU dev1]
    where
-    ray  = Employee (Person "Ray" "Redmond") (Salary 234567)
-    dev1 = Dept "Dev1" (Manager klaus) [DU dev11]
+    ray  = Employee "Ray" "Redmond" 234567
+    dev1 = Dept "Dev1" klaus [DU dev11]
      where
-      klaus = Employee (Person "Klaus" "Boston") (Salary 23456)
-      dev11 = Dept "Dev1.1" (Manager karl) [PU joe]
+      klaus = Employee "Klaus" "Boston" 23456
+      dev11 = Dept "Dev1.1" karl [PU joe]
        where
-        karl = Employee (Person "Karl" "Riga") (Salary 2345)
-        joe  = Employee (Person "Joe" "Wifi City") (Salary 2344)
+        karl = Employee "Karl" "Riga" 2345
+        joe  = Employee "Joe" "Wifi City" 2344

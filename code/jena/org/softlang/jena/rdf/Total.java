@@ -1,7 +1,5 @@
 package org.softlang.jena.rdf;
 
-import java.util.List;
-
 import org.softlang.company.CompanyModel;
 import com.hp.hpl.jena.rdf.model.*;
 
@@ -12,12 +10,14 @@ public class Total {
 
 	public static double total(CompanyModel c) {
 		double total = 0;
-		List<Statement> l =
+		StmtIterator i =
 			c.getModel().listStatements(
 				new SimpleSelector(
-					null, c.SALARY, (RDFNode) null)).toList();
-		for (Statement s : l)
+					null, c.SALARY, (RDFNode) null));
+		while (i.hasNext()) {
+			Statement s = i.next();
 			total += s.getDouble();
+		}
 		return total;
 	}
 }

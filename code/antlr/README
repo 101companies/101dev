@@ -11,3 +11,24 @@ In this manner, the parser is compiled.
 
 You may also use an ANTLR IDE.
 http://antlrv3ide.sourceforge.net/
+
+Just for fun, here is the signature corresponding to the grammar.
+
+Introduced sorts
+ Company,
+ Dept,
+ Employee
+ 
+Assumed sorts
+ Float,
+ String,
+ List(_)
+ 
+Function symbols:
+ company  : List(Dept) -> Company
+ dept     : String x Employee x List(Employee) x List(Dept) -> Dept
+ employee : String x String x Float -> Employee
+ 
+ Notes:
+ - We allow ourselves lists.
+ 
