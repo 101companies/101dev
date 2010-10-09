@@ -1,4 +1,4 @@
-company {
+company "meganalysis" {
 	department "Research" {
 		manager "Craig" {
 			address "Redmond"

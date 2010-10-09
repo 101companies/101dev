@@ -8,7 +8,7 @@ package org.softlang.antlr;
 }
 
 company :
-  'company' '{' dept* '}';
+  'company' STRING '{' dept* '}';
   
 dept :
   'department' STRING '{' 

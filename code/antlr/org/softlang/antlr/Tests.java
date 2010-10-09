@@ -19,19 +19,4 @@ public class Tests {
         CompanyParser parser = new CompanyParser(tokens);
         parser.company();		
 	}
-	
-//    @Test
-//	public void testTotal() throws Exception {
-//    	Document doc = DOMUtilities.loadDocument(sampleCompany);
-//    	double total = Total.total(doc);
-//    	assertEquals(399747, total, 0);
-// 	}
-//	
-//    @Test
-//    public void testCut() throws Exception {
-//    	Document doc = DOMUtilities.loadDocument(sampleCompany);
-//    	Cut.cut(doc);
-//    	double total = Total.total(doc);
-//    	assertEquals(199873.5, total, 0);
-//    }    
 }
