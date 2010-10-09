@@ -1,6 +1,8 @@
 package org.softlang.antlr;
 
 import org.softlang.company.Company;
+
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import org.antlr.runtime.*;
@@ -10,7 +12,10 @@ import static org.junit.Assert.assertEquals;
 
 public class Tests {
 		
-	private static String sampleCompany = "sample.Company";
+	private static String sampleCompany =
+		  ".." + File.separator
+		+ "antlr" + File.separator
+		+ "sample.Company";
 
 	private Company c;
 	

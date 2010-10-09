@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 public class Tests {
 
 	private static String sampleCompany =
-		  ".." + File.separatorChar
-		+ "sax" + File.separatorChar
+		  ".." + File.separator
+		+ "sax" + File.separator
 		+ "sampleCompany.xml";
 	
 	private static JAXBContext jaxbContext;

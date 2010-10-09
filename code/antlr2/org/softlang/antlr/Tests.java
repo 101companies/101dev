@@ -1,5 +1,6 @@
 package org.softlang.antlr;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import org.antlr.runtime.*;
@@ -11,7 +12,10 @@ import org.softlang.antlr.CompanyParser.company_return;
 
 public class Tests {
 		
-	private static String sampleCompany = "sample.Company";
+	private static String sampleCompany =
+		  ".." + File.separator
+		+ "antlr" + File.separator
+		+ "sample.Company";
 
 	@Test
 	public void testParse() throws IOException, RecognitionException {

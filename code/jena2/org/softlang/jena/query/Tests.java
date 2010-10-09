@@ -18,8 +18,8 @@ import com.hp.hpl.jena.rdf.model.Resource;
 public class Tests {
 
 	public final String filename =
-		  ".." + File.separatorChar
-		+ "jena" + File.separatorChar
+		  ".." + File.separator
+		+ "jena" + File.separator
 		+ "sampleCompany.rdf";
 	public CompanyModel sampleCompany = new CompanyModel();
 

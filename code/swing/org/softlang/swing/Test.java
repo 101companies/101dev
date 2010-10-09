@@ -8,9 +8,9 @@ public class Test {
 	public static void main(String[] args) {
 		new GUI(Company.readObject(
 					".."
-				+ 	File.separatorChar
+				+ 	File.separator
 				+	"serializable"
-				+ 	File.separatorChar
+				+ 	File.separator
 				+	"sampleCompany.ser"));
 	}
 }
