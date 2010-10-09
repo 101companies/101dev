@@ -1,4 +1,4 @@
-package org.softlang.serializable.tests;
+package org.softlang.alpha.tests;
 
 import org.softlang.company.Company;
 import org.junit.Test;
