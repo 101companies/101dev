@@ -51,9 +51,29 @@ public class SimpleFlaggedList<T extends Loadable> implements Iterable<T> {
 
 	@Override
 	public Iterator<T> iterator() {
-		for (T t : inner)
-			t.load();
-		return inner.iterator();
+		final Iterator<T> innerIterator = inner.iterator();
+
+		return new Iterator<T>() {
+
+			@Override
+			public boolean hasNext() {
+				return innerIterator.hasNext();
+			}
+
+			@Override
+			public T next() {
+				T t = innerIterator.next();
+				t.load();
+				return t;
+			}
+
+			@Override
+			public void remove() {
+				innerIterator.remove();
+
+			}
+		};
+
 	}
 
 	public boolean wasChanged() {
