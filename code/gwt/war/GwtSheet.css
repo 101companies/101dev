@@ -9,14 +9,14 @@
 }
 
 .borderPanel {
-	border-color: #454666;
-	border-style: solid;
-	border-width: 1px 0;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 30px;
 	padding-top: 1px;
 	width: 380px;
+	border-color: #454666;
+	border-style: solid;
+	border-width: 1px 0;
 }
 
 .butPanel {
@@ -27,7 +27,7 @@
 	margin-right: auto;
 	text-align: center;
 }
-
+	
 .depName {
 	font-family: century gothic;
 	font-size: 17px;
@@ -41,7 +41,7 @@
 	-moz-border-radius-topright: 3px;
 	background-color: #454666;
 	border-radius: 3px 3px 3px 3px;
-	color: white;
+	color: #FFF;
 	font-family: century gothic;
 	font-size: 20px;
 	font-weight: 700;
@@ -66,7 +66,7 @@
 	width: 180px;
 }
 
-.deptEditBox {
+.deptEditBox,.companyEditBox {
 	background-color: #d6e6f6;
 	color: #444;
 	font-family: century gothic;
@@ -81,39 +81,39 @@
 
 .empEditBoxOff {
 	background-color: #708090;
-	border-width: 0;
 	color: silver;
 	font-family: century gothic;
 	font-size: 19px;
 	font-weight: 700;
 	height: 30px;
 	margin-bottom: 23px;
-	margin-left: 0px;
+	margin-left: 0;
 	margin-top: 2px;
 	text-align: left;
 	width: 180px;
+	border-width: 0;
 }
 
-.deptEditBoxOff {
+.deptEditBoxOff,.companyEditBoxOff {
 	background-color: #708090;
-	border-width: 0;
 	color: silver;
 	font-family: century gothic;
 	font-size: 19px;
 	font-weight: 700;
 	height: 30px;
 	margin-bottom: 23px;
-	margin-left: 0px;
+	margin-left: 0;
 	margin-top: 2px;
 	text-align: left;
 	width: 191px;
+	border-width: 0;
 }
 
-.deptInfoPanel,.empInfoPanel {
+.companyInfoPanel,.deptInfoPanel,.empInfoPanel {
 	margin: 25px auto 0 0;
 }
 
-.deptInfoText,.empInfoText {
+.companyInfoText,.deptInfoText,.empInfoText {
 	color: #121333;
 	font-family: century gothic;
 	font-size: 19px;
@@ -132,7 +132,7 @@
 	-moz-border-radius-topright: 3px;
 	background-color: #454666;
 	border-radius: 3px 3px 3px 3px;
-	color: white;
+	color: #FFF;
 	font-family: century gothic;
 	font-size: 20px;
 	font-weight: 700;
@@ -141,9 +141,9 @@
 }
 
 .list {
-	margin: 10px auto 20px;
 	text-align: center;
 	width: 380px;
+	margin: 10px auto 20px;
 }
 
 .listInfo {
@@ -187,8 +187,8 @@
 .menuPanel {
 	margin-left: 0;
 	margin-right: auto;
-	padding: 0 0 10px;
 	text-align: center;
+	padding: 0 0 10px;
 }
 
 .navButton,.saveButton,.okButton,.editButton,.cutButton {
@@ -196,13 +196,13 @@
 }
 
 .salaryBorderPanel {
-	border-color: #121333;
-	border-style: solid;
-	border-width: 0 0 1px;
 	margin-left: 40px;
 	margin-top: 50px;
 	text-align: left;
 	width: 380px;
+	border-color: #121333;
+	border-style: solid;
+	border-width: 0 0 1px;
 }
 
 .salaryInfo {
@@ -235,14 +235,11 @@
 .topInnerPanel {
 	margin-left: auto;
 	margin-right: auto;
-	padding: 0 0 10px;
 	text-align: center;
+	padding: 0 0 10px;
 }
 
 .topPanel {
-	border-color: #121333;
-	border-style: solid;
-	border-width: 0 0 4px;
 	margin-bottom: 0;
 	margin-left: auto;
 	margin-right: auto;
@@ -251,6 +248,9 @@
 	text-align: center;
 	width: 400px;
 	min-height: 50px;
+	border-color: #121333;
+	border-style: solid;
+	border-width: 0 0 4px;
 }
 
 .viewInfo {
@@ -261,17 +261,8 @@
 	text-align: center;
 }
 
-.viewInfoExtDept {
-	color: white;
-	font-family: century gothic;
-	font-size: 22px;
-	font-weight: 700;
-	margin-left: 10px;
-	text-align: center;
-}
-
-.viewInfoExtEmpl {
-	color: white;
+.viewInfoExtCompany,.viewInfoExtDept,.viewInfoExtEmpl {
+	color: #FFF;
 	font-family: century gothic;
 	font-size: 22px;
 	font-weight: 700;
@@ -291,7 +282,7 @@
 	font-size: 30px;
 	font-weight: 700;
 	padding-bottom: 18px;
-	padding-top: 0px;
+	padding-top: 0;
 	text-align: center;
 }
 
@@ -325,7 +316,7 @@
 	width: 490px;
 	height: 20px;
 	margin-bottom: 10px;
-	padding-left: 0
+	padding-left: 0;
 }
 
 .header2 {
