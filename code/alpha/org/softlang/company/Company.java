@@ -12,6 +12,7 @@ import java.util.List;
 public class Company implements Serializable {
 
 	private static final long serialVersionUID = -200889592677165250L;
+	private String name;
 	private List<Dept> depts;
 
 	public Company() {
@@ -35,9 +36,9 @@ public class Company implements Serializable {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		return (Company)o;
+		return (Company) o;
 	}
-	
+
 	/**
 	 * Write (say, serialize) an object.
 	 */
@@ -56,21 +57,29 @@ public class Company implements Serializable {
 			ex.printStackTrace();
 			return false;
 		}
-	}	
-	
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public List<Dept> getDepts() {
 		return depts;
 	}
-	
+
 	public Double total() {
 		double total = 0;
 		for (Dept d : getDepts())
 			total += d.total();
 		return total;
 	}
-	
+
 	public void cut() {
 		for (Dept d : getDepts())
 			d.cut();
-	}	
+	}
 }

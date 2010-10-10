@@ -8,16 +8,17 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * We do a round-tripping test for de-/serialization.
- * That is, first, we create an object in memory.
- * Then, we write (say, serialize) the object.
- * Then, we read (say, de-serialize) the object.
- * Finally, we compare original and read object for structural equality.
+ * We do a round-tripping test for de-/serialization. That is, first, we create
+ * an object in memory. Then, we write (say, serialize) the object. Then, we
+ * read (say, de-serialize) the object. Finally, we compare original and read
+ * object for structural equality.
  */
 public class Serialization {
 
 	public static Company createCompany() {
 		Company company = new Company();
+
+		company.setName("meganalysis");
 
 		Person craig = new Person();
 		craig.setName("Craig");
@@ -76,7 +77,6 @@ public class Serialization {
 		research.getSubunits().add(researchS1);
 		research.getSubunits().add(researchS2);
 
-
 		Dept development = new Dept();
 		development.setManager(rayE);
 		development.setName("Development");
@@ -99,19 +99,17 @@ public class Serialization {
 		company.getDepts().add(research);
 		company.getDepts().add(development);
 
-
 		return company;
 	}
 
-
 	@Test
 	public void testLoadAndCreate() {
-		Company sampleCompany = createCompany(); 
+		Company sampleCompany = createCompany();
 		sampleCompany.writeObject("sampleCompany.ser");
 		Company loadedCompany = Company.readObject("sampleCompany.ser");
 		assertTrue(structurallyEqual(sampleCompany, loadedCompany));
 	}
-	
+
 	public static boolean structurallyEqual(Object o1, Object o2) {
 
 		try {
@@ -142,12 +140,8 @@ public class Serialization {
 							// to be equal, both can not be null
 							if (f1[i].get(o1) != null && f2[i].get(o2) != null) {
 								// check, if they are of the same class
-								if (f1[i]
-										.get(o1)
-										.getClass()
-										.getName()
-										.equals(f2[i].get(o2).getClass()
-												.getName())) {
+								if (f1[i].get(o1).getClass().getName().equals(
+										f2[i].get(o2).getClass().getName())) {
 									// check if the class is Double,Integer or
 									// String
 									if (check(f1[i].get(o1).getClass()
@@ -163,8 +157,8 @@ public class Serialization {
 										// list
 										if (f1[i].get(o1).getClass().getName()
 												.equals("java.util.LinkedList")) {
-											if (!(handleLinkedList(f1[i],
-													o1, f2[i], o2))) {
+											if (!(handleLinkedList(f1[i], o1,
+													f2[i], o2))) {
 												return false;
 											}
 										} else {
@@ -210,7 +204,8 @@ public class Serialization {
 
 	}
 
-	private static boolean handleLinkedList(Field f1, Object o1, Field f2, Object o2) {
+	private static boolean handleLinkedList(Field f1, Object o1, Field f2,
+			Object o2) {
 		try {
 			LinkedList<?> l1 = (LinkedList<?>) f1.get(o1);
 			LinkedList<?> l2 = (LinkedList<?>) f2.get(o2);
@@ -226,5 +221,5 @@ public class Serialization {
 			e.printStackTrace();
 		}
 		return true;
-	}	
+	}
 }
