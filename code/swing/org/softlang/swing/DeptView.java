@@ -33,12 +33,14 @@ public class DeptView {
 			salaryPanel, buttonPanel;
 	private final JFrame frame;
 	private final JTextField nameField;
-	private final JButton managerButton, cutButton;
+	private final JButton managerButton, cutButton, saveButton, okButton,
+			cancelButton;
 	private final JList employeeList;
 	private final DefaultListModel employeeListModel;
 	private final JLabel subDeptLabel, salaryLabel;
 	private final JList subDeptList;
 	private final DefaultListModel subDeptListModel;
+	private boolean isTop;
 
 	public DeptView(Controller controller) {
 		this.controller = controller;
@@ -46,12 +48,15 @@ public class DeptView {
 		namePanel = new JPanel(new GridLayout(1, 2, 0, 0));
 		managerPanel = new JPanel(new GridLayout(1, 2, 66, 0));
 		employeePanel = new JPanel(new GridLayout(1, 2, 30, 0));
-		subDeptPanel = new JPanel(new GridLayout(1, 2, 30, 0));
+		subDeptPanel = new JPanel(new GridLayout(1, 2, 20, 0));
 		salaryPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 0));
 		buttonPanel = new JPanel(new GridLayout(1, 3, 20, 0));
 		subDeptLabel = new JLabel();
 		salaryLabel = new JLabel();
 		cutButton = new JButton();
+		saveButton = new JButton();
+		okButton = new JButton();
+		cancelButton = new JButton();
 		nameField = new JTextField();
 		managerButton = new JButton();
 		employeeListModel = new DefaultListModel();
@@ -62,10 +67,12 @@ public class DeptView {
 	}
 
 	public void showCompany(final Company company, double total) {
+		isTop = true;
 		setNonTopPanelVisibilty(false);
 		removeListener();
 		subDeptListModel.clear();
 		frame.setTitle("Company");
+		nameField.setText(company.getName());
 		salaryLabel.setText("Total salary = " + Double.toString(total) + " $");
 		cutButton.addActionListener(new ActionListener() {
 
@@ -82,6 +89,7 @@ public class DeptView {
 	}
 
 	public void showDept(final Dept dept, double total) {
+		isTop = false;
 		setNonTopPanelVisibilty(true);
 		removeListener();
 		employeeListModel.clear();
@@ -126,10 +134,10 @@ public class DeptView {
 	}
 
 	private void setNonTopPanelVisibilty(boolean visibility) {
-		namePanel.setVisible(visibility);
 		managerPanel.setVisible(visibility);
 		employeePanel.setVisible(visibility);
-		buttonPanel.setVisible(visibility);
+		okButton.setVisible(visibility);
+		cancelButton.setVisible(visibility);
 	}
 
 	private void addSubunit(final Subunit subunit) {
@@ -222,16 +230,19 @@ public class DeptView {
 		salaryPanel.add(cutButton);
 		panel.add(salaryPanel);
 
-		JButton saveButton = new JButton("Save");
+		saveButton.setText("Save");
 		saveButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				controller.saveDeptClicked(nameField.getText());
+				if (isTop)
+					controller.saveCompanyClicked(nameField.getText());
+				else
+					controller.saveDeptClicked(nameField.getText());
 			}
 		});
 		buttonPanel.add(saveButton);
-		JButton okButton = new JButton("Ok");
+		okButton.setText("Ok");
 		okButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -240,7 +251,7 @@ public class DeptView {
 			}
 		});
 		buttonPanel.add(okButton);
-		JButton cancelButton = new JButton("Cancel");
+		cancelButton.setText("Cancel");
 		cancelButton.addActionListener(new ActionListener() {
 
 			@Override

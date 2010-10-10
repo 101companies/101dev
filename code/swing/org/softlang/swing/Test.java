@@ -9,7 +9,7 @@ public class Test {
 		new GUI(Company.readObject(
 					".."
 				+ 	File.separator
-				+	"serializable"
+				+	"alpha"
 				+ 	File.separator
 				+	"sampleCompany.ser"));
 	}

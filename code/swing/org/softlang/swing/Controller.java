@@ -47,6 +47,10 @@ public class Controller {
 		deptView.showDept(dept, dept.total());
 	}
 
+	public void saveCompanyClicked(String name) {
+		company.setName(name);
+	}
+
 	public void saveDeptClicked(String name) {
 		openDept.setName(name);
 		showDept(openDept, false);
