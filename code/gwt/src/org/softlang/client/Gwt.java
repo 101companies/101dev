@@ -56,22 +56,99 @@ public class Gwt implements EntryPoint {
 
 	public void showCompany() {
 		final VerticalPanel topPanel = new VerticalPanel();
+		final HorizontalPanel namePanel = new HorizontalPanel();
+		final HorizontalPanel borderPanel = new HorizontalPanel();
 		final HorizontalPanel salaryPanel = new HorizontalPanel();
 		final VerticalPanel borderPanel1 = new VerticalPanel();
-		final VerticalPanel deptListPanel = new VerticalPanel();
+		final HorizontalPanel deptsPanelTop = new HorizontalPanel();
+		final VerticalPanel deptPanel = new VerticalPanel();
+
+		final TextBox nameEditBox = new TextBox();
 
 		topPanel.setStyleName("topPanel");
 		final HorizontalPanel menuPanel = new HorizontalPanel();
 		menuPanel.setStyleName("menuPanel");
+		final Button saveButton = new Button("Save");
+		saveButton.setStyleName("saveButton");
+		saveButton.setEnabled(false);
+		saveButton.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				companyInfo.setName(nameEditBox.getText());
+				service.saveCompanyInfo(companyInfo.getName(),
+						new AsyncCallback<Void>() {
+
+							@Override
+							public void onSuccess(Void result) {
+								saveButton.setEnabled(false);
+
+							}
+
+							@Override
+							public void onFailure(Throwable caught) {
+								// TODO Auto-generated method stub
+
+							}
+						});
+			}
+		});
+		menuPanel.add(saveButton);
 		topPanel.add(menuPanel);
 		final HorizontalPanel topInnerPanel = new HorizontalPanel();
 		topInnerPanel.setStyleName("topInnerPanel");
-		final Label infoTopText = new Label("Top Departments");
+		final Label infoTopText = new Label("Company ");
 		infoTopText.setStyleName("viewInfo");
 		topInnerPanel.add(infoTopText);
+		final Label deptNameText = new Label("\"" + companyInfo.getName()
+				+ "\"");
+		deptNameText.setStyleName("viewInfoExtCompany");
+		topInnerPanel.add(deptNameText);
 		topPanel.add(topInnerPanel);
 		all.add(topPanel);
-		deptListPanel.setStyleName("list");
+
+		namePanel.setStyleName("companyInfoPanel");
+		final Label nameInfoText = new Label("Name: ");
+		nameInfoText.setStyleName("companyInfoText");
+		namePanel.add(nameInfoText);
+		nameEditBox.setText(companyInfo.getName());
+		nameEditBox.setStyleName("companyEditBoxOff");
+		nameEditBox.setReadOnly(true);
+		namePanel.add(nameEditBox);
+		final Button nameEditButton = new Button("Edit");
+		nameEditButton.setStyleName("editButton");
+		nameEditButton.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				if (nameEditBox.isReadOnly()) {
+					nameEditBox.setReadOnly(false);
+					nameEditBox.setStyleName("companyEditBox");
+					nameEditButton.setText("done");
+				} else {
+					nameEditBox.setReadOnly(true);
+					nameEditBox.setStyleName("companyEditBoxOff");
+					nameEditButton.setText("edit");
+					saveButton.setEnabled(!nameEditBox.getText().equals(
+							companyInfo.getName()));
+					deptNameText.setText("\"" + nameEditBox.getText() + "\"");
+				}
+			}
+		});
+		namePanel.add(nameEditButton);
+		all.add(namePanel);
+
+		borderPanel.addStyleName("borderPanel");
+		all.add(borderPanel);
+
+		deptsPanelTop.setStyleName("listTop");
+		final Label subDeptsInfoText = new Label("Top Departments:");
+		subDeptsInfoText.setStyleName("listInfo");
+		deptsPanelTop.add(subDeptsInfoText);
+		all.add(deptPanel);
+		all.add(deptsPanelTop);
+
+		deptPanel.setStyleName("list");
 		for (int i = 0; i < companyInfo.getDeptsInfos().size(); i++) {
 			final int finali = i;
 			HorizontalPanel butPanel = new HorizontalPanel();
@@ -88,9 +165,9 @@ public class Gwt implements EntryPoint {
 				}
 			});
 			butPanel.add(curDeptButton);
-			deptListPanel.add(butPanel);
+			deptPanel.add(butPanel);
 		}
-		all.add(deptListPanel);
+		all.add(deptPanel);
 		borderPanel1.addStyleName("salaryBorderPanel");
 		all.add(borderPanel1);
 
@@ -155,13 +232,13 @@ public class Gwt implements EntryPoint {
 		final HorizontalPanel namePanel = new HorizontalPanel();
 		final VerticalPanel borderPanel = new VerticalPanel();
 		final HorizontalPanel managerPanel = new HorizontalPanel();
-		final VerticalPanel borderPanel1 = new VerticalPanel();
+		final VerticalPanel borderPanel2 = new VerticalPanel();
 		final HorizontalPanel employeesPanelTop = new HorizontalPanel();
 		final VerticalPanel employeesPanel = new VerticalPanel();
-		final VerticalPanel borderPanel2 = new VerticalPanel();
+		final VerticalPanel borderPanel3 = new VerticalPanel();
 		final HorizontalPanel subDeptsPanelTop = new HorizontalPanel();
 		final VerticalPanel subDeptsPanel = new VerticalPanel();
-		final VerticalPanel borderPanel3 = new VerticalPanel();
+		final VerticalPanel borderPanel4 = new VerticalPanel();
 		final HorizontalPanel salaryPanel = new HorizontalPanel();
 
 		final TextBox nameEditBox = new TextBox();
@@ -315,8 +392,8 @@ public class Gwt implements EntryPoint {
 		managerPanel.add(managerButton);
 		all.add(managerPanel);
 
-		borderPanel1.addStyleName("borderPanel");
-		all.add(borderPanel1);
+		borderPanel2.addStyleName("borderPanel");
+		all.add(borderPanel2);
 
 		employeesPanelTop.setStyleName("listTop");
 		final Label employeesInfoText = new Label("Employees:");
@@ -353,8 +430,8 @@ public class Gwt implements EntryPoint {
 
 		all.add(employeesPanel);
 
-		borderPanel2.addStyleName("borderPanel");
-		all.add(borderPanel2);
+		borderPanel3.addStyleName("borderPanel");
+		all.add(borderPanel3);
 
 		subDeptsPanelTop.setStyleName("listTop");
 		final Label subDeptsInfoText = new Label("Sub Departments:");
@@ -390,8 +467,8 @@ public class Gwt implements EntryPoint {
 
 		all.add(subDeptsPanel);
 
-		borderPanel3.addStyleName("salaryBorderPanel");
-		all.add(borderPanel3);
+		borderPanel4.addStyleName("salaryBorderPanel");
+		all.add(borderPanel4);
 
 		salaryPanel.setStyleName("salaryPanel");
 		final Label salaryInfoValue = new Label();

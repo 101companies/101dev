@@ -7,6 +7,8 @@ public class SampleCompany {
 	public static Company getSampleCompany() {
 		Company company = new Company();
 
+		company.setName("meganalysis");
+
 		Person craig = new Person();
 		craig.setName("Craig");
 		craig.setAddress("Redmond");

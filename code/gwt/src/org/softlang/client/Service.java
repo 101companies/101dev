@@ -16,6 +16,8 @@ public interface Service extends RemoteService {
 
 	EmployeeInfo getEmployeeInfo(String employeeName);
 
+	void saveCompanyInfo(String companyName);
+	
 	void saveDeptInfo(String oldDeptName, String deptName);
 
 	void saveEmployeeInfo(String oldEmployeeName, EmployeeInfo employeeInfo);

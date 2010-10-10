@@ -22,15 +22,16 @@ public class ServiceImpl extends RemoteServiceServlet implements Service {
 
 	public ServiceImpl() {
 		this.company = SampleCompany.getSampleCompany();
-		Index index = new Index();
-		index.index(company);
-		this.deptMap = index.getDeptMap();
-		this.employeeMap = index.getEmployeeMap();
+		Index companyFlater = new Index();
+		companyFlater.index(company);
+		this.deptMap = companyFlater.getDeptMap();
+		this.employeeMap = companyFlater.getEmployeeMap();
 	}
 
 	@Override
 	public CompanyInfo getCompanyInfo() {
 		CompanyInfo companyInfo = new CompanyInfo();
+		companyInfo.setName(company.getName());
 		for (Dept dept : company.getDepts())
 			companyInfo.getDeptsInfos().add(dept.getName());
 		return companyInfo;
@@ -69,6 +70,12 @@ public class ServiceImpl extends RemoteServiceServlet implements Service {
 			employeeInfo.setSalary(employee.getSalary());
 		}
 		return employeeInfo;
+	}
+
+	@Override
+	public void saveCompanyInfo(String companyName) {
+		company.setName(companyName);
+
 	}
 
 	@Override

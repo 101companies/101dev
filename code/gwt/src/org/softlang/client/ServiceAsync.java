@@ -15,6 +15,8 @@ public interface ServiceAsync {
 
 	void getDeptTotal(String deptName, AsyncCallback<Double> callback);
 
+	void saveCompanyInfo(String companyName, AsyncCallback<Void> callback);
+	
 	void saveDeptInfo(String oldDeptName, String deptName,
 			AsyncCallback<Void> callback);
 

@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Company {
 
+	private String name;
 	private List<Dept> depts;
 
 	public Company() {
@@ -13,6 +14,14 @@ public class Company {
 
 	public List<Dept> getDepts() {
 		return depts;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Double total() {
