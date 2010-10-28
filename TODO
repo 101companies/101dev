@@ -1,10 +1,18 @@
-jdbc2 needs to become lazier.
+Project: jdbc2
+Issue: load and sace needs to become lazier.
 Reported: Ralf
 Assigned: Thomas
 
 ----------
 
-hibernate2 is stylistically different from hibernate
+Project: hibernate2
+Issue: project is stylistically different from hibernate
 Reported: Ralf
 Assigned: Thomas? Ralf?
 
+----------
+
+Project: antlr
+Issue: parsing error does not make JUnit test case fail
+Reported: Ralf
+Assigned: TODO
