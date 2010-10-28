@@ -1,7 +1,0 @@
-// (C) 2009--10 Ralf Laemmel
-
-Different implementations of a FSM (state diagram) for turnstiles.
-
-uml.state.switchCase uses switch-case statements to dispatch on states.
-uml.state.methodDispatch uses the State design pattern.
-uml.state.tableDriven encodes the FSM as a hashmap mapping events & states to states. 
