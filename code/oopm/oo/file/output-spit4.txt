@@ -1,0 +1,10 @@
+             is interpreted as an extended regular expression.  The matching
+             line will be the first line of the next output file.  This option
+             is incompatible with the -b and -l options.
+
+     If additional arguments are specified, the first is used as the name of
+     the input file which is to be split.  If a second additional argument is
+     specified, it is used as a prefix for the names of the files into which
+     the file is split.  In this case, each file into which the file is split
+     is named by the prefix followed by a lexically ordered suffix using
+     suffix_length characters in the range ``a-z''.  If -a is not specified,

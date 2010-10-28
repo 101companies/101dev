@@ -1,0 +1,18 @@
+{
+	int n;
+	read n;
+	int n1;
+	int n2;
+	n1 = 0;
+	n2 = 1;
+	int m1;
+	int m2;
+	while (n != 0) {
+  		m1 = n1;
+  		m2 = n2;
+  		n1 = m2;
+  		n2 = m1 + m2;
+  		n = n - 1;
+	}
+	write n1;
+}

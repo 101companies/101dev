@@ -1,0 +1,6 @@
+
+BUGS
+     The maximum line length for matching patterns is 65536.
+
+BSD                             August 21, 2005                            BSD
+ 

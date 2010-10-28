@@ -1,0 +1,10 @@
+     The split utility exits 0 on success, and >0 if an error occurs.
+
+SEE ALSO
+     csplit(1), re_format(7)
+
+STANDARDS
+     The split utility conforms to IEEE Std 1003.1-2001 (``POSIX.1'').
+
+HISTORY
+     A split command appeared in Version 3 AT&T UNIX.

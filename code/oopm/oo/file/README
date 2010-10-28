@@ -1,0 +1,8 @@
+The programs of this package implement some familiar command line tools;
+in fact, approximations thereof.
+
+Bc -- a calculator for addition (with fixed I/O files)
+Ls -- lists a directory hierarchy
+Wget -- retrieves content from a URL and echos it
+More -- reads a file and echos it
+Split -- splits up a file into pieces

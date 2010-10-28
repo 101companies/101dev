@@ -1,0 +1,45 @@
+(C) 2008--10 Ralf Laemmel
+
+These are different implementations of simple operations on a company structure.
+A company has managers, employees, departments, etc.
+One operation is to total all salaries for employees of the company.
+Another operation is to increase the salaries by some given amount.
+
+There are the following implementations:
+
+virtual:
+The operations are put into the various classes.
+This is presumably the classic OO approach.
+
+composite:
+A tiny variation on option virtual.
+The Composite-like (in the sense of the design pattern) potential is made more explicit.
+We do not add any interface though for accessing components in a generic manner.
+So this a composite-like design only with regard to the operations of the running example.
+
+typecase:
+Use POJOs and external static functions on those objects.
+When there is inheritance, then type case (instanceof, cast) needs to be used.
+That is, units (departments vs. employees) need to be distinguished in this manner.
+This model allows adding operations without editing the company classes.
+
+list:
+We realize that a class operations can be defined once we can iterate over all employees.
+Hence, we implement getters on all company classes that return collections of employees.
+The "total" operation simply adds all salaries of employees from that list.
+The "increase" operation instead mutates the employees to perform the salary increase.
+
+iterator:
+We improve on the model company.list in so far that the collection is not materialized.
+That is, instead we make all classes iterable according to Java's Iterable/Iterator pattern.
+This approach also provides laziness.
+That is, the iterator only pushes so far into the company as iteration pulls.
+
+iterable:
+A tiny variation on option iterator.
+We make all company classes implement Iterable<Employee>.
+Thereby, we can invoke the for-loop on all company classes.
+Note that each class can only be iterable in one manner.
+
+visitor:
+We use the visitor design pattern to implement operations on the company classes.

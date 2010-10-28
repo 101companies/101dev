@@ -1,0 +1,10 @@
+             Create smaller files byte_count bytes in length.  If ``k'' is
+             appended to the number, the file is split into byte_count kilo-
+             byte pieces.  If ``m'' is appended to the number, the file is
+             split into byte_count megabyte pieces.
+
+     -l line_count
+             Create smaller files n lines in length.
+
+     -p pattern
+             The file is split whenever an input line matches pattern, which
