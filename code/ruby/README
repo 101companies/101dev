@@ -1,0 +1,3 @@
+We use a simple object model for companies.
+These are plain ruby objects plus instance methods for some of the scenarios.
+See the tests package for test cases.
