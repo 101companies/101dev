@@ -1,3 +1,7 @@
+total(company(_,Ds),R)
+ :-
+    total(Ds,R).
+
 total([],0).
 
 total([H|T],R)

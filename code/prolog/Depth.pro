@@ -1,3 +1,7 @@
+depth(company(_,Ds),R)
+ :-
+    depth(Ds,R).
+
 depth([],0).
 
 depth([H|T],R)

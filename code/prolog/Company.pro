@@ -1,4 +1,4 @@
-isCompany(Depts) :- isDepts(Depts).
+isCompany(company(N,Ds)) :- isName(N), isDepts(Ds).
 
 isDepts([]).
 isDepts([D|Ds]) :- isDept(D), isDepts(Ds).
