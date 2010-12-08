@@ -1,1 +1,0 @@
-[Import("mobl"),Import("data"),ExternalSyncFunction([],QId("init","initialData"),[],SimpleType(QId("mobl","void")))]
