@@ -3,13 +3,12 @@ module Cut where
 import Company
 
 cut :: Company -> Company
-
-cut (n,ds) = (n,map cutDept ds)
+cut (n,ds) = (n,map dept ds)
  where
-  cutDept :: Dept -> Dept
-  cutDept (Dept n m sus) = Dept n (cutEmp m) (map cutSu sus)
-  cutEmp :: Employee -> Employee
-  cutEmp (Employee n a s) = Employee n a (s/2)  
-  cutSu :: SubUnit -> SubUnit
-  cutSu (PU e) = PU (cutEmp e)
-  cutSu (DU d) = DU (cutDept d)
+  dept :: Dept -> Dept
+  dept (Dept n m sus) = Dept n (employee m) (map subunit sus)
+  employee :: Employee -> Employee
+  employee (Employee n a s) = Employee n a (s/2)  
+  subunit :: SubUnit -> SubUnit
+  subunit (PU e) = PU (employee e)
+  subunit (DU d) = DU (dept d)
