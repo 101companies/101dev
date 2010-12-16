@@ -9,6 +9,7 @@ Steps to build and run:
 3. Select the project in the package explorer -> right click -> Run As -> Run on Server
 4. Select your preferred server (we made use of Apache -> Tomcat v6.0 Server) and click "Next"
 5. Click "Download and Install" and follow the menu's steps
-6. The project will be published on the installed server
-7. Visit http://localhost:8080/webDSL/ 
+6. Click "Finish"
+7. The project will be published on the installed server
+8. Visit http://localhost:8080/webDSL/ 
 (Eventually you will have to re-build or restart the server)
