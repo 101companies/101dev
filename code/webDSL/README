@@ -11,4 +11,4 @@ Steps to build and run:
 5. Click "Download and Install" and follow the menu's steps
 6. The project will be published on the installed server
 7. Visit http://localhost:8080/webDSL/ 
-
+(Eventually you will have to re-build or restart the server)
