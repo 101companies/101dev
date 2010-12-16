@@ -1,0 +1,5 @@
+This is an implementation of 101companies with WebDSL.
+
+webDSL.app is the "main file", containing the page definitions.
+company.app holds the company model while meganalysis.app contains "meganalysis" as an instance of the model. 
+
