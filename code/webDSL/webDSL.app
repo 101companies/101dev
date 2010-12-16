@@ -1,7 +1,7 @@
 application webDSL
 
 imports company				// model
-imports megaanalysis		// model instance 
+imports meganalysis		// model instance 
 
 var deptStack := DeptStack{list := List<Dept>()}
 

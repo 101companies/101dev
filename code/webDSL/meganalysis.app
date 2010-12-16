@@ -1,4 +1,4 @@
-module megaanalysis
+module meganalysis
 
 imports company	
 
