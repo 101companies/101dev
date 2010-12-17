@@ -21,7 +21,7 @@ var deptStack := DeptStack{list := List<Dept>()}
 							action{
 								deptStack.clear(); 
 								return deptView(dept);} 
-						    {output(dept.name)}
+							{output(dept.name)}
 					}	
 				}
 			}
