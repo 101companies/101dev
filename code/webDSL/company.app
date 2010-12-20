@@ -28,7 +28,7 @@ module company			// Companymodel
 		function total() : Float{
 			var ttl := manager.total();
 			for(employee:Employee in employees) {
-				ttl := employee.total();
+				ttl := ttl + employee.total();
 			}
 			for(subDept:Dept in subDepts) {
 				ttl := ttl + subDept.total();

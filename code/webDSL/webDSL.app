@@ -14,7 +14,7 @@ var deptStack := DeptStack{list := List<Dept>()}
 		block[class := "content"]{
 			block[class := "viewTitleC"]{output(meganalysis.name)}
 			block[class := "infoComp"]{
-				"Top Deparments :"
+				"Top Departments :"
 				for (dept:Dept in meganalysis.depts){
 					block[class:="listE" ] {
 						submit  
@@ -102,7 +102,7 @@ var deptStack := DeptStack{list := List<Dept>()}
 		 }	 
 	}
 		
-	define page employeeView(e : Employee) {
+	define page employeeView(e : Employee){
 	    title{output(e.name)}
 	    includeCSS("style.css")
 	    
