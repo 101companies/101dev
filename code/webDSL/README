@@ -3,8 +3,7 @@ This projects provides a very simple WebDSL WebApp for companies.
 
 == Description ==
 
-We make use of WebDSL to define pages (company/department/employee view).
-We also define the company model and a sample company (meganalysis). 
+We define pages (company/department/employee view), the company model and a sample company (meganalysis). 
 
 === Architecture of the project ===
 
