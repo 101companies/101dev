@@ -1,15 +1,33 @@
-This is a WebDSL implementation of 101companies. 
+== Summary
+This projects provides a very simple WebDSL WebApp for companies.
 
-webDSL.app is the "main file", containing the page definitions.
-company.app holds the company model while meganalysis.app contains "meganalysis" as an instance of the model. 
+== Description ==
 
-Steps to build and run:
-1. Install the WebDSL plugin: http://webdsl.org/page/Download
-2. Build the project by running the Ant Build file
-3. Select the project in the package explorer -> right click -> Run As -> Run on Server
-4. Select your preferred server (we made use of Apache -> Tomcat v6.0 Server) and click "Next"
-5. Click "Download and Install" and follow the menu's steps
-6. Click "Finish"
-7. The project will be published on the installed server
-8. Visit http://localhost:8080/webDSL/ 
+We make use of WebDSL to define pages (company/department/employee view).
+We also define the company model and a sample company (meganalysis). 
+
+=== Architecture of the project ===
+
+"webDSL.app" is the "main file", containing the page definitions.
+"company.app" holds the company model while meganalysis.app contains "meganalysis" as an instance of the model. 
+
+== Requirements ==
+
+We make use of the WebDSL Plugin. Update Site: http://webdsl.org/page/Download
+
+== Demo ==
+
+# Build the project by running the Ant Build file
+# Select the project in the package explorer -> right click -> Run As -> Run on Server
+# Select your preferred server (we made use of Apache -> Tomcat v6.0 Server) and click "Next"
+# Click "Download and Install" and follow the menu's steps
+# Click "Finish"
+# The project will be published on the installed server
+# Visit http://localhost:8080/webDSL/ 
 (Eventually you will have to re-build or restart the server)
+
+== Contributors ==
+* Thomas Schmorleiz
+
+
+
