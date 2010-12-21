@@ -17,5 +17,6 @@ xjc is part of the Java SDK since Java 6.
 BTW, if you need to add schema files to a project, do it like this:
 http://weblogs.java.net/blog/2009/07/21/add-xsd-file-eclipse-and-eliminate-those-pesky-xml-warnings
 Add the .xsd file to XML catalog.
+
 == Contributors ==
 * Ralf Lämmel
