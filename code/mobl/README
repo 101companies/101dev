@@ -11,7 +11,7 @@ Implements:
 
 Main file is "companies.mobl"
 "data.mobl" holds the company model, while "inti.mobl" cotains functionality to fill the database 
-with meganalyis (as an model instance).
+with meganalysis (as an model instance).
 
 == Requirements ==
 Requires the mobl Eclipse plug-in to be installed (from the update site: http://mobl-lang.org/update).
