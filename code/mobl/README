@@ -10,7 +10,7 @@ Implements:
 === Architecture of the project ===
 
 Main file is "companies.mobl"
-"data.mobl" holds the company model, while "inti.mobl" cotains functionality to fill the database 
+"data.mobl" holds the company model, while "init.mobl" cotains functionality to fill the database 
 with meganalysis (as an model instance).
 
 == Requirements ==
