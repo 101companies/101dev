@@ -18,7 +18,7 @@ Requires the mobl Eclipse plug-in to be installed (from the update site: http://
 
 == Demo ==
 
-To demo execute "java -jar fileserver.jar 8080 www\" in the project's directory and 
+To demo execute "java -jar fileserver.jar 8080 www" in the project's directory and 
 open http://localhost:8080/companies.html in your browser.
 
 == Contributors ==
