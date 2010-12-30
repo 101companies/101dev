@@ -4,4 +4,4 @@ import Company
 import Data.Generics
 
 cut :: Company -> Company
-cut = everywhere (mkT (/(2::Float)))
+cut = everywhere (extT id (/(2::Float)))
