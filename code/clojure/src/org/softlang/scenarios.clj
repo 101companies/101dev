@@ -4,8 +4,7 @@
 
 ;; cut
 
-(defn cutEmployee
-  [e]
+(defn cutEmployee [e]
   (update-in e [:salary] (partial * 0.5)))
 
 (defn cutDept [d]
