@@ -20,10 +20,7 @@
     (partial map cutDept)))
 
 (defn cutCompany [c]
-  (update-in
-    c
-    [:depts]
-    (partial map cutDept)))
+  (update-in c [:depts] (partial map cutDept)))
 
 ;; total
 
