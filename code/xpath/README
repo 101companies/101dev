@@ -1,3 +1,0 @@
-We use XPath on top of DOM for XML processing.
-We exercise some scenarios for companies.
-See the Tests class for test cases.
