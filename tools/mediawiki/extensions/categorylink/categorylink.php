@@ -5,7 +5,7 @@ if (!defined('MEDIAWIKI')) die('Not an entry point.');
 $wgHooks['InternalParseBeforeLinks'][] = 'fnMyHook';
 
 function fnMyHook( &$parser, &$text ) { 
- $pattern = "/(\[{3})([\w\W\s][^\][^\]]+)(\]{3})/"; //looking for [[[text]]]
+ $pattern = "/(\[)([\w\W\s][^\]]+)(\])/"; //looking for [[[text]]]
  preg_match_all($pattern, $text, $out, PREG_PATTERN_ORDER); 
 
  $i = 0;
