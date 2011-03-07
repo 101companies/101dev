@@ -10,7 +10,7 @@ function fnMyHook( &$parser, &$text ) {
    preg_match_all($pattern, $text, $out, PREG_PATTERN_ORDER); 
  
    $bot = 'Bot';
-   $wiki = 'Wiki';
+   $wiki = '101companies';
    $wpapi = new wikipediaapi ('', '', '', $bot, $wiki, true );
    $categories = $wpapi->listcategories(); //listprefix('Category'); 
    //var_dump($categories);

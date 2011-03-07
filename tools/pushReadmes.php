@@ -47,10 +47,10 @@
   // Create Contributor:-Page
   function createContributorPage($contributor, $pNames, $wpapi){
   	  echo "Creating contributor page for $contributor";
-      $text = '== List of contributions by '.$contributor.' =='.PHP_EOL;
-      foreach ($pNames as $pName){
-          $text .= '* [[Implementation:'.$pName.']]'.PHP_EOL;
-      }
+      $text = '';
+      //foreach ($pNames as $pName){
+      //    $text .= '* [[Implementation:'.$pName.']]'.PHP_EOL;
+      //}
       $result = $wpapi->edit('Contributor:'.$contributor, $text, 'A bot did this!', false, false, null, null, false );
       if ($result){   
         echo "Success!\n";
