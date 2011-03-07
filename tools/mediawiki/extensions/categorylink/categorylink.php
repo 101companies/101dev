@@ -1,27 +1,45 @@
 <?php
+require_once($_SERVER['DOCUMENT_ROOT'] . "/wiki/wikibot/wikibot.classes.php");
 
 if (!defined('MEDIAWIKI')) die('Not an entry point.');
 
 $wgHooks['InternalParseBeforeLinks'][] = 'fnMyHook';
 
 function fnMyHook( &$parser, &$text ) { 
- $pattern = "/(\[{3})([\w\W\s][^\]]+)(\]{3})/"; 
- preg_match_all($pattern, $text, $out, PREG_PATTERN_ORDER); 
+   $pattern = "/(\[{3})([\w\W\s][^\]]+)(\]{3})/"; 
+   preg_match_all($pattern, $text, $out, PREG_PATTERN_ORDER); 
  
- $i = 0;
- foreach($out[0] as $k=>$v) {
-    $c = substr_count($out[2][$i],"|"); 
-    var_dump($c);
-	
-    $replacement = "[[:Category:" . $out[2][$i] . "|" . $out[2][$i] . "]]";
-		
-    if(substr_count($out[2][$i],"|") == 1){ //looking for xxx|yyy
-	list($s1, $s2) = split('|', $out[2][$i]);
-	$replacement = "[[:Category:" . $out[2][$i] . "]]";
-    }   
-    
-    $i++;
-    $text = str_replace($v, $replacement, $text);
+   $bot = 'Bot';
+   $wiki = '101companies';
+   $wpapi = new wikipediaapi ('', '', '', $bot, $wiki, true );
+   $categories = $wpapi->listcategories();
+   $categoryNames = array();
+   foreach($categories as $c){
+       array_push($categoryNames, $c['*']);
+   }
+   var_dump($categoryNames);
+   
+   $i = 0;
+   foreach($out[0] as $k=>$v) {
+    $category = $out[2][$i];
+
+     $replacement = "[[:Category:" . $category . "|" . $category . "]]";
+     
+     if(substr_count($category,"|") == 1){ //looking for xxx|yyy
+        $s = explode('|', $category);
+ 	    $replacement = "[[:Category:" . $s[0] . "|" . $s[1] . "]]";  
+        $category = $s[0];
+     }
+     
+     if(in_array($category, $categoryNames) == true){ 
+        $text = str_replace($v, $replacement, $text);
+    }
+    else{
+        $replacement = "[[" . $category . "]]"; 
+        $text = str_replace($v, $replacement, $text);
+    }
+     
+    $i++;    
  } 
 
  return true;
