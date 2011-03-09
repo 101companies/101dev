@@ -11,7 +11,7 @@
 	
 	// 101companies: configuration file not commited.
 	// [begin]
-	require( '../do-not-commit/wikibot.config.php');
+	require( 'do-not-commit/wikibot.config.php');
 	// [end]
 
 	function getWikibotSetting( $setting, $bot, $wiki ) {
