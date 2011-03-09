@@ -16,8 +16,11 @@
         $inContributors = false;
       if ($inContributors && (substr($line,0,2) == '* ')){
         $contributorName = chop(str_replace('* ', '', $line));
+        $contributorName = chop(str_replace('[[Contributor:', '', $contributorName));
+        $contributorName = str_replace(']]','',$contributorName);
+        // echo $contributorName;
         array_push($contributors, $contributorName);
-        $line = str_replace($contributorName,'[[Contributor:'.$contributorName.'|]]', $line);
+        // $line = str_replace($contributorName,'[[Contributor:'.$contributorName.'|]]', $line);
       }
       if ($inSummary) {
       	$line = '::\'\'\''.$line.'\'\'\'';
@@ -100,7 +103,7 @@
   $foo = $mw->login($user,$pass);
   echo "Cleaning...";
   $deletedPages = array();
-  foreach($wpapi->listprefix('101implementation') as $page) {
+  foreach($wpapi->listprefix('svn implementation') as $page) {
   	if(!in_array($page["title"],$validPages)){
   		$mw->delete($page["title"],"Cleaning.");
   		array_push($deletedPages, $page["title"]);
