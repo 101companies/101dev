@@ -30,10 +30,11 @@
         $inSummary = true;
       }
       $text .= $line;
-    }  
+    } 
+    $text .= PHP_EOL.'[[Category:101implementation]]';
     echo "Pushing README...";
     $result = true;
-    $result = $wpapi->edit('Implementation:'.$pName, $text, 'A bot did this!', false, false, null, null, false );
+    $result = $wpapi->edit('101implementation:'.$pName, $text, 'A bot did this!', false, false, null, null, false );
     if ($result){   
       echo "Success!\n";
       return $contributors;
@@ -83,7 +84,7 @@
   foreach($fileArray as $file) {
    if ($file != '.' && $file != '..' && file_exists($base.'/'.$file.'/README')){ 
 	  $contributors = createPage($file,$wpapi);
-	  	array_push($validPages, 'Implementation:'.$file);
+	  	array_push($validPages, '101implementation:'.$file);
       	foreach($contributors as $contributor){
         	if (!array_key_exists($contributor, $projectsPerContributor))
             	$projectsPerContributor[$contributor] = array();
@@ -99,7 +100,7 @@
   $foo = $mw->login($user,$pass);
   echo "Cleaning...";
   $deletedPages = array();
-  foreach($wpapi->listprefix('Implementation') as $page) {
+  foreach($wpapi->listprefix('101implementation') as $page) {
   	if(!in_array($page["title"],$validPages)){
   		$mw->delete($page["title"],"Cleaning.");
   		array_push($deletedPages, $page["title"]);
