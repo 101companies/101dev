@@ -3,9 +3,17 @@
   include 'botclassesPhp/mediawiki.php';
   $base = '../implementations';
 
+  function startsWith($suffix, $text) {
+    return (strcmp(substr($text, 0, strlen($suffix)),$suffix)===0);
+  }
+  
+  function endsWith($suffix,$text) {
+    return (strcmp(substr($text, strlen($text) - strlen($suffix)),$suffix)===0);
+  }
+
   // Create Implementation:-Page 
   function createPage($pName,$wpapi){
-  	echo "Analyzing $pName...";
+  	echo "Analyzing $pName...\n";
     $text = '__FORCETOC__';
     $inContributors = false;
     $inSummary = false;
@@ -14,13 +22,12 @@
     foreach ($lines as $line) {
       if (!(strpos($line,'==') === false))
         $inContributors = false;
-      if ($inContributors && (substr($line,0,2) == '* ')){
-        $contributorName = chop(str_replace('* ', '', $line));
-        $contributorName = chop(str_replace('[[Contributor:', '', $contributorName));
-        $contributorName = str_replace(']]','',$contributorName);
-        // echo $contributorName;
-        array_push($contributors, $contributorName);
-        // $line = str_replace($contributorName,'[[Contributor:'.$contributorName.'|]]', $line);
+      if ($inContributors &&
+      	   startsWith('* [[Contributor:',$line) &&
+      	   endsWith(']]'.PHP_EOL,$line)) {
+       		$contributorName = chop(str_replace('* [[Contributor:', '', $line));	
+        	$contributorName = str_replace(']]','',$contributorName);
+        	array_push($contributors, $contributorName);
       }
       if ($inSummary) {
       	$line = '::\'\'\''.$line.'\'\'\'';
@@ -35,7 +42,7 @@
       $text .= $line;
     } 
     $text .= PHP_EOL.'[[Category:101implementation]]';
-    echo "Pushing README...";
+    echo "Pushing README...\n";
     $result = true;
     $result = $wpapi->edit('101implementation:'.$pName, $text, 'A bot did this!', false, false, null, null, false );
     if ($result){   
@@ -50,7 +57,7 @@
 
   // Create Contributor:-Page
   function createContributorPage($contributor, $pNames, $wpapi){
-  	  echo "Creating contributor page for $contributor";
+  	  echo "Creating contributor page for $contributor\n";
       $text = '';
       //foreach ($pNames as $pName){
       //    $text .= '* [[Implementation:'.$pName.']]'.PHP_EOL;
