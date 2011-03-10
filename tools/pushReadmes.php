@@ -14,7 +14,7 @@
   // Create Implementation:-Page 
   function createPage($pName,$wpapi){
   	echo "Analyzing $pName...\n";
-    $text = '__FORCETOC__';
+    $text = '';
     $inContributors = false;
     $inSummary = false;
     $contributors = array();
@@ -29,16 +29,9 @@
         	$contributorName = str_replace(']]','',$contributorName);
         	array_push($contributors, $contributorName);
       }
-      if ($inSummary) {
-      	$line = '::\'\'\''.$line.'\'\'\'';
-      	$inSummary = false;
-      }
       if (!(strpos($line,'== Contributors ==') === false)){
         $inContributors = true;
       }  
-      if (!(strpos($line,'== Summary ==') === false)){
-        $inSummary = true;
-      }
       $text .= $line;
     } 
     $text .= PHP_EOL.'[[Category:101implementation]]';
@@ -110,7 +103,7 @@
   $foo = $mw->login($user,$pass);
   echo "Cleaning...";
   $deletedPages = array();
-  foreach($wpapi->listprefix('svn implementation') as $page) {
+  foreach($wpapi->listprefix('101implementation') as $page) {
   	if(!in_array($page["title"],$validPages)){
   		$mw->delete($page["title"],"Cleaning.");
   		array_push($deletedPages, $page["title"]);
