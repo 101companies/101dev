@@ -24,14 +24,16 @@
         $inContributors = false;
       if ($inContributors &&
       	   startsWith('* [[Contributor:',$line) &&
-      	   endsWith(']]'.PHP_EOL,$line)) {
-       		$contributorName = chop(str_replace('* [[Contributor:', '', $line));	
-        	$contributorName = str_replace(']]','',$contributorName);
-        	array_push($contributors, $contributorName);
+      	   (endsWith(']]'.PHP_EOL,trim($line)) || endsWith(']]',trim($line)))) {
+       		$contributorName = chop(str_replace('* [[Contributor:', '', $line));
+       		$contributorName = str_replace(']]','',$contributorName);
+        	array_push($contributors,trim($contributorName));
       }
       if (!(strpos($line,'== Contributors ==') === false)){
         $inContributors = true;
-      }  
+      }
+      $bom = pack("CCC", 0xef, 0xbb, 0xbf);
+      $line = str_replace($bom,"",$line);
       $text .= $line;
     } 
     $text .= PHP_EOL.'[[Category:101implementation]]';
@@ -50,7 +52,7 @@
 
   // Create Contributor:-Page
   function createContributorPage($contributor, $pNames, $wpapi){
-  	  echo "Creating contributor page for $contributor\n";
+  	  echo "Creating contributor page for $contributor";
       $text = '';
       //foreach ($pNames as $pName){
       //    $text .= '* [[Implementation:'.$pName.']]'.PHP_EOL;
@@ -61,7 +63,6 @@
       }
       else {
         echo "Failure!\n";
-        die();
       }    
   }
 	
@@ -95,6 +96,7 @@
  	  }
    }  
   }
+  var_dump($projectsPerContributor);
   foreach($projectsPerContributor as $contributor => $projects)
     createContributorPage($contributor, $projects,$wpapi);
   
