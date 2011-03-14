@@ -23,8 +23,7 @@
       if (!(strpos($line,'==') === false))
         $inContributors = false;
       if ($inContributors &&
-      	   startsWith('* [[Contributor:',$line) &&
-      	   (endsWith(']]'.PHP_EOL,trim($line)) || endsWith(']]',trim($line)))) {
+      	   startsWith('* [[Contributor:',$line) && endsWith(']]',trim($line))) {
        		$contributorName = chop(str_replace('* [[Contributor:', '', $line));
        		$contributorName = str_replace(']]','',$contributorName);
         	array_push($contributors,trim($contributorName));
@@ -53,7 +52,7 @@
   // Create Contributor:-Page
   function createContributorPage($contributor, $pNames, $wpapi){
   	  echo "Creating contributor page for $contributor";
-      $text = '';
+      $text = '__NOTOC__';
       //foreach ($pNames as $pName){
       //    $text .= '* [[Implementation:'.$pName.']]'.PHP_EOL;
       //}
@@ -96,10 +95,8 @@
  	  }
    }  
   }
-  var_dump($projectsPerContributor);
   foreach($projectsPerContributor as $contributor => $projects)
     createContributorPage($contributor, $projects,$wpapi);
-  
   //Cleaning
   $mw = new mediawiki('http://sl-mac.uni-koblenz.de/~wiki101/wiki/api.php');
   $foo = $mw->login($user,$pass);
