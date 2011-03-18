@@ -35,7 +35,6 @@
       $line = str_replace($bom,"",$line);
       $text .= $line;
     } 
-    $text .= PHP_EOL.'[[Category:101implementation]]';
     echo "Pushing README...\n";
     $result = true;
     $result = $wpapi->edit('101implementation:'.$pName, $text, 'A bot did this!', false, false, null, null, false );
