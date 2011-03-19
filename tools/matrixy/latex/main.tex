@@ -1,0 +1,63 @@
+\documentclass{article}
+
+\usepackage{latexsym}
+\usepackage{listings}
+\usepackage{rotating}
+\usepackage{comment}
+\usepackage{boxedminipage}
+\usepackage{url}
+\usepackage{hyperref}
+
+% Regular macros
+\newcommand{\flip}[1]{\begin{sideways}#1\end{sideways}}
+\newcommand{\baseuri}{http://101companies.uni-koblenz.de/index.php}
+
+% Defaults for matrix elements
+\newcommand{\hLegend}[1]{#1}
+\newcommand{\vLegend}[1]{#1}
+\newcommand{\okValue}{{\large$\bullet$}}
+\newcommand{\noValue}{}
+\newcommand{\newRow}{\\ \hline}
+
+\begin{document}
+
+{
+
+% Adjust matrix elements locally
+
+\renewcommand{\hLegend}[1]{\flip{\textbf{\href{\baseuri/101feature:#1}{#1}}}}
+\renewcommand{\vLegend}[1]{\textbf{\href{\baseuri/101implementation:#1}{#1}}}
+
+\noindent
+\begin{boxedminipage}{\hsize}
+\begin{center}
+\bigskip
+\input{../data/features}
+\bigskip
+\end{center}
+\end{boxedminipage}
+
+}
+
+\begin{center}
+\textbf{Matrix showing features implemented by implementations}
+\end{center}
+
+\bigskip
+
+\bigskip
+
+\noindent
+Specification of the matrix
+
+\noindent
+\begin{itemize}
+\item Features are listed horizontally.
+\item Implementations are listed vertically.
+\item All existing features are shown.
+\item Only implementations with documented features are shown.
+\item Features are ordered by decreasing frequency of implementation.
+\item Implementations are ordered by decreasing number of features.
+\end{itemize}
+
+\end{document}
