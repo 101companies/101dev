@@ -1,0 +1,8 @@
+JSE
+"Java platform"
+ghci
+ghc
+ghc
+ghc
+MapReduce
+
