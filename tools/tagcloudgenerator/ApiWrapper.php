@@ -15,8 +15,7 @@ function getAllPages(){
 }
 
 function getAllImplementations(){
-   $continue = null;
-   $impl = getWpapi()->listprefix("101implementation:", 0, 500, &$continue);
+   $impl = getWpapi()->listprefix("101implementation:");
   // var_dump($impl); 
    return $impl;
 }
