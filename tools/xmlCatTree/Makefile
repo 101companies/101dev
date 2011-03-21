@@ -1,0 +1,3 @@
+run:
+	php rebuild.php
+
