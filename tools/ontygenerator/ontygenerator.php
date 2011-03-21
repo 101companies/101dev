@@ -252,12 +252,13 @@ foreach($categories as $category){
   $myFile =  $outputShallowFolder . $category . ".tex";
   $fh = fopen($myFile, 'w+'); //or die("can't open file");
   $indent = getIndentTextByName("Category:". $category);
-  fwrite($fh, "\concept{" . $category . "}{" . $indent . "}\n" );
+  fwrite($fh, "\\tree{" . $category . "}{" . $indent . "}{\n" );
   foreach($shallow as $s){
     $indent = getIndentTextByName("Category:" . $s); 
     fwrite($fh, "\\tab\concept{" . $s . "}{". $indent . "}\n");
   }
   $shallow= array();
+  fwrite($fh, "}");
   fclose($fh);
 }
 
