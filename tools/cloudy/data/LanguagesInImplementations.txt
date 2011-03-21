@@ -10,7 +10,7 @@
 "XML"
 "CSS"
 "Haskell"
-"Haskell 98"
+"Haskell_98"
 "XML"
 "Java"
 "SQL"
