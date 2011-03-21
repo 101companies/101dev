@@ -1,0 +1,35 @@
+\documentclass{article}
+
+\usepackage{a4wide}
+\usepackage{latexsym}
+\usepackage{listings}
+\usepackage{rotating}
+\usepackage{comment}
+\usepackage{boxedminipage}
+\usepackage{url}
+\usepackage{hyperref}
+
+\newcommand{\concept}[2]{\textbf{#1}&#2\\}
+\newcommand{\instance}[2]{\emph{#1}&#2\\}
+\newcommand{\tab}{\ ----\ }
+\newcommand{\shallow}[1]{\both{../data/shallow/#1.tex}}
+\newcommand{\deep}[1]{\both{../data/deep/#1.tex}}
+
+\newcommand{\both}[1]{
+\begin{tabular}{ll}
+\input{#1}
+\end{tabular}}
+
+\newcommand{\baseuri}{http://101companies.uni-koblenz.de/index.php}
+
+\begin{document}
+
+\section{Shallow ontology}
+
+\shallow{Language}
+
+\section{Deep ontology}
+
+\deep{Language}
+
+\end{document}
