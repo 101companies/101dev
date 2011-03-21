@@ -9,20 +9,26 @@
 \usepackage{url}
 \usepackage{hyperref}
 
-\newcommand{\concept}[2]{\textbf{#1}&#2\\}
-\newcommand{\instance}[2]{\emph{#1}&#2\\}
-\newcommand{\tab}{\ ----\ }
-\newcommand{\shallow}[1]{\both{../data/shallow/#1.tex}}
-\newcommand{\deep}[1]{\both{../data/deep/#1.tex}}
+\newcommand{\tree}[3]{%
 
-\newcommand{\both}[1]{
+\subsection{#1}
+
 \begin{tabular}{ll}
-\input{#1}
-\end{tabular}}
+\concept{#1}{#2}
+#3
+\end{tabular}
 
+}
 \newcommand{\baseuri}{http://101companies.uni-koblenz.de/index.php}
+\newcommand{\concept}[2]{\textbf{\href{\baseuri/Category:#1}{#1}}&#2\\}
+\newcommand{\instance}[2]{\emph{\href{\baseuri/#1}{#1}}&#2\\}
+\newcommand{\tab}{\ ----\ }
+\newcommand{\shallow}[1]{\input{../data/shallow/#1.tex}}
+\newcommand{\deep}[1]{\input{../data/deep/#1.tex}}
 
 \begin{document}
+
+\tableofcontents
 
 \section{Shallow ontology}
 
