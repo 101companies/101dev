@@ -245,7 +245,7 @@ function withoutCategoryPrefix($obj){
     return $obj;
 }
 
- function links($text) {
+   function links($text) {
    
    
    $pattern = '/\[\[((Technology|Language|:Category)):((\w|\d|\s|\/|\-|\.)+)\]\]/';
@@ -266,7 +266,7 @@ function withoutCategoryPrefix($obj){
    $pattern =  '/\[((\w|\d|\s|\/|\-|\.)+)\]/';
    $replacement = '\1';
    return preg_replace($pattern, $replacement, $text);
- }
+}
 $categories = getAllCategories();
 //var_dump($categories);
 
