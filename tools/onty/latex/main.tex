@@ -13,10 +13,14 @@
 
 \subsection{#1}
 
-\begin{tabular}{ll}
+{\small
+
+$\!\!\!\!$\begin{tabular}{ll}
 \concept{#1}{#2}
 #3
 \end{tabular}
+
+}
 
 \pagebreak
 
@@ -24,7 +28,7 @@
 \newcommand{\baseuri}{http://101companies.uni-koblenz.de/index.php}
 \newcommand{\concept}[2]{\textbf{\href{\baseuri/Category:#1}{#1}}&#2\\}
 \newcommand{\instance}[2]{\emph{\href{\baseuri/#1}{#1}}&#2\\}
-\newcommand{\tab}{\ ----\ }
+\newcommand{\tab}{--\ }
 \newcommand{\shallow}[1]{\input{../data/shallow/#1.tex}}
 \newcommand{\deep}[1]{\input{../data/deep/#1.tex}}
 
