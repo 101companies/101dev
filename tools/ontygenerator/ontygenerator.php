@@ -173,13 +173,13 @@ function string_begins_with($string, $search)
 function getObjectWithTexPrefix($obj){
   // category --> concept
   $intend = getIndentTextByName($obj);
-  $escaped = str_replace("#", "\\#", $indend);  
+  $escaped = str_replace("#", "\\#", $intend);  
   if(string_begins_with($obj,'Category:')){
     $l = split(":", $obj);
     $obj = $l[1];
-    return "\\concept{" . $obj . "}{" . $escaped . "}" . PHP_EOL;
+    return "\\concept{" . $obj . "}{" . links($escaped) . "}" . PHP_EOL;
   }
-  return "\\instance{" . $obj . "}{" . $escaped . "}" . PHP_EOL;
+  return "\\instance{" . $obj . "}{" . links($escaped) . "}" . PHP_EOL;
 }
 
 function getIntetByLevel($level){
@@ -203,10 +203,19 @@ function getIndentTextByName($name){
       $l = split(":", $name);
       $name = $l[1];
     }
-    $queryResult = $xml->xpath('//page[@name = \'' . $name . '\']');
-    //var_dump($queryResult);
-    $arr = simpleXMLToArray($queryResult[0]);
-    return $arr['intent'];
+    
+    $queryResult = $xml->xpath('//cat[@name = \''. $name .'\']');
+    if(count($queryResult) == 0){
+      $queryResult = $xml->xpath('//page[@name = \'' . $name . '\']');
+      //var_dump($queryResult);
+      $arr = simpleXMLToArray($queryResult[0]);
+      return $arr['intent'];
+    }
+    else{
+        $arr = simpleXMLToArray($queryResult[0]);
+        return $arr['indent'];
+    }
+   
   }
    $arr = simpleXMLToArray($queryResult[0]);
    return $arr['indent'];
@@ -236,6 +245,28 @@ function withoutCategoryPrefix($obj){
     return $obj;
 }
 
+ function links($text) {
+   
+   
+   $pattern = '/\[\[((Technology|Language|:Category)):((\w|\d|\s|\/|\-|\.)+)\]\]/';
+   $replacement = '\3';   
+   $text = preg_replace($pattern, $replacement, $text);
+   
+   $pattern =  '/\[\[((\w|\d|\s|\/|\-|\.)+):((\w|\d|\s|\/|\-|\.)+)\]\]/';
+   $replacement = '\1:\3';
+   $text = preg_replace($pattern, $replacement, $text);
+   
+   
+
+   
+   $pattern =  '/\[\[(:)?(((\w|\d|\s|\/|\-|\.)+):)?((\w|\d|\s|\/|\-|\.)+)\|((\w|\d|\s|\/|\-|\.)+)\]\]/';
+   $replacement = '\7';
+   $text = preg_replace($pattern, $replacement, $text);
+   
+   $pattern =  '/\[((\w|\d|\s|\/|\-|\.)+)\]/';
+   $replacement = '\1';
+   return preg_replace($pattern, $replacement, $text);
+ }
 $categories = getAllCategories();
 //var_dump($categories);
 
@@ -270,7 +301,7 @@ foreach($allCategories as $category){
   $myFile =  $outputDeepFolder . $fileName . ".tex";
   $fh = fopen($myFile, 'w+'); //or die("can't open file");
   $indent = getIndentTextByName("Category:". $category);
-  fwrite($fh, "\\tree{" . $category . "}{" .$indent. "}{" . PHP_EOL);
+  fwrite($fh, "\\tree{" . $category . "}{" .links($indent) . "}{" . PHP_EOL);
   $topLevelMembers = members($category);
 
  foreach($topLevelMembers as $member){
@@ -281,7 +312,7 @@ foreach($allCategories as $category){
   //if(count($l) == 2) $strMem = $l[1];
   //else $strMem = $l[0];
   $escaped = str_replace("#", "\\#", $indent);
-  fwrite($fh, "\\tab\\concept{" . $strMem . "}{" . $escaped . "}". PHP_EOL);
+  fwrite($fh, "\\tab\\concept{" . $strMem . "}{" . links($escaped)  . "}". PHP_EOL);
   
   
   $allMembers = getWithSubMembers(withoutCategoryPrefix($strMem));
@@ -308,13 +339,13 @@ foreach($allCategories as $category){
   $fileName = str_replace(" ", "", $category);  
   $myFile =  $outputShallowFolder . $fileName . ".tex";
   $fh = fopen($myFile, 'w+'); //or die("can't open file");
-  $indent = getIndentTextByName(withoutCategoryPrefix($category));
+  $indent = getIndentTextByName("Category:". $category);
   $escaped = str_replace("#", "\\#", $indent);
-  fwrite($fh, "\\tree{" . $category . "}{" . $escaped . "}{\n" );
+  fwrite($fh, "\\tree{" . $category . "}{" . links($escaped) . "}{\n" );
   foreach($shallow as $s){
-    $indent = getIndentTextByName(withoutCategoryPrefix($s));
+    $indent = getIndentTextByName("Category:". $s);
     $escaped = str_replace("#", "\\#", $indent);
-    fwrite($fh, "\\tab\concept{" . $s . "}{". $escaped . "}\n");
+    fwrite($fh, "\\tab\concept{" . $s . "}{". links($escaped)  . "}\n");
   }
   $shallow= array();
   fwrite($fh, "}");
