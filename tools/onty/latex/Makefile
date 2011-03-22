@@ -1,5 +1,6 @@
 all:
 	pdflatex main
+	pdflatex main
 
 clean:
 	rm -f *.pdf
