@@ -256,12 +256,13 @@ function withoutCategoryPrefix($obj){
    $replacement = '\1:\3';
    $text = preg_replace($pattern, $replacement, $text);
    
-   
-
-   
    $pattern =  '/\[\[(:)?(((\w|\d|\s|\/|\-|\.)+):)?((\w|\d|\s|\/|\-|\.)+)\|((\w|\d|\s|\/|\-|\.)+)\]\]/';
    $replacement = '\7';
    $text = preg_replace($pattern, $replacement, $text);
+   
+   $pattern =  '/\[\[((\w|\d|\s|\/|\-|\.)+)\]\]/';
+   $replacement = '\1';
+   $text =  preg_replace($pattern, $replacement, $text);
    
    $pattern =  '/\[((\w|\d|\s|\/|\-|\.)+)\]/';
    $replacement = '\1';
