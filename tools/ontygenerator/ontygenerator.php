@@ -3,8 +3,9 @@
 define('BASE_PATH',str_replace('ontygenerator','',dirname(__FILE__)));
 $outputShallowFolder = BASE_PATH . "onty/data/shallow/";
 $outputDeepFolder = BASE_PATH . "onty/data/deep/";
+$dataFolder = BASE_PATH . "onty/data/";
 $inputXml = BASE_PATH . "xmlCatTree/catTree.xml";
-$categories = array("Language", "Programming technique", "Technology", "Term");
+//$categories = array("Language", "Programming technique", "Technology", "Term");
 /**
      * Converts a simpleXML element into an array. Preserves attributes and everything.
      * You can choose to get your elements either flattened, or stored in a custom index that
@@ -209,9 +210,55 @@ function getIndentTextByName($name){
    return $arr['indent'];
 }
 
-//DEEP
+
+function getAllCategories(){
+    $xml = simplexml_load_file($GLOBALS["inputXml"]);
+    $queryResult = $xml->xpath('//cat');
+    $children = $queryResult[0]->children();
+ 	$members = array();
+ 	foreach($children as $child)
+ 	  foreach($child->attributes() as $k => $v)
+ 	   if ($k == 'name') {
+ 	    //echo $v;
+ 	   	array_push($members,$v);
+ 	   }
+ 	return $members;
+}
+
+function withoutCategoryPrefix($obj){
+    if(string_begins_with($obj, "Category:")){
+    $r = split(":", $obj);
+    return $r[1];
+    }
+    
+    return $obj;
+}
+
+$categories = getAllCategories();
+$allCategories = array();
+$f = fopen($dataFolder . "files.tex", 'w+'); //or die("can't open file");
 foreach($categories as $category){
-  $myFile =  $outputDeepFolder . $category . ".tex";
+    $cat = simpleXMLToArray($category);
+    $topLevelMembers = members(withoutCategoryPrefix($cat));
+    foreach($topLevelMembers as $m){
+        $mem = simpleXMLToArray($m);
+        if(string_begins_with($mem, "Category:")){
+         $fileName = str_replace(" ", "", withoutCategoryPrefix($mem));     
+         fwrite($f, "\categoryfile{" . $fileName ."}" . PHP_EOL);
+         array_push($allCategories, withoutCategoryPrefix($mem));
+        }
+    }
+}
+
+fclose($f);
+
+var_dump($allCategories);
+
+
+//DEEP
+foreach($allCategories as $category){
+  $fileName = str_replace(" ", "", $category);  
+  $myFile =  $outputDeepFolder . $fileName . ".tex";
   $fh = fopen($myFile, 'w+'); //or die("can't open file");
   $indent = getIndentTextByName("Category:". $category);
   fwrite($fh, "\\tree{" . $category . "}{" .$indent. "}{" . PHP_EOL);
@@ -221,14 +268,14 @@ foreach($categories as $category){
   $strMem = simpleXMLToArray($member);
   $indent = getIndentTextByName($strMem);
   echo $strMem;
-  $l = split(":", $strMem);
-  if(count($l) == 2) $strMem = $l[1];
-  else $strMem = $l[0];
+  //$l = split(":", $strMem);
+  //if(count($l) == 2) $strMem = $l[1];
+  //else $strMem = $l[0];
   
   fwrite($fh, "\\tab\\concept{" . $strMem . "}{" . $indent. "}". PHP_EOL);
   
   
-  $allMembers = getWithSubMembers($strMem);
+  $allMembers = getWithSubMembers(withoutCategoryPrefix($strMem));
   foreach($allMembers as $m){
     writeWithIdent($fh, $m, 0);
  }
@@ -240,7 +287,7 @@ foreach($categories as $category){
 
 
 //SHALLOW
-foreach($categories as $category){
+foreach($allCategories as $category){
   $shallow= array(); 
   $members = members($category);
   
@@ -249,12 +296,13 @@ foreach($categories as $category){
     array_push($shallow, $l);
   }
   
-  $myFile =  $outputShallowFolder . $category . ".tex";
+  $fileName = str_replace(" ", "", $category);  
+  $myFile =  $outputShallowFolder . $fileName . ".tex";
   $fh = fopen($myFile, 'w+'); //or die("can't open file");
-  $indent = getIndentTextByName("Category:". $category);
+  $indent = getIndentTextByName("Category:". withoutCategoryPrefix($category));
   fwrite($fh, "\\tree{" . $category . "}{" . $indent . "}{\n" );
   foreach($shallow as $s){
-    $indent = getIndentTextByName("Category:" . $s); 
+    $indent = getIndentTextByName("Category:" . withoutCategoryPrefix($s)); 
     fwrite($fh, "\\tab\concept{" . $s . "}{". $indent . "}\n");
   }
   $shallow= array();
