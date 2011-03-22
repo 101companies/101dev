@@ -173,12 +173,13 @@ function string_begins_with($string, $search)
 function getObjectWithTexPrefix($obj){
   // category --> concept
   $intend = getIndentTextByName($obj);
+  $escaped = str_replace("#", "\\#", $indend);  
   if(string_begins_with($obj,'Category:')){
     $l = split(":", $obj);
     $obj = $l[1];
-    return "\\concept{" . $obj . "}{" . $intend . "}" . PHP_EOL;
+    return "\\concept{" . $obj . "}{" . $escaped . "}" . PHP_EOL;
   }
-  return "\\instance{" . $obj . "}" .PHP_EOL;
+  return "\\instance{" . $obj . "}{" . $escaped . "}" . PHP_EOL;
 }
 
 function getIntetByLevel($level){
@@ -193,6 +194,7 @@ function getIntetByLevel($level){
 
 function getIndentTextByName($name){
   $xml = simplexml_load_file($GLOBALS["inputXml"]);
+  // 1.check for category
   $queryResult = $xml->xpath('//cat[@name = \''. $name .'\']');
   if(count($queryResult)==0)
   {
@@ -235,10 +237,17 @@ function withoutCategoryPrefix($obj){
 }
 
 $categories = getAllCategories();
+//var_dump($categories);
+
 $allCategories = array();
 $f = fopen($dataFolder . "files.tex", 'w+'); //or die("can't open file");
 foreach($categories as $category){
     $cat = simpleXMLToArray($category);
+   // echo $category;
+    $fileName = str_replace(" ", "", withoutCategoryPrefix($cat));     
+    fwrite($f, "\categoryfile{" . $fileName ."}" . PHP_EOL);
+    array_push($allCategories,  withoutCategoryPrefix($cat));
+    
     $topLevelMembers = members(withoutCategoryPrefix($cat));
     foreach($topLevelMembers as $m){
         $mem = simpleXMLToArray($m);
@@ -271,8 +280,8 @@ foreach($allCategories as $category){
   //$l = split(":", $strMem);
   //if(count($l) == 2) $strMem = $l[1];
   //else $strMem = $l[0];
-  
-  fwrite($fh, "\\tab\\concept{" . $strMem . "}{" . $indent. "}". PHP_EOL);
+  $escaped = str_replace("#", "\\#", $indent);
+  fwrite($fh, "\\tab\\concept{" . $strMem . "}{" . $escaped . "}". PHP_EOL);
   
   
   $allMembers = getWithSubMembers(withoutCategoryPrefix($strMem));
@@ -299,11 +308,13 @@ foreach($allCategories as $category){
   $fileName = str_replace(" ", "", $category);  
   $myFile =  $outputShallowFolder . $fileName . ".tex";
   $fh = fopen($myFile, 'w+'); //or die("can't open file");
-  $indent = getIndentTextByName("Category:". withoutCategoryPrefix($category));
-  fwrite($fh, "\\tree{" . $category . "}{" . $indent . "}{\n" );
+  $indent = getIndentTextByName(withoutCategoryPrefix($category));
+  $escaped = str_replace("#", "\\#", $indent);
+  fwrite($fh, "\\tree{" . $category . "}{" . $escaped . "}{\n" );
   foreach($shallow as $s){
-    $indent = getIndentTextByName("Category:" . withoutCategoryPrefix($s)); 
-    fwrite($fh, "\\tab\concept{" . $s . "}{". $indent . "}\n");
+    $indent = getIndentTextByName(withoutCategoryPrefix($s));
+    $escaped = str_replace("#", "\\#", $indent);
+    fwrite($fh, "\\tab\concept{" . $s . "}{". $escaped . "}\n");
   }
   $shallow= array();
   fwrite($fh, "}");
