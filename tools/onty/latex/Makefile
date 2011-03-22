@@ -8,3 +8,6 @@ clean:
 	rm -f *.out
 	rm -f *.aux
 
+ignore:
+	svn propedit svn:ignore .
+
