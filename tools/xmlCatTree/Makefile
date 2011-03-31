@@ -1,3 +1,3 @@
 run:
-	php extract.php
+	php rebuild.php
 
