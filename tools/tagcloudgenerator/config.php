@@ -1,6 +1,4 @@
 <?php
-define('BASE_PATH',str_replace('tagcloudgenerator','',dirname(__FILE__)));
-
 require_once(BASE_PATH . "do-not-commit/wikibot.config.php");
 require_once(BASE_PATH . "wikibotClasses/wikibot.classes.php");
 

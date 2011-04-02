@@ -1,6 +1,8 @@
 <?php
+
+define('BASE_PATH',str_replace('tagcloudgenerator','',dirname(__FILE__)));
 require_once("config.php");
-require_once("ApiWrapper.php");
+require_once(BASE_PATH . "API/ApiWrapper.php");
 
 function writeFile($fileName, $arr){
   $myFile =  $GLOBALS['cloudy_data_home'] . $fileName;
