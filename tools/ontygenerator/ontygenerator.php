@@ -4,47 +4,18 @@ define('BASE_PATH',str_replace('ontygenerator','',dirname(__FILE__)));
 $outputShallowFolder = BASE_PATH . "onty/data/shallow/";
 $outputDeepFolder = BASE_PATH . "onty/data/deep/";
 $dataFolder = BASE_PATH . "onty/data/";
-$inputXml = BASE_PATH . "xmlCatTree/catTree.xml";
+$inputXml = BASE_PATH . "intentsExtractor/intents.xml";
 //$categories = array("Language", "Programming technique", "Technology", "Term");
 /**
      * Converts a simpleXML element into an array. Preserves attributes and everything.
      * You can choose to get your elements either flattened, or stored in a custom index that
      * you define.
      * For example, for a given element
-     * <field name="someName" type="someType"/>
-     * if you choose to flatten attributes, you would get:
      * $array['field']['name'] = 'someName';
      * $array['field']['type'] = 'someType';
      * If you choose not to flatten, you get:
      * $array['field']['@attributes']['name'] = 'someName';
-     * _____________________________________
-     * Repeating fields are stored in indexed arrays. so for a markup such as:
-     * <parent>
-     * <child>a</child>
-     * <child>b</child>
-     * <child>c</child>
-     * </parent>
-     * you array would be:
-     * $array['parent']['child'][0] = 'a';
-     * $array['parent']['child'][1] = 'b';
-     * ...And so on.
-     * _____________________________________
-     * @param simpleXMLElement $xml the XML to convert
-     * @param boolean $flattenValues    Choose wether to flatten values
-     *                                    or to set them under a particular index.
-     *                                    defaults to true;
-     * @param boolean $flattenAttributes Choose wether to flatten attributes
-     *                                    or to set them under a particular index.
-     *                                    Defaults to true;
-     * @param boolean $flattenChildren    Choose wether to flatten children
-     *                                    or to set them under a particular index.
-     *                                    Defaults to true;
-     * @param string $valueKey            index for values, in case $flattenValues was set to
-            *                            false. Defaults to "@value"
-     * @param string $attributesKey        index for attributes, in case $flattenAttributes was set to
-            *                            false. Defaults to "@attributes"
-     * @param string $childrenKey        index for children, in case $flattenChildren was set to
-            *                            false. Defaults to "@children"
+    * _____________________________________
      * @return array the resulting array.
      */
     function simpleXMLToArray($xml,
@@ -246,28 +217,26 @@ function withoutCategoryPrefix($obj){
 }
 
    function links($text) {
+    $pattern = '/\[\[((Technology|Language|:Category)):((\w|\d|\s|\/|\-|\.)+)\]\]/';
+    $replacement = '\3';   
+    $text = preg_replace($pattern, $replacement, $text);
    
+    $pattern =  '/\[\[((\w|\d|\s|\/|\-|\.)+):((\w|\d|\s|\/|\-|\.)+)\]\]/';
+    $replacement = '\1:\3';
+    $text = preg_replace($pattern, $replacement, $text);
    
-   $pattern = '/\[\[((Technology|Language|:Category)):((\w|\d|\s|\/|\-|\.)+)\]\]/';
-   $replacement = '\3';   
-   $text = preg_replace($pattern, $replacement, $text);
+    $pattern =  '/\[\[(:)?(((\w|\d|\s|\/|\-|\.)+):)?((\w|\d|\s|\/|\-|\.)+)\|((\w|\d|\s|\/|\-|\.)+)\]\]/';
+    $replacement = '\7';
+    $text = preg_replace($pattern, $replacement, $text);
    
-   $pattern =  '/\[\[((\w|\d|\s|\/|\-|\.)+):((\w|\d|\s|\/|\-|\.)+)\]\]/';
-   $replacement = '\1:\3';
-   $text = preg_replace($pattern, $replacement, $text);
+    $pattern =  '/\[\[((\w|\d|\s|\/|\-|\.)+)\]\]/';
+    $replacement = '\1';
+    $text =  preg_replace($pattern, $replacement, $text);
    
-   $pattern =  '/\[\[(:)?(((\w|\d|\s|\/|\-|\.)+):)?((\w|\d|\s|\/|\-|\.)+)\|((\w|\d|\s|\/|\-|\.)+)\]\]/';
-   $replacement = '\7';
-   $text = preg_replace($pattern, $replacement, $text);
-   
-   $pattern =  '/\[\[((\w|\d|\s|\/|\-|\.)+)\]\]/';
-   $replacement = '\1';
-   $text =  preg_replace($pattern, $replacement, $text);
-   
-   $pattern =  '/\[((\w|\d|\s|\/|\-|\.)+)\]/';
-   $replacement = '\1';
-   return preg_replace($pattern, $replacement, $text);
-}
+    $pattern =  '/\[((\w|\d|\s|\/|\-|\.)+)\]/';
+    $replacement = '\1';
+    return preg_replace($pattern, $replacement, $text);
+  }
 $categories = getAllCategories();
 //var_dump($categories);
 
