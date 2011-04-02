@@ -12,7 +12,7 @@
 	// 101companies: configuration file not commited.
 	// [begin]
         define('BASE_PATH',str_replace('wikibotClasses','',dirname(__FILE__)));
-	require_once(BASE_PATH . 'do-not-commit/wikibot.config.php');
+	require(BASE_PATH . 'do-not-commit/wikibot.config.php');
 	// [end]
 
 	function getWikibotSetting( $setting, $bot, $wiki ) {
