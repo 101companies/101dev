@@ -30,7 +30,6 @@ class OntyGenerator{
   }
   
  function generateCategoryFile(){
-  
   $categoryFile = "";
   $allCategories = $this->catPage->getFullCategoryTree();
   foreach($allCategories as $cat){
@@ -42,17 +41,14 @@ class OntyGenerator{
   return $categoryFile;
  }
  
- 
-
  function generateShallowTexStructure($catPage){
    $shallowTex = "\\tree{" . $catPage->getTitle() . "}{" . escape($catPage->intent) . "}{\n" ;
-   
    foreach($catPage->members as $m){
      $shallowTex .= "\\tab\concept{" . $m->getTitle() . "}{". escape($m->intent) . "}\n";
    }
    
    return $shallowTex;
-}
+ }
 }
 
 
@@ -95,9 +91,21 @@ else if($args['mode'] == 'tex'){ //generate tex wiki pages representation
   $catImpl = new CategoryPage("101implementation");
   $impl = $catImpl->getImplementations();
   var_dump($impl);
+  foreach($impl as $i){
+   var_dump($i->toTex());
+  }
+}
+else if($args['mode'] == 'matrix'){
+ //1. get all features
+ //2. get all implementations
+
+ foreach($impl as $i){
+  
+ }
+ //3. calculate features frequency (e.g. using hashtable with [featureName][counter]
 }
 else{
-  die('the following params are supported: --mode:ontology|tex' . PHP_EOL);
+  die('the following params are supported: --mode:ontology|tex|matrix' . PHP_EOL);
 }
 
 echo PHP_EOL . "DONE" . PHP_EOL;
