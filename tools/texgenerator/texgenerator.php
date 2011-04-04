@@ -1,11 +1,11 @@
 <?php
 
 define('BASE_PATH',str_replace('texgenerator','',dirname(__FILE__)));
-$outputShallowFolder = BASE_PATH . "onty/data/shallow/";
-$outputDeepFolder = BASE_PATH . "onty/data/deep/";
-$dataFolder = BASE_PATH . "onty/data/";
+$outputShallowFolder = BASE_PATH . "texgenerator/tex/ontology/data/shallow/";
+$outputDeepFolder = BASE_PATH . "texgenerator/tex/ontology/data/deep/";
+$dataFolder = BASE_PATH . "texgenerator/tex/ontology/data/";
 
-$texFolder = BASE_PATH . "texgenerator/tex/data/";
+$texFolder = BASE_PATH . "texgenerator/tex/content/data/";
 
 require_once(BASE_PATH . 'API/ApiWrapper2.php');
 require_once("commandLine.php");
@@ -89,7 +89,7 @@ if($args['mode'] == 'ontology'){ //generate ontology
   }
   
 }
-else if($args['mode'] == 'tex'){ //generate tex wiki pages representation
+else if($args['mode'] == 'content'){ //generate tex wiki pages representation
   $wiki = new Wiki();
   $catImpl = new CategoryPage("101implementation");
   $impl = $catImpl->getImplementations();
@@ -163,7 +163,7 @@ else if($args['mode'] == 'matrix'){
  fclose($f);
 }
 else{
-  die('the following params are supported: --mode=ontology|tex|matrix' . PHP_EOL);
+  die('the following params are supported: --mode=ontology|content|matrix' . PHP_EOL);
 }
 
 function buildTableHeader($features){
