@@ -1,0 +1,40 @@
+<?php
+
+//define('BASE_PATH',str_replace('API','',dirname(__FILE__)));
+require_once(BASE_PATH . 'API/ApiWrapper.php' );
+require_once(BASE_PATH . 'API/Pages.php');
+
+class Wiki{
+    function getAllPages(){
+        $allPages = array();
+        $pages = getAllPages();
+        foreach($pages as $p){
+            $page = new Page($content = $p['title']);
+            array_push($allPages, $page);
+        }
+        
+        return $allPages;
+    }
+    function getLanguagesList(){
+      $res = array();
+      $allLangs = getAllLanguages();
+      var_dump($allLangs);
+      foreach($allLangs as $lang){
+	$l = str_replace("Language:", '', $lang['title']);
+        array_push($res, str_replace(" ", "", $l));
+      }
+
+      return $res;
+    }
+
+    function getTechnologiesList(){
+      $res = array();
+      $allLangs = getAllTechnologies();
+      foreach($allLangs as $lang){
+	$l = str_replace("Technology:", '', $lang['title']);
+        array_push($res, str_replace(" ", "", $l));
+      }
+
+      return $res;
+    }
+}

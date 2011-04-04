@@ -1,0 +1,272 @@
+<?php
+define('BASE_PATH',str_replace('API','',dirname(__FILE__)));
+require_once(BASE_PATH . 'API/ApiWrapper.php' );
+
+function startsWith($suffix, $text) {
+    return (strcmp(substr($text, 0, strlen($suffix)),$suffix)===0);
+}
+
+function extractIntent($content) {
+    $inIntent= false;
+    $indent = "";
+    foreach(explode(PHP_EOL, $content) as $line) {
+      if($inIntent) {
+          if (startsWith("==",trim($line))) {
+            break;
+          }
+          if ($line != '') {
+          	$intent = $line;
+          	break;
+          }
+      }
+      if (startsWith("==Intent==",str_replace(' ','',trim($line)) )) {
+        $inIntent= true;
+      }  
+    }
+    return $intent;
+ }
+ 
+function extractContent($content, $pattern){
+  $inside = false;
+  $res = "";
+  foreach(explode(PHP_EOL, $content) as $line) {
+    // echo "l:" . $line . PHP_EOL;
+    if($inside) {
+     // if ($line != '') { //we don't include empty lines
+     $res .= PHP_EOL .$line;
+     // }
+     if (startsWith(trim($line), "==")){ //next section begins
+      $inside = false;
+      break;    
+    }
+   }
+   
+   if($inside == false){ //we're not inside the section yet
+    if (startsWith($pattern, str_replace(' ','',trim($line)) )) {
+     $inside = true;
+    }  
+   }
+
+  }
+    return $res;
+}
+
+class Page{
+ private $title;
+ public $content;
+ public $intent;
+ public $description;
+ 
+ function getTitle(){
+  if(startsWith("Category:", $this->title)){
+   return str_replace("Category:", "", $this->title);
+  }
+  else if(startsWith("101implementation:", $this->title)){
+    return str_replace("101implementation:", "", $this->title);
+  }
+  else if(startWith("Technology:", $this->title)){
+    return str_replace("Technology:", "", $this->title);
+  }
+
+  return $this->title;
+ }
+ 
+ function getFileName(){
+  $t = $this->getTitle();
+  $symbols = array(" ", "/");
+  return str_replace($symbols, "_", $t);
+ }
+ 
+ 
+ function toTex(){
+  $tex = "wikisite\\" . "category" . "{" . $this->getTitle() . "}{" . escape($this->intent) . "}";
+  
+  return $tex;
+ }
+ 
+ function __construct($title){
+  $this->title = $title;
+  $this->content = getPageContent($title);
+  $this->intent = extractIntent($this->content);
+  $this->description = extractContent($this->descriptiopn, "==Description==");
+ }
+}
+
+class CategoryPage extends Page{
+ public $members;
+ public $namespace;
+ 
+ function __construct($title){
+  parent::__construct($title);
+  $this->namespace = "Category";
+  $this->members = array();
+  $subCats = getWpapi()->categorymembers($title);
+  
+  if($subCats == NULL) return;
+   foreach($subCats as $sc){
+    if(substr_count($sc['title'],"Category") == 1){ //found a Category
+      $page = new CategoryPage($sc['title']);
+      array_push($this->members, $page);
+    }
+    else if(substr_count($sc['title'],"101implementation") == 1){ //found an implementation page
+      $page = new ImplementationPage($sc['title']);
+      array_push($this->members, $page);
+    }
+   else{
+    $page = new Page($sc['title']);
+    array_push($this->members, $page);
+   }
+  } 
+ }
+ 
+ function getFullCategoryTree(){
+  $memberTree = array();
+  foreach($this->members as $m){
+   if($m->namespace == "Category"){
+    array_push($memberTree, $m);
+    $childlen = $m->getFullCategoryTree();
+    foreach($childlen as $c){
+     array_push($memberTree, $c);
+    }
+   }   
+  }
+  
+  return $memberTree;
+ }
+ 
+ function getImplementations(){
+  $memberTree = array();
+  foreach($this->members as $m){ //since we don't have nested implementations, top-level loop is OK
+   if($m->namespace == "101implementation"){
+    array_push($memberTree, $m);
+   }   
+  }
+  
+  return $memberTree;
+ }
+ 
+ 
+ private function getObjType($cat){
+  if($cat->namespace == "Category"){
+   return "concept";
+  }
+  
+  return "instance";
+ }
+ 
+ function getShallowTex(){
+   $tex = "\\tree{" . $this->getTitle() . "}{" . escape($this->intent) . "}{\n" ;
+   foreach($this->members as $m){
+     $tex .= "\\tab\\" . $this->getObjType($m) . "{" . $m->getTitle() . "}{". escape($m->intent) . "}\n";
+   }
+   $tex .= "}";
+   
+   return $tex;
+ }
+ 
+ private function getIntetByLevel($level){
+  $default = "\\tab";
+  for($i = 0; $i <= $level - 1; $i++){
+    $default .= "\\tab";
+  }
+  return $default;
+ }
+ 
+ private function writeWithIdent($cat, $level){
+   $tex .= $this->getIntetByLevel($level) . "\\" . $this->getObjType($cat) . "{" . $cat->getTitle() . "}{". escape($cat->intent) . "}\n";
+   foreach($cat->members as $c){
+    $tex .= $this->writeWithIdent($c, $level + 1); 
+   }
+   
+   return $tex;
+ }
+ 
+ function getDeepTex(){
+  $tex = "\\tree{" . $this->getTitle() . "}{" . escape($this->intent) . "}{\n" ;
+  $level = 0;
+  foreach($this->members as $m){
+   $tex .= $this->writeWithIdent($m, $level);
+  }
+  $tex .= "}";  
+  return $tex;
+ }
+}
+
+function getItemizedTex($markup){
+  $tex = PHP_EOL . "\\begin{itemize}";
+  foreach(explode(PHP_EOL, $markup) as $line) {
+    if($line != '') {   
+      $tex .= PHP_EOL . "\\item \\wikiref{". $line ."}{__LINK__}";
+    }  
+  }
+  $tex .=  PHP_EOL . "\\end{itemize}" . PHP_EOL;
+  return $tex;
+}
+
+function getTexCommandName($txt){
+  if (strlen(strstr($txt,'2'))>0) {
+    $res = str_replace("2","Two", $txt);
+    return $res;
+  }
+  if(strlen(strstr($txt,'3'))>0){
+    $res = str_replace("3", "Three", $txt);
+    return $res;
+  }
+  return $txt;
+}
+
+class ImplementationPage extends Page{
+ public $languages;
+ public $technologies;
+ public $features;
+ public $motivation;
+ public $architecture;
+ public $usage;
+ public $contributors;
+ public $namespace;
+ 
+ function toTexMacro(){
+   $tex = "\\newcommand{\\". getTexCommandName($this->getTitle()) . "ImplementationTitle}{". $this->getTitle() ."}" . PHP_EOL; 
+   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationIntent}{" . $this->intent . "}" . PHP_EOL;
+   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationMotivation}{" . $this->motivation . "}" . PHP_EOL;
+   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationLanguages}{" . $this->languages . "}" . PHP_EOL;
+   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationTechnologies}{" . getItemizedTex($this->technologies) . "}" . PHP_EOL;
+   return $tex;
+ } 
+
+ function __construct($title){
+  parent::__construct($title);
+  $this->namespace = "101implementation";
+  
+  $this->languages = extractContent($this->content, "==Languages==");
+  $this->technologies = extractContent($this->content, "==Technologies==");
+  $featuresContent = extractContent($this->content, "==Features==");
+   
+  $this->features = array();
+  $pattern = "/(\[2}101feature:)([\w\W\s][^\]]+)(\]{2})/"; 
+  preg_match_all($pattern, $featureContent, $out, PREG_PATTERN_ORDER); 
+  if(count($out) != 0){
+    // var_dump($out);
+   foreach($out as $f){
+    $feature = new Feature($f);
+    array_push($features, $feature);
+   }	
+  }
+  
+  $this->motivation = extractContent($this->content, "==Motivation==");
+  $this->architecture = extractContent($this->content, "==Architecture==");
+  $this->usage = extractContent($this->content, "==Usage==");
+  $this->contributors = extractContent($this->content, "==Contributors==");
+ }
+}
+
+class Feature{
+ public $name;
+ function __construct($content){
+  $this->name = $content;
+ }
+}
+
+
+
+
