@@ -9,6 +9,7 @@ $texFolder = BASE_PATH . "texgenerator/tex/data/";
 
 require_once(BASE_PATH . 'API/ApiWrapper2.php');
 require_once("commandLine.php");
+require_once("formatter.php");
 
 function getIntetByLevel($level){
   $default = "\\tab";
@@ -53,11 +54,9 @@ class OntyGenerator{
  }
 }
 
-
-
 $args = CommandLine::parseArgs($_SERVER['argv']);
 
-$args['mode'] = 'tex';
+//$args['mode'] = 'tex';
 if($args['mode'] == 'ontology'){ //generate ontology
   echo "entering ontology generation mode, please wait...";
   $tex = "";
@@ -98,7 +97,7 @@ else if($args['mode'] == 'tex'){ //generate tex wiki pages representation
   $allTechnologies = $wiki->getTechnologyPages();
   // var_dump($impl);
   $fImpl = fopen($texFolder . "implementations.tex", "w+");
-  $fMacro = fopen($texFolder . "macros.tex", "w+");
+  $fMacro = fopen($texFolder . "macros_raw.tex", "w+");
   foreach($impl as $i){
     fwrite($fImpl, "\\iwiki{" . getTexCommandName($i->getTitle()) . "}" . PHP_EOL);
     // echo PHP_EOL . $i->getTitle() . PHP_EOL;
@@ -126,18 +125,58 @@ else if($args['mode'] == 'tex'){ //generate tex wiki pages representation
     fwrite($fTech, "\\twiki{" .getTexCommandName($t->getTitle()) . "}" . PHP_EOL);
   }
   fclose($fTech);
+
+  formatTex();
 }
 else if($args['mode'] == 'matrix'){
+ $wiki = new Wiki();
+ $f = fopen($texFolder . "features.tex", "w+");
+
  //1. get all features
+ $features = $wiki->getFeaturePages();
+ fwrite($f, buildTableHeader($features));
+
  //2. get all implementations
-  echo "matrig generator in not yet implemented";
- foreach($impl as $i){
-  
+ $catImpl = new CategoryPage("101implementation");
+ $impl = $catImpl->getImplementations();
+ 
+ $featureNames = array();
+ foreach($features as $f){
+  array_push($featureNames, $f);
  }
+ $row = "";
+ foreach($impl as $i){
+  $row .= "\vLegend{". $i->getTitle() ."}";
+  foreach($i->features as $f){
+   if(in_array($f->name, $featureNames)){
+    $row .= "& \\okValue";
+   }
+   else{
+    $row .= "& \\noValue";
+   }
+  }
+ }
+ 
+ fwrite($f, $row);
  //3. calculate features frequency (e.g. using hashtable with [featureName][counter]
+ fwrite($f, "\\end{tabular}"); 
+ fclose($f);
 }
 else{
   die('the following params are supported: --mode=ontology|tex|matrix' . PHP_EOL);
+}
+
+function buildTableHeader($features){
+ $numCols = count($features);
+  $th = "begin{tabular}{l";
+ for($i=0; $i<$numCols; $i++){
+  $th .= "|c";
+ } 
+ $th .= "}" . PHP_EOL;
+ foreach($features as $f){
+  $th .= "& \\hLegend{" . $f->getTitle() . "} ";
+ }
+ return $th;
 }
 
 echo PHP_EOL . "DONE" . PHP_EOL;
