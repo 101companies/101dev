@@ -5,6 +5,8 @@ $outputShallowFolder = BASE_PATH . "onty/data/shallow/";
 $outputDeepFolder = BASE_PATH . "onty/data/deep/";
 $dataFolder = BASE_PATH . "onty/data/";
 
+$texFolder = BASE_PATH . "texgenerator/tex/data/";
+
 require_once(BASE_PATH . 'API/ApiWrapper2.php');
 require_once("commandLine.php");
 
@@ -55,6 +57,7 @@ class OntyGenerator{
 
 $args = CommandLine::parseArgs($_SERVER['argv']);
 
+$args['mode'] = 'tex';
 if($args['mode'] == 'ontology'){ //generate ontology
   echo "entering ontology generation mode, please wait...";
   $tex = "";
@@ -88,24 +91,53 @@ if($args['mode'] == 'ontology'){ //generate ontology
   
 }
 else if($args['mode'] == 'tex'){ //generate tex wiki pages representation
+  $wiki = new Wiki();
   $catImpl = new CategoryPage("101implementation");
   $impl = $catImpl->getImplementations();
-  var_dump($impl);
+  $allLangs = $wiki->getLanguagepages();
+  $allTechnologies = $wiki->getTechnologyPages();
+  // var_dump($impl);
+  $fImpl = fopen($texFolder . "implementations.tex", "w+");
+  $fMacro = fopen($texFolder . "macros.tex", "w+");
   foreach($impl as $i){
-   var_dump($i->toTex());
+    fwrite($fImpl, "\\iwiki{" . getTexCommandName($i->getTitle()) . "}" . PHP_EOL);
+    // echo PHP_EOL . $i->getTitle() . PHP_EOL;
+    //var_dump($i->toTexMacro());
+    fwrite($fMacro, escape($i->toTexMacro()));
   }
+  foreach($allLangs as $lang){
+  //var_dump($lang->toTexMacro()); 
+  fwrite($fMacro, escape($lang->toTexMacro()));
+  }
+  foreach($allTechnologies as $tech){
+   fwrite($fMacro, escape($tech->toTexMacro()));
+  }
+  fclose($fImpl);
+  fclose($fMacro);
+
+  $fLang = fopen($texFolder . "languages.tex", "w+");
+  foreach($allLangs as $lang){
+    fwrite($fLang, "\\lwiki{" . getTexCommandName($lang->getTitle()) . "}". PHP_EOL);
+  }
+  fclose($fLang);
+
+  $fTech = fopen($texFolder . "technologies.tex", "w+");
+  foreach($allTechnologies as $t){
+    fwrite($fTech, "\\twiki{" .getTexCommandName($t->getTitle()) . "}" . PHP_EOL);
+  }
+  fclose($fTech);
 }
 else if($args['mode'] == 'matrix'){
  //1. get all features
  //2. get all implementations
-
+  echo "matrig generator in not yet implemented";
  foreach($impl as $i){
   
  }
  //3. calculate features frequency (e.g. using hashtable with [featureName][counter]
 }
 else{
-  die('the following params are supported: --mode:ontology|tex|matrix' . PHP_EOL);
+  die('the following params are supported: --mode=ontology|tex|matrix' . PHP_EOL);
 }
 
 echo PHP_EOL . "DONE" . PHP_EOL;
