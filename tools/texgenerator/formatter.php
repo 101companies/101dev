@@ -13,7 +13,7 @@ function formatTex(){
      $line = formatter::toTex($line);
   }
   else{
-    $line = formatter::toPlainText($line);
+    $line = formatter::toTex($line);
   }
   fwrite($fOutput, $line);
  }
