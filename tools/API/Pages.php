@@ -230,13 +230,11 @@ class ImplementationPage extends Page{
     if($line == '') continue;
     
     preg_match_all($pattern, $line, $out, PREG_PATTERN_ORDER);
-    if(count($out) != 0){
-    foreach($out as $f){
      //var_dump($f);
-     $feature = new Feature($f);
-     array_push($features, $feature);
-    }	
-   } 
+     if($out[2][0] != ''){
+      //$feature = new Feature($out[2][0]);
+      array_push($this->features,$out[2][0]); //$feature);
+     }
   }
     
   $this->motivation = extractContent($this->content, "==Motivation==");
@@ -281,8 +279,8 @@ class TechnologyPage extends Page{
 
 class FeaturePage extends Page{
  public $discussion;
- function __construct($content){
-  parent::__construct($content);
+ function __construct($title){
+  parent::__construct($title);
   $this->discussion = extractContent($this->content, "==Discussion==");
   $this->namespace = "101feature";
  }
