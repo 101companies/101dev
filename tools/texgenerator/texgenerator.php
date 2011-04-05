@@ -6,6 +6,7 @@ $outputDeepFolder = BASE_PATH . "texgenerator/tex/ontology/data/deep/";
 $dataFolder = BASE_PATH . "texgenerator/tex/ontology/data/";
 
 $texFolder = BASE_PATH . "texgenerator/tex/content/data/";
+$texFolderMatrix = BASE_PATH . "texgenerator/tex/matrix/data/";
 
 require_once(BASE_PATH . 'API/ApiWrapper2.php');
 require_once("commandLine.php");
@@ -56,7 +57,7 @@ class OntyGenerator{
 
 $args = CommandLine::parseArgs($_SERVER['argv']);
 
-//$args['mode'] = 'tex';
+$args['mode'] = 'matrix';
 if($args['mode'] == 'ontology'){ //generate ontology
   echo "entering ontology generation mode, please wait...";
   $tex = "";
@@ -130,11 +131,9 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
 }
 else if($args['mode'] == 'matrix'){
  $wiki = new Wiki();
- $f = fopen($texFolder . "features.tex", "w+");
 
  //1. get all features
  $features = $wiki->getFeaturePages();
- fwrite($f, buildTableHeader($features));
 
  //2. get all implementations
  $catImpl = new CategoryPage("101implementation");
@@ -142,41 +141,82 @@ else if($args['mode'] == 'matrix'){
  
  $featureNames = array();
  foreach($features as $f){
-  array_push($featureNames, $f);
+  array_push($featureNames, $f->getTitle());
  }
  $row = "";
+ $implFeatures = array();
+ foreach($featureNames as $fn){
+  $implFeatures[$fn] = 0;
+ }
+ 
+ $featureFrequency = array();
+ foreach($featureFrequency as $ff){
+  $featureFrequency[$ff] = 0;  
+ }
  foreach($impl as $i){
-  $row .= "\vLegend{". $i->getTitle() ."}";
-  foreach($i->features as $f){
-   if(in_array($f->name, $featureNames)){
-    $row .= "& \\okValue";
+   foreach($featureNames as $fn){
+   if(in_array($fn, $i->features)){
+    $implFeatures[$fn] ++;
+    $featureFrequency[$i->getTitle()] ++;
+    //$row .= " & \\okValue";
    }
    else{
-    $row .= "& \\noValue";
+    //$row .= " & \\noValue";
    }
   }
  }
  
- fwrite($f, $row);
+ //$implFeatures = array_flip($implFeatures);
+ asort($implFeatures, SORT_NUMERIC);
+ asort($featureFrequency, SORT_NUMERIC);
+ $implFeatures = array_reverse($implFeatures);
+ $featureFrequency = array_reverse($featureFrequency);
+ 
+ $content = buildTableHeader(array_keys($implFeatures));
+ 
+ foreach($featureFrequency as $ff=>$v){
+  $impl = getBy($catImpl, $ff);
+  $row .= "\\vLegend{". $impl->getTitle() ."}";
+  foreach(array_keys($implFeatures) as $fn){
+   if(in_array($fn, $impl->features)){
+    $row .= " & \\okValue";
+   }
+   else{
+    $row .= " & \\noValue";
+   }
+  }
+  $row .= PHP_EOL . "\\newRow" . PHP_EOL;
+ }
+ 
+ $content .= $row . "\\end{tabular}";
  //3. calculate features frequency (e.g. using hashtable with [featureName][counter]
- fwrite($f, "\\end{tabular}"); 
+ 
+ $f = fopen($texFolderMatrix . "features.tex", "w+");
+ fwrite($f, $content); 
  fclose($f);
 }
 else{
   die('the following params are supported: --mode=ontology|content|matrix' . PHP_EOL);
 }
 
+function getBy($catImpl, $val){
+  $impl = $catImpl->getImplementations();
+  foreach($impl as $i){
+    if($i->getTitle() == $val) return $i;
+  }
+}
+
 function buildTableHeader($features){
  $numCols = count($features);
-  $th = "begin{tabular}{l";
+  $th = "\\begin{tabular}{l";
  for($i=0; $i<$numCols; $i++){
   $th .= "|c";
  } 
  $th .= "}" . PHP_EOL;
  foreach($features as $f){
-  $th .= "& \\hLegend{" . $f->getTitle() . "} ";
+  $th .= "& \\hLegend{" . $f . "} ";
  }
- return $th;
+ return $th . PHP_EOL . "\\newRow" . PHP_EOL;
 }
 
 echo PHP_EOL . "DONE" . PHP_EOL;
