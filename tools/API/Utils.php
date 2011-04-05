@@ -85,14 +85,14 @@ function getItemizedTex($markup){
   $tex = PHP_EOL . "\\begin{itemize}";
   foreach(explode(PHP_EOL, $markup) as $line) {
     if($line != '') {
-      $t = formatter::toTex($line);
-      $t1 = formatter::toPlainText($t); //hadnle remaining wiki markup
-      if($t == $line){
-         $tex .= PHP_EOL . "\\item \\wikiref{}{}". $t1;
-      }
-      else{
-           $tex .= PHP_EOL . "\\item \\wikiref". $t1;
-      }   
+      //$t = formatter::toTex($line);
+      //$t1 = formatter::toPlainText($t); //hadnle remaining wiki markup
+     // if($t == $line){
+     //    $tex .= PHP_EOL . "\\item \\wikiref{}{}". $t1;
+    //  }
+    //  else{
+           $tex .= PHP_EOL . "\\item ". $line;
+    //  }   
     }
   }
   $tex .=  PHP_EOL . "\\end{itemize}" . PHP_EOL;
@@ -146,12 +146,24 @@ class formatter{
 
     public static function toTex($text) {
     
-     $pattern =  '/\*\s*\[\[(:)?((\w|\d|\s|\/|\-|\.|\#)+):((\w|\d|\s|\/|\-|\.|\#)+)\|((\w|\d|\s|\/|\-|\.|\#)+)\]\]/';
-     $replacement = '{\2:\4}{\6}';
+     $pattern =  '/\[\[(:)?((\w|\d|\s|\/|\-|\.|\#)+):((\w|\d|\s|\/|\-|\.|\#)+)\|((\w|\d|\s|\/|\-|\.|\#)+)\]\]/';
+     $replacement = '\\wikiref{\2:\4}{\6}';
      $text = preg_replace($pattern, $replacement, $text);
     
-     $pattern =  '/\*\s*\[\[(:)?((\w|\d|\s|\/|\-|\.|\#)+):((\w|\d|\s|\/|\-|\.|\#)+)\]\]/';
-     $replacement = '{\2:\4}{\4}';
+     $pattern =  '/\[\[(:)?((\w|\d|\s|\/|\-|\.|\#)+):((\w|\d|\s|\/|\-|\.|\#)+)\]\]/';
+     $replacement = '\\wikiref{\2:\4}{\4}';
+     $text = preg_replace($pattern, $replacement, $text);
+     
+     $pattern =  '/\[\[((\w|\d|\s|\/|\-|\.|\#)+)\]\]/';
+     $replacement = '\\wikiref{\1}{\1}';
+     $text = preg_replace($pattern, $replacement, $text);
+     
+     $pattern =  '/\[\[((\w|\d|\s|\/|\-|\.|\#)+)\|((\w|\d|\s|\/|\-|\.|\#)+)\]\]/';
+     $replacement = '\\wikiref{\1}{\3}';
+     $text = preg_replace($pattern, $replacement, $text);
+     
+     $pattern  = '/\\\item\s*\*\s*\\\wikiref/';
+     $replacement = '\\\item \\\wikiref';
      $text = preg_replace($pattern, $replacement, $text);
    
     return $text;  
