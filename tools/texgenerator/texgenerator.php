@@ -57,7 +57,7 @@ class OntyGenerator{
 
 $args = CommandLine::parseArgs($_SERVER['argv']);
 
-//$args['mode'] = 'matrix';
+$args['mode'] = 'matrix';
 if($args['mode'] == 'ontology'){ //generate ontology
   echo "entering ontology generation mode, please wait...";
   $tex = "";
@@ -131,13 +131,11 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
 }
 else if($args['mode'] == 'matrix'){
  $wiki = new Wiki();
-
- //1. get all features
  $features = $wiki->getFeaturePages();
-
- //2. get all implementations
  $catImpl = new CategoryPage("101implementation");
  $impl = $catImpl->getImplementations();
+ 
+ buildSpacesMatrix($impl);
  
  $featureNames = array();
  foreach($features as $f){
@@ -154,19 +152,14 @@ else if($args['mode'] == 'matrix'){
   $featureFrequency[$ff] = 0;  
  }
  foreach($impl as $i){
-   foreach($featureNames as $fn){
+  foreach($featureNames as $fn){
    if(in_array($fn, $i->features)){
     $implFeatures[$fn] ++;
     $featureFrequency[$i->getTitle()] ++;
-    //$row .= " & \\okValue";
-   }
-   else{
-    //$row .= " & \\noValue";
    }
   }
  }
  
- //$implFeatures = array_flip($implFeatures);
  asort($implFeatures, SORT_NUMERIC);
  asort($featureFrequency, SORT_NUMERIC);
  $implFeatures = array_reverse($implFeatures);
@@ -189,8 +182,7 @@ else if($args['mode'] == 'matrix'){
  }
  
  $content .= $row . "\\end{tabular}";
- //3. calculate features frequency (e.g. using hashtable with [featureName][counter]
- 
+  
  $f = fopen($texFolderMatrix . "features.tex", "w+");
  fwrite($f, $content); 
  fclose($f);
@@ -217,6 +209,36 @@ function buildTableHeader($features){
   $th .= "& \\hLegend{" . $f . "} ";
  }
  return $th . PHP_EOL . "\\newRow" . PHP_EOL;
+}
+
+function buildSpacesMatrix($impl){
+  $catSpace = new CategoryPage("Technical space");
+  $spaces = $catSpace->members;
+  $arrSpaces = array();
+  foreach($spaces as $s){
+    array_push($arrSpaces, $s->getTitle());
+  }
+  $content = buildTableHeader($arrSpaces);
+  
+  foreach($impl as $i){
+    $row .= "\\vLegend{". $i->getTitle() ."}";
+    foreach($arrSpaces as $s){
+      $sp = $i->spaces;
+     if(in_array($s, $sp)){
+      $row .= " & \\okValue";
+     }
+     else{
+      $row .= " & \\noValue";
+     }
+    }
+    $row .= PHP_EOL . "\\newRow" . PHP_EOL;
+  }
+  
+  $content .= $row . "\\end{tabular}";
+  global $texFolderMatrix;
+  $f = fopen($texFolderMatrix. "spaces.tex", "w+");
+  fwrite($f, $content);
+  fclose($f);
 }
 
 echo PHP_EOL . "DONE" . PHP_EOL;

@@ -206,6 +206,7 @@ class ImplementationPage extends Page{
  public $architecture;
  public $usage;
  public $contributors;
+ public $spaces;
   
  function toTexMacro(){
    $tex = "\\newcommand{\\". getTexCommandName($this->getTitle()) . "ImplementationTitle}{". $this->getTitle() ."}" . PHP_EOL; 
@@ -223,19 +224,31 @@ class ImplementationPage extends Page{
   $this->languages = extractContent($this->content, "==Languages==");
   $this->technologies = extractContent($this->content, "==Technologies==");
   $featuresContent = extractContent($this->content, "==Features==");
-   
+ 
   $this->features = array();
   $pattern = "/(101feature:)([\w\W\s][^\]]+)(\]{2})/"; 
   foreach(explode(PHP_EOL, $featuresContent) as $line){
     if($line == '') continue;
     
     preg_match_all($pattern, $line, $out, PREG_PATTERN_ORDER);
-     //var_dump($f);
      if($out[2][0] != ''){
-      //$feature = new Feature($out[2][0]);
-      array_push($this->features,$out[2][0]); //$feature);
+       array_push($this->features,$out[2][0]); //$feature);
      }
   }
+  
+  $this->spaces = array();
+  foreach(explode(PHP_EOL, $this->technologies) as $t){
+   if($t == '') continue;
+   $pattern =  "/(Technology:[\w\W\s][^\]]+)(\]{2})/";
+   preg_match_all($pattern, $t, $out, PREG_PATTERN_ORDER);
+   
+   if($out[1][0] == '') continue;
+
+   $tp = new TechnologyPage($out[1][0]);
+   foreach($tp->spaces as $s){
+    array_push($this->spaces, $s);
+   }
+  }  
     
   $this->motivation = extractContent($this->content, "==Motivation==");
   $this->architecture = extractContent($this->content, "==Architecture==");
@@ -263,10 +276,23 @@ class LanguagePage extends Page{
 
 class TechnologyPage extends Page{
  public $description;
- function __construct($content){
-  parent::__construct($content);
+ public $spaces;
+ function __construct($title){
+  parent::__construct($title);
   $this->description = extractContent($this->content, "==Description==");
   $this->namespace = "Technology";
+  
+  $spacesContent = extractContent($this->content, "==Spaces==");  
+  $this->spaces = array();
+  $pattern = "/(\*(\s)*\[{2})([\w\W\s][^\]]+)(\]{2})/";
+  foreach(explode(PHP_EOL, $spacesContent) as $line){
+   if($line == '') continue;
+
+   preg_match_all($pattern, $line, $out, PREG_PATTERN_ORDER);
+   if($out[3][0] != ''){
+    array_push($this->spaces, $out[3][0]);
+   }
+  } 
  }
  
  function toTexMacro(){
