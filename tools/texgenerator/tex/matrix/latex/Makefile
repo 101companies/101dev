@@ -1,5 +1,6 @@
 ll:
 	pdflatex main
+	pdflatex spaces
 
 clean:
 	rm -f *.pdf
