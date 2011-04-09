@@ -28,7 +28,7 @@
        		$contributorName = str_replace(']]','',$contributorName);
         	array_push($contributors,trim($contributorName));
       }
-      if (!(strpos($line,'== Contributors ==') === false)){
+      if (!(strpos($line,'== Contributors ==') === false) || !(strpos($line,'== Contributor ==') === false)){
         $inContributors = true;
       }
       $bom = pack("CCC", 0xef, 0xbb, 0xbf);
