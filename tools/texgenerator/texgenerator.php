@@ -57,7 +57,7 @@ class OntyGenerator{
 
 $args = CommandLine::parseArgs($_SERVER['argv']);
 
-//$args['mode'] = 'matrix';
+//$args['mode'] = 'ontology';
 if($args['mode'] == 'ontology'){ //generate ontology
   echo "entering ontology generation mode, please wait...";
   $tex = "";
@@ -72,20 +72,28 @@ if($args['mode'] == 'ontology'){ //generate ontology
   echo PHP_EOL . "generating shallow ontology";
   $allCategories = $base->getFullCategoryTree();
   foreach($allCategories as $cat){
-   $tex = $cat->getShallowTex();
    $fileName = $cat->getFileName() . ".tex";
    $f = fopen($outputShallowFolder . $fileName, 'w+') or die("can't open file");
-   fwrite($f, $tex);
-   fclose($fh);
+   $tex = $cat->getShallowTex();
+   foreach (explode(PHP_EOL, $tex) as $line)
+   {
+    $line = formatter::toTex($line);
+    fwrite($f, $line . PHP_EOL);
+   }
+    //fwrite($f, $tex);
+   fclose($f);
   }
   
   echo PHP_EOL . "generating deep ontology";
   foreach($allCategories as $cat){
    $tex = $cat->getDeepTex();
-  
    $fileName = $cat->getFileName() . ".tex";
    $f = fopen($outputDeepFolder . $fileName, 'w+') or die("can't open file");
-   fwrite($f, $tex);
+   foreach (explode(PHP_EOL, $tex) as $line)
+   {
+     $line = formatter::toTex($line);
+     fwrite($f, $line . PHP_EOL);
+    }
    fclose($fh);
   }
   
