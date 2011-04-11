@@ -112,6 +112,7 @@ function getTexCommandName($txt){
 
   $txt = str_replace(".", "dot", $txt);
   $txt = str_replace("-", "", $txt);
+  $txt = str_replace("/", "", $txt);
   $res = str_replace(' ', '',$txt);
   return $res;
 }
