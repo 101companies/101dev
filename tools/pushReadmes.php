@@ -23,10 +23,17 @@
       if (!(strpos($line,'==') === false))
         $inContributors = false;
       if ($inContributors &&
-      	   startsWith('* [[Contributor:',$line) && endsWith(']]',trim($line))) {
-       		$contributorName = chop(str_replace('* [[Contributor:', '', $line));
-       		$contributorName = str_replace(']]','',$contributorName);
-        	array_push($contributors,trim($contributorName));
+      	    startsWith('* {{101contributor|',$line) && endsWith('}}',trim($line))) {
+       		$contributorText = chop(str_replace('* {{101contributor|', '', $line));
+       		$contributorText = str_replace('}}','',$contributorText);
+       		if (!($pos = strpos($contributorText, "|")) === false) {
+       			$role = substr($contributorText, $pos + 1, strlen($contributorText) - $pos - 1);
+       			$contributorName = trim(substr($contributorText, 0, $pos));
+       			//echo $contributorName.' -> '.$role;
+       			if (!array_key_exists($contributorName, $contributors))
+       				$contributors[$contributorName] = array();
+       			array_push($contributors[$contributorName], $role);
+       		}
       }
       if (!(strpos($line,'== Contributors ==') === false) || !(strpos($line,'== Contributor ==') === false)){
         $inContributors = true;
@@ -37,7 +44,7 @@
     } 
     echo "Pushing README...\n";
     $result = true;
-    $result = $wpapi->edit('101implementation:'.$pName, $text, 'A bot did this!', false, false, null, null, false );
+    //$result = $wpapi->edit('101implementation:'.$pName, $text, 'A bot did this!', false, false, null, null, false );
     if ($result){   
       echo "Success!\n";
       return $contributors;
@@ -49,13 +56,19 @@
   }
 
   // Create Contributor:-Page
-  function createContributorPage($contributor, $pNames, $wpapi){
+  function createContributorPage($contributor, $roles, $wpapi,$wpq){
+  	  $content = $wpq->getpage('101contributor:'.$contributor);
+  	  if ($content == null) {
+  	   	$content = '__NOTOC__';
+  	  }	
   	  echo "Creating contributor page for $contributor";
-      $text = '__NOTOC__';
-      //foreach ($pNames as $pName){
-      //    $text .= '* [[Implementation:'.$pName.']]'.PHP_EOL;
-      //}
-      $result = $wpapi->edit('Contributor:'.$contributor, $text, 'A bot did this!', false, false, null, null, false );
+  	  foreach($roles as $role) {
+  	  	$roleText = '[[Category:101'.$role.']]';
+  	  	if (strpos($content, $roleText) === false) 
+  	  		$content .= PHP_EOL.$roleText;
+  	  }
+      $result =true;
+      $result = $wpapi->edit('101contributor:'.$contributor, $content, 'A bot did this!', false, false, null, null, false );
       if ($result){   
         echo "Success!\n";
       }
@@ -82,20 +95,24 @@
   $fileArray = scandir($base);
   // Create implementation and contributor pages
   $validPages = array();
-  $projectsPerContributor = array();
+  $contributors = array();
   foreach($fileArray as $file) {
    if ($file != '.' && $file != '..' && file_exists($base.'/'.$file.'/README')){ 
-	  $contributors = createPage($file,$wpapi);
-	  	array_push($validPages, '101implementation:'.$file);
-      	foreach($contributors as $contributor){
-        	if (!array_key_exists($contributor, $projectsPerContributor))
-            	$projectsPerContributor[$contributor] = array();
-        	array_push($projectsPerContributor[$contributor], $file);
+	  $projectContributors = createPage($file,$wpapi);
+	  array_push($validPages, '101implementation:'.$file);
+      foreach($projectContributors as $projectContributor => $roles){
+       	if (!array_key_exists($projectContributor, $contributors))
+           	$contributors[$projectContributor] = array();
+       	foreach($roles as $role) {
+       	if(!in_array($role, $contributors[$projectContributor]))
+       		array_push($contributors[$projectContributor],$role);
+       	}
  	  }
    }  
   }
-  foreach($projectsPerContributor as $contributor => $projects)
-    createContributorPage($contributor, $projects,$wpapi);
+  var_dump($contributors);
+  foreach($contributors as $contributor => $roles)
+    createContributorPage($contributor, $roles,$wpapi,$wpq);
   //Cleaning
   $mw = new mediawiki('http://sl-mac.uni-koblenz.de/~wiki101/wiki/api.php');
   $foo = $mw->login($user,$pass);
