@@ -47,4 +47,3 @@ $allLanguages = array();
 writeFile("TechnologiesAnywhere.txt", $allTechnologies);
 writeFile("LanguagesAnywhere.txt", $allLanguages);
 
-exec("make -C " . $GLOBALS['cloudy_home']);
