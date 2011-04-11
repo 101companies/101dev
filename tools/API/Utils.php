@@ -99,6 +99,11 @@ function getItemizedTex($markup){
   return $tex;
 }
 
+function handleUmlauts($txt){
+ $t = str_replace("ä", "\\\"{a}", $txt);
+ return $t;
+}
+
 function getTexCommandName($txt){
  //var_dump($txt);
  for($i=100; $i>=0; $i--){
@@ -167,7 +172,8 @@ class formatter{
      $replacement = '\\\item \\\wikiref';
      $text = preg_replace($pattern, $replacement, $text);
    
-    return $text;  
+     $text = handleUmlauts($text);	
+     return $text;  
    }
     
 }
