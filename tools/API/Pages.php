@@ -72,7 +72,14 @@ class Page{
   else if(startsWith("101feature:", $this->title)){
    return str_replace("101feature:", "", $this->title);
   }
+  else if(startsWith("101contributor:", $this->title)){
+   return str_replace("101contributor:","", $this->title);
+  }
 
+  return $this->title;
+ }
+
+ function getFullTitle(){
   return $this->title;
  }
  
@@ -162,7 +169,7 @@ class CategoryPage extends Page{
  function getShallowTex(){
    $tex = "\\tree{" . $this->getTitle() . "}{" . escape($this->intent) . "}{\n" ;
    foreach($this->members as $m){
-     $tex .= "\\tab\\" . $this->getObjType($m) . "{" . $m->getTitle() . "}{". escape($m->intent) . "}\n";
+     $tex .= "\\tab\\" . $this->getObjType($m) . "{\\wikiref{" . $m->getFullTitle() . "}{".handleUmlauts($m->getTitle()) ."}}{". escape($m->intent) . "}\n";
    }
    $tex .= "}";
    
@@ -178,7 +185,7 @@ class CategoryPage extends Page{
  }
  
  private function writeWithIdent($cat, $level){
-   $tex .= $this->getIntetByLevel($level) . "\\" . $this->getObjType($cat) . "{" . $cat->getTitle() . "}{". escape($cat->intent) . "}\n";
+   $tex .= $this->getIntetByLevel($level) . "\\" . $this->getObjType($cat) . "{\\wikiref{" . $cat->getFullTitle() . "}{".handleUmlauts($cat->getTitle()) ."}}{". escape($cat->intent) . "}\n";
    foreach($cat->members as $c){
     $tex .= $this->writeWithIdent($c, $level + 1); 
    }

@@ -172,7 +172,7 @@ class formatter{
      $replacement = '\\\item \\\wikiref';
      $text = preg_replace($pattern, $replacement, $text);
    
-     $text = handleUmlauts($text);	
+     //$text = handleUmlauts($text);	
      return $text;  
    }
     
