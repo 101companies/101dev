@@ -105,7 +105,6 @@ function handleUmlauts($txt){
 }
 
 function handleWikiRef($txt){
-    $txt = handleUmlauts($txt);
     $res = str_replace(" ", "_", $txt);
     return $res;
 }
