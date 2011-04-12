@@ -111,14 +111,15 @@ function getTexCommandName($txt){
   if(strlen(strstr($txt,$str))>0){
     $word = convert_number($i);
     $txt = str_replace($str, $word, $txt);
-    break;
+    //break;
    }
   }
 
   $txt = str_replace(".", "dot", $txt);
   $txt = str_replace("-", "", $txt);
   $txt = str_replace("/", "", $txt);
-  $res = str_replace(' ', '',$txt);
+  $txt = str_replace(' ', '',$txt);
+  $res = handleUmlauts($txt);
   return $res;
 }
 

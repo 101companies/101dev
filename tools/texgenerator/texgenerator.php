@@ -7,6 +7,7 @@ $dataFolder = BASE_PATH . "texgenerator/tex/ontology/data/";
 
 $texFolder = BASE_PATH . "texgenerator/tex/content/data/";
 $texFolderMatrix = BASE_PATH . "texgenerator/tex/matrix/data/";
+$texFolderDump = BASE_PATH . "texgenerator/tex/dump/data/";
 
 require_once(BASE_PATH . 'API/ApiWrapper2.php');
 require_once("commandLine.php");
@@ -57,10 +58,18 @@ class OntyGenerator{
 
 $args = CommandLine::parseArgs($_SERVER['argv']);
 
-//$args['mode'] = 'content';
+//$args['mode'] = 'dump';
 //$args['whitelist'] = "whitelist.txt";
-
-if($args['mode'] == 'ontology'){ //generate ontology
+if($args['mode'] == 'dump'){
+   $wiki = new Wiki();
+   $f = fopen($texFolderDump . "macros.tex", "w+");
+   $allPages = $wiki->getAllPages();
+   foreach($allPages as $page){
+    fwrite($f, $page->dumpToTex());
+   }
+   fclose($f);
+}
+else if($args['mode'] == 'ontology'){ //generate ontology
   echo "entering ontology generation mode, please wait...";
   $tex = "";
   $wiki = new Wiki();
@@ -166,7 +175,7 @@ else if($args['mode'] == 'matrix'){
  $catImpl = new CategoryPage("101implementation");
  $impl = $catImpl->getImplementations();
  
- buildSpacesMatrix($impl, $whiteList);
+ buildImplSpacesMatrix($impl, $whiteList);
  
  $featureNames = array();
  foreach($features as $f){
@@ -248,7 +257,7 @@ function buildTableHeader($features){
  return $th . PHP_EOL . "\\newRow" . PHP_EOL;
 }
 
-function buildSpacesMatrix($impl, $whiteList){
+function buildImplSpacesMatrix($impl, $whiteList){
   $catSpace = new CategoryPage("Technical space");
   $spaces = $catSpace->members;
   $arrSpaces = array();
@@ -279,7 +288,7 @@ function buildSpacesMatrix($impl, $whiteList){
   
   $content .= $row . "\\end{tabular}";
   global $texFolderMatrix;
-  $f = fopen($texFolderMatrix. "spaces.tex", "w+");
+  $f = fopen($texFolderMatrix. "implementationspaces.tex", "w+");
   fwrite($f, $content);
   fclose($f);
 }

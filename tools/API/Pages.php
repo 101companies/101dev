@@ -55,6 +55,8 @@ class Page{
  public $content;
  public $intent;
  public $namespace;
+ private $sections;
+ public $rawDump;
  
  function getTitle(){
   if(startsWith("Category:", $this->title)){
@@ -98,11 +100,51 @@ class Page{
  
  function __construct($title){
   $this->title = $title;
-  $this->namespace = ""; 	
+  $this->namespace = "";
+  $this->sections = array();
+  $this->rawDump = array();
   $this->content = getPageContent($title);
+  $this->getSections();
   $this->intent = extractIntent($this->content);
   $this->description = extractContent($this->descriptiopn, "==Description==");
  }
+
+ private function getSections(){
+   $pattern =  '/\s?\={2,3}\s*([A-Za-z\s]+)\s*\={2,3}/';
+   preg_match_all($pattern, $this->content, $out, PREG_PATTERN_ORDER);
+   foreach($out[1] as $section){
+    if($section == '') continue;
+    $section = trim($section);
+    array_push($this->sections, $section);
+    $rawDump[$section] = extractContent($this->content, "==". $section . "==");
+   }
+   
+   //var_dump($rawDump);
+ }
+
+ function dumpToTex(){
+  $tex = "";
+  $tex = handleTitle($this->title);
+  return $tex;  
+ }
+}
+
+function handleTitle($fullTitle){
+  $out = split(":", $fullTitle); 
+  $namespace = "";
+  $title = "";
+  
+  //page name can be either namespace:title or just title
+  if(count($out) == 2){
+   $namespace = $out[0];
+   $title = $out[1];
+  }
+  else{
+   $title = $fullTitle;
+   $namespace = "";
+  }
+  $res = "\\" . getTexCommandName($namespace .$title). "Title{\\wikiref{" . $fullTitle . "}{" . $title . "}}" . PHP_EOL;  
+  return $res;
 }
 
 class CategoryPage extends Page{
