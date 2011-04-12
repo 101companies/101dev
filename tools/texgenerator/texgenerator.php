@@ -1,8 +1,5 @@
 <?php
 
-// Report simple running errors
-error_reporting(E_ALL ^ E_DEPRECATED);
-
 define('BASE_PATH',str_replace('texgenerator','',dirname(__FILE__)));
 $outputShallowFolder = BASE_PATH . "texgenerator/tex/ontology/data/shallow/";
 $outputDeepFolder = BASE_PATH . "texgenerator/tex/ontology/data/deep/";
