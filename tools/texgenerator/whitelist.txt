@@ -1,2 +1,14 @@
-java
+antlr
+aspectJ
+atl
 csharp
+dom
+ef
+emf
+erlang
+gwt
+haskell
+hibernate
+sqlServer
+xpathAPI
+xslt
