@@ -116,7 +116,7 @@ class Page{
     if($section == '') continue;
     $section = trim($section);
     array_push($this->sections, $section);
-    $rawDump[$section] = extractContent($this->content, "==". $section . "==");
+    $this->rawDump[$section] = extractContent($this->content, "==". $section . "==");
    }
    
    //var_dump($rawDump);
@@ -125,6 +125,10 @@ class Page{
  function dumpToTex(){
   $tex = "";
   $tex = handleTitle($this->title);
+  foreach($this->rawDump as $section=>$content){
+   $title = str_replace(":", "", $this->title);
+   $tex .= "\\newcommand{\\" . getTexCommandName($section). "{" .  str_replace(" ", "_", $section) . "}{" . formatter::toTex($content) ."}" . PHP_EOL; 
+  }
   return $tex;  
  }
 }
