@@ -2,18 +2,21 @@ all:
 	svn up
 	cd ../API; svn up
 	make clean
-	make extract
-	make latex
+	make content
+	make ontology
+	make matrix
 
-extract:
+content:
 	php texgenerator.php --mode=content
-	php texgenerator.php --mode=ontology
-	php texgenerator.php --mode=matrix
-
-latex:
 	cd tex/content/latex; make
-	cd tex/matrix/latex; make
+
+ontology:
+	php texgenerator.php --mode=ontology
 	cd tex/ontology/latex; make
+
+matrix:
+	php texgenerator.php --mode=matrix --whitelist=whitelist.txt
+	cd tex/matrix/latex; make
 
 clean:
 
