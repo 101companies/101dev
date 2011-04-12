@@ -104,6 +104,12 @@ function handleUmlauts($txt){
  return $t;
 }
 
+function handleWikiRef($txt){
+    $txt = handleUmlauts($txt);
+    $res = str_replace(" ", "_", $txt);
+    return $res;
+}
+
 function getTexCommandName($txt){
  //var_dump($txt);
  for($i=1000; $i>=0; $i--){

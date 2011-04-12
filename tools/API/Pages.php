@@ -143,7 +143,7 @@ function handleTitle($fullTitle){
    $title = $fullTitle;
    $namespace = "";
   }
-  $res = "\\newcommand{\\" . getTexCommandName($namespace .$title). "Title}{\\wikiref{" . $fullTitle . "}{" . $title . "}}" . PHP_EOL;  
+  $res = "\\newcommand{\\" . getTexCommandName($namespace .$title). "Title}{\\wikiref{" . handleWikiRef($fullTitle) . "}{" . $title . "}}" . PHP_EOL;  
   return $res;
 }
 
