@@ -127,7 +127,7 @@ class Page{
   $tex = handleTitle($this->title);
   foreach($this->rawDump as $section=>$content){
    $title = str_replace(":", "", $this->title);
-   $tex .= "\\newcommand{\\" . getTexCommandName($section). "{" .  str_replace(" ", "_", $section) . "}{" . formatter::toTex($content) ."}" . PHP_EOL; 
+   $tex .= "\\newcommand{\\" . getTexCommandName(str_replace("101", "", $title. $section)). "{" .  str_replace(" ", "_", $section) . "}{" . formatter::toTex($content) ."}" . PHP_EOL; 
   }
   return $tex;  
  }
@@ -147,7 +147,7 @@ function handleTitle($fullTitle){
    $title = $fullTitle;
    $namespace = "";
   }
-  $res = "\\newcommand{\\" . getTexCommandName($namespace .$title). "Title}{\\wikiref{" . handleWikiRef($fullTitle) . "}{" . $title . "}}" . PHP_EOL;  
+  $res = "\\newcommand{\\" . getTexCommandName(str_replace("101", "",($namespace .$title))). "Title}{\\wikiref{" . handleWikiRef($fullTitle) . "}{" . $title . "}}" . PHP_EOL;  
   return $res;
 }
 
