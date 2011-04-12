@@ -57,7 +57,9 @@ class OntyGenerator{
 
 $args = CommandLine::parseArgs($_SERVER['argv']);
 
-//$args['mode'] = 'ontology';
+//$args['mode'] = 'matrix';
+//$args['whitelist'] = "whitelist.txt";
+
 if($args['mode'] == 'ontology'){ //generate ontology
   echo "entering ontology generation mode, please wait...";
   $tex = "";
@@ -138,12 +140,16 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
   formatTex();
 }
 else if($args['mode'] == 'matrix'){
+  $whiteList = array();
+  if($args['whitelist'] != ''){
+   $whiteList = file($args['whitelist'], FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
+  } 
  $wiki = new Wiki();
  $features = $wiki->getFeaturePages();
  $catImpl = new CategoryPage("101implementation");
  $impl = $catImpl->getImplementations();
  
- buildSpacesMatrix($impl);
+ buildSpacesMatrix($impl, $whiteList);
  
  $featureNames = array();
  foreach($features as $f){
@@ -177,6 +183,12 @@ else if($args['mode'] == 'matrix'){
  
  foreach($featureFrequency as $ff=>$v){
   $impl = getBy($catImpl, $ff);
+  //apply whitelist
+  if(count($whiteList) > 0){
+    if(in_array($impl->getTitle(), $whiteList) == false){
+      continue;
+    }
+  }
   $row .= "\\vLegend{". $impl->getTitle() ."}";
   foreach(array_keys($implFeatures) as $fn){
    if(in_array($fn, $impl->features)){
@@ -219,7 +231,7 @@ function buildTableHeader($features){
  return $th . PHP_EOL . "\\newRow" . PHP_EOL;
 }
 
-function buildSpacesMatrix($impl){
+function buildSpacesMatrix($impl, $whiteList){
   $catSpace = new CategoryPage("Technical space");
   $spaces = $catSpace->members;
   $arrSpaces = array();
@@ -229,6 +241,12 @@ function buildSpacesMatrix($impl){
   $content = buildTableHeader($arrSpaces);
   
   foreach($impl as $i){
+   //apply whitelist
+   if(count($whiteList) > 0){
+     if(in_array($i->getTitle(), $whiteList) == false){
+      continue;
+     }
+   }
     $row .= "\\vLegend{". $i->getTitle() ."}";
     foreach($arrSpaces as $s){
       $sp = $i->spaces;
