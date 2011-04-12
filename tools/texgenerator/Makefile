@@ -17,6 +17,8 @@ ontology:
 matrix:
 	php texgenerator.php --mode=matrix --whitelist=whitelist.txt
 	cd tex/matrix/latex; make
-
+dump:
+	php texgenerator.php --mode=dump
+	
 clean:
 
