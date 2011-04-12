@@ -44,7 +44,7 @@
     } 
     echo "Pushing README...\n";
     $result = true;
-    //$result = $wpapi->edit('101implementation:'.$pName, $text, 'A bot did this!', false, false, null, null, false );
+    $result = $wpapi->edit('101implementation:'.$pName, $text, 'A bot did this!', false, false, null, null, false );
     if ($result){   
       echo "Success!\n";
       return $contributors;
