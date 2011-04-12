@@ -5,6 +5,7 @@ all:
 	make content
 	make ontology
 	make matrix
+	make dump
 
 content:
 	php texgenerator.php --mode=content

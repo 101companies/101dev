@@ -1,4 +1,6 @@
 antlr
+hadoop
+jgralab
 aspectJ
 atl
 csharp
@@ -6,6 +8,7 @@ dom
 ef
 emf
 erlang
+swing
 gwt
 haskell
 hibernate
