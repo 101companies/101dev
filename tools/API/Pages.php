@@ -130,7 +130,7 @@ class Page{
 }
 
 function handleTitle($fullTitle){
-  $out = split(":", $fullTitle); 
+  $out = explode(":", $fullTitle); 
   $namespace = "";
   $title = "";
   
@@ -143,7 +143,7 @@ function handleTitle($fullTitle){
    $title = $fullTitle;
    $namespace = "";
   }
-  $res = "\\" . getTexCommandName($namespace .$title). "Title{\\wikiref{" . $fullTitle . "}{" . $title . "}}" . PHP_EOL;  
+  $res = "\\newcommand{\\" . getTexCommandName($namespace .$title). "Title{\\wikiref{" . $fullTitle . "}{" . $title . "}}" . PHP_EOL;  
   return $res;
 }
 
