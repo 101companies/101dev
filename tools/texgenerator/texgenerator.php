@@ -57,7 +57,7 @@ class OntyGenerator{
 
 $args = CommandLine::parseArgs($_SERVER['argv']);
 
-//$args['mode'] = 'matrix';
+//$args['mode'] = 'content';
 //$args['whitelist'] = "whitelist.txt";
 
 if($args['mode'] == 'ontology'){ //generate ontology
@@ -106,6 +106,8 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
   $impl = $catImpl->getImplementations();
   $allLangs = $wiki->getLanguagepages();
   $allTechnologies = $wiki->getTechnologyPages();
+  $catFeature = new CategoryPage("101feature");
+  
   // var_dump($impl);
   $fImpl = fopen($texFolder . "implementations.tex", "w+");
   $fMacro = fopen($texFolder . "macros_raw.tex", "w+");
@@ -122,6 +124,12 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
   foreach($allTechnologies as $tech){
    fwrite($fMacro, escape($tech->toTexMacro()));
   }
+  foreach($catFeature->members as $cf){
+    fwrite($fMacro, "\\newcommand{\\" .getTexCommandName($cf->getTitle()) . "FeatureCategory}{" . $cf->getTitle() ."}". PHP_EOL);;
+    foreach($cf->members as $f){
+      fwrite($fMacro, escape($f->toTexMacro()));
+    }
+  }
   fclose($fImpl);
   fclose($fMacro);
 
@@ -136,6 +144,15 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
     fwrite($fTech, "\\twiki{" .getTexCommandName($t->getTitle()) . "}" . PHP_EOL);
   }
   fclose($fTech);
+  
+  $fFeatures = fopen($texFolder . "features.tex", "w+");
+  foreach($catFeature->members as $cf){
+    fwrite($fFeatures, "\\fcwiki{" .getTexCommandName($cf->getTitle()) . "}" . PHP_EOL);
+    foreach($cf->members as $f){
+      fwrite($fFeatures, "\\fwiki{" .getTexCommandName($f->getTitle()) . "}" . PHP_EOL);
+    }    
+  }
+  fclose($fFeatures);
 
   formatTex();
 }

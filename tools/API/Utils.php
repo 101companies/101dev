@@ -106,7 +106,7 @@ function handleUmlauts($txt){
 
 function getTexCommandName($txt){
  //var_dump($txt);
- for($i=100; $i>=0; $i--){
+ for($i=1000; $i>=0; $i--){
   $str = (string)$i;
   if(strlen(strstr($txt,$str))>0){
     $word = convert_number($i);

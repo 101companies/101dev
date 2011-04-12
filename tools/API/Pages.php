@@ -124,7 +124,11 @@ class CategoryPage extends Page{
       $page = new ImplementationPage($sc['title']);
       array_push($this->members, $page);
     }
-   else{
+    else if(substr_count($sc['title'], "101feature") == 1){
+     $page = new FeaturePage($sc['title']);
+     array_push($this->members, $page);
+    }
+    else{
     $page = new Page($sc['title']);
     array_push($this->members, $page);
    }
@@ -201,6 +205,9 @@ class CategoryPage extends Page{
   }
   $tex .= "}";  
   return $tex;
+ }
+ function toTexMacro(){
+    $tex = "\\newcommand{\\". getTexCommandName($this->getTitle()) . "CategoryTitle}{". $this->getTitle() ."}" . PHP_EOL;
  }
 }
 
@@ -316,6 +323,13 @@ class FeaturePage extends Page{
   parent::__construct($title);
   $this->discussion = extractContent($this->content, "==Discussion==");
   $this->namespace = "101feature";
+ }
+ 
+ function toTexMacro(){
+  $tex = "\\newcommand{\\". getTexCommandName($this->getTitle()) . "FeatureTitle}{". $this->getTitle() ."}" . PHP_EOL;
+  $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "FeatureIntent}{" . $this->intent . "}" . PHP_EOL;
+  $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "FeatureDescription}{" . $this->description . "}" . PHP_EOL;
+  return $tex;
  }
 }
 class Feature{

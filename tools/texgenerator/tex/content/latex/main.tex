@@ -79,13 +79,43 @@
 
 }
 
+%--------------------------------------------------
+\newcommand{\fcwiki}[1]{
+  \subsection{\wikimacro{#1}{Feature}{Category}}
+}
 % --------------------------------------------------
+\newcommand{\fwiki}[1]{
+
+%\subsection{\wikimacro{#1}{Feature}{Category}}
+
+\subsubsection{\wikimacro{#1}{Feature}{Title}}
+
+\paragraph{Intent}
+
+\begin{center}\bfseries\itshape
+\wikimacro{#1}{Feature}{Intent}
+\end{center}
+
+\paragraph{Description}
+
+\wikimacro{#1}{Feature}{Description}
+}
+
+
+% -------------------------------------------------
 
 \pagebreak
 
 \begin{document}
 
 \tableofcontents
+
+\pagebreak
+
+% -------------------------------------------------
+\section{Features}
+
+\input {../data/features.tex}
 
 \pagebreak
 
