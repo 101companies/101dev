@@ -3,8 +3,7 @@ www-dir = /home/softlang/www/101companies
 
 all:
 	pdflatex featureMatrix
-	pdflatex spacesMatrix
-	make upload
+	pdflatex implementationSpacesMatrix
 
 upload:
 	ssh ${ssh-user} 'mkdir -p ${www-dir}; mkdir -p ${www-dir}/views; chmod -R go+rX ${www-dir}'
