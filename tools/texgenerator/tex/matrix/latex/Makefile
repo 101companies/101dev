@@ -3,9 +3,9 @@ www-dir = /home/softlang/www/101companies
 
 all:
 	pdflatex featureMatrix
-	pdflatex implementationSpacesMatrix
+	pdflatex implementationSpaceMatrix
 
-upload:
+upload: all
 	ssh ${ssh-user} 'mkdir -p ${www-dir}; mkdir -p ${www-dir}/views; chmod -R go+rX ${www-dir}'
 	scp -r -p *.pdf ${ssh-user}:${www-dir}/views
 
