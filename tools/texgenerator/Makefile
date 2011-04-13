@@ -2,7 +2,7 @@ all:
 	make up
 	make clean
 	make content
-	make ontology
+	make onto
 	make matrix
 	make dump-only
 
@@ -14,11 +14,11 @@ content:
 	php texgenerator.php --mode=content
 	cd tex/content/latex; make
 
-ontology:
+onto:
 	make up
-	make ontology-only
+	make onto-only
 
-ontology-only:
+onto-only:
 	php texgenerator.php --mode=ontology
 	cd tex/ontology/latex; make
 
