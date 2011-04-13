@@ -1,11 +1,14 @@
 all:
-	svn up
-	cd ../API; svn up
+	make up
 	make clean
 	make content
 	make ontology
 	make matrix
-	make dump
+	make dump-only
+
+up:
+	svn up
+	cd ../API; svn up
 
 content:
 	php texgenerator.php --mode=content
@@ -18,7 +21,12 @@ ontology:
 matrix:
 	php texgenerator.php --mode=matrix --whitelist=whitelist.txt
 	cd tex/matrix/latex; make
+
 dump:
+	make up
+	make dump-only
+
+dump-only:
 	php texgenerator.php --mode=dump
 	
 clean:

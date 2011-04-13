@@ -10,7 +10,8 @@ emf
 erlang
 swing
 gwt
-haskell
+syb
+kiama
 hibernate
 sqlServer
 xpathAPI
