@@ -80,6 +80,8 @@ function convert_number($number)
 }
 
 function getItemizedTex($markup){
+    return $markup;
+    
   if($markup == '') return $markup;
   
   $tex = PHP_EOL . "\\begin{itemize}";
@@ -134,6 +136,11 @@ function startsWith($suffix, $text) {
     return (strcmp(substr($text, 0, strlen($suffix)),$suffix)===0);
 }
 
+function endsWith($haystack,$needle,$case=true) {
+      if($case){return (strcmp(substr($haystack, strlen($haystack) - strlen($needle)),$needle)===0);}
+      return (strcasecmp(substr($haystack, strlen($haystack) - strlen($needle)),$needle)===0);
+}
+
 class formatter{
     public static function toPlainText($text) { 
     
@@ -159,6 +166,10 @@ class formatter{
 
     public static function toTex($text) {
     
+     if($text == '') return '';
+     if($text == null) return '';
+     //var_dump($text);
+     
      $pattern =  '/\[\[(:)?((\w|\d|\s|\/|\-|\.|\#)+):((\w|\d|\s|\/|\-|\.|\#)+)\|((\w|\d|\s|\/|\-|\.|\#)+)\]\]/';
      $replacement = '\\wikiref{\2:\4}{\6}';
      $text = preg_replace($pattern, $replacement, $text);
@@ -175,10 +186,6 @@ class formatter{
      $replacement = '\\wikiref{\1}{\3}';
      $text = preg_replace($pattern, $replacement, $text);
      
-     $pattern  = '/\\\item\s*\*\s*\\\wikiref/';
-     $replacement = '\\\item \\\wikiref';
-     $text = preg_replace($pattern, $replacement, $text);
-     
      $pattern =  '/<pre>((.|\s)*)<\/pre>/';
      $replacement = '\\begin{verbatim} \1 \\end{verbatim}';
      $text = preg_replace($pattern, $replacement, $text);
@@ -186,17 +193,25 @@ class formatter{
      $text = str_replace("<references>", "", $text);
      $text = str_replace("<references/>", "", $text);
      
+     $text = formatter::nestedList($text);
+     
      $text = escape($text);
-     $res = handleUmlauts($text);	
+     $res = handleUmlauts($text);
+    // var_dump($res);
      return $res;  
    }
-    
-    public static function nestedList($text) {
+      
+      function nestedList($text) {
+      //$hasCB = false;
+      //if (endsWith($text,"}")) {
+      //  $text = substr($text, 0, strlen($test) - 1);
+      //  $hasCB = true;
+      //} 
       $lines = explode(PHP_EOL,$text);
-      $pattern =  '/(\**)(.*)/';
       $newText = '';
       $nestLevel = 0;
       $currentNestLevel = 0;
+      $newLines = array();
       foreach($lines as $line) {
         $currentNestLevel = strlen(preg_replace('/(\**)\s*(.*)/','\1',$line));
         $itemText = preg_replace('/(\**)(.*)/','\2',$line);
@@ -204,29 +219,32 @@ class formatter{
         // nesting gets depper
         if ($currentNestLevel > $nestLevel) {
             for ($i = 0; $i < $currentNestLevel - $nestLevel; $i++)
-              $newText .= '\\begin{itemize}'.PHP_EOL;
-            $newText .= '\\item '.$itemText.PHP_EOL;        
+              array_push($newLines,'\\begin{itemize}');
+            array_push($newLines,'\\item'.$itemText);       
         }
         
         // same or less nesting
         if ($currentNestLevel <= $nestLevel) {
             for ($i = 0; $i < $nestLevel - $currentNestLevel; $i++)
-              $newText .= '\\end{itemize}'.PHP_EOL;
+              array_push($newLines,'\\end{itemize}');
             if ($currentNestLevel != 0)
-              $newText .= '\\item '.$itemText.PHP_EOL;
+              array_push($newLines,'\\item'.$itemText);
             else
-              $newText .= $itemText.PHP_EOL;   
+              array_push($newLines, $itemText);
         }
-  
-               
+        
         $nestLevel = $currentNestLevel;
       }
       
       for ($i = 0; $i < $nestLevel; $i++)
-        $newText .= '\\end{itemize}'.PHP_EOL;
+         array_push($newLines,'\\end{itemize}');
+        
+      $outText = implode(PHP_EOL,$newLines);
       
-      return $newText;
+        return $outText;
+        
    }
+ 
 }
    
   

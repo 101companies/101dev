@@ -272,10 +272,10 @@ class ImplementationPage extends Page{
   
  function toTexMacro(){
    $tex = "\\newcommand{\\". getTexCommandName($this->getTitle()) . "ImplementationTitle}{". $this->getTitle() ."}" . PHP_EOL; 
-   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationIntent}{" . $this->intent . "}" . PHP_EOL;
-   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationMotivation}{" . $this->motivation . "}" . PHP_EOL;
-   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationLanguages}{" . getItemizedTex($this->languages) . "}" . PHP_EOL;
-   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationTechnologies}{" . getItemizedTex($this->technologies) . "}" . PHP_EOL;
+   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationIntent}{" . formatter::toTex($this->intent) . "}" . PHP_EOL;
+   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationMotivation}{" . formatter::toTex($this->motivation) . "}" . PHP_EOL;
+   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationLanguages}{" . formatter::toTex($this->languages) . "}" . PHP_EOL;
+   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationTechnologies}{" . formatter::toTex($this->technologies) . "}" . PHP_EOL;
    return $tex;
  } 
 
@@ -329,8 +329,8 @@ class LanguagePage extends Page{
  
   function toTexMacro(){
    $tex = "\\newcommand{\\". getTexCommandName($this->getTitle()) . "LanguageTitle}{". $this->getTitle() ."}" . PHP_EOL;
-   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "LanguageIntent}{" . $this->intent . "}" . PHP_EOL;
-   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "LanguageDescription}{" . $this->description . "}" . PHP_EOL;
+   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "LanguageIntent}{" . formatter::toTex($this->intent) . "}" . PHP_EOL;
+   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "LanguageDescription}{" . formatter::toTex($this->description) . "}" . PHP_EOL;
    return $tex;
   }
 
@@ -358,9 +358,9 @@ class TechnologyPage extends Page{
  }
  
  function toTexMacro(){
-   $tex = "\\newcommand{\\". getTexCommandName($this->getTitle()) . "TechnologyTitle}{". $this->getTitle() ."}" . PHP_EOL;
-   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "TechnologyIntent}{" . $this->intent . "}" . PHP_EOL;
-   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "TechnologyDescription}{" . $this->description . "}" . PHP_EOL;
+   $tex = "\\newcommand{\\". getTexCommandName($this->getTitle()) . "TechnologyTitle}{". formatter::toTex($this->getTitle()) ."}" . PHP_EOL;
+   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "TechnologyIntent}{" . formatter::toTex($this->intent) . "}" . PHP_EOL;
+   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "TechnologyDescription}{" . formatter::toTex($this->description) . "}" . PHP_EOL;
    return $tex;
   }
 }
@@ -375,8 +375,8 @@ class FeaturePage extends Page{
  
  function toTexMacro(){
   $tex = "\\newcommand{\\". getTexCommandName($this->getTitle()) . "FeatureTitle}{". $this->getTitle() ."}" . PHP_EOL;
-  $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "FeatureIntent}{" . $this->intent . "}" . PHP_EOL;
-  $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "FeatureDescription}{" . $this->description . "}" . PHP_EOL;
+  $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "FeatureIntent}{" . formatter::toTex($this->intent) . "}" . PHP_EOL;
+  $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "FeatureDescription}{" . formatter::toTex($this->description) . "}" . PHP_EOL;
   return $tex;
  }
 }

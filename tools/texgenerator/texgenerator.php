@@ -61,7 +61,7 @@ class OntyGenerator{
 
 $args = CommandLine::parseArgs($_SERVER['argv']);
 
-//$args['mode'] = 'matrix';
+//$args['mode'] = 'content';
 //$args['whitelist'] = "whitelist.txt";
 if($args['mode'] == 'dump'){
    $wiki = new Wiki();
@@ -122,7 +122,7 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
   
   // var_dump($impl);
   $fImpl = fopen($texFolder . "implementations.tex", "w+");
-  $fMacro = fopen($texFolder . "macros_raw.tex", "w+");
+  $fMacro = fopen($texFolder . "macros.tex", "w+");
   foreach($impl as $i){
     fwrite($fImpl, "\\iwiki{" . getTexCommandName($i->getTitle()) . "}" . PHP_EOL);
     // echo PHP_EOL . $i->getTitle() . PHP_EOL;
@@ -166,7 +166,7 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
   }
   fclose($fFeatures);
 
-  formatTex();
+  //formatTex();
 }
 else if($args['mode'] == 'matrix'){
   $whiteList = array();
@@ -306,23 +306,34 @@ function buildTechnicalSpacesMatrix($technologies){
  
  foreach($spaceFrequency as $sf=>$v){
   $t = getTechologyBy($technologies, $sf);
-
-  $row .= "\\vLegend{". $t->getTitle() ."}";
+  
+  $atleastOnce = false;
   foreach(array_keys($implSpaces) as $sn){
+   if(count($t->spaces) == 0) break; 
    if(in_array($sn, $t->spaces)){
-    $row .= " & \\okValue";
-   }
-   else{
-    $row .= " & \\noValue";
+    $atleastOnce = true;
    }
   }
-  $row .= PHP_EOL . "\\newRow" . PHP_EOL;
+  
+  if($atleastOnce == true)
+  {
+    $row .= "\\vLegend{". $t->getTitle() ."}";
+    foreach(array_keys($implSpaces) as $sn){
+    if(in_array($sn, $t->spaces)){
+     $row .= " & \\okValue";
+    }
+    else{
+     $row .= " & \\noValue";
+    }
+   } 
+   $row .= PHP_EOL . "\\newRow" . PHP_EOL;    
+  }
  }
  
  $content .= $row . "\\end{tabular}";
  
- 
- $f = fopen($texFolderMatrix . "spaces.tex", "w+");
+ global $texFolderMatrix;
+ $f = fopen($texFolderMatrix . "technologyspaces.tex", "w+");
  fwrite($f, $content); 
  fclose($f);  
 }
