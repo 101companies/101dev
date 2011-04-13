@@ -191,6 +191,42 @@ class formatter{
      return $res;  
    }
     
+    public static function nestedList($text) {
+      $lines = explode(PHP_EOL,$text);
+      $pattern =  '/(\**)(.*)/';
+      $newText = '';
+      $nestLevel = 0;
+      $currentNestLevel = 0;
+      foreach($lines as $line) {
+        $currentNestLevel = strlen(preg_replace('/(\**)\s*(.*)/','\1',$line));
+        $itemText = preg_replace('/(\**)(.*)/','\2',$line);
+        
+        // nesting gets depper
+        if ($currentNestLevel > $nestLevel) {
+            for ($i = 0; $i < $currentNestLevel - $nestLevel; $i++)
+              $newText .= '\\begin{itemize}'.PHP_EOL;
+            $newText .= '\\item '.$itemText.PHP_EOL;        
+        }
+        
+        // same or less nesting
+        if ($currentNestLevel <= $nestLevel) {
+            for ($i = 0; $i < $nestLevel - $currentNestLevel; $i++)
+              $newText .= '\\end{itemize}'.PHP_EOL;
+            if ($currentNestLevel != 0)
+              $newText .= '\\item '.$itemText.PHP_EOL;
+            else
+              $newText .= $itemText.PHP_EOL;   
+        }
+  
+               
+        $nestLevel = $currentNestLevel;
+      }
+      
+      for ($i = 0; $i < $nestLevel; $i++)
+        $newText .= '\\end{itemize}'.PHP_EOL;
+      
+      return $newText;
+   }
 }
    
   

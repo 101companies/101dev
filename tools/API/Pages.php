@@ -219,9 +219,9 @@ class CategoryPage extends Page{
  }
  
  function getShallowTex(){
-   $tex = "\\tree{" . $this->getTitle() . "}{" . escape($this->intent) . "}{\n" ;
+   $tex = "\\tree{" . $this->getTitle() . "}{" . ($this->intent) . "}{\n" ;
    foreach($this->members as $m){
-     $tex .= "\\tab\\" . $this->getObjType($m) . "{\\wikiref{" . $m->getFullTitle() . "}{".handleUmlauts($m->getTitle()) ."}}{". escape($m->intent) . "}\n";
+     $tex .= "\\tab\\" . $this->getObjType($m) . "{\\wikiref{" . $m->getFullTitle() . "}{".handleUmlauts($m->getTitle()) ."}}{". ($m->intent) . "}\n";
    }
    $tex .= "}";
    
@@ -237,7 +237,7 @@ class CategoryPage extends Page{
  }
  
  private function writeWithIdent($cat, $level){
-   $tex .= $this->getIntetByLevel($level) . "\\" . $this->getObjType($cat) . "{\\wikiref{" . $cat->getFullTitle() . "}{".handleUmlauts($cat->getTitle()) ."}}{". escape($cat->intent) . "}\n";
+   $tex .= $this->getIntetByLevel($level) . "\\" . $this->getObjType($cat) . "{\\wikiref{" . $cat->getFullTitle() . "}{".handleUmlauts($cat->getTitle()) ."}}{". ($cat->intent) . "}\n";
    foreach($cat->members as $c){
     $tex .= $this->writeWithIdent($c, $level + 1); 
    }
@@ -246,7 +246,7 @@ class CategoryPage extends Page{
  }
  
  function getDeepTex(){
-  $tex = "\\tree{" . $this->getTitle() . "}{" . escape($this->intent) . "}{\n" ;
+  $tex = "\\tree{" . $this->getTitle() . "}{" . $this->intent . "}{\n" ;
   $level = 0;
   foreach($this->members as $m){
    $tex .= $this->writeWithIdent($m, $level);

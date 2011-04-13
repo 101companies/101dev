@@ -23,8 +23,8 @@ function getIntetByLevel($level){
 
 
 function escape($txt){
-  $escaped = str_replace("#", "\\#", $txt);
-  $escaped = str_replace('$', "\\$", $escaped);
+  $escaped = str_replace("#", "\#", $txt);
+  $escaped = str_replace('$', "\$", $escaped);
   //$escaped = str_replace('<', "\\<", $escaped);
   //$escaped = str_replace('<', "\\<", $escaped);
   return $escaped;
@@ -127,19 +127,19 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
     fwrite($fImpl, "\\iwiki{" . getTexCommandName($i->getTitle()) . "}" . PHP_EOL);
     // echo PHP_EOL . $i->getTitle() . PHP_EOL;
     //var_dump($i->toTexMacro());
-    fwrite($fMacro, escape($i->toTexMacro()));
+    fwrite($fMacro, $i->toTexMacro());
   }
   foreach($allLangs as $lang){
   //var_dump($lang->toTexMacro()); 
-  fwrite($fMacro, escape($lang->toTexMacro()));
+  fwrite($fMacro, $lang->toTexMacro());
   }
   foreach($allTechnologies as $tech){
-   fwrite($fMacro, escape($tech->toTexMacro()));
+   fwrite($fMacro, $tech->toTexMacro());
   }
   foreach($catFeature->members as $cf){
     fwrite($fMacro, "\\newcommand{\\" .getTexCommandName($cf->getTitle()) . "FeatureCategory}{" . $cf->getTitle() ."}". PHP_EOL);;
     foreach($cf->members as $f){
-      fwrite($fMacro, escape($f->toTexMacro()));
+      fwrite($fMacro, $f->toTexMacro());
     }
   }
   fclose($fImpl);
