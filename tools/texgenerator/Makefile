@@ -15,6 +15,10 @@ content:
 	cd tex/content/latex; make
 
 ontology:
+	make up
+	make ontology-only
+
+ontology-only:
 	php texgenerator.php --mode=ontology
 	cd tex/ontology/latex; make
 
