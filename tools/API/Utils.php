@@ -123,8 +123,9 @@ function getTexCommandName($txt){
   $txt = str_replace(".", "dot", $txt);
   $txt = str_replace("-", "", $txt);
   $txt = str_replace("/", "", $txt);
-  $txt = str_replace(' ', '',$txt);
-  $res = handleUmlauts($txt);
+  $txt = str_replace("ä", "ae", $txt);
+  
+  $res = str_replace(' ', '',$txt);
   return $res;
 }
 
@@ -177,7 +178,15 @@ class formatter{
      $pattern  = '/\\\item\s*\*\s*\\\wikiref/';
      $replacement = '\\\item \\\wikiref';
      $text = preg_replace($pattern, $replacement, $text);
-   
+     
+     $pattern =  '/<pre>((.|\s)*)<\/pre>/';
+     $replacement = '\\begin{verbatim} \1 \\end{verbatim}';
+     $text = preg_replace($pattern, $replacement, $text);
+  
+     $text = str_replace("<references>", "", $text);
+     $text = str_replace("<references/>", "", $text);
+     
+     $text = escape($text);
      $res = handleUmlauts($text);	
      return $res;  
    }

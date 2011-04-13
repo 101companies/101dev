@@ -24,6 +24,9 @@ function getIntetByLevel($level){
 
 function escape($txt){
   $escaped = str_replace("#", "\\#", $txt);
+  $escaped = str_replace('$', "\\$", $escaped);
+  //$escaped = str_replace('<', "\\<", $escaped);
+  //$escaped = str_replace('<', "\\<", $escaped);
   return $escaped;
 }
 
@@ -58,7 +61,7 @@ class OntyGenerator{
 
 $args = CommandLine::parseArgs($_SERVER['argv']);
 
-//$args['mode'] = 'dump';
+$args['mode'] = 'dump';
 //$args['whitelist'] = "whitelist.txt";
 if($args['mode'] == 'dump'){
    $wiki = new Wiki();
