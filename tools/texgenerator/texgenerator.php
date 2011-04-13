@@ -61,7 +61,7 @@ class OntyGenerator{
 
 $args = CommandLine::parseArgs($_SERVER['argv']);
 
-//$args['mode'] = 'dump';
+//$args['mode'] = 'matrix';
 //$args['whitelist'] = "whitelist.txt";
 if($args['mode'] == 'dump'){
    $wiki = new Wiki();
@@ -177,7 +177,9 @@ else if($args['mode'] == 'matrix'){
  $features = $wiki->getFeaturePages();
  $catImpl = new CategoryPage("101implementation");
  $impl = $catImpl->getImplementations();
+ $technologies = $wiki->getTechnologyPages();
  
+ buildTechnicalSpacesMatrix($technologies);
  buildImplSpacesMatrix($impl, $whiteList);
  
  $featureNames = array();
@@ -247,6 +249,12 @@ function getBy($catImpl, $val){
   }
 }
 
+function getTechologyBy($technologies, $val){
+  foreach($technologies as $t){
+    if($t->getTitle() == $val) return $t;
+  }
+}
+
 function buildTableHeader($features){
  $numCols = count($features);
   $th = "\\begin{tabular}{l";
@@ -258,6 +266,65 @@ function buildTableHeader($features){
   $th .= "& \\hLegend{" . $f . "} ";
  }
  return $th . PHP_EOL . "\\newRow" . PHP_EOL;
+}
+
+
+function buildTechnicalSpacesMatrix($technologies){
+   $catSpace = new CategoryPage("Technical space");
+   $spaces = $catSpace->members;
+   
+   $spaceNames = array();
+   foreach($spaces as $s){
+    array_push($spaceNames, $s->getTitle());
+   }
+   
+   $implSpaces = array();
+   foreach($spaceNames as $s){
+    $implSpaces[$s] = 0;
+   }
+ 
+   $spaceFrequency = array();
+   foreach($spaceFrequency as $sf){
+    $spaceFrequency[$sf] = 0;  
+   } 
+ 
+ foreach($technologies as $t){
+  foreach($spaceNames as $sn){
+   if(in_array($sn, $t->spaces)){
+    $implSpaces[$sn] ++;
+    $spaceFrequency[$t->getTitle()] ++;
+   }
+  }
+ }
+ 
+ asort($implSpaces, SORT_NUMERIC);
+ asort($spaceFrequency, SORT_NUMERIC);
+ $implSpaces = array_reverse($implSpaces);
+ $spaceFrequency = array_reverse($spaceFrequency);
+ 
+ $content = buildTableHeader(array_keys($implSpaces));
+ 
+ foreach($spaceFrequency as $sf=>$v){
+  $t = getTechologyBy($technologies, $sf);
+
+  $row .= "\\vLegend{". $t->getTitle() ."}";
+  foreach(array_keys($implSpaces) as $sn){
+   if(in_array($sn, $t->spaces)){
+    $row .= " & \\okValue";
+   }
+   else{
+    $row .= " & \\noValue";
+   }
+  }
+  $row .= PHP_EOL . "\\newRow" . PHP_EOL;
+ }
+ 
+ $content .= $row . "\\end{tabular}";
+ 
+ 
+ $f = fopen($texFolderMatrix . "spaces.tex", "w+");
+ fwrite($f, $content); 
+ fclose($f);  
 }
 
 function buildImplSpacesMatrix($impl, $whiteList){
