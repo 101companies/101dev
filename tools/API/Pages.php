@@ -127,7 +127,9 @@ class Page{
   $tex = handleTitle($this->title);
   foreach($this->rawDump as $section=>$content){
    $title = str_replace(":", "", $this->title);
-   $tex .= "\\newcommand{\\" . getTexCommandName(str_replace("101", "", $title . $section)). "}{" .  str_replace(" ", "_", $section) . "}{" . formatter::toTex($content) ."}" . PHP_EOL; 
+   $t = str_replace(" ", "", $title . $section) . "}";
+   
+   $tex .= "\\newcommand{\\" . getTexCommandName(str_replace("101", "", $t)) . "{" . formatter::toTex($content) ."}" . PHP_EOL; 
   }
   return $tex;  
  }
