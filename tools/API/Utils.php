@@ -194,13 +194,20 @@ class formatter{
      $text = str_replace("<references/>", "", $text);
      
      $text = formatter::nestedList($text);
+     $text = formatter::italic2Textit($text);
      
      $text = escape($text);
      $res = handleUmlauts($text);
     // var_dump($res);
      return $res;  
    }
-      
+    
+    function italic2Textit($text){
+     $pattern = '/\'\'(.*)\'\'/';
+     $replacement = '\\textit{\1}';
+     return preg_replace($pattern, $replacement, $text);
+    }
+  
       function nestedList($text) {
       //$hasCB = false;
       //if (endsWith($text,"}")) {

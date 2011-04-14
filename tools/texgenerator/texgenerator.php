@@ -61,7 +61,7 @@ class OntyGenerator{
 
 $args = CommandLine::parseArgs($_SERVER['argv']);
 
-//$args['mode'] = 'content';
+//$args['mode'] = 'matrix';
 //$args['whitelist'] = "whitelist.txt";
 if($args['mode'] == 'dump'){
    $wiki = new Wiki();
@@ -273,10 +273,16 @@ function buildTechnicalSpacesMatrix($technologies){
    $catSpace = new CategoryPage("Technical space");
    $spaces = $catSpace->members;
    
+   $catSegments = new CategoryPage("Technical segment");
+   $segments = $catSegments->members;
+   
    $spaceNames = array();
    foreach($spaces as $s){
     array_push($spaceNames, $s->getTitle());
    }
+   foreach($segments as $s){
+    array_push($spaceNames, $s->getTitle());
+  }  
    
    $implSpaces = array();
    foreach($spaceNames as $s){
@@ -315,12 +321,22 @@ function buildTechnicalSpacesMatrix($technologies){
    }
   }
   
+  $technicalSegments = array();
+  foreach($segments as $s){
+    array_push($technicalSegments, $s->getTitle());
+  }
+  
   if($atleastOnce == true)
   {
     $row .= "\\vLegend{". $t->getTitle() ."}";
     foreach(array_keys($implSpaces) as $sn){
     if(in_array($sn, $t->spaces)){
-     $row .= " & \\okValue";
+      if(in_array($sn, $technicalSegments)){
+        $row .= "& \\softValue";
+      }
+      else{
+        $row .= " & \\okValue";
+      }
     }
     else{
      $row .= " & \\noValue";
