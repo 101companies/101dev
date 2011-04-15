@@ -61,7 +61,7 @@ class OntyGenerator{
 
 $args = CommandLine::parseArgs($_SERVER['argv']);
 
-//$args['mode'] = 'matrix';
+//$args['mode'] = 'content';
 //$args['whitelist'] = "whitelist.txt";
 if($args['mode'] == 'dump'){
    $wiki = new Wiki();

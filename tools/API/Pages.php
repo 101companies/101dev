@@ -276,6 +276,14 @@ class ImplementationPage extends Page{
    $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationMotivation}{" . formatter::toTex($this->motivation) . "}" . PHP_EOL;
    $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationLanguages}{" . formatter::toTex($this->languages) . "}" . PHP_EOL;
    $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationTechnologies}{" . formatter::toTex($this->technologies) . "}" . PHP_EOL;
+   
+   $ftxt = "";
+   foreach($this->features as $f)
+   {
+    $ftxt .= "* " . $f . PHP_EOL;
+   }
+   
+   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationFeatures}{" . formatter::toTex($ftxt) . "}" . PHP_EOL;
    return $tex;
  } 
 
