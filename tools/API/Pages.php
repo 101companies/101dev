@@ -280,7 +280,7 @@ class ImplementationPage extends Page{
    $ftxt = "";
    foreach($this->features as $f)
    {
-    $ftxt .= "* " . $f . PHP_EOL;
+    $ftxt .= "* [[101feature:" . $f . "]]". PHP_EOL;
    }
    
    $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationFeatures}{" . formatter::toTex($ftxt) . "}" . PHP_EOL;
