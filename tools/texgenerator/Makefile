@@ -2,7 +2,7 @@ all:
 	make up
 	make clean
 	make content
-	make onto
+	make onto-only
 	make matrix
 	make dump-only
 
