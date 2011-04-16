@@ -61,7 +61,7 @@ class OntyGenerator{
 
 $args = CommandLine::parseArgs($_SERVER['argv']);
 
-//$args['mode'] = 'content';
+//$args['mode'] = 'matrix';
 //$args['whitelist'] = "whitelist.txt";
 if($args['mode'] == 'dump'){
    $wiki = new Wiki();
@@ -255,11 +255,16 @@ function getTechologyBy($technologies, $val){
   }
 }
 
-function buildTableHeader($features){
+function buildTableHeader($features, $delimPosition){
  $numCols = count($features);
   $th = "\\begin{tabular}{l";
  for($i=0; $i<$numCols; $i++){
-  $th .= "|c";
+  if($i != $delimPosition){
+    $th .= "|c";
+  }
+  else{
+    $th .= "||c";
+  }  
  } 
  $th .= "}" . PHP_EOL;
  foreach($features as $f){
@@ -308,13 +313,14 @@ function buildTechnicalSpacesMatrix($technologies){
  $implSpaces = array_reverse($implSpaces);
  $spaceFrequency = array_reverse($spaceFrequency);
  
- $content = buildTableHeader(array_keys($implSpaces));
+ $content = buildTableHeader($spaceNames, count($spaces));//array_keys($implSpaces));
  
  foreach($spaceFrequency as $sf=>$v){
   $t = getTechologyBy($technologies, $sf);
   
   $atleastOnce = false;
-  foreach(array_keys($implSpaces) as $sn){
+  foreach($spaceNames as $sn){
+  //foreach(array_keys($implSpaces) as $sn){
    if(count($t->spaces) == 0) break; 
    if(in_array($sn, $t->spaces)){
     $atleastOnce = true;
@@ -329,14 +335,10 @@ function buildTechnicalSpacesMatrix($technologies){
   if($atleastOnce == true)
   {
     $row .= "\\vLegend{". $t->getTitle() ."}";
-    foreach(array_keys($implSpaces) as $sn){
+    foreach($spaceNames as $sn){
+    //foreach(array_keys($implSpaces) as $sn){
     if(in_array($sn, $t->spaces)){
-      if(in_array($sn, $technicalSegments)){
-        $row .= "& \\softValue";
-      }
-      else{
         $row .= " & \\okValue";
-      }
     }
     else{
      $row .= " & \\noValue";
