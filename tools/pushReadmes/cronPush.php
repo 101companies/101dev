@@ -16,10 +16,11 @@
    echo 'Post up revision:'.$postUpRev.PHP_EOL;
    if ($preUpRev != $postUpRev) {
    		echo 'New revision!'.PHP_EOL.'Pushing READMES...';
-   		echo shell_exec('php pushReadmes.php');
+   		echo shell_exec('php pushAllReadmes.php');
    }
    else {
    	echo 'Checkout up-to-date!'.PHP_EOL;
    }
+   shell_exec('rm svnInfo.xml');
    
 ?>
