@@ -3,7 +3,7 @@ all:
 pushReadmes:
 	cd ../../tools; svn up
 	cd ../../implementations; svn up
-	php ../pushReadmes.php
+	php pushAllReadmes.php
 	cd ../../implementations; svn commit -m ""
 
 ignore:
