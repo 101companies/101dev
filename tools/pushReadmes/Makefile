@@ -1,5 +1,3 @@
-all:
-
 pushReadmes:
 	cd ../../tools; svn up
 	cd ../../implementations; svn up
