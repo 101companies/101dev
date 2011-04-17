@@ -41,10 +41,10 @@
 	echo 'Getting pre-up revision numbers...';
 	$preUpRevs = getRevs();
 	echo 'Done.'.PHP_EOL;
-    echo 'Updating...';
-    shell_exec("svn up ../../implementations/");
-    echo 'Done.'.PHP_EOL;
-    echo 'Getting post-up revision numbers...';
+	echo 'Updating...';
+	shell_exec("svn up ../../implementations/");
+	echo 'Done.'.PHP_EOL;
+	echo 'Getting post-up revision numbers...';
 	$postUpRevs = getRevs();
 	echo 'Done.'.PHP_EOL;
 	echo 'Looking for new/changed READMEs...'.PHP_EOL;
@@ -74,12 +74,12 @@
 	}
 	echo PHP_EOL;
 	echo $new.' new READMEs pushed. '.$changed.' changed READMEs pushed.'.PHP_EOL.PHP_EOL;
-    if ($new + $changed != 0){
+	if ($new + $changed != 0){
     	echo 'Pushing new contributorpages...'.PHP_EOL;
     	foreach($contributors as $contributor)
     		createContributorPage($contributor, $wpapi,$wpq);
-    }
-    echo PHP_EOL;
+	}
+	echo PHP_EOL;
 	echo 'Looking for deleted READMEs...'.PHP_EOL;
 	$deleted = 0;
 	foreach($preUpRevs as $pName => $preRevNum) {
