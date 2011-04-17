@@ -36,9 +36,9 @@ $allLanguages = array();
  $javaBasedTechnologies = array();
  foreach($implementationPages as $ip){
   $langs = $ip->languages;
-  var_dump($langs);
+  //var_dump($langs);
    if(strpos($langs, "Java") != FALSE){
-    var_dump($ip->technologies);
+   // var_dump($ip->technologies);
     $t = extractTechnologies($ip->technologies);
     if($t != NULL) flattern($t, &$javaBasedTechnologies);
    }
