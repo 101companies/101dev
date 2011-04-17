@@ -92,6 +92,4 @@
 	echo $deleted.' READMEs deleted.'.PHP_EOL.
     
 	shell_exec('rm svnInfo.xml');
-
-   
 ?>
