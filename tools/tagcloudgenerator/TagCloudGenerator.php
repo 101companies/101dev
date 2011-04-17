@@ -3,6 +3,7 @@
 define('BASE_PATH',str_replace('tagcloudgenerator','',dirname(__FILE__)));
 require_once("config.php");
 require_once(BASE_PATH . "API/ApiWrapper.php");
+require_once(BASE_PATH . "API/ApiWrapper2.php");
 
 function writeFile($fileName, $arr){
   $myFile =  $GLOBALS['cloudy_data_home'] . $fileName;
@@ -18,6 +19,8 @@ $allTechnologies = array();
 $allLanguages = array();
 
  $impl = getAllImplementations();
+ $wiki = new Wiki();
+
  if($impl == NULL) die ("pages have not been downloaded, please try a bit later" . PHP_EOL);
  foreach($impl as $i){
   $page = getPageContent($i['title']);
@@ -27,8 +30,24 @@ $allLanguages = array();
   flattern($languages, &$allLanguages); 
  }
 
+ $catPage = new CategoryPage("101implementation");
+ $implementationPages = $catPage->getImplementations();
+ $languagePages = $wiki->getLanguagePages();
+ $javaBasedTechnologies = array();
+ foreach($implementationPages as $ip){
+  $langs = $ip->languages;
+  var_dump($langs);
+   if(strpos($langs, "Java") != FALSE){
+    var_dump($ip->technologies);
+    $t = extractTechnologies($ip->technologies);
+    if($t != NULL) flattern($t, &$javaBasedTechnologies);
+   }
+  }
+
+
  writeFile("TechnologiesInImplementations.txt", $allTechnologies);
  writeFile("LanguagesInImplementations.txt", $allLanguages);
+ writeFile("JavaBasedTechnologiesInImplementations.txt", $javaBasedTechnologies);
 
 $allTechnologies = array();
 $allLanguages = array();
