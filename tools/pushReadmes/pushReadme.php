@@ -12,7 +12,6 @@
 
   // Create Implementation:-Page 
   function createPage($pName,$wpapi){
-  	echo "Analyzing $pName...\n";
     $text = '';
     $inContributors = false;
     $inSummary = false;
@@ -40,7 +39,6 @@
       $line = str_replace($bom,"",$line);
       $text .= $line;
     } 
-    echo "Pushing README...\n";
     $result = true;
     $result = $wpapi->edit('101implementation:'.$pName, $text, 'A bot did this!', false, false, null, null, false );
     if ($result){   

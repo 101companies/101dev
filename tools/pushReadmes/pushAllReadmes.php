@@ -11,11 +11,11 @@
   $wpi	= new wikipediaindex ( '', '', '', $bot, $wiki, true );
   $user = getWikibotSetting( 'user', $bot, $wiki );
   $pass = getWikibotSetting( 'pass', $bot, $wiki );
-  if ( $wpapi->login( $user, $pass ) != 'true' ) {
-   	echo "Login failure";
-    die();
+  while ( $wpapi->login( $user, $pass ) != 'true' ) {
+   	echo 'Login failure.Retrying...'.PHP_EOL;
+   	sleep(1);
   }
-  sleep( 1 );
+  sleep(1);
 
   // Scan checkout
   $fileArray = scandir($base);
@@ -23,7 +23,8 @@
   $validPages = array();
   $contributors = array();
   foreach($fileArray as $file) {
-   if ($file != '.' && $file != '..' && file_exists($base.'/'.$file.'/README')){ 
+   if ($file != '.' && $file != '..' && file_exists($base.'/'.$file.'/README')){
+   	  echo 'Pushing README for '.$file.'...';	
 	  $projectContributors = createPage($file,$wpapi);
 	  array_push($validPages, '101implementation:'.$file);
       foreach($projectContributors as $projectContributor ){
