@@ -10,7 +10,6 @@
 \usepackage{hyperref}
 
 \input{../data/macros.tex}
-
 % http://en.literateprograms.org/Turing_machine_simulator_(LaTeX)
 
 \newcommand{\baseuri}{http://101companies.uni-koblenz.de/index.php}
@@ -109,6 +108,23 @@
 \wikimacro{#1}{Feature}{Illustration}  
 }
 
+%-------------------------------------------------
+
+\newenvironment{itemizei}{%
+\begin{list}{\labelitemi}{\leftmargin=1em}%
+}{%
+\end{list}%
+}
+\newenvironment{itemizeii}{%
+\begin{list}{\labelitemii}{\leftmargin=1em}%
+}{%
+\end{list}%
+}
+\newenvironment{itemizeiii}{%
+\begin{list}{\labelitemiii}{\leftmargin=1em}%
+}{%
+\end{list}%
+}
 
 % -------------------------------------------------
 
