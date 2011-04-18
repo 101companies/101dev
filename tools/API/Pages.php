@@ -119,6 +119,9 @@ class Page{
     $this->rawDump[$section] = extractContent($this->content, "==". $section . "==");
    }
    
+  // $lastSectionIdx = count($out[1]);
+  // $this->rawDump[$out[1][$lastSection]]
+   
    //var_dump($rawDump);
  }
 

@@ -126,7 +126,7 @@ function getTexCommandName($txt){
   $txt = str_replace("-", "", $txt);
   $txt = str_replace("/", "", $txt);
   $txt = str_replace("ä", "ae", $txt);
-  
+  $txt = str_replace(":", "", $txt);
   $res = str_replace(' ', '',$txt);
   return $res;
 }
@@ -193,13 +193,13 @@ class formatter{
      preg_match($pattern, $text, $out);
      if(count($out) > 0){
         $fname = uniqid("f") . ".ext";
-        global $texFolder;
-        $f = fopen($texFolder . "/files/" . $fname, "w+");
+        global $filesFolder;
+        $f = fopen($filesFolder . $fname, "w+");
         fwrite($f, trim($out[1]));
         fclose($f);
         
         $pattern =  '/<pre>((\s*|.|\s)*)<\/pre>/';
-        $replacement = '\lstinputlisting{../data/files/' . $fname . "}";
+        $replacement = '\lstinputlisting{\texgen/files/' . $fname . "}";
         $text = preg_replace($pattern, $replacement, $text);
      }     
   
@@ -216,7 +216,7 @@ class formatter{
    }
     
     function italic2Textit($text){
-     $pattern = '/\'\'(.*)\'\'/';
+     $pattern =  '/\'\'((\w*|\W*|\d*|\s*|\-*)*)\'\'/'; //'/\'\'(.*)\'\'/';
      $replacement = '\\textit{\1}';
      return preg_replace($pattern, $replacement, $text);
     }
