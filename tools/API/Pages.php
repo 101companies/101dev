@@ -382,10 +382,12 @@ class TechnologyPage extends Page{
 }
 
 class FeaturePage extends Page{
- public $discussion;
+ public $description;
+ public $illustration;
  function __construct($title){
   parent::__construct($title);
-  $this->discussion = extractContent($this->content, "==Discussion==");
+  $this->description = extractContent($this->content, "==Description==");
+  $this->illustration = extractContent($this->content, "==Illustration==");
   $this->namespace = "101feature";
  }
  
@@ -393,6 +395,7 @@ class FeaturePage extends Page{
   $tex = "\\newcommand{\\". getTexCommandName($this->getTitle()) . "FeatureTitle}{". $this->getTitle() ."}" . PHP_EOL;
   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "FeatureIntent}{" . formatter::toTex($this->intent) . "}" . PHP_EOL;
   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "FeatureDescription}{" . formatter::toTex($this->description) . "}" . PHP_EOL;
+  $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "FeatureIllustration}{" . formatter::toTex($this->illustration) . "}" . PHP_EOL;
   return $tex;
  }
 }
