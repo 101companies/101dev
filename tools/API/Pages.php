@@ -124,6 +124,9 @@ class Page{
 
  function dumpToTex(){
   $tex = "";
+  if($this->title == '') return '';
+  if($this->title == NULL) return '';
+  
   $tex = handleTitle($this->title);
   foreach($this->rawDump as $section=>$content){
    $title = str_replace(":", "", $this->title);
@@ -131,6 +134,7 @@ class Page{
    
    $tex .= "\\newcommand{\\" . getTexCommandName(str_replace("101", "", $t)) . "{" . formatter::toTex($content) ."}" . PHP_EOL; 
   }
+  //var_dump($tex);
   return $tex;  
  }
 }
@@ -256,6 +260,10 @@ class CategoryPage extends Page{
  }
  function toTexMacro(){
     $tex = "\\newcommand{\\". getTexCommandName($this->getTitle()) . "CategoryTitle}{". $this->getTitle() ."}" . PHP_EOL;
+ }
+ 
+ function dumpToTex(){
+  return parent::dumpToTex();
  }
 }
 

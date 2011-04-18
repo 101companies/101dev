@@ -42,6 +42,16 @@ class Wiki{
       return $res;
      }
      
+     function getCategoryPages(){
+        $res = array();
+        $categories = getWpapi()->listcategories();
+       foreach($categories as $c){
+         $page = new CategoryPage($content = "Category:" . $c['*']);
+         array_push($res, $page);
+        }
+      return $res;
+     }
+     
     function getFeaturePages(){
      $res = array();
      $allFeatures = getWpapi()->listprefix("101feature:");

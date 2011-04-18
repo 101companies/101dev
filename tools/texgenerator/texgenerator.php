@@ -61,15 +61,23 @@ class OntyGenerator{
 
 $args = CommandLine::parseArgs($_SERVER['argv']);
 
-//$args['mode'] = 'matrix';
+//$args['mode'] = 'dump';
 //$args['whitelist'] = "whitelist.txt";
 if($args['mode'] == 'dump'){
+   echo "Entering dump mode, please wait..." . PHP_EOL;
    $wiki = new Wiki();
    $f = fopen($texFolderDump . "macros.tex", "w+");
    $allPages = $wiki->getAllPages();
-   foreach($allPages as $page){
-    fwrite($f, $page->dumpToTex());
+   $catPages = $wiki->getCategoryPages();
+   echo "Dumping wiki content..." . PHP_EOL;
+   $pages = array();
+   $pages = array_merge($catPages, $allPages);
+   
+   $content = "";
+   foreach($pages as $page){
+    $content .= $page->dumpToTex();
    }
+   fwrite($f, $content);
    fclose($f);
 }
 else if($args['mode'] == 'ontology'){ //generate ontology
