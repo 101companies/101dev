@@ -208,20 +208,24 @@ class formatter{
      
      $text = formatter::nestedList($text);
      $text = formatter::italic2Textit($text);
+   /*  
+     $pattern = '\([\[Category:(\w|W|\S|\d)*\]\]))/';
+     $replacement = '';
+     $text = preg_replace($pattern, $replacement, $text); */
      
      $text = escape($text);
      $res = handleUmlauts($text);
+     
     // var_dump($res);
      return $res;  
    }
-    
     function italic2Textit($text){
      $pattern =  '/\'\'((\w*|\W*|\d*|\s*|\-*)*)\'\'/'; //'/\'\'(.*)\'\'/';
      $replacement = '\\textit{\1}';
      return preg_replace($pattern, $replacement, $text);
     }
-  
-      function nestedList($text) {
+    
+    function nestedList($text) {
       //$hasCB = false;
       //if (endsWith($text,"}")) {
       //  $text = substr($text, 0, strlen($test) - 1);
@@ -239,14 +243,14 @@ class formatter{
         // nesting gets depper
         if ($currentNestLevel > $nestLevel) {
             for ($i = 0; $i < $currentNestLevel - $nestLevel; $i++)
-              array_push($newLines,'\\begin{itemize}');
+              array_push($newLines,'\\begin{itemize'.str_repeat('i',$nestLevel + $i + 1).'}');
             array_push($newLines,'\\item'.$itemText);       
         }
         
         // same or less nesting
         if ($currentNestLevel <= $nestLevel) {
             for ($i = 0; $i < $nestLevel - $currentNestLevel; $i++)
-              array_push($newLines,'\\end{itemize}');
+              array_push($newLines,'\\end{itemize'.str_repeat('i',$nestLevel - $i).'}');
             if ($currentNestLevel != 0)
               array_push($newLines,'\\item'.$itemText);
             else
@@ -257,13 +261,13 @@ class formatter{
       }
       
       for ($i = 0; $i < $nestLevel; $i++)
-         array_push($newLines,'\\end{itemize}');
+         array_push($newLines,'\\end{itemize'.str_repeat('i',$nestLevel - $i).'}');
         
       $outText = implode(PHP_EOL,$newLines);
       
         return $outText;
         
-   }
+   }     
  
 }
    
