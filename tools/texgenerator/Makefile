@@ -38,4 +38,4 @@ dump-only:
 	php texgenerator.php --mode=dump
 	
 clean:
-
+	rm -f *.ext

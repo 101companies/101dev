@@ -9,6 +9,8 @@ $texFolder = BASE_PATH . "texgenerator/tex/content/data/";
 $texFolderMatrix = BASE_PATH . "texgenerator/tex/matrix/data/";
 $texFolderDump = BASE_PATH . "texgenerator/tex/dump/data/";
 
+$filesFolder = BASE_PATH . "texgenerator/tex/files/";
+
 require_once(BASE_PATH . 'API/ApiWrapper2.php');
 require_once("commandLine.php");
 require_once("formatter.php");
