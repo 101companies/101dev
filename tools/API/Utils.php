@@ -186,9 +186,22 @@ class formatter{
      $replacement = '\\wikiref{\1}{\3}';
      $text = preg_replace($pattern, $replacement, $text);
      
-     $pattern =  '/<pre>((.|\s)*)<\/pre>/';
-     $replacement = '\\begin{verbatim} \1 \\end{verbatim}';
-     $text = preg_replace($pattern, $replacement, $text);
+     //$pattern =  '/\s*<pre>/s*((.|\s)*)/s*<\/pre>\s*/';
+     $pattern = '/<pre>((\s*|.|\s)*)<\/pre>/';
+     //$replacement = '\\begin{listings} \1 \\end{listings}';
+     //$text = preg_replace($pattern, $replacement, $text);
+     preg_match($pattern, $text, $out);
+     if(count($out) > 0){
+        $fname = uniqid("f") . ".ext";
+        global $texFolder;
+        $f = fopen($texFolder . "/files/" . $fname, "w+");
+        fwrite($f, trim($out[1]));
+        fclose($f);
+        
+        $pattern =  '/<pre>((\s*|.|\s)*)<\/pre>/';
+        $replacement = '\lstinputlisting{../data/files/' . $fname . "}";
+        $text = preg_replace($pattern, $replacement, $text);
+     }     
   
      $text = str_replace("<references>", "", $text);
      $text = str_replace("<references/>", "", $text);
