@@ -1,7 +1,7 @@
 all:
 	make up
 	make clean
-	make content
+	make content-only
 	make onto-only
 	make matrix-only
 	make dump-only
@@ -11,6 +11,10 @@ up:
 	cd ../API; svn up
 
 content:
+	make up
+	make content-only
+
+content-only:
 	php texgenerator.php --mode=content
 	cd tex/content/latex; make
 
@@ -36,6 +40,7 @@ dump:
 
 dump-only:
 	php texgenerator.php --mode=dump
+	cd tex/dump/latex; make
 	
 clean:
 	rm -f *.ext
