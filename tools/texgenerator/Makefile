@@ -3,7 +3,7 @@ all:
 	make clean
 	make content
 	make onto-only
-	make matrix
+	make matrix-only
 	make dump-only
 
 up:
@@ -23,6 +23,10 @@ onto-only:
 	cd tex/ontology/latex; make
 
 matrix:
+	make up
+	make matrix-only
+
+matrix-only:
 	php texgenerator.php --mode=matrix --whitelist=whitelist.txt
 	cd tex/matrix/latex; make
 
