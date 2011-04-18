@@ -27,7 +27,7 @@ matrix:
 	make matrix-only
 
 matrix-only:
-	php texgenerator.php --mode=matrix --whitelist=whitelist.txt
+	php texgenerator.php --mode=matrix --whitelist=../lists/featuredJavaImplementations.lst
 	cd tex/matrix/latex; make
 
 dump:
