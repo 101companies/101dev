@@ -61,7 +61,7 @@ class OntyGenerator{
 
 $args = CommandLine::parseArgs($_SERVER['argv']);
 
-//$args['mode'] = 'dump';
+//$args['mode'] = 'content';
 //$args['whitelist'] = "whitelist.txt";
 if($args['mode'] == 'dump'){
    echo "Entering dump mode, please wait..." . PHP_EOL;
@@ -336,7 +336,7 @@ function buildTechnicalSpacesMatrix($technologies){
   }
   
   $technicalSegments = array();
-  foreach($segments as $s){
+  foreach($segments as $s){ 
     array_push($technicalSegments, $s->getTitle());
   }
   
