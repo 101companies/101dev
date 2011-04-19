@@ -190,6 +190,10 @@ class formatter{
      $pattern =  '/\\[\[(101implementation:)((\w|\d|\s|\/|\-|\.|\#)+)\]\]/';
      $replacement = '\\wikiiref{\2}';
      $text = preg_replace($pattern, $replacement, $text);
+     
+     $pattern =  '/\\[\[(101companies:)((\w|\d|\s|\/|\-|\.|\#)+)\]\]/';
+     $replacement = '\\wikicref{\2}';
+     $text = preg_replace($pattern, $replacement, $text);
           
      //----------------------------------------------------------
      
