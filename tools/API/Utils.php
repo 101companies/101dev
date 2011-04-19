@@ -174,6 +174,25 @@ class formatter{
      $replacement = '\\wikiref{\2:\4}{\6}';
      $text = preg_replace($pattern, $replacement, $text);
     
+     //  --- recognize specific links ---
+     $pattern =  '/\\[\[(Technology:)((\w|\d|\s|\/|\-|\.|\#)+)\]\]/';
+     $replacement = '\\wikitref{\2}';
+     $text = preg_replace($pattern, $replacement, $text);
+     
+     $pattern =  '/\\[\[(Language:)((\w|\d|\s|\/|\-|\.|\#)+)\]\]/';
+     $replacement = '\\wikilref{\2}';
+     $text = preg_replace($pattern, $replacement, $text);
+     
+     $pattern =  '/\\[\[(101feature:)((\w|\d|\s|\/|\-|\.|\#)+)\]\]/';
+     $replacement = '\\wikifref{\2}';
+     $text = preg_replace($pattern, $replacement, $text);
+     
+     $pattern =  '/\\[\[(101implementation:)((\w|\d|\s|\/|\-|\.|\#)+)\]\]/';
+     $replacement = '\\wikiiref{\2}';
+     $text = preg_replace($pattern, $replacement, $text);
+          
+     //----------------------------------------------------------
+     
      $pattern =  '/\[\[(:)?((\w|\d|\s|\/|\-|\.|\#)+):((\w|\d|\s|\/|\-|\.|\#)+)\]\]/';
      $replacement = '\\wikiref{\2:\4}{\4}';
      $text = preg_replace($pattern, $replacement, $text);
@@ -186,10 +205,7 @@ class formatter{
      $replacement = '\\wikiref{\1}{\3}';
      $text = preg_replace($pattern, $replacement, $text);
      
-     //$pattern =  '/\s*<pre>/s*((.|\s)*)/s*<\/pre>\s*/';
      $pattern = '/<pre>((\s*|.|\s)*)<\/pre>/';
-     //$replacement = '\\begin{listings} \1 \\end{listings}';
-     //$text = preg_replace($pattern, $replacement, $text);
      preg_match($pattern, $text, $out);
      if(count($out) > 0){
         $fname = uniqid("f") . ".ext";
