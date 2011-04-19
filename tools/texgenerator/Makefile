@@ -1,11 +1,13 @@
 all:
 	make up
+	make local
+
+local:
 	make clean
 	make content-only
 	make onto-only
 	make matrix-only
 	make dump-only
-
 up:
 	svn up
 	cd ../API; svn up

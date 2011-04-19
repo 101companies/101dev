@@ -63,7 +63,7 @@ class OntyGenerator{
 
 $args = CommandLine::parseArgs($_SERVER['argv']);
 
-//$args['mode'] = 'content';
+//$args['mode'] = 'dump';
 //$args['whitelist'] = "whitelist.txt";
 if($args['mode'] == 'dump'){
    echo "Entering dump mode, please wait..." . PHP_EOL;
