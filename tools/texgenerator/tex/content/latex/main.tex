@@ -88,6 +88,19 @@
   \subsection{\wikimacro{#1}{Feature}{Category}}
 }
 % --------------------------------------------------
+
+\newcommand{\cwiki}[1]{
+ \subsection{\wikimacro{#1}{Category}{Title}}
+ 
+\begin{center}\bfseries\itshape
+ \wikimacro{#1}{Category}{Intent}
+ \end{center}
+
+\paragraph{Description}
+\wikimacro{#1}{Category}{Description}
+
+}
+% -------------------------------------------------
 \newcommand{\fwiki}[1]{
 
 %\subsection{\wikimacro{#1}{Feature}{Category}}
@@ -166,6 +179,13 @@
 
 \input{../data/implementations.tex}
 
+\pagebreak
+% --------------------------------------------------
+
+\section{Categories}
+
+\input{../data/categories.tex}
+
 \end{document}
 
-% --------------------------------------------------
+% -------------------------------------------------

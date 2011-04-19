@@ -228,7 +228,8 @@ class CategoryPage extends Page{
  function getShallowTex(){
    $tex = "\\tree{" . $this->getTitle() . "}{" . ($this->intent) . "}{\n" ;
    foreach($this->members as $m){
-     $tex .= "\\tab\\" . $this->getObjType($m) . "{\\wikiref{" . $m->getFullTitle() . "}{".handleUmlauts($m->getTitle()) ."}}{". ($m->intent) . "}\n";
+     $tex .= "\\tab\\" . $this->getObjType($m) . "{" . formatter::handleLinks($m->getFullTitle()) . "}{". ($m->intent) . "}\n";
+     //"{\\wikiref{" . $m->getFullTitle() . "}{".handleUmlauts($m->getTitle()) ."}}{". formatter::toTex($m->intent) . "}\n";
    }
    $tex .= "}";
    
@@ -244,7 +245,8 @@ class CategoryPage extends Page{
  }
  
  private function writeWithIdent($cat, $level){
-   $tex .= $this->getIntetByLevel($level) . "\\" . $this->getObjType($cat) . "{\\wikiref{" . $cat->getFullTitle() . "}{".handleUmlauts($cat->getTitle()) ."}}{". ($cat->intent) . "}\n";
+   $tex .= $this->getIntetByLevel($level) . "\\" . $this->getObjType($cat) ."{" . formatter::handleLinks($cat->getFullTitle()) . "}{". ($cat->intent) . "}\n";
+   //"\\" . $this->getObjType($cat) . "{\\wikiref{" . $cat->getFullTitle() . "}{".handleUmlauts($cat->getTitle()) ."}}{". formatter::toTex($cat->intent) . "}\n";
    foreach($cat->members as $c){
     $tex .= $this->writeWithIdent($c, $level + 1); 
    }
@@ -253,7 +255,7 @@ class CategoryPage extends Page{
  }
  
  function getDeepTex(){
-  $tex = "\\tree{" . $this->getTitle() . "}{" . $this->intent . "}{\n" ;
+  $tex = "\\tree{" . $this->getTitle() . "}{" . formatter::toTex($this->intent) . "}{\n" ;
   $level = 0;
   foreach($this->members as $m){
    $tex .= $this->writeWithIdent($m, $level);
@@ -263,6 +265,9 @@ class CategoryPage extends Page{
  }
  function toTexMacro(){
     $tex = "\\newcommand{\\". getTexCommandName($this->getTitle()) . "CategoryTitle}{". $this->getTitle() ."}" . PHP_EOL;
+    $tex .= "\\newcommand{\\". getTexCommandName($this->getTitle()) . "CategoryIntent}{". formatter::toTex($this->intent) ."}" . PHP_EOL;
+    $tex .= "\\newcommand{\\". getTexCommandName($this->getTitle()) . "CategoryDescription}{". formatter::toTex($this->description) ."}" . PHP_EOL;
+    return $tex;
  }
  
  function dumpToTex(){

@@ -163,12 +163,77 @@ class formatter{
      
     return $text;
    }
+   
+   public static function handleLinks($text){
+    if($text == '') return '';
+     if($text == null) return '';
+     
+     $pattern =  '/\[\[(:)?((\w|\d|\s|\/|\-|\.|\#)+):((\w|\d|\s|\/|\-|\.|\#)+)\|((\w|\d|\s|\/|\-|\.|\#)+)\]\]/';
+     $replacement = '\\wikiref{\2:\4}{\6}';
+     $text = preg_replace($pattern, $replacement, $text);
+    
+     //  --- recognize specific links ---
+     $pattern =  '/(Technology:)((\w|\d|\s|\/|\-|\.|\#)+)/';
+     $replacement = '\\wikitref{\2}';
+     $text = preg_replace($pattern, $replacement, $text);
+     
+     $pattern =  '/(Category:)((\w|\d|\s|\/|\-|\.|\#)+)/';
+     $replacement = '\\wikiref{Category:\2}{\2}';
+     $text = preg_replace($pattern, $replacement, $text);
+     
+     $pattern =  '/(Language:)((\w|\d|\s|\/|\-|\.|\#)+)/';
+     $replacement = '\\wikilref{\2}';
+     $text = preg_replace($pattern, $replacement, $text);
+     
+     $pattern =  '/(101feature:)((\w|\d|\s|\/|\-|\.|\#)+)/';
+     $replacement = '\\wikifref{\2}';
+     $text = preg_replace($pattern, $replacement, $text);
+     
+     $pattern =  '/(101implementation:)((\w|\d|\s|\/|\-|\.|\#)+)/';
+     $replacement = '\\wikiiref{\2}';
+     $text = preg_replace($pattern, $replacement, $text);
+     
+     $pattern =  '/(101contributor:)((\w|\d|\s|\/|\-|\.|\#)+)/';
+     $replacement = '\\wikicontribref{\2}';
+     $text = preg_replace($pattern, $replacement, $text);
+     
+     $pattern =  '/(101companies:)((\w|\d|\s|\/|\-|\.|\#)+)/';
+     $replacement = '\\wikicref{\2}';
+     $text = preg_replace($pattern, $replacement, $text);
+          
+     //----------------------------------------------------------
+     
+     $pattern =  '/\[\[(:)?((\w|\d|\s|\/|\-|\.|\#)+):((\w|\d|\s|\/|\-|\.|\#)+)\]\]/';
+     $replacement = '\\wikiref{\2:\4}{\4}';
+     $text = preg_replace($pattern, $replacement, $text);
+     
+     $pattern =  '/\[\[((\w|\d|\s|\/|\-|\.|\#)+)\]\]/';
+     $replacement = '\\wikiref{\1}{\1}';
+     $text = preg_replace($pattern, $replacement, $text);
+     
+     $pattern =  '/\[\[((\w|\d|\s|\/|\-|\.|\#)+)\|((\w|\d|\s|\/|\-|\.|\#)+)\]\]/';
+     $replacement = '\\wikiref{\1}{\3}';
+     $text = preg_replace($pattern, $replacement, $text);
+     
+     $text = escape($text);
+     $res = handleUmlauts($text);
+     
+    // var_dump($res);
+     return $res;  
+   }
 
     public static function toTex($text) {
     
      if($text == '') return '';
      if($text == null) return '';
      //var_dump($text);
+     
+     $pattern = '/(\[\[(Category:)((\w|\d|\s|\/|\-|\.|\#)+)\]\])/';
+     preg_match($pattern, $text, $out);
+     if(count($out) > 0){
+        $replacement = '';
+        $text = preg_replace($pattern, $replacement, $text);
+     }
      
      $pattern =  '/\[\[(:)?((\w|\d|\s|\/|\-|\.|\#)+):((\w|\d|\s|\/|\-|\.|\#)+)\|((\w|\d|\s|\/|\-|\.|\#)+)\]\]/';
      $replacement = '\\wikiref{\2:\4}{\6}';
@@ -228,10 +293,6 @@ class formatter{
      
      $text = formatter::nestedList($text);
      $text = formatter::italic2Textit($text);
-   /*  
-     $pattern = '\([\[Category:(\w|W|\S|\d)*\]\]))/';
-     $replacement = '';
-     $text = preg_replace($pattern, $replacement, $text); */
      
      $text = escape($text);
      $res = handleUmlauts($text);

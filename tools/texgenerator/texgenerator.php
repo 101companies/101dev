@@ -63,7 +63,7 @@ class OntyGenerator{
 
 $args = CommandLine::parseArgs($_SERVER['argv']);
 
-//$args['mode'] = 'dump';
+//$args['mode'] = 'ontology';
 //$args['whitelist'] = "whitelist.txt";
 if($args['mode'] == 'dump'){
    echo "Entering dump mode, please wait..." . PHP_EOL;
@@ -99,11 +99,13 @@ else if($args['mode'] == 'ontology'){ //generate ontology
    $fileName = $cat->getFileName() . ".tex";
    $f = fopen($outputShallowFolder . $fileName, 'w+') or die("can't open file");
    $tex = $cat->getShallowTex();
-   foreach (explode(PHP_EOL, $tex) as $line)
+   $text = formatter::toTex($tex);
+   fwrite($f, $text . PHP_EOL);
+ /*  foreach (explode(PHP_EOL, $tex) as $line)
    {
     $line = formatter::toTex($line);
     fwrite($f, $line . PHP_EOL);
-   }
+   } */
     //fwrite($f, $tex);
    fclose($f);
   }
@@ -129,6 +131,7 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
   $allLangs = $wiki->getLanguagepages();
   $allTechnologies = $wiki->getTechnologyPages();
   $catFeature = new CategoryPage("101feature");
+  $baseCat = new CategoryPage("base");
   
   // var_dump($impl);
   $fImpl = fopen($texFolder . "implementations.tex", "w+");
@@ -146,12 +149,25 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
   foreach($allTechnologies as $tech){
    fwrite($fMacro, $tech->toTexMacro());
   }
+  $categories = array();  
   foreach($catFeature->members as $cf){
-    fwrite($fMacro, "\\newcommand{\\" .getTexCommandName($cf->getTitle()) . "FeatureCategory}{" . $cf->getTitle() ."}". PHP_EOL);;
+    //array_push($categories, $cf->getTitle());
+    fwrite($fMacro, "\\newcommand{\\" .getTexCommandName($cf->getTitle()) . "FeatureCategory}{" . $cf->getTitle() ."}". PHP_EOL);
     foreach($cf->members as $f){
+      //array_push($categories, $f->getTitle());
       fwrite($fMacro, $f->toTexMacro());
     }
   }
+    
+  foreach($baseCat->getFullCategoryTree() as $c){
+    if($c->namespace == "Category"){
+      if(in_array($c->getTitle(), $categories) == false){
+       fwrite($fMacro, $c->toTexMacro());
+       array_push($categories, $c->getTitle());
+      }
+    }
+  }
+ 
   fclose($fImpl);
   fclose($fMacro);
 
@@ -175,6 +191,14 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
     }    
   }
   fclose($fFeatures);
+  
+  $fCategories = fopen($texFolder . "categories.tex", "w+");
+  foreach($baseCat->getFullCategoryTree() as $c){
+    if($c->namespace == "Category"){
+      fwrite($fCategories, "\\cwiki{" . getTexCommandName($c->getTitle()) . "}" . PHP_EOL);
+    }
+  }  
+  fclose($fCategories);
 
   //formatTex();
 }
