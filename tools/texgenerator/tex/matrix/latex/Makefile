@@ -5,6 +5,8 @@ all:
 	pdflatex implementationFeatureMatrix
 	pdflatex implementationSpaceMatrix
 	pdflatex technologySpaceMatrix
+	pdflatex pppjif
+	pdflatex pppjts
 
 upload: all
 	ssh ${ssh-user} 'mkdir -p ${www-dir}; mkdir -p ${www-dir}/views; chmod -R go+rX ${www-dir}'
