@@ -36,9 +36,12 @@ matrix-only:
 	php texgenerator.php --mode=matrixif --output=matrixif
 	php texgenerator.php --mode=matrixis --output=matrixis
 	php texgenerator.php --mode=matrixts --output=matrixts
+	make matrix-pppj
+	cd tex/matrix/latex; make
+
+matrix-pppj:
 	php texgenerator.php --mode=matrixif --ilist=../lists/pppjImpls.lst --output=pppjif
 	php texgenerator.php --mode=matrixts --tlist=../lists/pppjTechs.lst --output=pppjts
-	cd tex/matrix/latex; make
 
 dump:
 	make up
