@@ -63,8 +63,10 @@ class OntyGenerator{
 
 $args = CommandLine::parseArgs($_SERVER['argv']);
 
-//$args['mode'] = 'ontology';
-//$args['whitelist'] = "whitelist.txt";
+//$args['mode'] = 'matrixif';
+//$args['ilist'] = "../lists/pppjImpls.lst";
+//$args['output'] = "pppjif";
+
 if($args['mode'] == 'dump'){
    echo "Entering dump mode, please wait..." . PHP_EOL;
    $wiki = new Wiki();
@@ -202,75 +204,39 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
 
   //formatTex();
 }
-else if($args['mode'] == 'matrix'){
-  $whiteList = array();
-  if($args['whitelist'] != ''){
-   $whiteList = file($args['whitelist'], FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
-  } 
+else if(($args['mode'] == 'matrixif') || ($args['mode'] == 'matrixis') || ($args['mode'] == 'matrixts')){
+  $output = ($texFolderMatrix . $args['mode'] . ".tex");
+  if($args['output'] != ''){
+    $output = $texFolderMatrix . $args['output'] . ".tex";
+  }
+  
+  var_dump($output);
+  
+  $ilist = array();
+  $tlist = array();
+    
+  if($args['ilist'] != ''){
+    $ilist = file(realpath($args['ilist']), FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
+  }
+  if($args['tlist'] != ''){
+    $tlist = file(realpath($args['tlist']), FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
+  }
+  
  $wiki = new Wiki();
  $features = $wiki->getFeaturePages();
  $catImpl = new CategoryPage("101implementation");
  $impl = $catImpl->getImplementations();
  $technologies = $wiki->getTechnologyPages();
  
- buildTechnicalSpacesMatrix($technologies);
- buildImplSpacesMatrix($impl, $whiteList);
- 
- $featureNames = array();
- foreach($features as $f){
-  array_push($featureNames, $f->getTitle());
+ if($args['mode'] == 'matrixif'){
+  buildImplementationFeaturesMatrix($impl, $features, $output, $ilist);
  }
- $row = "";
- $implFeatures = array();
- foreach($featureNames as $fn){
-  $implFeatures[$fn] = 0;
+ else if($args['mode'] == 'matrixis'){
+   buildImplSpacesMatrix($impl, $ilist, $output);
  }
- 
- $featureFrequency = array();
- foreach($featureFrequency as $ff){
-  $featureFrequency[$ff] = 0;  
+ else if($args['mode'] == 'matrixts'){
+   buildTechnicalSpacesMatrix($technologies, $tlist, $output);
  }
- foreach($impl as $i){
-  foreach($featureNames as $fn){
-   if(in_array($fn, $i->features)){
-    $implFeatures[$fn] ++;
-    $featureFrequency[$i->getTitle()] ++;
-   }
-  }
- }
- 
- asort($implFeatures, SORT_NUMERIC);
- asort($featureFrequency, SORT_NUMERIC);
- $implFeatures = array_reverse($implFeatures);
- $featureFrequency = array_reverse($featureFrequency);
- 
- $content = buildTableHeader(array_keys($implFeatures));
- 
- foreach($featureFrequency as $ff=>$v){
-  $impl = getBy($catImpl, $ff);
-  //apply whitelist
-  if(count($whiteList) > 0){
-    if(in_array($impl->getTitle(), $whiteList) == false){
-      continue;
-    }
-  }
-  $row .= "\\vLegend{". $impl->getTitle() ."}";
-  foreach(array_keys($implFeatures) as $fn){
-   if(in_array($fn, $impl->features)){
-    $row .= " & \\okValue";
-   }
-   else{
-    $row .= " & \\noValue";
-   }
-  }
-  $row .= PHP_EOL . "\\newRow" . PHP_EOL;
- }
- 
- $content .= $row . "\\end{tabular}";
-  
- $f = fopen($texFolderMatrix . "features.tex", "w+");
- fwrite($f, $content); 
- fclose($f);
 }
 else{
   die('the following params are supported: --mode=ontology|content|matrix' . PHP_EOL);
@@ -308,7 +274,7 @@ function buildTableHeader($features, $delimPosition){
 }
 
 
-function buildTechnicalSpacesMatrix($technologies){
+function buildTechnicalSpacesMatrix($technologies, $tlist, $output){
    $catSpace = new CategoryPage("Technical space");
    $spaces = $catSpace->members;
    
@@ -349,6 +315,11 @@ function buildTechnicalSpacesMatrix($technologies){
  
  $content = buildTableHeader($spaceNames, count($spaces));//array_keys($implSpaces));
  
+ if(count($tlist) > 0){
+  $spaceFrequency = array_flip($tlist);
+ }
+ 
+ 
  foreach($spaceFrequency as $sf=>$v){
   $t = getTechologyBy($technologies, $sf);
   
@@ -385,27 +356,36 @@ function buildTechnicalSpacesMatrix($technologies){
  $content .= $row . "\\end{tabular}";
  
  global $texFolderMatrix;
- $f = fopen($texFolderMatrix . "technologyspaces.tex", "w+");
+ $f = fopen($output, "w+");
  fwrite($f, $content); 
  fclose($f);  
 }
 
-function buildImplSpacesMatrix($impl, $whiteList){
+function buildImplSpacesMatrix($impl, $whiteList, $output){
   $catSpace = new CategoryPage("Technical space");
   $spaces = $catSpace->members;
   $arrSpaces = array();
   foreach($spaces as $s){
     array_push($arrSpaces, $s->getTitle());
   }
-  $content = buildTableHeader($arrSpaces);
+  
+   $catSegments = new CategoryPage("Technical segment");
+   $segments = $catSegments->members;
+
+   foreach($segments as $s){
+    array_push($arrSpaces, $s->getTitle());
+  }  
+  
+  $content = buildTableHeader($arrSpaces, count($spaces));
+  
+  if(count($whiteList) > 0){
+    $impl = array();
+    foreach($whiteList as $wl){
+      array_push($impl, new ImplementationPage("101implementation:" . $wl));
+    }
+  }
   
   foreach($impl as $i){
-   //apply whitelist
-   if(count($whiteList) > 0){
-     if(in_array($i->getTitle(), $whiteList) == false){
-      continue;
-     }
-   }
     $row .= "\\vLegend{". $i->getTitle() ."}";
     foreach($arrSpaces as $s){
       $sp = $i->spaces;
@@ -421,11 +401,73 @@ function buildImplSpacesMatrix($impl, $whiteList){
   
   $content .= $row . "\\end{tabular}";
   global $texFolderMatrix;
-  $f = fopen($texFolderMatrix. "implementationspaces.tex", "w+");
+  $f = fopen($output, "w+");
   fwrite($f, $content);
   fclose($f);
 }
 
+function buildImplementationFeaturesMatrix($impl, $features, $output, $ilist){
+ $catImpl = new CategoryPage("101implementation");
+ $featureNames = array();
+ foreach($features as $f){
+  array_push($featureNames, $f->getTitle());
+ }
+ $row = "";
+ $implFeatures = array();
+ foreach($featureNames as $fn){
+  $implFeatures[$fn] = 0;
+ }
+ 
+ $featureFrequency = array();
+ foreach($featureFrequency as $ff){
+  $featureFrequency[$ff] = 0;  
+ }
+ foreach($impl as $i){
+  foreach($featureNames as $fn){
+   if(in_array($fn, $i->features)){
+    $implFeatures[$fn] ++;
+    $featureFrequency[$i->getTitle()] ++;
+   }
+  }
+ }
+ 
+ asort($implFeatures, SORT_NUMERIC);
+ asort($featureFrequency, SORT_NUMERIC);
+ $implFeatures = array_reverse($implFeatures);
+ $featureFrequency = array_reverse($featureFrequency);
+
+ if(count($ilist) > 0){
+  $featureFrequency = array_flip($ilist);
+ }
+ 
+ $content = buildTableHeader(array_keys($implFeatures));
+ 
+ foreach($featureFrequency as $ff=>$v){
+  $impl = getBy($catImpl, $ff);
+  //apply whitelist
+  if(count($ilist) > 0){
+    if(in_array($impl->getTitle(), $ilist) == false){
+      continue;
+    }
+  }
+  $row .= "\\vLegend{". $impl->getTitle() ."}";
+  foreach(array_keys($implFeatures) as $fn){
+   if(in_array($fn, $impl->features)){
+    $row .= " & \\okValue";
+   }
+   else{
+    $row .= " & \\noValue";
+   }
+  }
+  $row .= PHP_EOL . "\\newRow" . PHP_EOL;
+ }
+ 
+ $content .= $row . "\\end{tabular}";
+  
+ $f = fopen($output, "w+");
+ fwrite($f, $content); 
+ fclose($f);
+}
 echo PHP_EOL . "DONE" . PHP_EOL;
 
 

@@ -36,8 +36,8 @@ matrix-only:
 	php texgenerator.php --mode=matrixif --output=matrixif
 	php texgenerator.php --mode=matrixis --output=matrixis
 	php texgenerator.php --mode=matrixts --output=matrixts
-	php texgenerator.php --mode=matrixif --ilist=../list/pppjImpls.lst --output=pppjif
-	php texgenerator.php --mode=matrixts --tlist=../list/pppjTechs.lst --output=pppjts
+	php texgenerator.php --mode=matrixif --ilist=../lists/pppjImpls.lst --output=pppjif
+	php texgenerator.php --mode=matrixts --tlist=../lists/pppjTechs.lst --output=pppjts
 	cd tex/matrix/latex; make
 
 dump:
