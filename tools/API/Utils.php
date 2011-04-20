@@ -286,7 +286,21 @@ class formatter{
         $pattern =  '/<pre>((\s*|.|\s)*)<\/pre>/';
         $replacement = '\lstinputlisting{\texgen/files/' . $fname . "}";
         $text = preg_replace($pattern, $replacement, $text);
-     }     
+     }
+     
+     
+     $pattern = '/(<syntaxhighlight lang=\"([a-zA-Z]*)\">)((\s*|.|\s)*)<\/syntaxhighlight>/';
+     preg_match($pattern, $text, $out);
+     if(count($out) > 0){
+        $fname = uniqid("f") . ".ext";
+        global $filesFolder;
+        $f = fopen($filesFolder . $fname, "w+");
+        fwrite($f, trim($out[3]));
+        fclose($f);
+        
+        $replacement = '\lstinputlisting[language=' . $out[2] . ']{\texgen/files/' . $fname . "}";
+        $text = preg_replace($pattern, $replacement, $text);
+     }    
   
      $text = str_replace("<references>", "", $text);
      $text = str_replace("<references/>", "", $text);

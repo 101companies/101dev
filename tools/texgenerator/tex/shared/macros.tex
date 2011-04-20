@@ -8,3 +8,53 @@
 \newcommand{\wikicontribref}[1]{\wikiref{101contributor:#1}{#1}}
 
 % --------------------------------------------------
+
+
+\lstdefinelanguage{antlr}{%
+  numbers=none,
+  morekeywords={new,returns},
+  sensitive=true,
+  morecomment=[l]{//},
+  morestring=[b]',
+  morestring=[b]",
+}
+
+\lstdefinelanguage{aspectj}{%
+  numbers=none,
+  morekeywords={target,pointcut,declare,aspect,proceed,call,around,abstract,static,double,foreach,for,in,protected,extends,implements,class,null,int,if,where,partial,public,return,new,interface,private,void,from,select,this,throws},
+  sensitive=true,
+  morecomment=[l]{//},
+  morestring=[b]",
+}
+
+\lstdefinelanguage{java}{%
+  numbers=none,
+  morekeywords={abstract,static,double,foreach,for,in,protected,extends,implements,class,null,int,if,where,partial,public,return,new,interface,private,void,from,select,this,throws},
+  sensitive=true,
+  morecomment=[l]{//},
+  morestring=[b]",
+}
+
+\lstdefinelanguage{csharp}{%
+  numbers=none,
+  morekeywords={abstract,override,var,delegate,static,double,foreach,in,protected,extends,implements,class,null,int,if,where,partial,public,return,new,interface,private,void,from,select,get,set,this},
+  sensitive=true,
+  morecomment=[l]{//},
+  morestring=[b]",
+}
+
+\lstdefinelanguage{sql}{%
+  numbers=none,
+  morekeywords={SELECT, FROM, SUM},
+  sensitive=true,
+  morecomment=[l]{--},
+  morestring=[b]",
+}
+
+\lstdefinelanguage{company}{%
+  numbers=none,
+  morekeywords={employee, manager,department,company,salary,address,name},
+  sensitive=true,
+}
+
+%-----------------------------------------------------------------------------------------------

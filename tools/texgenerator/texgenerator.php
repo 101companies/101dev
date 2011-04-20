@@ -63,7 +63,7 @@ class OntyGenerator{
 
 $args = CommandLine::parseArgs($_SERVER['argv']);
 
-//$args['mode'] = 'matrixif';
+$args['mode'] = 'content';
 //$args['ilist'] = "../lists/pppjImpls.lst";
 //$args['output'] = "pppjif";
 
