@@ -288,7 +288,7 @@ class ImplementationPage extends Page{
  public $illustration;
   
  function toTexMacro(){
-   $tex = "\\newcommand{\\". getTexCommandName($this->getTitle()) . "ImplementationTitle}{". $this->getTitle() ."}" . PHP_EOL; 
+   $tex = "\\newcommand{\\". getTexCommandName($this->getTitle()) . "ImplementationTitle}{\\wikiiref{". $this->getTitle() ."}}" . PHP_EOL; 
    $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationIntent}{" . formatter::toTex($this->intent) . "}" . PHP_EOL;
    $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationMotivation}{" . formatter::toTex($this->motivation) . "}" . PHP_EOL;
    $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationLanguages}{" . formatter::toTex($this->languages) . "}" . PHP_EOL;
