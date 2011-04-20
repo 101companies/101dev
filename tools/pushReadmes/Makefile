@@ -1,11 +1,19 @@
 pushAllReadmes:
-	cd ../../tools; svn up
-	cd ../../implementations; svn up
+	make before
 	php pushAllReadmes.php
-	cd ../../implementations; svn commit -m ""
+	make after
 
 pushDiff:
+	make before
 	php pushDiff.php
+	make after
+
+before:
+	cd ../../tools; svn up
+	cd ../../implementations; svn up
+
+after:
+	cd ../../implementations; svn commit -m ""
 
 ignore:
 	svn propedit svn:ignore .
