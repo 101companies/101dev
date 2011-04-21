@@ -289,17 +289,20 @@ class formatter{
      }
      
      
-     $pattern = '/(<syntaxhighlight lang=\"([a-zA-Z]*)\">)((\s*|.|\s)*)<\/syntaxhighlight>/';
-     preg_match($pattern, $text, $out);
-     if(count($out) > 0){
+     $pattern = '/<syntaxhighlight lang=\"([a-zA-Z]*)\">((\s*|.|\s)*)<\/syntaxhighlight>/';
+     preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
+     foreach($matches as $match){
+        var_dump($matches);
+        echo PHP_EOL;
         $fname = uniqid("f") . ".ext";
         global $filesFolder;
         $f = fopen($filesFolder . $fname, "w+");
-        fwrite($f, trim($out[3]));
+        fwrite($f, trim($match[2]));
         fclose($f);
         
-        $replacement = '\lstinputlisting[language=' . $out[2] . ']{\texgen/files/' . $fname . "}";
-        $text = preg_replace($pattern, $replacement, $text);
+        $pattern = '<syntaxhighlight lang="' . $match[1] .'">' . $match[2] .'</syntaxhighlight>';
+        $replacement = '\lstinputlisting[language=' . $match[1] . ']{\texgen/files/' . $fname . "}";
+        $text = str_replace($pattern, $replacement, $text);
      }    
   
      $text = str_replace("<references>", "", $text);
