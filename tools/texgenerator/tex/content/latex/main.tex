@@ -88,6 +88,18 @@
 
 }
 
+% -----------------------------------------------
+\newcommand{\pwiki}[1]{
+ \subsection{\wikimacro{#1}{Page}{Title}}
+ 
+ \begin{center}\bfseries\itshape
+ \wikimacro{#1}{Page}{Intent}
+ \end{center}
+ 
+ \paragraph{Description}
+ \wikimacro{#1}{Page}{Description}
+}
+
 %--------------------------------------------------
 \newcommand{\fcwiki}[1]{
   \subsection{\wikimacro{#1}{Feature}{Category}}
@@ -191,6 +203,13 @@
 
 \input{../data/categories.tex}
 
-\end{document}
+\pagebreak
 
+% -------------------------------------------------
+
+\section{Pages}
+
+\input{../data/pages.tex}
+
+\end{document}
 % -------------------------------------------------

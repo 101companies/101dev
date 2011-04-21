@@ -134,6 +134,7 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
   $allTechnologies = $wiki->getTechnologyPages();
   $catFeature = new CategoryPage("101feature");
   $baseCat = new CategoryPage("base");
+  $allPages = $wiki->getAllPages();  
   
   // var_dump($impl);
   $fImpl = fopen($texFolder . "implementations.tex", "w+");
@@ -160,7 +161,13 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
       fwrite($fMacro, $f->toTexMacro());
     }
   }
-    
+  
+  foreach($allPages as $p){
+    if(strstr($p->getFullTitle(), ":") == FALSE){
+      fwrite($fMacro, $p->toTexMacro());
+    }
+  }
+  
   foreach($baseCat->getFullCategoryTree() as $c){
     if($c->namespace == "Category"){
       if(in_array($c->getTitle(), $categories) == false){
@@ -201,6 +208,16 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
     }
   }  
   fclose($fCategories);
+  
+    
+  $fPages = fopen($texFolder . "pages.tex", "w+");
+  foreach($allPages as $p){
+    if(strstr($p->getFullTitle(), ":") == FALSE){
+      fwrite($fPages,  "\\pwiki{" . getTexCommandName($p->getTitle()) . "}" . PHP_EOL);
+    }
+  }
+  fclose($fPages);
+ 
 
   //formatTex();
 }

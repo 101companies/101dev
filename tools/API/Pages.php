@@ -57,6 +57,7 @@ class Page{
  public $namespace;
  private $sections;
  public $rawDump;
+ public $description;
  
  function getTitle(){
   if(startsWith("Category:", $this->title)){
@@ -91,6 +92,12 @@ class Page{
   return str_replace($symbols, "_", $t);
  }
  
+ function toTexMacro(){
+    $tex = "\\newcommand{\\". getTexCommandName($this->getTitle()) . "PageTitle}{". $this->getTitle() ."}" . PHP_EOL;
+    $tex .= "\\newcommand{\\". getTexCommandName($this->getTitle()) . "PageIntent}{". formatter::toTex($this->intent) ."}" . PHP_EOL;
+    $tex .= "\\newcommand{\\". getTexCommandName($this->getTitle()) . "PageDescription}{". formatter::toTex($this->description) ."}" . PHP_EOL;
+    return $tex;
+ }
  
  function toTex(){
   $tex = "wikisite\\" . "category" . "{" . $this->getTitle() . "}{" . escape($this->intent) . "}";
@@ -106,7 +113,7 @@ class Page{
   $this->content = getPageContent($title);
   $this->getSections();
   $this->intent = extractIntent($this->content);
-  $this->description = extractContent($this->descriptiopn, "==Description==");
+  $this->description = extractContent($this->content, "==Description==");
  }
 
  private function getSections(){
