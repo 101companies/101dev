@@ -52,4 +52,4 @@ dump-only:
 	cd tex/dump/latex; make
 	
 clean:
-	rm -f *.ext
+	rm -f tex/files/*.ext
