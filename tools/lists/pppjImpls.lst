@@ -1,7 +1,7 @@
-java
+javaComposition
 aspectJ
 dom
-jaxb
+jaxbComposition
 hibernate
-antlr3
+antlrObjects
 hadoop
