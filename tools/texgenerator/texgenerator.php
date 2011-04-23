@@ -264,6 +264,8 @@ function getBy($catImpl, $val){
   foreach($impl as $i){
     if($i->getTitle() == $val) return $i;
   }
+  
+  return NULL;
 }
 
 function getTechologyBy($technologies, $val){
@@ -461,6 +463,10 @@ function buildImplementationFeaturesMatrix($impl, $features, $output, $ilist){
  
  foreach($featureFrequency as $ff=>$v){
   $impl = getBy($catImpl, $ff);
+  if($impl == NULL) {
+    echo "Please check the consistency of the input whitelist. Implementation " . $ff . " has not beed found" . PHP_EOL;
+    exit(1);
+  }
   //apply whitelist
   if(count($ilist) > 0){
     if(in_array($impl->getTitle(), $ilist) == false){
