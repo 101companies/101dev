@@ -29,6 +29,7 @@ function escape($txt){
   $escaped = str_replace('$', "\$", $escaped);
   //$escaped = str_replace('<', "\<", $escaped);
   //$escaped = str_replace('<', "\<", $escaped);
+  $escaped = str_replace("_", "\_", $escaped);
   return $escaped;
 }
 
