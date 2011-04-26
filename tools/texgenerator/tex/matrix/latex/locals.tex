@@ -1,3 +1,6 @@
+\newcommand{\wikiref}[2]{%
+  \protect\StrSubstitute{#1}{ }{_}[\wikiuri]%
+  \protect\href{\baseuri/\wikiuri}{#2}}
 \newcommand{\texgen}{../..}
 \newcommand{\baseuri}{http://101companies.uni-koblenz.de/index.php}
 \newcommand{\matrixshow}[1]{
