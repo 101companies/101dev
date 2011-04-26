@@ -102,7 +102,8 @@ function getItemizedTex($markup){
 }
 
 function handleUmlauts($txt){
- $t = str_replace("ä", "\\\"{a}", $txt);
+ $txt = str_replace("ä", "\\\"{a}", $txt);
+ $t = str_replace("ü", "\\\"{u}", $txt);
  return $t;
 }
 
@@ -126,6 +127,7 @@ function getTexCommandName($txt){
   $txt = str_replace("-", "", $txt);
   $txt = str_replace("/", "", $txt);
   $txt = str_replace("ä", "ae", $txt);
+  $txt = str_replace("ü", "ou", $txt);
   $txt = str_replace(":", "", $txt);
   $res = str_replace(' ', '',$txt);
   return $res;
