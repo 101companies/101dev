@@ -64,7 +64,7 @@ class OntyGenerator{
 
 $args = CommandLine::parseArgs($_SERVER['argv']);
 
-//$args['mode'] = 'content';
+//$args['mode'] = 'matrixif';
 //$args['ilist'] = "../lists/pppjImpls.lst";
 //$args['output'] = "pppjif";
 
@@ -257,7 +257,7 @@ else if(($args['mode'] == 'matrixif') || ($args['mode'] == 'matrixis') || ($args
  }
 }
 else{
-  die('the following params are supported: --mode=ontology|content|matrix' . PHP_EOL);
+  die('the following params are supported: --mode=ontology|content|matrixif|matrixis|matrixts' . PHP_EOL);
 }
 
 function getBy($catImpl, $val){
@@ -279,12 +279,22 @@ function buildTableHeader($features, $delimPosition){
  $numCols = count($features);
   $th = "\\begin{tabular}{l";
  for($i=0; $i<$numCols; $i++){
-  if($i != $delimPosition){
-    $th .= "|c";
+  if(gettype($delimPosition) == 'array'){
+    if(in_array($i, $delimPosition)){
+      $th .= "||c";
+    }
+    else{
+      $th .= "|c";
+    } 
   }
   else{
-    $th .= "||c";
-  }  
+    if($i != $delimPosition){
+      $th .= "|c";
+    }
+    else{
+      $th .= "||c";
+    } 
+  }
  } 
  $th .= "}" . PHP_EOL;
  foreach($features as $f){
@@ -443,6 +453,8 @@ function buildImplementationFeaturesMatrix($impl, $features, $output, $ilist){
   $featureFrequency[$ff] = 0;  
  }
  foreach($impl as $i){
+  if((count($ilist) > 0) && (in_array($i->getTitle(), $ilist) == false)) continue;
+  
   foreach($featureNames as $fn){
    if(in_array($fn, $i->features)){
     $implFeatures[$fn] ++;
@@ -453,16 +465,50 @@ function buildImplementationFeaturesMatrix($impl, $features, $output, $ilist){
  
  asort($implFeatures, SORT_NUMERIC);
  asort($featureFrequency, SORT_NUMERIC);
- $implFeatures = array_reverse($implFeatures);
+ $implFeatures = array_filter(array_reverse($implFeatures));
  $featureFrequency = array_reverse($featureFrequency);
 
  if(count($ilist) > 0){
   $featureFrequency = array_flip($ilist);
  }
  
- $content = buildTableHeader(array_keys($implFeatures));
+ $implFeatures = array_keys($implFeatures);
+ 
+ $featureNames = array();
+ $delims = array();
+ $cat = new CategoryPage("101basics");
+ $i = 0;
+ foreach($cat->members as $f){
+  if(in_array($f->getTitle(), $implFeatures)){
+     array_push($featureNames, $f->getTitle());
+     $i++;
+  } 
+ }
+ array_push($delims, $i);
+ 
+ $cat = new CategoryPage("101capabilities");
+ foreach($cat->members as $f){
+  if(in_array($f->getTitle(), $implFeatures)){
+     array_push($featureNames, $f->getTitle());
+     $i++;
+  } 
+ }
+ array_push($delims, $i);
+ 
+ $cat = new CategoryPage("101extras");
+ $i = 0;
+ foreach($cat->members as $f){
+  if(in_array($f->getTitle(), $implFeatures)){
+     array_push($featureNames, $f->getTitle());
+     $i++;
+  } 
+ }
+ //array_push($delims, count($delims) + $i);
+ 
+ $content = buildTableHeader($featureNames, $delims);
  
  foreach($featureFrequency as $ff=>$v){
+  if($v == 0) continue;
   $impl = getBy($catImpl, $ff);
   if($impl == NULL) {
     echo "Please check the consistency of the input whitelist. Implementation " . $ff . " has not beed found" . PHP_EOL;
@@ -475,7 +521,8 @@ function buildImplementationFeaturesMatrix($impl, $features, $output, $ilist){
     }
   }
   $row .= "\\vLegend{". $impl->getTitle() ."}";
-  foreach(array_keys($implFeatures) as $fn){
+  foreach($featureNames as $fn){
+  //foreach(array_keys($implFeatures) as $fn){
    if(in_array($fn, $impl->features)){
     $row .= " & \\okValue";
    }
