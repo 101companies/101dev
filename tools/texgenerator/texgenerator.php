@@ -463,7 +463,7 @@ function buildImplementationFeaturesMatrix($impl, $features, $output, $ilist){
   }
  }
  
- asort($implFeatures, SORT_NUMERIC);
+ asort($implFejatures, SORT_NUMERIC);
  asort($featureFrequency, SORT_NUMERIC);
  $implFeatures = array_filter(array_reverse($implFeatures));
  $featureFrequency = array_reverse($featureFrequency);
@@ -508,7 +508,7 @@ function buildImplementationFeaturesMatrix($impl, $features, $output, $ilist){
  $content = buildTableHeader($featureNames, $delims);
  
  foreach($featureFrequency as $ff=>$v){
-  if($v == 0) continue;
+ // if($v == 0) continue;
   $impl = getBy($catImpl, $ff);
   if($impl == NULL) {
     echo "Please check the consistency of the input whitelist. Implementation " . $ff . " has not beed found" . PHP_EOL;
