@@ -17,7 +17,7 @@ public class RunTests {
             try {
                m.invoke(null);
                passed++;
-            } catch (Throwable ex) {
+            } catch (Exception ex) {
                System.out.printf("Test %s failed: %s %n", m, ex.getCause());
                failed++;
             }
