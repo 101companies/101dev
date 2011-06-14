@@ -1,6 +1,9 @@
 <?php
 
-define('BASE_PATH',str_replace('texgenerator','',dirname(__FILE__)));
+definr('BASE_PATH',str_replace('texgenerator','',dirname(__FILE__)));
+error_reporting(E_ALL);
+ini_set('display_errors','On');
+ 
 $outputShallowFolder = BASE_PATH . "texgenerator/tex/ontology/data/shallow/";
 $outputDeepFolder = BASE_PATH . "texgenerator/tex/ontology/data/deep/";
 $dataFolder = BASE_PATH . "texgenerator/tex/ontology/data/";
@@ -138,7 +141,7 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
   $allPages = $wiki->getAllPages();  
   
   // var_dump($impl);
-  $fImpl = fopen($texFolder . "implementations.tex", "w+");
+  $fImpl = fopen($texFolder . "implementations.tex", "w+") or die "cannot create a file implementations.tex";
   $fMacro = fopen($texFolder . "macros.tex", "w+");
   foreach($impl as $i){
     fwrite($fImpl, "\\iwiki{" . getTexCommandName($i->getTitle()) . "}" . PHP_EOL);
