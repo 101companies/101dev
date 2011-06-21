@@ -12,20 +12,18 @@ package sumwordlength.parallel;
 import java.util.*;
 import java.util.concurrent.*;
 
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+
 /*
  * Compute the length of an array of words
  */
-public class Program {
-
-	/*
-	 * Test input
-	 */
-	private final static String words[] = {"let", "us", "sum", "up", "the", "length", "of", "all", "these", "words"};
+public class SumWordLength {
 
 	/*
 	 * A parallel implementation using a thread pool
 	 */
-	private static int SumOfLengths()
+	private static int sumWordLength(String[] words)
 		throws
 			InterruptedException,
 			ExecutionException 
@@ -69,11 +67,12 @@ public class Program {
 		
 		return sum;
 	}
-	
-	/*
-	 * Test the computation
-	 */
-	public static void main(String args[]) throws Exception {
-		System.out.printf("The sum of lengths is %s.%n", SumOfLengths());
+
+	// Test input
+	final static String[] words = {"let", "us", "sum", "up", "the", "length", "of", "all", "these", "words"};
+
+	@Test
+	public void testSumWordLength() throws InterruptedException, ExecutionException {
+	    assertEquals(sumWordLength(words), 34);
   	}
 }
