@@ -1,4 +1,4 @@
-package sumwordlength.distributed;
+package sumlength.distributed;
 
 import java.net.InetAddress;
 import java.net.MalformedURLException;

@@ -1,4 +1,4 @@
-package sumwordlength.distributed;
+package sumlength.distributed;
 
 import java.net.UnknownHostException; // for disambiguation
 import java.rmi.*;

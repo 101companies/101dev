@@ -1,4 +1,4 @@
-package sumwordlength.sequential;
+package sumlength.sequential;
 
 import static org.junit.Assert.assertEquals;
 

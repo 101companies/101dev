@@ -1,4 +1,4 @@
-package sumwordlength.parallel;
+package sumlength.parallel;
 /* 
  * Inspired by the following blog post:
  * http://blogs.sun.com/CoreJavaTechTips/entry/get_netbeans_6

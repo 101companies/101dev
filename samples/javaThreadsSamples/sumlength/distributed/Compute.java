@@ -1,4 +1,4 @@
-package sumwordlength.distributed;
+package sumlength.distributed;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
