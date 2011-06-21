@@ -16,26 +16,26 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 /*
- * Compute the length of an array of words
+ * Compute the length of an array of strings
  */
-public class SumWordLength {
+public class SumLength {
 
 	/*
-	 * A parallel implementation using a thread pool
+	 * Parallel computation of the sum of the lengths of an array of strings
 	 */
-	private static int sumWordLength(String[] words)
+	private static int sumLength(String[] a)
 		throws
 			InterruptedException,
 			ExecutionException 
 	{
 
 		/*
-		 * We will use a thread pool to compute the length of words.
+		 * We use a thread pool.
 		 */
 		ExecutorService pool = Executors.newFixedThreadPool(5);
 	  	  
 		/* 
-		 * Create one Callable per word in the input array.
+		 * Create one Callable per string in the input array.
 		 * Submit each Callable to the thread pool.
 		 * Each submission returns a Future.
 		 * The result of the call can be retrieved later from the Future.
@@ -43,10 +43,10 @@ public class SumWordLength {
 		 * So the idea is that the threads will progress in the meantime.
 		 */
 		Set<Future<Integer>> set = new HashSet<Future<Integer>>();
-		for (final String word: words) {
+		for (final String s: a) {
 			Callable<Integer> callable = new Callable<Integer>() {
 		    	public Integer call() {
-		    		return Integer.valueOf(word.length());
+		    		return Integer.valueOf(s.length());
 		    	}				
 			};
 			Future<Integer> future = pool.submit(callable);
@@ -72,7 +72,7 @@ public class SumWordLength {
 	final static String[] words = {"let", "us", "sum", "up", "the", "length", "of", "all", "these", "words"};
 
 	@Test
-	public void testSumWordLength() throws InterruptedException, ExecutionException {
-	    assertEquals(sumWordLength(words), 34);
+	public void testSumLength() throws InterruptedException, ExecutionException {
+	    assertEquals(sumLength(words), 34);
   	}
 }
