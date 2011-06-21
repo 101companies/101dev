@@ -17,7 +17,7 @@ public class Program {
 	/*
 	 * Our handle on the compute server
 	 */
-	private static Compute obj = null;	
+	private static Compute server = null;	
 
 	/*
 	 * A semaphore that limits the number of remote invocations
@@ -50,7 +50,7 @@ public class Program {
 		    		InterruptedException 
 		    	{
 					sem. acquire();
-					int len = obj.length(word);
+					int len = server.length(word);
 					sem.release();
 					return Integer.valueOf(len);
 		    	}	
@@ -90,7 +90,7 @@ public class Program {
 		
 		// Bind to server
 		try {
-			obj = (Compute) Naming.lookup("//" + hostname + "/OurLovelyComputeServer");
+			server = (Compute) Naming.lookup("//" + hostname + "/OurLovelyComputeServer");
 		} catch (MalformedURLException malformedException) {
 			System.err.println("Bad URL: " + malformedException);
 		} catch (NotBoundException notBoundException) {
