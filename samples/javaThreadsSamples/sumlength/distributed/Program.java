@@ -10,15 +10,10 @@ import java.util.concurrent.*;
 import concurrent.Semaphore; // We use a customized version for logging.
 
 /*
- * Compute the length of an array of words
+ * Compute the sum of lengths of an array of strings
  */
 public class Program {
 	
-	/*
-	 * Test input
-	 */
-	private final static String words[] = {"let", "us", "sum", "up", "the", "length", "of", "all", "these", "words"};
-
 	/*
 	 * Our handle on the compute server
 	 */
@@ -32,7 +27,7 @@ public class Program {
 	/*
 	 * A distributed implementation using a thread pool
 	 */
-	private static int SumOfLengths() throws Exception {
+	private static int sumLength(String[] a) throws Exception {
 
 		/* 
 		 * We will a thread pool to compute the length of words. 
@@ -48,7 +43,7 @@ public class Program {
 		 * So the idea is that the threads will progress in the meantime.
 		 */
 		Set<Future<Integer>> set = new HashSet<Future<Integer>>();
-		for (final String word: words) {
+		for (final String word: a) {
 			Callable<Integer> callable = new Callable<Integer>() {
 		    	public Integer call() throws
 		    		RemoteException,
@@ -78,7 +73,12 @@ public class Program {
 
 		return sum;
 	}
-		
+
+	/*
+	 * Test input
+	 */
+	private final static String words[] = {"let", "us", "sum", "up", "the", "length", "of", "all", "these", "words"};	
+	
 	/*
 	 * Test the computation
 	 */
@@ -100,6 +100,6 @@ public class Program {
 		}
 
 		// Compute ... 
-		System.out.printf("The sum of lengths is %s.%n", SumOfLengths());
+		System.out.printf("The sum of lengths is %s.%n", sumLength(words));
   	}
 }

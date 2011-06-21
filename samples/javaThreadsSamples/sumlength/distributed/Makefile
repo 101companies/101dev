@@ -1,4 +1,4 @@
 none:
 
 start-server:
-	@cd ../..; java sumwordlength.distributed.Server
+	@cd ../..; java sumlength.distributed.Server

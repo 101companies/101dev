@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 /*
- * Compute the length of an array of strings
+ * Compute the sum of lengths of an array of strings
  */
 public class SumLength {
 
