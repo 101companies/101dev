@@ -16,11 +16,11 @@ public class Account
 	// - w/ synchronized keyword
 	// - w/o
 	//
-	public boolean withdraw (int amount) {
+	public synchronized boolean withdraw (int amount) {
 		
 		int preview = balance - amount;
 		
-		// uncomment the next two lines of code to decrease thread safety
+		// activate the next two lines of code to decrease thread safety
 		try { Thread.sleep(100); }
 		catch (InterruptedException e) { return false; }
 		

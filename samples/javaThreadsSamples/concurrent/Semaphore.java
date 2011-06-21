@@ -2,6 +2,9 @@ package concurrent;
 
 /**
  * 
+ * JSE readily covers semaphores.
+ * See package java.util.concurrent.
+ * 
  * http://www.ibm.com/developerworks/library/j-thread.html Writing multithreaded
  * Java applications Alex Roetter (aroetter@CS.Stanford.edu), Software engineer,
  * Teton Data Systems

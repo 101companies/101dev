@@ -1,7 +1,7 @@
 package dining.simple;
 
-public final class Fork
-{
+public final class Fork {
+	
 	private boolean taken = false;
 
 	public boolean isTaken()
