@@ -6,7 +6,7 @@ public class Test
 		
 		// Create 5 forks as threads
 		int size = 5;    
-		Thread [] table = new Thread [5];
+		Thread [] table = new Thread[size];
 		Fork[] forks = new Fork[size];
 		for(int i = 0; i < size; i++)
 			forks[i] = new Fork();
