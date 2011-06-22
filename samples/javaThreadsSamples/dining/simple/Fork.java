@@ -9,15 +9,13 @@ public final class Fork {
 		return taken;
 	}	
 	
-	public synchronized	void take() throws InterruptedException
-	{
+	public synchronized	void take() throws InterruptedException {
 		while(taken)
 			wait();
 		taken = true;
 	}
 	
-	public synchronized void drop() 
-	{
+	public synchronized void drop() {
 		taken = false;
 		notifyAll();
 	}

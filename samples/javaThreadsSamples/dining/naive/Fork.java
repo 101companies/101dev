@@ -8,20 +8,17 @@ public final class Fork
 
 	private Random r = new Random();
 	
-	public boolean isTaken()
-	{
+	public boolean isTaken() {
 		return taken;
 	}	
 	
-	public void take() throws InterruptedException
-	{
+	public void take() throws InterruptedException {
 		Thread.sleep(r.nextInt(1024)); // slow fork
 		while(taken) { }; // busy waiting
 		taken = true;
 	}
 	
-	public void drop() 
-	{
+	public void drop() {
 		taken = false;
 	}
 }

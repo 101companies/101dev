@@ -1,14 +1,20 @@
 package banking;
 
 public class Employee implements Runnable {
-	
+
 	private Account companyCreditCard;
+	static private int maxid = 0;
+	private int id = ++maxid;
 
 	// Associate employee with a credit card (of the company)
 	public Employee(Account cc) {
 		companyCreditCard = cc;
 	}
 
+	public int getId() {
+		return id;
+	}
+	
 	//
 	// Try to get as much beer as possible.
 	// Use varying amount of money at times.
@@ -18,12 +24,12 @@ public class Employee implements Runnable {
 		int beer;
 		while (!Thread.interrupted()) {
 			beer = 1 + (int) (100 * Math.random());
+			String prefix = "#" + getId() + ": ";
 			if (companyCreditCard.withdraw(beer)) {
-				System.out.println("Got $" + beer);
+				System.out.println(prefix + "Got $" + beer);
 				total += beer;
 			} else {
-				System.out.println("Didn't get $" + beer);
-				System.out.println("Out of money after spending $" + total);
+				System.out.println(prefix + "Didn't get $" + beer + " (after spending $" + total + ")");
 				return;
 			}
 		}
