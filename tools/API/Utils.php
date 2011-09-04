@@ -223,19 +223,29 @@ class formatter{
     // var_dump($res);
      return $res;  
    }
+   
+    public static function sourceLinks($title,$text) {
+      $pattern = '/\[this!!((\d|\w)+)(\.(\d|\w)+)?\]/';
+      $sfURL = 'http://developers.svn.sourceforge.net/viewvc/developers/repository/101companies/implementations/';
+      $sfProject = str_replace('101implementation:','',$title);
+      $replacement = '\\href{'.$sfURL.$sfProject.'/'.'\1\3'.'?view=markup}{\1\3}';
+      $newText = preg_replace($pattern,$replacement,$text);
+      return $newText;
+    }
 
     public static function toTex($text) {
     
      if($text == '') return '';
      if($text == null) return '';
      //var_dump($text);
-     
+                               
      $pattern = '/(\[\[(Category:)((\w|\d|\s|\/|\-|\.|\#)+)\]\])/';
      preg_match($pattern, $text, $out);
      if(count($out) > 0){
         $replacement = '';
         $text = preg_replace($pattern, $replacement, $text);
      }
+     
      
      $pattern =  '/\[\[(:)?((\w|\d|\s|\/|\-|\.|\#)+):((\w|\d|\s|\/|\-|\.|\#)+)\|((\w|\d|\s|\/|\-|\.|\#)+)\]\]/';
      $replacement = '\\wikiref{\2:\4}{\6}';
@@ -289,13 +299,12 @@ class formatter{
         $replacement = '\lstinputlisting{\texgen/files/' . $fname . "}";
         $text = preg_replace($pattern, $replacement, $text);
      }
-     
-     
-     $pattern = '/<syntaxhighlight lang=\"([a-zA-Z]*)\">((\s*|.|\s)*)<\/syntaxhighlight>/';
+     $text = str_replace("\"haskell\" line>","\"haskell\">", $text);
+     $pattern = '/<syntaxhighlight lang=\"([a-zA-Z]*)\">((\s*|.|\s)*)<\/syntaxhighlight>/'; 
      preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
      foreach($matches as $match){
-        var_dump($matches);
-        echo PHP_EOL;
+        //var_dump($matches);
+        //echo PHP_EOL;
         $fname = uniqid("f") . ".ext";
         global $filesFolder;
         $f = fopen($filesFolder . $fname, "w+");
@@ -303,17 +312,35 @@ class formatter{
         fclose($f);
         
         $pattern = '<syntaxhighlight lang="' . $match[1] .'">' . $match[2] .'</syntaxhighlight>';
-        $replacement = '\lstinputlisting[language=' . $match[1] . ']{\texgen/files/' . $fname . "}";
+        $replacement = '\lstinputlisting[language=' . $match[1] . ']{../../../101companies/tools/texgenerator/tex/files/' . $fname . "}";
         $text = str_replace($pattern, $replacement, $text);
-     }    
-  
+     }
+     
+     $text = str_replace('lang="haskell" enclose="none">','lang="haskell">', $text);
+     $text = str_replace('lang="haskell"  enclose="none">','lang="haskell">', $text);
+     $pattern = '/<syntaxhighlight lang=\"([a-zA-Z]*)\">((\s*|.|:|=|>|<|\s)*)<\/syntaxhighlight>/'; 
+     preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
+     foreach($matches as $match){
+        $pattern = '<syntaxhighlight lang="' . $match[1] .'">' . $match[2] .'</syntaxhighlight>';
+        $replacement = '\textbf{'.$match[2].'}';
+        $text = str_replace($pattern, $replacement, $text);
+     }
+      
+     $text = str_replace('$','\$',$text);
+      
+     $text = str_replace('->','$\rightarrow$',$text);
+     $text = str_replace('=>','$\Rightarrow$',$text); 
+     $text = str_replace('<','$<$',$text);
+     $text = str_replace('>','$>$',$text);   
+     
      $text = str_replace("<references>", "", $text);
      $text = str_replace("<references/>", "", $text);
-     
-     $text = formatter::nestedList($text);
+               
+     $text = formatter::nestedList($text);                                           
+     $text = formatter::subsubsections($text);                                        
      $text = formatter::italic2Textit($text);
      
-     $text = escape($text);
+     $text = escape($text);      
      $res = handleUmlauts($text);
      
     // var_dump($res);
@@ -324,6 +351,22 @@ class formatter{
      $replacement = '\\textit{\1}';
      return preg_replace($pattern, $replacement, $text);
     }
+     
+    
+     function subsubsections($text){
+      $lines = preg_split( '/\r\n|\r|\n/',$text);
+      $newText = '';
+      $pattern ='/===(.*)===/';
+      $replacement ='\\subsubsection{\1}';
+      foreach ($lines as $line) { 
+        if (startsWith('===',$line)){
+          $newText .= preg_replace($pattern, $replacement, $line);
+        } else {
+          $newText .= $line;
+        }
+      }         
+      return $newText;
+    }  
     
     function nestedList($text) {
       //$hasCB = false;
@@ -331,13 +374,14 @@ class formatter{
       //  $text = substr($text, 0, strlen($test) - 1);
       //  $hasCB = true;
       //} 
-      $lines = explode(PHP_EOL,$text);
+      $lines = preg_split('/\r\n|\r|\n/',$text);
       $newText = '';
       $nestLevel = 0;
       $currentNestLevel = 0;
       $newLines = array();
       foreach($lines as $line) {
         $currentNestLevel = strlen(preg_replace('/(\**)\s*(.*)/','\1',$line));
+        
         $itemText = preg_replace('/(\**)(.*)/','\2',$line);
         
         // nesting gets depper

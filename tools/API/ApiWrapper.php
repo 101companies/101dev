@@ -11,6 +11,21 @@ function getWpapi(){
    return $wpapi;
 }
 
+
+function getWQuery() {
+  $bot = 'Bot';
+  $wiki = '101companies';
+  $wquery = new wikipediaquery('','','',$bot,$wiki,true);
+  
+  return $wquery; 
+}
+
+function getPage($title){
+  $page = getWQuery()->getpage($title);
+  return $page; 
+
+}
+
 function getAllPages(){
  $pages = getWpapi()->listprefix("");
  //var_dump($pages);
@@ -32,6 +47,10 @@ function getAllTechnologies(){
  $technologies = getWpapi()->listprefix("Technology:");
 // var_dump($technologies);
  return $technologies;
+}
+
+function getRivison($title,$age){
+  return getWpapi()->revisions($title, 1, $age, false);
 }
 
 function getPageContent($title){

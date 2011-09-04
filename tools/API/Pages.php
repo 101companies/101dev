@@ -6,7 +6,7 @@ require_once('Utils.php');
 function extractIntent($content) {
     $inIntent= false;
     $indent = "";
-    foreach(explode(PHP_EOL, $content) as $line) {
+    foreach(preg_split( '/\r\n|\r|\n/', $content) as $line) {
       if (startsWith("==Intent==",str_replace(' ','',trim($line)) )) {
         $inIntent= true;
       }
@@ -27,11 +27,12 @@ function extractIntent($content) {
 function extractContent($content, $pattern){
   $inside = false;
   $res = "";
-  $content = explode(PHP_EOL, $content);
+  $content = preg_split( '/\r\n|\r|\n/', $content);
+
   foreach($content as $line) {
     //echo  PHP_EOL . $line . PHP_EOL;
     if($inside) {
-     if (($line != '') && (startsWith("==", str_replace(' ','',$line)))){ //next section begins
+     if (($line != '') && (startsWith("==", str_replace(' ','',$line))) && !(startsWith("===", str_replace(' ','',$line)))){ //next section begins
       $inside = false;
       break;    
      }
@@ -41,7 +42,7 @@ function extractContent($content, $pattern){
      }     
     }
     if($inside == false){ //we're not inside the section yet
-     if (startsWith($pattern, str_replace(' ','',$line) )) {
+     if (startsWith($pattern, str_replace(' ','',trim($line)) )) {
       $inside = true;
      }  
    }
@@ -58,6 +59,8 @@ class Page{
  private $sections;
  public $rawDump;
  public $description;
+ public $lastrev;
+ public $creation;
  
  function getTitle(){
   if(startsWith("Category:", $this->title)){
@@ -86,6 +89,8 @@ class Page{
   return $this->title;
  }
  
+
+ 
  function getFileName(){
   $t = $this->getTitle();
   $symbols = array(" ", "/");
@@ -111,12 +116,14 @@ class Page{
   $this->sections = array();
   $this->rawDump = array();
   $this->content = getPageContent($title);
+  $this->lastrev = getRivison($title,'older');
+  $this->creation = getRivison($title,'newer');
   $this->getSections();
   $this->intent = extractIntent($this->content);
   $this->description = extractContent($this->content, "==Description==");
  }
 
- private function getSections(){
+  function getSections(){
    $pattern =  '/\s?\={2,3}\s*([A-Za-z\s]+)\s*\={2,3}/';
    preg_match_all($pattern, $this->content, $out, PREG_PATTERN_ORDER);
    foreach($out[1] as $section){
@@ -125,6 +132,7 @@ class Page{
     array_push($this->sections, $section);
     $this->rawDump[$section] = extractContent($this->content, "==". $section . "==");
    }
+  return $rawDump;
    
   // $lastSectionIdx = count($out[1]);
   // $this->rawDump[$out[1][$lastSection]]
@@ -301,14 +309,18 @@ class ImplementationPage extends Page{
    $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationLanguages}{" . formatter::toTex($this->languages) . "}" . PHP_EOL;
    $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationTechnologies}{" . formatter::toTex($this->technologies) . "}" . PHP_EOL;
    $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationIllustration}{" . formatter::toTex($this->illustration) . "}" . PHP_EOL;
+   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationArchitecture}{" . formatter::toTex($this->architecture) . "}" . PHP_EOL;
+   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationUsage}{" . formatter::toTex($this->usage) . "}" . PHP_EOL;
    
    $ftxt = "";
    foreach($this->features as $f)
    {
     $ftxt .= "* [[101feature:" . $f . "]]". PHP_EOL;
    }
-   
-   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationFeatures}{" . formatter::toTex($ftxt) . "}" . PHP_EOL;
+  
+      
+   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationFeatures}{" . formatter::toTex(formatter::nestedList($ftxt)) . "}" . PHP_EOL;
+   $tex = formatter::sourceLinks($this->getTitle(),$tex);
    return $tex;
  } 
 
@@ -319,10 +331,9 @@ class ImplementationPage extends Page{
   $this->languages = extractContent($this->content, "==Languages==");
   $this->technologies = extractContent($this->content, "==Technologies==");
   $featuresContent = extractContent($this->content, "==Features==");
- 
   $this->features = array();
   $pattern = "/(101feature:)([\w\W\s][^\]]+)(\]{2})/"; 
-  foreach(explode(PHP_EOL, $featuresContent) as $line){
+  foreach(preg_split( '/\r\n|\r|\n/', $featuresContent) as $line){
     if($line == '') continue;
     
     preg_match_all($pattern, $line, $out, PREG_PATTERN_ORDER);
@@ -332,7 +343,7 @@ class ImplementationPage extends Page{
   }
   
   $this->spaces = array();
-  foreach(explode(PHP_EOL, $this->technologies) as $t){
+  foreach(preg_split( '/\r\n|\r|\n/', $this->technologies) as $t){
    if($t == '') continue;
    $pattern =  "/(Technology:[\w\W\s][^\]]+)(\]{2})/";
    preg_match_all($pattern, $t, $out, PREG_PATTERN_ORDER);
@@ -381,7 +392,7 @@ class TechnologyPage extends Page{
   $spacesContent = extractContent($this->content, "==Spaces==");  
   $this->spaces = array();
   $pattern = "/(\*(\s)*\[{2})([\w\W\s][^\]]+)(\]{2})/";
-  foreach(explode(PHP_EOL, $spacesContent) as $line){
+  foreach(preg_split( '/\r\n|\r|\n/', $spacesContent) as $line){
    if($line == '') continue;
 
    preg_match_all($pattern, $line, $out, PREG_PATTERN_ORDER);

@@ -5,6 +5,12 @@ require_once(BASE_PATH . 'API/ApiWrapper.php' );
 require_once(BASE_PATH . 'API/Pages.php');
 
 class Wiki{
+
+    function getPage($title){
+      $page = getPage();
+      return $page;   
+    }  
+      
     function getAllPages(){
         $allPages = array();
         $pages = getAllPages();
