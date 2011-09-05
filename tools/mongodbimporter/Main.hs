@@ -6,6 +6,7 @@ import Control.Monad
 import Control.Monad.Trans (liftIO)
 import Text.JSON
 import Directory
+import qualified Data.Enumerator
 import Types
 import Json2WP
 import WP2Doc
@@ -27,13 +28,22 @@ getLatestContribs author ns = do
     where
       query = rest =<< find (select ["meta.lastrev.author" =: author, "ns" =: ns]  "page") {project = ["title" =: 1]} 
 
+--get all file names from a dir
+getFileNames :: String -> IO [FilePath]
+getFileNames datadir = do
+	fsIO <- liftM (filterM doesFileExist) $
+	            liftM (map (\s -> datadir ++ s)) $ 
+	              getDirectoryContents  datadir
+	fsIO
+
 -- get all JSON data from a dir 
 getJSONs :: String -> IO [JSValue]
 getJSONs datadir = do
-  fsIO <- liftM (filterM doesFileExist) $
-            liftM (map (\s -> datadir ++ s)) $ 
-              getDirectoryContents  datadir
-  contents <- liftM (mapM readFile) fsIO
+ -- fsIO <- liftM (filterM doesFileExist) $
+ --           liftM (map (\s -> datadir ++ s)) $ 
+ --             getDirectoryContents  datadir
+ -- contents <- liftM (mapM readFile) fsIO
+  
   liftM (map (unpackResult.decode)) contents
     where
       unpackResult (Ok a) = a
@@ -48,7 +58,7 @@ main = do
   -- deleting
   access pipe master "wiki" (delete (select [] "page"))
   -- inserting 
-  mapM (ins pipe (length docs)) (zip docs [1..length docs])
+  mapM (ins pipe (366)) (zip docs [1..366])
   -- close connection
   close pipe
     where
