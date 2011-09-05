@@ -4,6 +4,8 @@ module Main where
 import Database.MongoDB
 import Control.Monad
 import Control.Monad.Trans (liftIO)
+import qualified Data.ByteString.Lazy as BS
+
 import Text.JSON
 import Directory
 import qualified Data.Enumerator
@@ -37,31 +39,28 @@ getFileNames datadir = do
 	fsIO
 
 -- get all JSON data from a dir 
-getJSONs :: String -> IO [JSValue]
-getJSONs datadir = do
- -- fsIO <- liftM (filterM doesFileExist) $
- --           liftM (map (\s -> datadir ++ s)) $ 
- --             getDirectoryContents  datadir
- -- contents <- liftM (mapM readFile) fsIO
-  
-  liftM (map (unpackResult.decode)) contents
-    where
+main :: IO ()
+main = do
+  let datadir = "../jsongenerator/data/"
+  fsIO <- liftM (filterM doesFileExist) $
+              liftM (map (\s -> datadir ++ s)) $ 
+                getDirectoryContents  datadir
+  pipe <- localpipe 
+  access pipe master "wiki" (delete (select [] "page"))             
+  fs <- fsIO       
+  putStrLn $ show $length fs         
+  mapM_ (toMongoDB pipe) fs
+   
+      
+toMongoDB :: Pipe -> String -> IO ()
+toMongoDB pipe s = do 
+  c <- readFile s
+  print $ "Converting .json " ++ s ++ " to Document..."
+  let r = (wp2Doc.json2WP.unpackResult.decode) c
+  print "Done. Inserting into MongoDB..."
+  access pipe master "wiki" (insert "page" r)
+  putStrLn "Done."
+  return () 
+     where
       unpackResult (Ok a) = a
       unpackResult (Error s) = error s
-
--- insert all JSON data      
-main = do
-  -- converting from .json files to mongoDB docs
-  docs <- liftM (map (wp2Doc.json2WP)) (getJSONs "../jsongenerator/data/")
-  -- connecting
-  pipe <- localpipe
-  -- deleting
-  access pipe master "wiki" (delete (select [] "page"))
-  -- inserting 
-  mapM (ins pipe (366)) (zip docs [1..366])
-  -- close connection
-  close pipe
-    where
-      ins pipe m (d,n) = do
-        putStrLn $ "Inserting " ++ show n ++ "/" ++ show m
-        access pipe master "wiki" (insert "page" d)      
