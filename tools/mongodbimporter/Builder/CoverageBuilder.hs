@@ -24,7 +24,9 @@ coverageHandler pipe = do
   mapM insertFeatures featuress
   return $ featuress
     where
-      insertFeatures (title, features) = do 
+      insertFeatures (title, features) = do
+        putStrLn $ "Inserting features for " ++ title ++ " :"
+        putStrLn $ show features   
         run pipe $ insert "coverage" $ ["title" =: title, "features" =: features]
   
 getTitle (String s) = unpack s  
