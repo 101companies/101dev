@@ -27,8 +27,8 @@ getFileNames datadir = do
 	fsIO
 
 -- get all JSON data from a dir 
-main :: IO ()
-main = do
+populatePages :: IO ()
+populatePages = do
   let datadir = "../jsongenerator/data/"
   fsIO <- liftM (filterM doesFileExist) $
               liftM (map (\s -> datadir ++ s)) $ 
@@ -40,19 +40,22 @@ main = do
 
 populateCoverage :: IO ()
 populateCoverage = do
-  pipe <- localpipe   
-  featuress <- build coverageBuilder pipe
-  mapM_ (putStrLn.show) featuress   
+  pipe <- localpipe
+  run pipe (delete (select [] "coverage"))   
+  build coverageBuilder pipe
+  return ()
+    
  
 -- convert json file to doc and insert into mongoDB     
 jsonFileToMongoDB :: Pipe ->  Collection -> String -> IO ()
 jsonFileToMongoDB pipe coll path = do 
   c <- readFile path
-  print $ "Converting .json " ++ path ++ " to Document..."
+  putStrLn  $ "Converting .json " ++ path ++ " to Document..."
   let r = (wp2Doc.json2WP.unpackResult.decode) c
-  print "Done. Inserting into MongoDB..."
+  putStrLn "Done. Inserting ..."
   run pipe (insert coll r)
   putStrLn "Done."
+  putStrLn ""
   return () 
      where
       unpackResult (Ok a) = a
