@@ -19,7 +19,7 @@ function getTopSections($content) {
     if (startsWith('== ',$line)) {
       if ($section != '') {
        $sec = array();
-       $sec['tag'] = $section;
+       $sec['tag'] = trim($section);
        $sec['content'] = $sectioncontent;
        array_push($sections,$sec);
        $sectioncontent = '';
