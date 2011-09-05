@@ -64,7 +64,7 @@ function toJson($title){
   $c = new Page($title);
   $arr = array(); 
   // title
-  $arr['title']=$c->getTitle();
+  $arr['title']=str_replace("\"", "", $c->getTitle());
   // namespace
   $arr['namespace']=str_replace(':', '', str_replace($c->getTitle(),'',$c->getFullTitle()));
   // sections
