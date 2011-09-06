@@ -1,25 +1,49 @@
 module CoverageTable where
 
 import Control.Monad (liftM,forM_)
+import Data.List
 import Database.MongoDB
 
 import Queries.Coverage
 import Queries.Features
 
-createCoverageTable = do
+main = do
   pipe <- runIOE $ connect (host "127.0.0.1") 
   features <- liftM reverse $ queryFeatures pipe
-  coverage <- liftM reverse $ queryCoverage pipe
+  coverageAll <- liftM reverse $ queryCoverage pipe
+  let coverage = filter (not.null.snd) coverageAll
+  let covNum = [sum [if elem f fimpl then 1 else 0 | (_, fimpl)  <- coverage] | f <- features]
+  
+  
   -- head
   putStrLn $ "\\begin{longtable}{|r" 
             ++ concat (replicate (length features) "|c") 
             ++ "|}\\hline"
-  putStrLn $ "\\begin{sideways}Implementation\\end{sideways}"
-  -- feature names
-  forM_ features $ \feature -> do
-    putStrLn $ "&\\begin{sideways}" ++ feature ++ "\\end{sideways}"
+  putStrLn $ "\\caption[Feature Model Coverage]{Feature Model Coverage} \\\\"
   
-  putStrLn "\\hline"
+  putStrLn $ "\\hline"
+           ++ "\\multicolumn{1}{|c|}{\\textbf{\\begin{sideways}Implementation\\textcolor{blue}{" ++ show (length coverage) ++ "}  "++ "\\end{sideways}}} & " 
+           ++ (concat $ intersperse " & " $ map 
+                          (\(f,c) -> "\\multicolumn{1}{|c|}{\\textbf{\\begin{sideways}" ++ f ++ " \\textcolor{blue}{" ++ show c ++ "}"++ "\\end{sideways}}}")
+                          (zip features covNum))
+          ++ "\\\\ \\hline"  
+  putStrLn "\\endfirsthead"
+  putStrLn $ "\\multicolumn{" ++ (show $ length features) ++ "}{c}%"
+  putStrLn "{{\\bfseries \\tablename\\ \\thetable{} -- continued from previous page}} \\\\" 
+  
+  putStrLn $ "\\hline"
+           ++ "\\multicolumn{1}{|c|}{\\textbf{\\begin{sideways}Feature\\end{sideways}}} & " 
+           ++ (concat $ intersperse " & " $ map 
+                          (\(f,c) -> "\\multicolumn{1}{|c|}{\\textbf{\\begin{sideways}" ++ f ++ " \\textcolor{blue}{" ++ show c ++ "}"++ "\\end{sideways}}}")
+                          (zip features covNum))
+          ++ "\\\\ \\hline"  
+  putStrLn "\\endhead"
+  
+  putStrLn $ "\\hline \\multicolumn{"++  (show $ length features) ++ "}{|r|}{{Continued on next page}} \\\\ \\hline"
+  putStrLn "\\endfoot" 
+  
+  putStrLn "\\hline \\hline"
+  putStrLn "\\endlastfoot"
   
   -- feature coverage  
   forM_ coverage $ \(title, implFs) -> do 
@@ -27,8 +51,7 @@ createCoverageTable = do
                " " ++ 
                (concat $ map (\f -> symbol $ elem f implFs) features)
     putStrLn $ line ++ "\\\\\\hline"
-           
-  putStrLn "\\hline"           
+                  
   putStrLn "\\end{longtable}"             
 
 symbol :: Bool -> String
