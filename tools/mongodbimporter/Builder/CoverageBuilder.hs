@@ -42,5 +42,5 @@ getFeatures (Array secs) = saveHead $ map extractFeatures $ filter isFSec secs
                           filter (S.startswith "101feature") $
                           map (S.replace "*[[" "") $  
                           S.split "]]" $ 
-                          S.replace " " "" $
+                          S.replace "* " "*" $
                           unpack  s
