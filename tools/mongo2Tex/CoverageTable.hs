@@ -22,7 +22,7 @@ main = do
   putStrLn $ "\\caption[Feature Model Coverage]{Feature Model Coverage} \\\\"
   
   putStrLn $ "\\hline"
-           ++ "\\multicolumn{1}{|c|}{\\textbf{\\begin{sideways}Implementation\\textcolor{blue}{" ++ show (length coverage) ++ "}  "++ "\\end{sideways}}} & " 
+           ++ "\\multicolumn{1}{|c|}{\\textbf{\\begin{sideways}Implementation \\textcolor{blue}{" ++ show (length coverage) ++ "}  "++ "\\end{sideways}}} & " 
            ++ (concat $ intersperse " & " $ map 
                           (\(f,c) -> "\\multicolumn{1}{|c|}{\\textbf{\\begin{sideways}" ++ f ++ " \\textcolor{blue}{" ++ show c ++ "}"++ "\\end{sideways}}}")
                           (zip features covNum))
@@ -32,7 +32,7 @@ main = do
   putStrLn "{{\\bfseries \\tablename\\ \\thetable{} -- continued from previous page}} \\\\" 
   
   putStrLn $ "\\hline"
-           ++ "\\multicolumn{1}{|c|}{\\textbf{\\begin{sideways}Feature\\end{sideways}}} & " 
+           ++ "\\multicolumn{1}{|c|}{\\textbf{\\begin{sideways}Implementation \\textcolor{blue}{" ++ show (length coverage) ++ "}  "++ "\\end{sideways}}} & " 
            ++ (concat $ intersperse " & " $ map 
                           (\(f,c) -> "\\multicolumn{1}{|c|}{\\textbf{\\begin{sideways}" ++ f ++ " \\textcolor{blue}{" ++ show c ++ "}"++ "\\end{sideways}}}")
                           (zip features covNum))
