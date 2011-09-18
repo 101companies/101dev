@@ -3,6 +3,50 @@ define('BASE_PATH',str_replace('API','',dirname(__FILE__)));
 require_once(BASE_PATH . 'API/ApiWrapper.php' );
 require_once('Utils.php');
 
+function extractBibs(&$content) {
+  $bibs = array();
+  $currentTag = '';
+  $currentBib = '';
+  $newContent = '';
+  $inRefs = false;
+  foreach(preg_split( '/\r\n|\r|\n/', $content) as $line) {
+    if (startsWith("==References==",str_replace(' ','',trim($line)) )) {
+        $inRefs= true;
+        continue;
+    }
+    if (startsWith("==",trim($line))) {
+        $inRefs = false; ;
+    }
+    // only non-bib content should be actual content
+    if (!$inRefs){
+      $newContent .= $line.PHP_EOL;
+    }
+    if ($inRefs) {
+      if ('' == trim($line) || startsWith('<biblio>',trim($line)) || startsWith('</biblio>',trim($line)) )
+        continue;
+      preg_match_all('/#(.*)\s*bibtex=/',trim($line),$out);
+      // new bib
+      if(count($out[1])!= 0) {
+        if ($currentTag != '') {
+          $bibs[$currentTag] = $currentBib;
+          $currentBib = '';
+        }
+        $currentTag = trim($out[1][0]);
+        $line = str_replace($out[0],'',$line);
+      }
+      $currentBib .= $line.PHP_EOL;
+    }
+     
+  }
+  if ($currentTag != '') {
+    $bibs[$currentTag] = $currentBib;
+  }
+  $content = $newContent;
+  return $bibs;
+  
+  
+}
+
 function extractIntent($content) {
     $inIntent= false;
     $indent = "";
@@ -23,18 +67,22 @@ function extractIntent($content) {
     
     return $intent;
 }
-
+                                                                                                            
 function extractContent($content, $pattern){
   $inside = false;
   $res = "";
   $content = preg_split( '/\r\n|\r|\n/', $content);
-
+  $preLine = '';
   foreach($content as $line) {
     //echo  PHP_EOL . $line . PHP_EOL;
     if($inside) {
      if (($line != '') && (startsWith("==", str_replace(' ','',$line))) && !(startsWith("===", str_replace(' ','',$line)))){ //next section begins
       $inside = false;
       break;    
+     }
+     
+     if ($line == '' && !startsWith("</syntax",$preLine)) {
+      $res .= PHP_EOL;
      }
      
      if ($line != '') { //we don't include empty lines
@@ -46,7 +94,7 @@ function extractContent($content, $pattern){
       $inside = true;
      }  
    }
-
+  $preLine = $line;
   }
   return $res;
 }
@@ -58,9 +106,10 @@ class Page{
  public $namespace;
  private $sections;
  public $rawDump;
- public $description;
+ public $discussion;
  public $lastrev;
  public $creation;
+ public $bibs;
  
  function getTitle(){
   if(startsWith("Category:", $this->title)){
@@ -98,9 +147,10 @@ class Page{
  }
  
  function toTexMacro(){
-    $tex = "\\newcommand{\\". getTexCommandName($this->getTitle()) . "PageTitle}{". $this->getTitle() ."}" . PHP_EOL;
-    $tex .= "\\newcommand{\\". getTexCommandName($this->getTitle()) . "PageIntent}{". formatter::toTex($this->intent) ."}" . PHP_EOL;
-    $tex .= "\\newcommand{\\". getTexCommandName($this->getTitle()) . "PageDescription}{". formatter::toTex($this->description) ."}" . PHP_EOL;
+    $tex = "\\newcommand{\\". getTexCommandName(str_replace('_','',$this->getTitle())) . "PageTitle}{". str_replace('_',' ',$this->getTitle()) ."}" . PHP_EOL;
+    $tex .= "\\newcommand{\\". getTexCommandName(str_replace('_','',$this->getTitle())) . "PageIntent}{". ucfirst(formatter::toTex($this->intent)) ."}" . PHP_EOL;
+    $tex .= "\\newcommand{\\". getTexCommandName(str_replace('_','',$this->getTitle())) . "PageDiscussion}{". formatter::toTex($this->discussion) ."}" . PHP_EOL;
+    $tex = formatter::sourceLinks($this->getTitle(),$tex);
     return $tex;
  }
  
@@ -119,8 +169,10 @@ class Page{
   $this->lastrev = getRivison($title,'older');
   $this->creation = getRivison($title,'newer');
   $this->getSections();
+  $this->bibs = extractBibs($this->content);
   $this->intent = extractIntent($this->content);
-  $this->description = extractContent($this->content, "==Description==");
+  $this->discussion = extractContent($this->content, "==Discussion==");
+  
  }
 
   function getSections(){
@@ -304,7 +356,7 @@ class ImplementationPage extends Page{
   
  function toTexMacro(){
    $tex = "\\newcommand{\\". getTexCommandName($this->getTitle()) . "ImplementationTitle}{\\wikiiref{". $this->getTitle() ."}}" . PHP_EOL; 
-   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationIntent}{" . formatter::toTex($this->intent) . "}" . PHP_EOL;
+   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationIntent}{" . ucfirst(formatter::toTex($this->intent)) . "}" . PHP_EOL;
    $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationMotivation}{" . formatter::toTex($this->motivation) . "}" . PHP_EOL;
    $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationLanguages}{" . formatter::toTex($this->languages) . "}" . PHP_EOL;
    $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationTechnologies}{" . formatter::toTex($this->technologies) . "}" . PHP_EOL;

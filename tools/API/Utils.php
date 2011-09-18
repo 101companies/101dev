@@ -219,10 +219,18 @@ class formatter{
      
      $text = escape($text);
      $res = handleUmlauts($text);
-     
+       
     // var_dump($res);
      return $res;  
    }
+   
+   
+    public static function handleCites($text){
+      $pattern = '/<cite>(.*)<\/cite>/';
+      $replacement = '\\cite{\1}';
+      return preg_replace($pattern,$replacement,$text);
+      
+    }
    
     public static function sourceLinks($title,$text) {
       $pattern = '/\[this!!((\d|\w)+)(\.(\d|\w)+)?\]/';
@@ -232,8 +240,58 @@ class formatter{
       $newText = preg_replace($pattern,$replacement,$text);
       return $newText;
     }
+    
+    public static function extLinks($text) {
+      $pattern = '/\\[http\:\/\/([^\]]*)\]/';
+      preg_match_all($pattern, $text, $matches);
+      $links = array();
+      foreach($matches[0] as $match){
+        array_push($links, str_replace('\\','',str_replace('[','',str_replace(']','',$match))));
+      }
+      return $links;
+    }
+
+
+    public static function intLinks($tex,$titles){
+      foreach ($titles as $title){
+        array_push($titles, str_replace('_',' ',$title));
+      }
+      // general links
+      $pattern = '/wikiref{((\d|\w|\:|\s)*)}{((\d|\w|\:|\s)*)}/';
+      preg_match_all($pattern,$tex,$matches, PREG_SET_ORDER);
+      foreach ($matches as $match){
+        if (in_array($match[1],$titles)){
+          if (startsWith('101implementation:',$match[1])){
+            $tex = str_replace($match[0],"hyperlink{impl".str_replace(' ','',str_replace('101implementation:','',$match[1]))."}{".$match[3]."}",$tex);
+          }
+          else {
+            $tex = str_replace($match[0],"hyperlink{ttc".str_replace('Technology:','',str_replace(' ','',str_replace('Technology:','',$match[1])))."}{".$match[3]."}",$tex);
+          }
+        }
+      }
+      //tech links
+      $pattern = '/wikitref{((\d|\w|\:|\s)*)}/';
+      preg_match_all($pattern,$tex,$matches, PREG_SET_ORDER);
+      foreach ($matches as $match){
+        if (in_array('Technology:'.$match[1],$titles)){
+          var_dump($match[1]);
+          if (startsWith('101implementation:',$match[1])){
+            $tex = str_replace($match[0],"hyperlink{impl".str_replace(' ','',str_replace('101implementation:','',$match[1]))."}{".$match[1]."}",$tex);
+          }
+          else {
+            $tex = str_replace($match[0],"hyperlink{ttc".str_replace('Technology:','',str_replace(' ','',str_replace('Technology:','',$match[1])))."}{".$match[1]."}",$tex);
+          }
+        }
+      }   
+      
+      return $tex;
+      
+    }
 
     public static function toTex($text) {
+    
+    
+     $text = str_replace('&','\&',$text); 
     
      if($text == '') return '';
      if($text == null) return '';
@@ -296,9 +354,15 @@ class formatter{
         fclose($f);
         
         $pattern =  '/<pre>((\s*|.|\s)*)<\/pre>/';
-        $replacement = '\lstinputlisting{\texgen/files/' . $fname . "}";
+        $replacement = '\lstinputlisting[xleftmargin=20pt]{\texgen/files/' . $fname . "}";
         $text = preg_replace($pattern, $replacement, $text);
      }
+     
+     $pattern = '/<syntaxhighlight lang=\"make" enclose=\"none\">(.*)<\/syntaxhighlight>/';
+     $replacement = '\begin{ttfamily}\1\end{ttfamily}';
+     $text = preg_replace($pattern, $replacement, $text);
+     
+     
      $text = str_replace("\"haskell\" line>","\"haskell\">", $text);
      $pattern = '/<syntaxhighlight lang=\"([a-zA-Z]*)\">((\s*|.|\s)*)<\/syntaxhighlight>/'; 
      preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
@@ -312,7 +376,7 @@ class formatter{
         fclose($f);
         
         $pattern = '<syntaxhighlight lang="' . $match[1] .'">' . $match[2] .'</syntaxhighlight>';
-        $replacement = '\lstinputlisting[language=' . $match[1] . ']{../../../101companies/tools/texgenerator/tex/files/' . $fname . "}";
+        $replacement = '\lstinputlisting[xleftmargin=20pt, language=' . $match[1] . ']{../../../101companies/tools/texgenerator/tex/files/' . $fname . "}";
         $text = str_replace($pattern, $replacement, $text);
      }
      
@@ -321,24 +385,33 @@ class formatter{
      $pattern = '/<syntaxhighlight lang=\"([a-zA-Z]*)\">((\s*|.|:|=|>|<|\s)*)<\/syntaxhighlight>/'; 
      preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
      foreach($matches as $match){
-        $pattern = '<syntaxhighlight lang="' . $match[1] .'">' . $match[2] .'</syntaxhighlight>';
-        $replacement = '\textbf{'.$match[2].'}';
+        $pattern = '<syntaxhighlight lang="' . $match[1] .'">' . $match[2] .'</syntaxhighlight>';   
+        $replacement = '\begin{ttfamily}'.$match[2].'\end{ttfamily}';    
+        $replacement = pprint($replacement);
         $text = str_replace($pattern, $replacement, $text);
      }
-      
+     
+     
+           
+     $text = str_replace('<nowiki>','',str_replace('</nowiki>','',$text)); 
      $text = str_replace('$','\$',$text);
-      
+     $text = formatter::handleCites($text);
+     $text = formatter::handleBold($text);                                       
+     $text = formatter::italic2Textit($text); 
      $text = str_replace('->','$\rightarrow$',$text);
      $text = str_replace('=>','$\Rightarrow$',$text); 
      $text = str_replace('<','$<$',$text);
-     $text = str_replace('>','$>$',$text);   
+     $text = str_replace('>','$>$',$text);
+     
+     $text = str_replace('%','\%',$text);   
      
      $text = str_replace("<references>", "", $text);
      $text = str_replace("<references/>", "", $text);
                
-     $text = formatter::nestedList($text);                                           
-     $text = formatter::subsubsections($text);                                        
-     $text = formatter::italic2Textit($text);
+     $text = formatter::nestedList($text);
+     $text = formatter::subsubsubsections($text);                                                
+     $text = formatter::subsubsections($text);
+     
      
      $text = escape($text);      
      $res = handleUmlauts($text);
@@ -346,23 +419,51 @@ class formatter{
     // var_dump($res);
      return $res;  
    }
+   
     function italic2Textit($text){
-     $pattern =  '/\'\'((\w*|\W*|\d*|\s*|\-*)*)\'\'/'; //'/\'\'(.*)\'\'/';
-     $replacement = '\\textit{\1}';
+      $newText = '';
+      foreach(preg_split( '/\r\n|\r|\n/', $text) as $line) {
+        if (startsWith("''",trim($line)) && endsWith(trim($line),"''")){
+          $newText .= '\\noindent '.str_replace("''",'','\\textit{'.$line.'}').PHP_EOL;
+        } else
+          $newText .= $line.PHP_EOL;
+        
+      }      
+      $pattern =  '/\'\'((\w*|\W*|\d*|\s*|\-*)*)\'\'/'; //'/\'\'(.*)\'\'/';
+      $replacement = '\\textit{\1}';
+      return preg_replace($pattern, $replacement, $newText);
+   
+    }
+    
+    function handleBold($text){
+     $pattern =  '/\'\'\'((\w*|\d*|\s*|\-*|\:*)*)\'\'\'/'; //'/\'\'(.*)\'\'/';
+     $replacement = '\\textbf{\1}';
      return preg_replace($pattern, $replacement, $text);
     }
      
     
      function subsubsections($text){
+      $newText = '';
+      foreach(preg_split( '/\r\n|\r|\n/', $text) as $line) {
+        if (startsWith("===",trim($line)) && endsWith(trim($line),"===")){
+          $newText .= '\\subsubsection'.str_replace("===",'','{'.$line.'}').PHP_EOL;
+        } else
+          $newText .= $line.PHP_EOL;
+        
+      }      
+      return $newText;
+    }  
+    
+    function subsubsubsections($text){  
       $lines = preg_split( '/\r\n|\r|\n/',$text);
       $newText = '';
-      $pattern ='/===(.*)===/';
-      $replacement ='\\subsubsection{\1}';
+      $pattern ='/====(.*)====/';
+      $replacement ='\\paragraph{\1}'; 
       foreach ($lines as $line) { 
-        if (startsWith('===',$line)){
-          $newText .= preg_replace($pattern, $replacement, $line);
+        if (startsWith('====',$line)){
+          $newText .= preg_replace($pattern, $replacement, $line).PHP_EOL;
         } else {
-          $newText .= $line;
+          $newText .= $line.PHP_EOL;
         }
       }         
       return $newText;
@@ -415,6 +516,52 @@ class formatter{
  
 }
    
+pprint("");
+function pprint($text){
+  $keys = array("FilePath","IOError","abs","acos","acosh","all","and","any","appendFile","approxRational","asTypeOf","asin","
+		asinh","atan","atan2","atanh","basicIORun","break","catch","ceiling","chr","compare","concat","concatMap","
+		const","cos","cosh","curry","cycle","decodeFloat","denominator","digitToInt","div","divMod","drop","
+		dropWhile","either","elem","encodeFloat","enumFrom","enumFromThen","enumFromThenTo","enumFromTo","
+		error","even","exp","exponent","fail","filter","flip","floatDigits","floatRadix","floatRange","floor","
+		fmap","foldl","foldl1","foldr","foldr1","fromDouble","fromEnum","fromInt","fromInteger","fromIntegral","
+		fromRational","fst","gcd","getChar","getContents","getLine","head","id","inRange","index","init","intToDigit","
+		interact","ioError","isAlpha","isAlphaNum","isAscii","isControl","isDenormalized","isDigit","isHexDigit","
+		isIEEE","isInfinite","isLower","isNaN","isNegativeZero","isOctDigit","isPrint","isSpace","isUpper","iterate","
+		last","lcm","length","lex","lexDigits","lexLitChar","lines","log","logBase","lookup","map","mapM","mapM_","max","
+		maxBound","maximum","maybe","min","minBound","minimum","mod","negate","not","notElem","null","numerator","odd","
+		or","ord","otherwise","pi","pred","primExitWith","print","product","properFraction","putChar","putStr","putStrLn","quot","
+		quotRem","range","rangeSize","read","readDec","readFile","readFloat","readHex","readIO","readInt","readList","readLitChar","
+		readLn","readOct","readParen","readSigned","reads","readsPrec","realToFrac","recip","rem","repeat","replicate","return","
+		reverse","round","scaleFloat","scanl","scanl1","scanr","scanr1","seq","sequence","sequence_","show","showChar","showInt","
+		showList","showLitChar","showParen","showSigned","showString","shows","showsPrec","significand","signum","sin","
+		sinh","snd","span","splitAt","sqrt","subtract","succ","sum","tail","take","takeWhile","tan","tanh","threadToIOResult","toEnum","
+		toInt","toInteger","toLower","toRational","toUpper","truncate","uncurry","undefined","unlines","until","unwords","unzip","
+		unzip3","userError","words","writeFile","zip","zip3","zipWith","zipWith3","listArray","doParse","Bool","Char","Double","Either","
+    Float","IO","Integer","Int","Maybe","Ordering","Rational","Ratio","ReadS","ShowS","String","quot","rem","div","mod","elem","notElem","seq","
+    EQ","False","GT","Just","LT","Left","Nothing","Right","True","Show","Eq","Ord","Num", "Word8","InPacket");
+	usort($keys,'sortByLength');
+  foreach($keys as $key){
   
+    $pattern = '/([^{|\w|\d])('.$key.')([^\w|\d])/';
+  	 $text = preg_replace($pattern,'\\1\textcolor{hgreen}{\textbf{\2}}\3',$text);
+  }
+  
+  $keys = array("case","class","data","deriving","do","else","if","import","in","infixl","infixr","instance","let","
+		module","of","primitive","then","type","where");
+	usort($keys,'sortByLength');
+  foreach($keys as $key){
+  
+    $pattern = '/([^{|\w|\d])('.$key.')([^\w|\d])/';
+  	 $text = preg_replace($pattern,'\\1\textcolor{hpink}{\textbf{\2}}\3',$text);
+  }
+  
+  $text = str_replace("\\(","\\\\(",$text);
+  return $text; 
+}  
+
+function sortByLength($a,$b){
+  if($a == $b) return 0;
+  return (strlen($a) > strlen($b) ? -1 : 1);
+}
 
  
