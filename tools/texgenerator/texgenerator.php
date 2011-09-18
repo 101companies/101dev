@@ -1,6 +1,6 @@
 <?php
 
-definr('BASE_PATH',str_replace('texgenerator','',dirname(__FILE__)));
+define('BASE_PATH',str_replace('texgenerator','',dirname(__FILE__)));
 error_reporting(E_ALL);
 ini_set('display_errors','On');
  
@@ -14,7 +14,13 @@ $texFolderDump = BASE_PATH . "texgenerator/tex/dump/data/";
 
 $filesFolder = BASE_PATH . "texgenerator/tex/files/";
 
+$implsFolder = BASE_PATH. "texgenerator/tex/impl/data/";
+$ttcsFolder = BASE_PATH. "texgenerator/tex/ttc/data/";
+
+$hs101Folder = BASE_PATH.'../../101nonpublic/papers/hs101/';
+
 require_once(BASE_PATH . 'API/ApiWrapper2.php');
+require_once(BASE_PATH . 'API/Utils.php');
 require_once("commandLine.php");
 require_once("formatter.php");
 
@@ -63,7 +69,7 @@ class OntyGenerator{
    
    return $shallowTex;
  }
-}
+}                                                                                      
 
 $args = CommandLine::parseArgs($_SERVER['argv']);
 
@@ -130,6 +136,125 @@ else if($args['mode'] == 'ontology'){ //generate ontology
   }
   
 }
+else if ($args['mode'] == 'implContents') {
+  $titles = explode(',',$args['titles']);
+  $otherTitles = explode(',', $args['otitles']);
+  $macroTex = '';
+  $implsTex = '';
+  $fMacro = fopen($implsFolder.'macros.tex', 'w+');
+  $fBib = fopen($implsFolder.'impls.bib', 'w+');
+  $fImpls = fopen($implsFolder.'implementations.tex', 'w+');
+  $bibs = array();
+  foreach($titles as $title){
+    $pureTitle = str_replace('101implementation:','',$title); 
+    $ucTitle = ucfirst($pureTitle);
+    $implTexTit = 'impls/impl'.$ucTitle.'.tex';
+    
+    // adding to mactro
+    $macroTex .= '\\input{../../../101companies/tools/texgenerator/tex/impl/data/'.$implTexTit.'}'.PHP_EOL;
+    
+    // adding to implementations.tex
+    $implsTex .= '\\iwiki{'.$pureTitle.'}'.PHP_EOL;
+    
+    // creating tex file for implementation
+    $fImplMacro = fopen($implsFolder.$implTexTit,'w+');
+    echo 'Saving macro for "'.$title.'"... ';
+    $s = new ImplementationPage($title);
+    $implMacroTex = $s->toTexMacro();
+    $implMacroTex = formatter::intLinks($implMacroTex, array_merge($titles,$otherTitles));
+    $implMacroTex .= "\\newcommand{\\". str_replace('_','', str_replace(' ','',$s->getTitle())) . "ImplLabel}{". str_replace('_','', str_replace(' ','',$s->getTitle())) ."}" . PHP_EOL;
+    fwrite($fImplMacro,$implMacroTex);
+    fclose($fImplMacro);
+    echo 'DONE'.PHP_EOL;
+    echo 'Getting BibTex... ';
+    foreach($s->bibs as $bib){
+      array_push($bibs,$bib);
+    }
+    echo 'DONE'.PHP_EOL.PHP_EOL;
+  }
+  echo 'Saving collective macro file "macros.tex"... ';
+  fwrite($fMacro, $macroTex);
+  fclose($fMacro);
+  echo 'DONE'.PHP_EOL;
+  echo 'Saving "implementations.tex"... ';
+  fwrite($fImpls, $implsTex);
+  fclose($fImpls);
+  echo 'DONE'.PHP_EOL;
+  echo 'Saving .bib for implementations... ';
+  fwrite($fBib,implode(PHP_EOL,$bibs));
+  fclose($fBib);
+  echo 'DONE'.PHP_EOL;
+  
+}
+else if ($args['mode'] = 'ttcContents') {
+  $titles = explode(',',$args['titles']);
+  $macroTex = '';
+  $ttcsTex = '';
+  //var_dump($linkRefs);
+  $fMacro = fopen($ttcsFolder.'macros.tex', 'w+');
+  $fBib = fopen($ttcsFolder.'ttcs.bib', 'w+');
+  $fTtcs = fopen($ttcsFolder.'ttcs.tex', 'w+');
+  $bibs = array();
+  $allLinks = array();
+  foreach ($titles as $title) {
+    $pureTitle = str_replace('_','',str_replace('Category:','',str_replace('Technology:','',$title)));
+    $ucTitle = ucfirst($pureTitle);
+    $ttcTexTit = 'ttcs/ttc'.$ucTitle.'.tex'; 
+    
+    // adding to mactro
+    $macroTex .= '\\input{../../../101companies/tools/texgenerator/tex/ttc/data/'.$ttcTexTit.'}'.PHP_EOL;
+    
+    $s = new Page($title);
+     // adding to ttcs.tex
+    if ($s->discussion != '') {
+      $ttcsTex .= '\\ttcdwiki{'.$pureTitle.'}'.PHP_EOL;
+    } else {
+      $ttcsTex .= '\\ttcwiki{'.$pureTitle.'}'.PHP_EOL;
+    }
+    
+    
+    
+    $fTtcMacro = fopen($ttcsFolder.$ttcTexTit,'w+');
+    echo 'Saving macro for "'.$title.'"... ';
+    
+    $ttcMacroTex = $s->toTexMacro();
+    $ttcMacroTex = formatter::intLinks($ttcMacroTex,$titles);
+    $ttcMacroTex .= "\\newcommand{\\". str_replace('_','', str_replace(' ','',$s->getTitle())) . "TtcLabel}{". str_replace('_','', str_replace(' ','',$s->getTitle())) ."}" . PHP_EOL;
+    //var_dump($links);
+    fwrite($fTtcMacro, $ttcMacroTex);
+    fclose($fTtcMacro);
+    echo 'DONE'.PHP_EOL;
+    echo 'Getting BibTex... ';
+    foreach($s->bibs as $bib){
+      $newbib = '';
+      $i = 0;
+      foreach(preg_split( '/\r\n|\r|\n/', $bib) as $bibline) {
+        if ($i != 0 && startsWith('title',ltrim($bibline))) {
+          $bibline = preg_replace('/([A-Z]+)/','{\1}',$bibline);
+        }
+        $newbib .= $bibline.PHP_EOL;
+        $i += 1;
+        
+      }
+      array_push($bibs,$newbib);
+    }
+    echo 'DONE'.PHP_EOL.PHP_EOL; 
+  }
+  echo 'Saving collective macro file "macros.tex"... ';
+  fwrite($fMacro, $macroTex);
+  fclose($fMacro);
+  echo 'DONE'.PHP_EOL;
+  echo 'Saving "ttcs.tex"... ';
+  fwrite($fTtcs, $ttcsTex);
+  fclose($fTtcs);
+  echo 'DONE'.PHP_EOL;
+  echo 'Saving .bib for ttcs... ';
+  fwrite($fBib,implode(PHP_EOL,$bibs));
+  fclose($fBib);
+  echo 'DONE'.PHP_EOL;
+}
+
+
 else if($args['mode'] == 'content'){ //generate tex wiki pages representation
   $wiki = new Wiki();
   $catImpl = new CategoryPage("101implementation");
@@ -140,8 +265,8 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
   $baseCat = new CategoryPage("base");
   $allPages = $wiki->getAllPages();  
   
-  // var_dump($impl);
-  $fImpl = fopen($texFolder . "implementations.tex", "w+") or die "cannot create a file implementations.tex";
+
+  $fImpl = fopen($texFolder . 'implementations.tex', 'w+');
   $fMacro = fopen($texFolder . "macros.tex", "w+");
   foreach($impl as $i){
     fwrite($fImpl, "\\iwiki{" . getTexCommandName($i->getTitle()) . "}" . PHP_EOL);
@@ -277,6 +402,8 @@ function getTechologyBy($technologies, $val){
     if($t->getTitle() == $val) return $t;
   }
 }
+
+
 
 function buildTableHeader($features, $delimPosition){
  $numCols = count($features);
@@ -542,8 +669,7 @@ function buildImplementationFeaturesMatrix($impl, $features, $output, $ilist){
  fwrite($f, $content); 
  fclose($f);
 }
-echo PHP_EOL . "DONE" . PHP_EOL;
-
+echo PHP_EOL . "ALL DONE" . PHP_EOL;
 
 
 
