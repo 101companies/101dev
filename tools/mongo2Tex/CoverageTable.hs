@@ -11,7 +11,8 @@ main = do
   pipe <- runIOE $ connect (host "127.0.0.1") 
   features <- liftM reverse $ queryFeatures pipe
   coverageAll <- liftM reverse $ queryCoverage pipe
-  let coverage = filter (not.null.snd) coverageAll
+  let coverageU = filter (not.null.snd) coverageAll
+  let coverage = filter (((flip $ elem) hsTitles).fst) coverageU     
   let covNum = [sum [if elem f fimpl then 1 else 0 | (_, fimpl)  <- coverage] | f <- features]
   
   
@@ -44,7 +45,7 @@ main = do
   
   putStrLn "\\hline \\hline"
   putStrLn "\\endlastfoot"
-  
+   
   -- feature coverage  
   forM_ coverage $ \(title, implFs) -> do 
     let line = title ++ 
@@ -56,4 +57,6 @@ main = do
 
 symbol :: Bool -> String
 symbol True = "&$\\bullet$ "  
-symbol False = "& "
+symbol False = "& "  
+
+hsTitles = ["haskellLogger","haskellParser", "haskellConcurrent", "dph", "hdbc", "haskellDB", "hxt", "hxtPickler", "wxHaskell",	"haskellCGI",	"happstack"]
