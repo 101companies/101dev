@@ -138,6 +138,10 @@ else if($args['mode'] == 'ontology'){ //generate ontology
 }
 else if ($args['mode'] == 'implContents') {
   $titles = explode(',',$args['titles']);
+  $note = explode('%', $args['node']);
+  $nTitle = $note[0];
+  $nNote = str_replace('ä','\\"a',str_replace('_',' ',$note[1]));
+  echo $nNode;
   $otherTitles = explode(',', $args['otitles']);
   $macroTex = '';
   $implsTex = '';
@@ -154,13 +158,22 @@ else if ($args['mode'] == 'implContents') {
     $macroTex .= '\\input{../../../101companies/tools/texgenerator/tex/impl/data/'.$implTexTit.'}'.PHP_EOL;
     
     // adding to implementations.tex
-    $implsTex .= '\\iwiki{'.$pureTitle.'}'.PHP_EOL;
+    if ($title != $nTitle){
+      $implsTex .= '\\iwiki{'.$pureTitle.'}'.PHP_EOL;
+    } else
+      $implsTex .= '\\inwiki{'.$pureTitle.'}'.PHP_EOL;
+    
     
     // creating tex file for implementation
     $fImplMacro = fopen($implsFolder.$implTexTit,'w+');
-    echo 'Saving macro for "'.$title.'"... ';
     $s = new ImplementationPage($title);
+    
+    echo 'Saving macro for "'.$title.'"... ';
+    
     $implMacroTex = $s->toTexMacro();
+    if ($title == $nTitle){
+    $implMacroTex .= "\\newcommand{\\". str_replace('_','', str_replace(' ','',$s->getTitle())) . "ImplNote}{".$nNote."}".PHP_EOL;
+    } 
     $implMacroTex = formatter::intLinks($implMacroTex, array_merge($titles,$otherTitles));
     $implMacroTex .= "\\newcommand{\\". str_replace('_','', str_replace(' ','',$s->getTitle())) . "ImplLabel}{". str_replace('_','', str_replace(' ','',$s->getTitle())) ."}" . PHP_EOL;
     fwrite($fImplMacro,$implMacroTex);

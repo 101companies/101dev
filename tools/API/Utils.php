@@ -291,7 +291,7 @@ class formatter{
     public static function toTex($text) {
     
     
-     $text = str_replace('&','\&',$text); 
+      
     
      if($text == '') return '';
      if($text == null) return '';
@@ -391,7 +391,7 @@ class formatter{
         $text = str_replace($pattern, $replacement, $text);
      }
      
-     
+     $text = str_replace('&','\&',$text);
            
      $text = str_replace('<nowiki>','',str_replace('</nowiki>','',$text)); 
      $text = str_replace('$','\$',$text);
