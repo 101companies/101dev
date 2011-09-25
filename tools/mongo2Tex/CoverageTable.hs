@@ -20,12 +20,12 @@ main = do
   putStrLn $ "\\begin{longtable}{|r" 
             ++ concat (replicate (length features) "|c") 
             ++ "|}\\hline"
-  putStrLn $ "\\caption[Feature Model Coverage]{Feature Model Coverage} \\\\"
+  putStrLn $ "\\caption[Coverage of the feature model]{Coverage of the feature model} \\\\"
   
   putStrLn $ "\\hline"
-           ++ "\\multicolumn{1}{|c|}{\\textbf{\\begin{sideways}Implementation \\textcolor{blue}{" ++ show (length coverage) ++ "}  "++ "\\end{sideways}}} & " 
+           ++ "\\multicolumn{1}{|c|}{\\textbf{\\begin{sideways}Implementation \\end{sideways}}} & " 
            ++ (concat $ intersperse " & " $ map 
-                          (\(f,c) -> "\\multicolumn{1}{|c|}{\\textbf{\\begin{sideways}" ++ f ++ " \\textcolor{blue}{" ++ show c ++ "}"++ "\\end{sideways}}}")
+                          (\(f,c) -> "\\multicolumn{1}{|c|}{\\textbf{\\begin{sideways}" ++ f ++ "\\end{sideways}}}")
                           (zip features covNum))
           ++ "\\\\ \\hline"  
   putStrLn "\\endfirsthead"
@@ -33,9 +33,9 @@ main = do
   putStrLn "{{\\bfseries \\tablename\\ \\thetable{} -- continued from previous page}} \\\\" 
   
   putStrLn $ "\\hline"
-           ++ "\\multicolumn{1}{|c|}{\\textbf{\\begin{sideways}Implementation \\textcolor{blue}{" ++ show (length coverage) ++ "}  "++ "\\end{sideways}}} & " 
+           ++ "\\multicolumn{1}{|c|}{\\textbf{\\begin{sideways}Implementation \\end{sideways}}} & " 
            ++ (concat $ intersperse " & " $ map 
-                          (\(f,c) -> "\\multicolumn{1}{|c|}{\\textbf{\\begin{sideways}" ++ f ++ " \\textcolor{blue}{" ++ show c ++ "}"++ "\\end{sideways}}}")
+                          (\(f,c) -> "\\multicolumn{1}{|c|}{\\textbf{\\begin{sideways}" ++ f ++  "\\end{sideways}}}")
                           (zip features covNum))
           ++ "\\\\ \\hline"  
   putStrLn "\\endhead"
@@ -52,7 +52,13 @@ main = do
                " " ++ 
                (concat $ map (\f -> symbol $ elem f implFs) features)
     putStrLn $ line ++ "\\\\\\hline"
-                  
+  putStrLn "\\hline\\hline"   
+  putStrLn "\\textcolor{blue}{Coverage}"
+  putStrLn $ concat $
+        map (\n ->  " &\\textcolor{blue}{" ++ show n ++ "}") covNum
+  
+  putStrLn "\\\\\\hline" 
+                              
   putStrLn "\\end{longtable}"             
 
 symbol :: Bool -> String
