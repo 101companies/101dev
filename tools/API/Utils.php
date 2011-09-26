@@ -226,7 +226,7 @@ class formatter{
    
    
     public static function handleCites($text){
-      $pattern = '/<cite>(.*)<\/cite>/';
+      $pattern = '/<cite>([^<]*)<\/cite>/';
       $replacement = '\\cite{\1}';
       return preg_replace($pattern,$replacement,$text);
       
@@ -236,7 +236,7 @@ class formatter{
       $pattern = '/\[this!!((\d|\w)+)(\.(\d|\w)+)?\]/';
       $sfURL = 'http://developers.svn.sourceforge.net/viewvc/developers/repository/101companies/implementations/';
       $sfProject = str_replace('101implementation:','',$title);
-      $replacement = '\\href{'.$sfURL.$sfProject.'/'.'\1\3'.'?view=markup}{\1\3}';
+      $replacement = '\\begin{small}\\textsf{\\href{'.$sfURL.$sfProject.'/'.'\1\3'.'?view=markup}{\1\3}}\\end{small}';
       $newText = preg_replace($pattern,$replacement,$text);
       return $newText;
     }
@@ -348,7 +348,7 @@ class formatter{
      preg_match($pattern, $text, $out);
      if(count($out) > 0){
         $fname = uniqid("f") . ".ext";
-        global $filesFolder;
+        global $filesFolder; 
         $f = fopen($filesFolder . $fname, "w+");
         fwrite($f, trim($out[1]));
         fclose($f);
@@ -362,21 +362,27 @@ class formatter{
      $replacement = '\begin{ttfamily}\1\end{ttfamily}';
      $text = preg_replace($pattern, $replacement, $text);
      
-     
-     $text = str_replace("\"haskell\" line>","\"haskell\">", $text);
-     $pattern = '/<syntaxhighlight lang=\"([a-zA-Z]*)\">((\s*|.|\s)*)<\/syntaxhighlight>/'; 
-     preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
+     $sfURL = 'http://developers.svn.sourceforge.net/viewvc/developers/repository/101companies/implementations/';
+     $text = str_replace(" line>",">", $text);
+     $pattern = '/<syntaxhighlight lang=\"([a-zA-Z]*)\"(\s*(source=\"(.*)\")?\s*)>((\s*|.|\s)*)<\/syntaxhighlight>/'; 
+     preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);  
      foreach($matches as $match){
         //var_dump($matches);
         //echo PHP_EOL;
         $fname = uniqid("f") . ".ext";
-        global $filesFolder;
+        global $filesFolder; 
+        $sourceText = '';
+        if ($match[4] != null && $match[4]!= ''){
+          $link = $sfURL.$match[4];
+          $name = end(explode('/',$match[4]));
+          $sourceText = ', caption={\\href{'.$link.'}{'.$name.'}}';
+        }             
         $f = fopen($filesFolder . $fname, "w+");
-        fwrite($f, trim($match[2]));
+        fwrite($f, trim($match[5]));
         fclose($f);
         
-        $pattern = '<syntaxhighlight lang="' . $match[1] .'">' . $match[2] .'</syntaxhighlight>';
-        $replacement = '\lstinputlisting[xleftmargin=20pt, language=' . $match[1] . ']{../../../101companies/tools/texgenerator/tex/files/' . $fname . "}";
+        $pattern = '<syntaxhighlight lang="' . $match[1] .'"'.$match[2].'>' . $match[5] .'</syntaxhighlight>';
+        $replacement = '\lstinputlisting[xleftmargin=20pt, language=' . $match[1] .$sourceText. ']{../../../101companies/tools/texgenerator/tex/files/' . $fname . "}";
         $text = str_replace($pattern, $replacement, $text);
      }
      

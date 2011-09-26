@@ -140,7 +140,7 @@ else if ($args['mode'] == 'implContents') {
   $titles = explode(',',$args['titles']);
   $note = explode('%', $args['node']);
   $nTitle = $note[0];
-  $nNote = str_replace('ä','\\"a',str_replace('_',' ',$note[1]));
+  $nNote = str_replace('L"a','L\\"a',str_replace('_',' ',$note[1]));
   echo $nNode;
   $otherTitles = explode(',', $args['otitles']);
   $macroTex = '';

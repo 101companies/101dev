@@ -147,7 +147,11 @@ class Page{
  }
  
  function toTexMacro(){
-    $tex = "\\newcommand{\\". getTexCommandName(str_replace('_','',$this->getTitle())) . "PageTitle}{". str_replace('_',' ',$this->getTitle()) ."}" . PHP_EOL;
+    if (startsWith("Technology", $this->title)) {
+      $tex = "\\newcommand{\\". getTexCommandName(str_replace('_','',$this->getTitle())) . "PageTitle}{\wikittref{". str_replace('_',' ',$this->getTitle()) ."}}" . PHP_EOL;
+    }
+    else
+      $tex = "\\newcommand{\\". getTexCommandName(str_replace('_','',$this->getTitle())) . "PageTitle}{\wikiuqref{". str_replace('_',' ',$this->getTitle()) ."}}" . PHP_EOL;
     $tex .= "\\newcommand{\\". getTexCommandName(str_replace('_','',$this->getTitle())) . "PageIntent}{". ucfirst(formatter::toTex($this->intent)) ."}" . PHP_EOL;
     $tex .= "\\newcommand{\\". getTexCommandName(str_replace('_','',$this->getTitle())) . "PageDiscussion}{". formatter::toTex($this->discussion) ."}" . PHP_EOL;
     $tex = formatter::sourceLinks($this->getTitle(),$tex);
@@ -461,7 +465,7 @@ class TechnologyPage extends Page{
    return $tex;
   }
 }
-
+   
 class FeaturePage extends Page{
  public $description;
  public $illustration;
