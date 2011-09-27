@@ -156,17 +156,23 @@ else if ($args['mode'] == 'implContents') {
     
     // adding to mactro
     $macroTex .= '\\input{../../../101companies/tools/texgenerator/tex/impl/data/'.$implTexTit.'}'.PHP_EOL;
-    
+    $s = new ImplementationPage($title);
     // adding to implementations.tex
     if ($title != $nTitle){
-      $implsTex .= '\\iwiki{'.$pureTitle.'}'.PHP_EOL;
-    } else
+      if ($s->issues != ''){
+        echo "FOOOOO";
+        $implsTex .= '\\iuwiki{'.$pureTitle.'}'.PHP_EOL;
+      } else {
+        $implsTex .= '\\iwiki{'.$pureTitle.'}'.PHP_EOL;
+      }
+    } else {
       $implsTex .= '\\inwiki{'.$pureTitle.'}'.PHP_EOL;
+    }
     
     
     // creating tex file for implementation
     $fImplMacro = fopen($implsFolder.$implTexTit,'w+');
-    $s = new ImplementationPage($title);
+    
     
     echo 'Saving macro for "'.$title.'"... ';
     

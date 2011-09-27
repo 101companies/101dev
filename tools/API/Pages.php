@@ -357,6 +357,7 @@ class ImplementationPage extends Page{
  public $contributors;
  public $spaces;
  public $illustration;
+ public $issues;
   
  function toTexMacro(){
    $tex = "\\newcommand{\\". getTexCommandName($this->getTitle()) . "ImplementationTitle}{\\wikiiref{". $this->getTitle() ."}}" . PHP_EOL; 
@@ -367,6 +368,7 @@ class ImplementationPage extends Page{
    $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationIllustration}{" . formatter::toTex($this->illustration) . "}" . PHP_EOL;
    $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationArchitecture}{" . formatter::toTex($this->architecture) . "}" . PHP_EOL;
    $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationUsage}{" . formatter::toTex($this->usage) . "}" . PHP_EOL;
+   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationIssues}{" . formatter::toTex($this->issues) . "}" . PHP_EOL;
    
    $ftxt = "";
    foreach($this->features as $f)
@@ -417,6 +419,7 @@ class ImplementationPage extends Page{
   $this->usage = extractContent($this->content, "==Usage==");
   $this->contributors = extractContent($this->content, "==Contributors==");
   $this->illustration = extractContent($this->content, "==Illustration==");
+  $this->issues = extractContent($this->content, "==Issues==");
  }
 }
 
