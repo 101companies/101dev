@@ -1,3 +1,3 @@
-populatePages:
-	echo "populatePages" | ghci -v0 Main.hs
+importPages:
+	echo "importPages" | ghci -v0 Main.hs
     

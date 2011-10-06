@@ -31,8 +31,8 @@ jsonFileToMongoDB pipe coll path = do
       unpackResult (Error e) = error e
       
 -- get all JSON data from a dir 
-populatePages :: IO ()
-populatePages = do
+importPages :: IO ()
+importPages = do
   let datadir = "../jsongenerator/data/"
   fsIO <- liftM (filterM doesFileExist) $
               liftM (map (\s -> datadir ++ s)) $ 
