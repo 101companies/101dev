@@ -1,45 +1,54 @@
 {-# LANGUAGE OverloadedStrings, ExtendedDefaultRules #-}
-module Queries(queryCoverage, queryFeatures, queryImpls) where
+module Queries where
 
 import Database.MongoDB
 import qualified Data.String.Utils as S
+import Data.List.Split
 
 import Types
 import ActionRunner
 
 getTitle (String s) = unpack s  
 
-queryCoverage :: Pipe -> IO Coverage 
-queryCoverage pipe = do
-  maybeDocs <- run pipe $ find (select ["ns" =: "101implementation"] "page") 
+queryListed :: String -> UString -> String -> Pipe -> IO [(String,[String])]
+queryListed ns sectionName elemNs pipe  = do
+  maybeDocs <- run pipe $ find (select ["ns" =: ns] "page") 
                          {project = ["title" =: 1, "sections" =: 1, "_id" =: 0]}
                     >>= rest
-  -- get list of features for all implementations                  
-  let featuress = case maybeDocs of                     
+  return $ case maybeDocs of                     
             Right docs -> map (\doc -> (getTitle $ valueAt "title" $ doc, 
-                                        getFeatures $ valueAt "sections" $ doc)) docs
+                                        getX sectionName elemNs $ valueAt "sections" $ doc)) docs
             Left e    -> error $ show e
-  --mapM insertFeatures featuress
-  mapM_ (putStrLn.show) featuress
-  return $ featuress
   
-getFeatures (Array secs) = saveHead $ map extractFeatures $ filter isFSec secs
+queryCoverage = queryListed "101implementation" "Features" "101feature"
+
+queryLangUsage = queryListed "101implementation" "Languages" "Language"  
+
+queryTechUsage = queryListed "101implementation" "Technologies" "Technology"
+  
+getX :: UString -> String -> Value -> [String] 
+getX sectionName elemNs (Array secs) = saveHead $ map extractFeatures $ filter isFSec secs
     where
       saveHead [] = []
       saveHead [x] = x  
-      isFSec (Doc c) = valueAt "tag" c == String "Features"
+      isFSec (Doc c) = valueAt "tag" c == String sectionName
       isFSec _       = False  
       extractFeatures (Doc c) = case (valueAt "content" c) of
-              String s -> map (S.replace "101feature:" "") $ 
-                          filter (S.startswith "101feature") $
+              String s -> map (S.replace (elemNs ++ ":") "") $ 
+                          filter (S.startswith (elemNs ++ ":")) $
                           map (S.replace "*[[" "") $  
                           S.split "]]" $ 
-                          S.replace "* " "*" $ 
+                          S.replace "* " "*" $
+                          head $ (splitOn "|") $ 
                           unpack s
                             
 queryFeatures = queryNamespace "101feature" 
 
-queryImpls =  queryNamespace "101implementation"     
+queryImpls =  queryNamespace "101implementation"
+
+queryTechs = queryNamespace "Technology"     
+
+queryLangs = queryNamespace "Language"     
       
 queryNamespace :: String -> Pipe -> IO [String] 
 queryNamespace ns pipe = do

@@ -16,14 +16,21 @@ import IO
 
 main = do 
   pipe <- runIOE $ connect (host "127.0.0.1")
+  putStrLn "Extracting metadata..."
   itts <- extractImpls pipe
   ftts <- extractFeats pipe
-  cts <- extractCoverage pipe 
-  let allTriples = concat [itts, ftts, cts]
+  tets <- extractTechs pipe
+  lts <- extractLangs pipe
+  cts <- extractCoverage pipe
+  tuts <- extractTechUsage pipe
+  luts <- extractLangUsage pipe 
+  let allTriples = concat [itts, ftts, tets, lts, cts, tuts, luts]
   handle <- openFile "wikimeta.nt" WriteMode
   writeTriples handle allTriples
   hClose handle
-  run pipe (delete (select [] "wiki.meta")) 
-  mapM_ (saveTriple pipe) allTriples 
-  return allTriples
-                                                           
+  run pipe (delete (select [] "meta")) 
+  putStrLn "Saving triples"
+  forM (zip allTriples [1..length allTriples]) $ \(t,n) -> do
+    putStrLn ("Saving Triple " ++ show n ++ "/" ++  show (length allTriples) ++ "..")
+    saveTriple pipe t
+  return ()  

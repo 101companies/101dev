@@ -2,7 +2,11 @@
 module X2Graph
   ( implTitle2Graph
   , featTitle2Graph
-  , coverage2Graph) 
+  , techTitle2Graph
+  , langTitle2Graph
+  , coverage2Graph
+  , techUsage2Graph
+  , langUsage2Graph) 
 where
 
 import Database.MongoDB
@@ -19,7 +23,7 @@ prefixMap = PrefixMappings $ fromList [(fromJust $ prefixOf rdf, uriOf rdf)]
 
 titTriple tit sort = triple 
       (unode $ s2b $ ns101 ++ sort ++ tit)
-      (unode $ s2b $ ns101 ++ sort ++ "name") 
+      (unode $ s2b $ ns101 ++ sort ++ "Name") 
       (lnode $ TypedL (s2b tit) (mkFastString (s2b ((b2s (uriOf rdfs)) ++ "string"))))
 -- /helpers
 
@@ -32,7 +36,15 @@ implTitle2Graph = title2Graph "impl"
     
 -- create feature title graph
 featTitle2Graph :: String -> TriplesGraph
-featTitle2Graph  = title2Graph "impl"
+featTitle2Graph  = title2Graph "feat"
+
+-- create technology title graph
+techTitle2Graph :: String -> TriplesGraph
+techTitle2Graph = title2Graph "tech"
+
+-- create language title graph
+langTitle2Graph :: String -> TriplesGraph
+langTitle2Graph = title2Graph "lang"
       
 -- create coverage bags
 coverage2Graph :: Coverage -> TriplesGraph
@@ -42,7 +54,7 @@ coverage2Graph cov = mkGraph (concat (map cov2Triples cov)) Nothing prefixMap
                                 ++ [assoTriple tit, typeTriple tit]
     assoTriple tit = triple
       (unode $ s2b $ ns101 ++ "impl" ++ tit)
-      (unode $ s2b $ ns101 ++ "implCoverage")
+      (unode $ s2b $ ns101 ++ "featCoverage")
       (bnode $ s2b $ "_:" ++ tit ++ "cov")
     typeTriple tit = triple
       (bnode $ s2b $ "_:" ++ tit ++ "cov")
@@ -53,3 +65,25 @@ coverage2Graph cov = mkGraph (concat (map cov2Triples cov)) Nothing prefixMap
       (unode $ s2b $ (b2s (uriOf rdf)) ++ "_" ++ show n)
       (unode $ s2b $ ns101 ++ "feat" ++ ftit)
       
+techUsage2Graph = usage2Graph "tech"         
+      
+langUsage2Graph = usage2Graph "lang" 
+      
+-- create usage bags
+usage2Graph :: String -> Usage -> TriplesGraph
+usage2Graph kind us = mkGraph (concat (map us2Triples us)) Nothing prefixMap
+  where
+    us2Triples (tit, implus) =  (map (iUseTriple tit) (zip implus [1..length implus])) 
+                                ++ [assoTriple tit, typeTriple tit]
+    assoTriple tit = triple
+      (unode $ s2b $ ns101 ++ "impl" ++ tit)
+      (unode $ s2b $ ns101 ++ kind ++"Usage")
+      (bnode $ s2b $ "_:" ++ tit ++ kind ++ "use")
+    typeTriple tit = triple
+      (bnode $ s2b $ "_:" ++ tit ++ kind ++ "use")
+      (unode $ s2b $ (b2s (uriOf rdf)) ++ "type") 
+      (unode $ s2b $ (b2s (uriOf rdf)) ++ "Bag")
+    iUseTriple tit (utit,n) = triple
+      (bnode $ s2b $ "_:" ++ tit ++ kind ++ "use")
+      (unode $ s2b $ (b2s (uriOf rdf)) ++ "_" ++ show n)
+      (unode $ s2b $ ns101 ++ kind ++ utit)      

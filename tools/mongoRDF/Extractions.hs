@@ -18,6 +18,23 @@ extractFeats :: Pipe -> IO Triples
 extractFeats pipe =
   liftM (concat.(map (\tit -> triplesOf $ featTitle2Graph tit))) (queryFeatures pipe)
   
+extractTechs:: Pipe -> IO Triples
+extractTechs pipe =
+  liftM (concat.(map (\tit -> triplesOf $ techTitle2Graph tit))) (queryTechs pipe)
+  
+extractLangs :: Pipe -> IO Triples
+extractLangs pipe =
+  liftM (concat.(map (\tit -> triplesOf $ langTitle2Graph tit))) (queryLangs pipe)    
+  
 extractCoverage :: Pipe -> IO Triples
 extractCoverage pipe = 
-  liftM (triplesOf.coverage2Graph) (queryCoverage pipe)                      
+  liftM (triplesOf.coverage2Graph) (queryCoverage pipe)
+  
+extractLangUsage :: Pipe -> IO Triples
+extractLangUsage pipe = 
+  liftM (triplesOf.langUsage2Graph) (queryLangUsage pipe)
+  
+extractTechUsage :: Pipe -> IO Triples
+extractTechUsage pipe = 
+  liftM (triplesOf.techUsage2Graph) (queryTechUsage pipe)
+                           
