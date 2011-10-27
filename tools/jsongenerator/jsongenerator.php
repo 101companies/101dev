@@ -28,7 +28,7 @@ function getTopSections($content) {
       $replacement = '\1';
       $section = preg_replace($pattern, $replacement, $line);
     } else {
-       $sectioncontent .= $line;
+       $sectioncontent .= $line.PHP_EOL;
     }
     
   }
@@ -67,6 +67,8 @@ function toJson($title){
   $arr['title']=str_replace("\"", "", $c->getTitle());
   // namespace
   $arr['namespace']=str_replace(':', '', str_replace($c->getTitle(),'',$c->getFullTitle()));
+  if ($arr['namespace'] == "")
+  	$arr['namespace'] = "Term";
   // sections
   $arr['sections'] = getTopSections($c->content);
   

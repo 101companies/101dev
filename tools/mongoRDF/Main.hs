@@ -24,6 +24,7 @@ main = do
   cts <- extractCoverage pipe
   tuts <- extractTechUsage pipe
   luts <- extractLangUsage pipe 
+  putStrLn $ show $ length $ cts
   let allTriples = concat [itts, ftts, tets, lts, cts, tuts, luts]
   handle <- openFile "wikimeta.nt" WriteMode
   writeTriples handle allTriples

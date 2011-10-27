@@ -27,19 +27,20 @@ queryLangUsage = queryListed "101implementation" "Languages" "Language"
 queryTechUsage = queryListed "101implementation" "Technologies" "Technology"
   
 getX :: UString -> String -> Value -> [String] 
-getX sectionName elemNs (Array secs) = saveHead $ map extractFeatures $ filter isFSec secs
+getX sectionName elemNs (Array secs) = saveHead $ map extractX$ filter isFSec secs
     where
       saveHead [] = []
       saveHead [x] = x  
       isFSec (Doc c) = valueAt "tag" c == String sectionName
       isFSec _       = False  
-      extractFeatures (Doc c) = case (valueAt "content" c) of
+      extractX (Doc c) = case (valueAt "content" c) of
               String s -> map (S.replace (elemNs ++ ":") "") $ 
                           filter (S.startswith (elemNs ++ ":")) $
                           map (S.replace "*[[" "") $  
                           S.split "]]" $ 
                           S.replace "* " "*" $
-                          head $ (splitOn "|") $ 
+                          head $ (splitOn "|") $
+                          S.replace "\n" "" $
                           unpack s
                             
 queryFeatures = queryNamespace "101feature" 

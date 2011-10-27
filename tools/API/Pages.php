@@ -112,6 +112,11 @@ class Page{
  public $bibs;
  
  function getTitle(){
+  if(strpos($this->title,":") === FALSE)
+  	return $this->title;
+  else 
+  	return substr($this->title, strpos($this->title,":")+1);
+  // could still be usefull
   if(startsWith("Category:", $this->title)){
    return str_replace("Category:", "", $this->title);
   }
