@@ -382,7 +382,7 @@ class ImplementationPage extends Page{
    }
   
       
-   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationFeatures}{" . formatter::toTex(formatter::nestedList($ftxt)) . "}" . PHP_EOL;
+   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "ImplementationFeatures}{" . formatter::toTex(formatter::nestedList($ftxt)) . "}" . PHP_EOL;  
    $tex = formatter::sourceLinks($this->getTitle(),$tex);
    return $tex;
  } 
@@ -391,8 +391,8 @@ class ImplementationPage extends Page{
   parent::__construct($title);
   $this->namespace = "101implementation";
   
-  $this->languages = extractContent($this->content, "==Languages==");
-  $this->technologies = extractContent($this->content, "==Technologies==");
+  $this->languages = extractContent($this->content, "==Languages=="); 
+  $this->technologies = extractContent($this->content, "==Technologies==");  
   $featuresContent = extractContent($this->content, "==Features==");
   $this->features = array();
   $pattern = "/(101feature:)([\w\W\s][^\]]+)(\]{2})/"; 

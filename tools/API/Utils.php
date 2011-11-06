@@ -262,7 +262,7 @@ class formatter{
       foreach ($matches as $match){
         if (in_array($match[1],$titles)){
           if (startsWith('101implementation:',$match[1])){
-            $tex = str_replace($match[0],"hyperlink{impl".str_replace(' ','',str_replace('101implementation:','',$match[1]))."}{".$match[3]."}",$tex);
+            $tex = str_replace($match[0],"hyperlink{impl".str_replace(' ','',str_replace('101implementation:','',$match[1]))."}{\\textsf{\\textit{".$match[3]."}}}",$tex);
           }
           else {
             $tex = str_replace($match[0],"hyperlink{ttc".str_replace('Technology:','',str_replace(' ','',str_replace('Technology:','',$match[1])))."}{".$match[3]."}",$tex);
@@ -422,7 +422,7 @@ class formatter{
      $text = escape($text);      
      $res = handleUmlauts($text);
      
-    // var_dump($res);
+     //var_dump($res);
      return $res;  
    }
    
