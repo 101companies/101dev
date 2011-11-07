@@ -233,10 +233,10 @@ class formatter{
     }
    
     public static function sourceLinks($title,$text) {
-      $pattern = '/\[this!!((\d|\w)+)(\.(\d|\w)+)?\]/';
+      $pattern = '/\[this!!(([^\]])+\/)*((\d|\w)+)(\.(\d|\w)+)?( (\d|\w)+(\.(\d|\w)+)?)?\]/';
       $sfURL = 'http://developers.svn.sourceforge.net/viewvc/developers/repository/101companies/implementations/';
       $sfProject = str_replace('101implementation:','',$title);
-      $replacement = '\\begin{small}\\textsf{\\href{'.$sfURL.$sfProject.'/'.'\1\3'.'?view=markup}{\1\3}}\\end{small}';
+      $replacement = '\\begin{small}\\textsf{\\href{'.$sfURL.$sfProject.'/\1'.'\3\5'.'?view=markup}{\3\5}}\\end{small}';
       $newText = preg_replace($pattern,$replacement,$text);
       return $newText;
     }
