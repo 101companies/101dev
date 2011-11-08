@@ -17,7 +17,7 @@ $filesFolder = BASE_PATH . "texgenerator/tex/files/";
 $implsFolder = BASE_PATH. "texgenerator/tex/impl/data/";
 $ttcsFolder = BASE_PATH. "texgenerator/tex/ttc/data/";
 
-$hs101Folder = BASE_PATH.'../../101nonpublic/papers/hs101/';
+$hs101Folder = BASE_PATH.'../../101nonpublic/papers/waf101/';
 
 require_once(BASE_PATH . 'API/ApiWrapper2.php');
 require_once(BASE_PATH . 'API/Utils.php');
@@ -228,7 +228,11 @@ else if ($args['mode'] = 'ttcContents') {
     if ($s->discussion != '') {
       $ttcsTex .= '\\ttcdwiki{'.$pureTitle.'}'.PHP_EOL;
     } else {
-      $ttcsTex .= '\\ttcwiki{'.$pureTitle.'}'.PHP_EOL;
+	  if ($s->technologies != '') {
+	    $ttcsTex .= '\\ttcdtwiki{'.$pureTitle.'}'.PHP_EOL;
+	  } else {
+	    $ttcsTex .= '\\ttcwiki{'.$pureTitle.'}'.PHP_EOL;
+	  }
     }
     
     
