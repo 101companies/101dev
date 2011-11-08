@@ -107,6 +107,8 @@ class Page{
  private $sections;
  public $rawDump;
  public $discussion;
+ public $description;
+ public $technologies;
  public $lastrev;
  public $creation;
  public $bibs;
@@ -159,6 +161,8 @@ class Page{
       $tex = "\\newcommand{\\". getTexCommandName(str_replace('_','',$this->getTitle())) . "PageTitle}{\wikiuqref{". str_replace('_',' ',$this->getTitle()) ."}}" . PHP_EOL;
     $tex .= "\\newcommand{\\". getTexCommandName(str_replace('_','',$this->getTitle())) . "PageIntent}{". ucfirst(formatter::toTex($this->intent)) ."}" . PHP_EOL;
     $tex .= "\\newcommand{\\". getTexCommandName(str_replace('_','',$this->getTitle())) . "PageDiscussion}{". formatter::toTex($this->discussion) ."}" . PHP_EOL;
+	$tex .= "\\newcommand{\\". getTexCommandName(str_replace('_','',$this->getTitle())) . "PageDescription}{". formatter::toTex($this->description) ."}" . PHP_EOL;
+	$tex .= "\\newcommand{\\". getTexCommandName(str_replace('_','',$this->getTitle())) . "PageTechnologies}{". formatter::toTex($this->technologies) ."}" . PHP_EOL;
     $tex = formatter::sourceLinks($this->getTitle(),$tex);
     return $tex;
  }
@@ -181,6 +185,8 @@ class Page{
   $this->bibs = extractBibs($this->content);
   $this->intent = extractIntent($this->content);
   $this->discussion = extractContent($this->content, "==Discussion==");
+  $this->description = extractContent($this->content, "==Description==");
+  $this->technologies = extractContent($this->content, "==Technologies==");
   
  }
 
