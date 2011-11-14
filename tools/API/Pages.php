@@ -1,6 +1,6 @@
 <?php
 define('BASE_PATH',str_replace('API','',dirname(__FILE__)));
-require_once(BASE_PATH . 'API/ApiWrapper.php' );
+require_once('/ApiWrapper.php' );
 require_once('Utils.php');
 
 function extractBibs(&$content) {
@@ -53,8 +53,10 @@ function extractIntent($content) {
     foreach(preg_split( '/\r\n|\r|\n/', $content) as $line) {
       if (startsWith("==Intent==",str_replace(' ','',trim($line)) )) {
         $inIntent= true;
+        continue;
       }
       if (startsWith("==",trim($line))) {
+         $inIntent = false;
          continue;
       }
       if($inIntent) {
@@ -66,6 +68,13 @@ function extractIntent($content) {
     }
     
     return $intent;
+}
+
+function until($pattern,$text){
+  if(strpos($text,$pattern) === FALSE)
+  	return $text;
+  else 
+  	return substr($text, 0, strpos($text,$pattern));
 }
                                                                                                             
 function extractContent($content, $pattern){
@@ -369,6 +378,38 @@ class ImplementationPage extends Page{
  public $spaces;
  public $illustration;
  public $issues;
+  
+ function getFeats(){
+  return $this->features;
+ } 
+ 
+ function getTechs(){
+   $techs = array();
+   $pattern = "/(Technology:)([\w\W\s][^\]]+)(\]{2})/";
+   foreach(preg_split( '/\r\n|\r|\n/', $this->technologies) as $line){
+    if($line == '') continue;
+    
+    preg_match_all($pattern, $line, $out, PREG_PATTERN_ORDER);
+     if($out[2][0] != ''){
+       array_push($techs,trim(until("|",$out[2][0]))); 
+     }
+  }
+  return $techs;
+ }
+ 
+ function getLangs(){
+   $langs = array();
+   $pattern = "/(Language:)([\w\W\s][^\]]+)(\]{2})/";
+   foreach(preg_split( '/\r\n|\r|\n/', $this->languages) as $line){
+    if($line == '') continue;
+    
+    preg_match_all($pattern, $line, $out, PREG_PATTERN_ORDER);  
+     if($out[2][0] != ''){
+       array_push($langs,trim(until("|",$out[2][0]))); 
+     }
+  }
+  return $langs;
+ } 
   
  function toTexMacro(){
    $tex = "\\newcommand{\\". getTexCommandName($this->getTitle()) . "ImplementationTitle}{\\wikiiref{". $this->getTitle() ."}}" . PHP_EOL; 
