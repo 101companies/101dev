@@ -205,7 +205,7 @@ else if ($args['mode'] == 'implContents') {
   echo 'DONE'.PHP_EOL;
   
 }
-else if ($args['mode'] = 'ttcContents') {
+else if ($args['mode'] == 'ttcContents') {
   $titles = explode(',',$args['titles']);
   $macroTex = '';
   $ttcsTex = '';
