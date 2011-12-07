@@ -382,7 +382,7 @@ class formatter{
         fclose($f);
         
         $pattern = '<syntaxhighlight lang="' . $match[1] .'"'.$match[2].'>' . $match[5] .'</syntaxhighlight>';
-        $replacement = '\lstinputlisting[xleftmargin=20pt, language=' . $match[1] .$sourceText. ']{../../../101companies/tools/texgenerator/tex/files/' . $fname . "}";
+        $replacement = '\lstinputlisting[xleftmargin=20pt, language=' . $match[1] .$sourceText. ']{../../../101dev/tools/texgenerator/tex/files/' . $fname . "}";
         $text = str_replace($pattern, $replacement, $text);
      }
      
