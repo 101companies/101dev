@@ -9,8 +9,8 @@ local:
 	make matrix-only
 	make dump-only
 up:
-	svn up
-	cd ../API; svn up
+	git pull
+	cd ../API; git pull
 
 content:
 	make up
