@@ -289,10 +289,6 @@ class formatter{
     }
 
     public static function toTex($text) {
-    
-    
-      
-    
      if($text == '') return '';
      if($text == null) return '';
      //var_dump($text);
@@ -382,10 +378,11 @@ class formatter{
         fclose($f);
         
         $pattern = '<syntaxhighlight lang="' . $match[1] .'"'.$match[2].'>' . $match[5] .'</syntaxhighlight>';
-        $replacement = '\lstinputlisting[xleftmargin=20pt, language=' . $match[1] .$sourceText. ']{../../../101dev/tools/texgenerator/tex/files/' . $fname . "}";
+        $replacement = '\lstinputlisting[xleftmargin=20pt]{../../files/' . $fname . "}"; //, language=' . $match[1] .$sourceText. 
         $text = str_replace($pattern, $replacement, $text);
      }
      
+     $text = str_replace($pattern, $match[5], $text); //av: quick fix by Thomas
      $text = str_replace('lang="haskell" enclose="none">','lang="haskell">', $text);
      $text = str_replace('lang="haskell"  enclose="none">','lang="haskell">', $text);
      $pattern = '/<syntaxhighlight lang=\"([a-zA-Z]*)\">((\s*|.|:|=|>|<|\s)*)<\/syntaxhighlight>/'; 
