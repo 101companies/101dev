@@ -387,12 +387,12 @@ class formatter{
      $text = str_replace('lang="haskell"  enclose="none">','lang="haskell">', $text);
      $pattern = '/<syntaxhighlight lang=\"([a-zA-Z]*)\">((\s*|.|:|=|>|<|\s)*)<\/syntaxhighlight>/'; 
      preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
-     foreach($matches as $match){
+     /*   foreach($matches as $match){
         $pattern = '<syntaxhighlight lang="' . $match[1] .'">' . $match[2] .'</syntaxhighlight>';   
         $replacement = '\begin{ttfamily}'.$match[2].'\end{ttfamily}';    
         $replacement = pprint($replacement);
         $text = str_replace($pattern, $replacement, $text);
-     }
+	} */
      
      $text = str_replace('&','\&',$text);
            
@@ -410,7 +410,8 @@ class formatter{
      
      $text = str_replace("<references>", "", $text);
      $text = str_replace("<references/>", "", $text);
-               
+     $text = str_replace('^','\^', $text);
+          
      $text = formatter::nestedList($text);
      $text = formatter::subsubsubsections($text);                                                
      $text = formatter::subsubsections($text);

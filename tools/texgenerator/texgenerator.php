@@ -155,7 +155,7 @@ else if ($args['mode'] == 'implContents') {
     $implTexTit = 'impls/impl'.$ucTitle.'.tex';
     
     // adding to mactro
-    $macroTex .= '\\input{../../../101companies/tools/texgenerator/tex/impl/data/'.$implTexTit.'}'.PHP_EOL;
+    $macroTex .= '\\input{../../../101dev/tools/texgenerator/tex/impl/data/'.$implTexTit.'}'.PHP_EOL;
     $s = new ImplementationPage($title);
     // adding to implementations.tex
     if ($title != $nTitle){
@@ -221,7 +221,7 @@ else if ($args['mode'] == 'ttcContents') {
     $ttcTexTit = 'ttcs/ttc'.$ucTitle.'.tex'; 
     
     // adding to mactro
-    $macroTex .= '\\input{../../../101companies/tools/texgenerator/tex/ttc/data/'.$ttcTexTit.'}'.PHP_EOL;
+    $macroTex .= '\\input{../../../101dev/tools/texgenerator/tex/ttc/data/'.$ttcTexTit.'}'.PHP_EOL;
     
     $s = new Page($title);
      // adding to ttcs.tex
