@@ -1,6 +1,5 @@
 <?php
 define('API_PATH',str_replace('API','',dirname(__FILE__)));
-
 require_once(API_PATH . "wikibotClasses/wikibot.classes.php");
 
 function getWpapi(){
@@ -33,8 +32,9 @@ function getAllPages(){
 }
 
 function getAllImplementations(){
+  echo "getting all implementations";
    $impl = getWpapi()->listprefix("101implementation:");
-  // var_dump($impl); 
+   var_dump($impl); 
    return $impl;
 }
 

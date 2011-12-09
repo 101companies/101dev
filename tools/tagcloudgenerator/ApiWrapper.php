@@ -16,6 +16,16 @@ function getAllPages(){
  return $pages;
 }
 
+function getRivison($title,$age){
+  return getWpapi()->revisions($title, 1, $age, false);
+}
+
+function getAllLanguages(){
+ $langs = getWpapi()->listprefix("Language:");
+ return $langs;	
+}
+
+
 function getAllImplementations(){
    echo "FOO";
    $impl = getWpapi()->listprefix("101implementation:");
