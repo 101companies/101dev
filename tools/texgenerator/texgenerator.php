@@ -287,8 +287,8 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
   $impl = $catImpl->getImplementations();
   $allLangs = $wiki->getLanguagepages();
   $allTechnologies = $wiki->getTechnologyPages();
-  echo "Number of technology pages"; 
-  echo sizeof($allTechnologies) ;
+  //echo "Number of technology pages"; 
+  // echo sizeof($allTechnologies) ;
   $catFeature = new CategoryPage("101feature");
   $baseCat = new CategoryPage("base");
   $allPages = $wiki->getAllPages();  
@@ -302,11 +302,12 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
     fwrite($fMacro, $i->toTexMacro());
   }
   foreach($allLangs as $lang){
-  //var_dump($lang->toTexMacro()); 
-  fwrite($fMacro, $lang->toTexMacro());
+   //var_dump($lang->toTexMacro()); 
+   fwrite($fMacro, $lang->toTexMacro());
   }
   foreach($allTechnologies as $tech){
-   fwrite($fMacro, $tech->toTexMacro());
+    $tex = $tech->toTexMacro();
+    fwrite($fMacro, $tex);
   }
   $categories = array();  
   foreach($catFeature->members as $cf){

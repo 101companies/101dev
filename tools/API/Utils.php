@@ -103,6 +103,7 @@ function getItemizedTex($markup){
 
 function handleUmlauts($txt){
  $txt = str_replace("ä", "\\\"{a}", $txt);
+ $txt = str_replace("ö", "\\\"{o}", $txt);
  $t = str_replace("ü", "\\\"{u}", $txt);
  return $t;
 }
@@ -128,6 +129,7 @@ function getTexCommandName($txt){
   $txt = str_replace("/", "", $txt);
   $txt = str_replace("ä", "ae", $txt);
   $txt = str_replace("ü", "ou", $txt);
+  $txt = str_replace("ö", "oe", $txt);
   $txt = str_replace(":", "", $txt);
   $res = str_replace(' ', '',$txt);
   return $res;
@@ -421,7 +423,7 @@ class formatter{
      $res = handleUmlauts($text);
      
      //var_dump($res);
-     return $res;  
+     return trim($res);  
    }
    
     function italic2Textit($text){

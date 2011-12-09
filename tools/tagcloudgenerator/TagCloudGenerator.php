@@ -2,7 +2,7 @@
 
 define('BASE_PATH',str_replace('tagcloudgenerator','',dirname(__FILE__)));
 require_once("config.php");
-require_once(BASE_PATH . "API/ApiWrapper.php");
+//require_once(BASE_PATH . "API/ApiWrapper.php");
 require_once(BASE_PATH . "API/ApiWrapper2.php");
 
 function writeFile($fileName, $arr){
@@ -21,7 +21,7 @@ $allLanguages = array();
  $impl = getAllImplementations();
  $wiki = new Wiki();
 
- if($impl == NULL) die ("pages have not been downloaded, please try a bit later" . PHP_EOL);
+ if($impl == NULL) die ("implementation pages have not been downloaded, please try a bit later" . PHP_EOL);
  foreach($impl as $i){
   $page = getPageContent($i['title']);
   $technologies = extractTechnologies($page);
