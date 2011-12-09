@@ -1,8 +1,10 @@
 <?php
 
+require_once("../wikibotClasses/wikibot.classes.php");
+
 function getWpapi(){
-   $bot = 'Bot';
-   $wiki = 'Wiki';
+   $bot = 'TestBot';
+   $wiki = '101companies';
    $wpapi = new wikipediaapi ('', '', '', $bot, $wiki, true);
    
    return $wpapi;
@@ -15,8 +17,9 @@ function getAllPages(){
 }
 
 function getAllImplementations(){
+   echo "FOO";
    $impl = getWpapi()->listprefix("101implementation:");
-  // var_dump($impl); 
+   var_dump($impl); 
    return $impl;
 }
 
