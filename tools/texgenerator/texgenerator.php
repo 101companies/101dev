@@ -89,7 +89,10 @@ if($args['mode'] == 'dump'){
    
    $content = "";
    foreach($pages as $page){
-    $content .= $page->dumpToTex();
+    $tex = $page->dumpToTex();
+    if(strstr($tex, "CategorymetaTitle") == FALSE){
+      $content .= $tex;
+    }
    }
    fwrite($f, $content);
    fclose($f);
@@ -284,11 +287,12 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
   $impl = $catImpl->getImplementations();
   $allLangs = $wiki->getLanguagepages();
   $allTechnologies = $wiki->getTechnologyPages();
+  echo "Number of technology pages"; 
+  echo sizeof($allTechnologies) ;
   $catFeature = new CategoryPage("101feature");
   $baseCat = new CategoryPage("base");
   $allPages = $wiki->getAllPages();  
-  
-
+ 
   $fImpl = fopen($texFolder . 'implementations.tex', 'w+');
   $fMacro = fopen($texFolder . "macros.tex", "w+");
   foreach($impl as $i){
