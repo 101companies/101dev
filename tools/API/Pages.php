@@ -514,9 +514,9 @@ class TechnologyPage extends Page{
  }
  
  function toTexMacro(){
-   $tex = "\\newcommand{\\". getTexCommandName($this->getTitle()) . "TechnologyTitle}{". formatter::toTex($this->getTitle()) ."}" . PHP_EOL;
-   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "TechnologyIntent}{" . formatter::toTex($this->intent) . "}" . PHP_EOL;
-   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "TechnologyDescription}{" . formatter::toTex($this->description) . "}" . PHP_EOL;
+   $tex = "\\newcommand{\\". getTexCommandName($this->getTitle()) . "TechnologyTitle}{". formatter::toTex(trim($this->getTitle())) ."}" . PHP_EOL;
+   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "TechnologyIntent}{" . formatter::toTex(trim($this->intent)) . "}" . PHP_EOL;
+   $tex .= "\\newcommand{\\" . getTexCommandName($this->getTitle()) . "TechnologyDescription}{" . formatter::toTex(trim($this->description)) . "}" . PHP_EOL;
    return $tex;
   }
 }

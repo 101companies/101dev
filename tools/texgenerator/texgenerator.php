@@ -89,7 +89,10 @@ if($args['mode'] == 'dump'){
    
    $content = "";
    foreach($pages as $page){
-    $content .= $page->dumpToTex();
+    $tex = $page->dumpToTex();
+    if(strstr($tex, "CategorymetaTitle") == FALSE){
+      $content .= $tex;
+    }
    }
    fwrite($f, $content);
    fclose($f);
@@ -155,7 +158,7 @@ else if ($args['mode'] == 'implContents') {
     $implTexTit = 'impls/impl'.$ucTitle.'.tex';
     
     // adding to mactro
-    $macroTex .= '\\input{../../../101companies/tools/texgenerator/tex/impl/data/'.$implTexTit.'}'.PHP_EOL;
+    $macroTex .= '\\input{../../../101dev/tools/texgenerator/tex/impl/data/'.$implTexTit.'}'.PHP_EOL;
     $s = new ImplementationPage($title);
     // adding to implementations.tex
     if ($title != $nTitle){
@@ -221,7 +224,7 @@ else if ($args['mode'] == 'ttcContents') {
     $ttcTexTit = 'ttcs/ttc'.$ucTitle.'.tex'; 
     
     // adding to mactro
-    $macroTex .= '\\input{../../../101companies/tools/texgenerator/tex/ttc/data/'.$ttcTexTit.'}'.PHP_EOL;
+    $macroTex .= '\\input{../../../101dev/tools/texgenerator/tex/ttc/data/'.$ttcTexTit.'}'.PHP_EOL;
     
     $s = new Page($title);
      // adding to ttcs.tex
@@ -284,11 +287,12 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
   $impl = $catImpl->getImplementations();
   $allLangs = $wiki->getLanguagepages();
   $allTechnologies = $wiki->getTechnologyPages();
+  //echo "Number of technology pages"; 
+  // echo sizeof($allTechnologies) ;
   $catFeature = new CategoryPage("101feature");
   $baseCat = new CategoryPage("base");
   $allPages = $wiki->getAllPages();  
-  
-
+ 
   $fImpl = fopen($texFolder . 'implementations.tex', 'w+');
   $fMacro = fopen($texFolder . "macros.tex", "w+");
   foreach($impl as $i){
@@ -298,11 +302,12 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
     fwrite($fMacro, $i->toTexMacro());
   }
   foreach($allLangs as $lang){
-  //var_dump($lang->toTexMacro()); 
-  fwrite($fMacro, $lang->toTexMacro());
+   //var_dump($lang->toTexMacro()); 
+   fwrite($fMacro, $lang->toTexMacro());
   }
   foreach($allTechnologies as $tech){
-   fwrite($fMacro, $tech->toTexMacro());
+    $tex = $tech->toTexMacro();
+    fwrite($fMacro, $tex);
   }
   $categories = array();  
   foreach($catFeature->members as $cf){

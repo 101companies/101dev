@@ -2,8 +2,8 @@ ssh-user = softlang@linux.uni-koblenz.de
 www-dir = /home/softlang/www/101companies
 
 all:
-	svn up
-	cd ../API; svn up
+	git pull
+	cd ../API; git pull
 	php TagCloudGenerator.php
 	cd data; make
 

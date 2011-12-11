@@ -1,8 +1,10 @@
 <?php
 
+require_once("../wikibotClasses/wikibot.classes.php");
+
 function getWpapi(){
-   $bot = 'Bot';
-   $wiki = 'Wiki';
+   $bot = 'TestBot';
+   $wiki = '101companies';
    $wpapi = new wikipediaapi ('', '', '', $bot, $wiki, true);
    
    return $wpapi;
@@ -14,9 +16,20 @@ function getAllPages(){
  return $pages;
 }
 
+function getRivison($title,$age){
+  return getWpapi()->revisions($title, 1, $age, false);
+}
+
+function getAllLanguages(){
+ $langs = getWpapi()->listprefix("Language:");
+ return $langs;	
+}
+
+
 function getAllImplementations(){
+   echo "FOO";
    $impl = getWpapi()->listprefix("101implementation:");
-  // var_dump($impl); 
+   var_dump($impl); 
    return $impl;
 }
 

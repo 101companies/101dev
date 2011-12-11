@@ -103,6 +103,7 @@ function getItemizedTex($markup){
 
 function handleUmlauts($txt){
  $txt = str_replace("ä", "\\\"{a}", $txt);
+ $txt = str_replace("ö", "\\\"{o}", $txt);
  $t = str_replace("ü", "\\\"{u}", $txt);
  return $t;
 }
@@ -128,6 +129,7 @@ function getTexCommandName($txt){
   $txt = str_replace("/", "", $txt);
   $txt = str_replace("ä", "ae", $txt);
   $txt = str_replace("ü", "ou", $txt);
+  $txt = str_replace("ö", "oe", $txt);
   $txt = str_replace(":", "", $txt);
   $res = str_replace(' ', '',$txt);
   return $res;
@@ -289,10 +291,6 @@ class formatter{
     }
 
     public static function toTex($text) {
-    
-    
-      
-    
      if($text == '') return '';
      if($text == null) return '';
      //var_dump($text);
@@ -382,20 +380,21 @@ class formatter{
         fclose($f);
         
         $pattern = '<syntaxhighlight lang="' . $match[1] .'"'.$match[2].'>' . $match[5] .'</syntaxhighlight>';
-        $replacement = '\lstinputlisting[xleftmargin=20pt, language=' . $match[1] .$sourceText. ']{../../../101dev/tools/texgenerator/tex/files/' . $fname . "}";
+        $replacement = '\lstinputlisting[xleftmargin=20pt]{\texgen/files/' . $fname . "}"; //, language=' . $match[1] .$sourceText. //../../files/
         $text = str_replace($pattern, $replacement, $text);
      }
      
+     $text = str_replace($pattern, $match[5], $text); //av: quick fix by Thomas
      $text = str_replace('lang="haskell" enclose="none">','lang="haskell">', $text);
      $text = str_replace('lang="haskell"  enclose="none">','lang="haskell">', $text);
      $pattern = '/<syntaxhighlight lang=\"([a-zA-Z]*)\">((\s*|.|:|=|>|<|\s)*)<\/syntaxhighlight>/'; 
      preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
-     foreach($matches as $match){
+     /*   foreach($matches as $match){
         $pattern = '<syntaxhighlight lang="' . $match[1] .'">' . $match[2] .'</syntaxhighlight>';   
         $replacement = '\begin{ttfamily}'.$match[2].'\end{ttfamily}';    
         $replacement = pprint($replacement);
         $text = str_replace($pattern, $replacement, $text);
-     }
+	} */
      
      $text = str_replace('&','\&',$text);
            
@@ -413,7 +412,8 @@ class formatter{
      
      $text = str_replace("<references>", "", $text);
      $text = str_replace("<references/>", "", $text);
-               
+     $text = str_replace('^','\^', $text);
+          
      $text = formatter::nestedList($text);
      $text = formatter::subsubsubsections($text);                                                
      $text = formatter::subsubsections($text);
@@ -423,7 +423,7 @@ class formatter{
      $res = handleUmlauts($text);
      
      //var_dump($res);
-     return $res;  
+     return trim($res);  
    }
    
     function italic2Textit($text){
