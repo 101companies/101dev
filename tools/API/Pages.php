@@ -154,8 +154,6 @@ class Page{
   return $this->title;
  }
  
-
- 
  function getFileName(){
   $t = $this->getTitle();
   $symbols = array(" ", "/");

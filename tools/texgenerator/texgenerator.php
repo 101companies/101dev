@@ -290,7 +290,7 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
   //echo "Number of technology pages"; 
   // echo sizeof($allTechnologies) ;
   $catFeature = new CategoryPage("101feature");
-  $baseCat = new CategoryPage("base");
+  $baseCat = new CategoryPage("Base");
   $allPages = $wiki->getAllPages();  
  
   $fImpl = fopen($texFolder . 'implementations.tex', 'w+');
@@ -310,24 +310,38 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
     fwrite($fMacro, $tex);
   }
   $categories = array();  
+  $cat = array();
   foreach($catFeature->members as $cf){
     //array_push($categories, $cf->getTitle());
     fwrite($fMacro, "\\newcommand{\\" .getTexCommandName($cf->getTitle()) . "FeatureCategory}{" . $cf->getTitle() ."}". PHP_EOL);
-    foreach($cf->members as $f){
-      //array_push($categories, $f->getTitle());
-      fwrite($fMacro, $f->toTexMacro());
+	foreach($cf->members as $f){
+	  if(in_array($f->getFullTitle(), $cat) == FALSE){
+		ECHO $f->getFullTitle() . PHP_EOL;
+	    fwrite($fMacro, $f->toTexMacro());
+	    array_push($cat, $f->getFullTitle());
+	    if($f->namespace == "Category"){
+		 foreach($f->members as $fm){
+			ECHO $fm->getFullTitle() . PHP_EOL;		
+			fwrite($fMacro, $fm->toTexMacro());
+		    array_push($cat, $fm->getFullTitle());
+	     }
+	    }
+	   }
     }
   }
   
   foreach($allPages as $p){
     if(strstr($p->getFullTitle(), ":") == FALSE){
-      fwrite($fMacro, $p->toTexMacro());
+	 //ECHO $p->getFullTitle() . PHP_EOL;
+     fwrite($fMacro, $p->toTexMacro());
     }
   }
   
+  echo "Full base category tree" . PHP_EOL;
   foreach($baseCat->getFullCategoryTree() as $c){
     if($c->namespace == "Category"){
-      if(in_array($c->getTitle(), $categories) == false){
+      if((in_array($c->getTitle(), $categories) == FALSE) && (in_array($c->getFullTitle(), $cat) == FALSE)) { //!!!  
+	   //ECHO $c->getFullTitle() . PHP_EOL;	
        fwrite($fMacro, $c->toTexMacro());
        array_push($categories, $c->getTitle());
       }
@@ -351,9 +365,18 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
   
   $fFeatures = fopen($texFolder . "features.tex", "w+");
   foreach($catFeature->members as $cf){
+	echo $cf->getTitle() . " : " . $cf->namespace . PHP_EOL;
     fwrite($fFeatures, "\\fcwiki{" .getTexCommandName($cf->getTitle()) . "}" . PHP_EOL);
     foreach($cf->members as $f){
-      fwrite($fFeatures, "\\fwiki{" .getTexCommandName($f->getTitle()) . "}" . PHP_EOL);
+	  echo "  " . $f->getTitle() . " : " . $f->namespace . PHP_EOL;
+	  if(count($f->members) > 0){
+		//fwrite($fFeatures, "\\fcwiki{" .getTexCommandName($f->getTitle()) . "}" . PHP_EOL);
+		foreach($f->members as $fm){
+		 echo "  " . $fm->getTitle() . " : " . $f->namespace . PHP_EOL;	 
+	     fwrite($fFeatures, "\\fwiki{" .getTexCommandName($fm->getTitle()) . "}" . PHP_EOL);		 
+		}
+	  }
+      else fwrite($fFeatures, "\\fwiki{" .getTexCommandName($f->getTitle()) . "}" . PHP_EOL);
     }    
   }
   fclose($fFeatures);
