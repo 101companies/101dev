@@ -256,23 +256,29 @@ class CategoryPage extends Page{
   parent::__construct($title);
   $this->namespace = "Category";
   $this->members = array();
+  ECHO "Getting category members for " . $title . PHP_EOL;
   $subCats = getWpapi()->categorymembers($title);
-  
+  var_dump($subCats);
+
   if($subCats == NULL) return;
    foreach($subCats as $sc){
     if(substr_count($sc['title'],"Category") == 1){ //found a Category
+	  ECHO "Adding a category page: " . $sc['title'] . PHP_EOL;
       $page = new CategoryPage($sc['title']);
       array_push($this->members, $page);
     }
     else if(substr_count($sc['title'],"101implementation") == 1){ //found an implementation page
+	  ECHO "Adding an implementation page: " . $sc['title'] . PHP_EOL;
       $page = new ImplementationPage($sc['title']);
       array_push($this->members, $page);
     }
     else if(substr_count($sc['title'], "101feature") == 1){
+	 ECHO "Adding an feature page: " . $sc['title'] . PHP_EOL;
      $page = new FeaturePage($sc['title']);
      array_push($this->members, $page);
     }
     else{
+	ECHO "Adding a page: " . $sc['title'] . PHP_EOL;
     $page = new Page($sc['title']);
     array_push($this->members, $page);
    }

@@ -283,14 +283,22 @@ else if ($args['mode'] == 'ttcContents') {
 
 else if($args['mode'] == 'content'){ //generate tex wiki pages representation
   $wiki = new Wiki();
+  ECHO "Getting 101implementation category" . PHP_EOL;
   $catImpl = new CategoryPage("101implementation");
+  ECHO "Getting all implementation pages" . PHP_EOL;
   $impl = $catImpl->getImplementations();
+  
+  ECHO "Getting all language pages" . PHP_EOL;
   $allLangs = $wiki->getLanguagepages();
+
+  ECHO "Getting all technologies pages" . PHP_EOL;
   $allTechnologies = $wiki->getTechnologyPages();
   //echo "Number of technology pages"; 
   // echo sizeof($allTechnologies) ;
   $catFeature = new CategoryPage("101feature");
   $baseCat = new CategoryPage("Base");
+  
+  ECHO "Getting all other pages" . PHP_EOL;
   $allPages = $wiki->getAllPages();  
  
   $fImpl = fopen($texFolder . 'implementations.tex', 'w+');
@@ -305,12 +313,15 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
    //var_dump($lang->toTexMacro()); 
    fwrite($fMacro, $lang->toTexMacro());
   }
+  ECHO "Dumping technologies" . PHP_EOL;
   foreach($allTechnologies as $tech){
     $tex = $tech->toTexMacro();
     fwrite($fMacro, $tex);
   }
   $categories = array();  
   $cat = array();
+  
+  ECHO "Dumping Features" . PHP_EOL;
   foreach($catFeature->members as $cf){
     //array_push($categories, $cf->getTitle());
     fwrite($fMacro, "\\newcommand{\\" .getTexCommandName($cf->getTitle()) . "FeatureCategory}{" . $cf->getTitle() ."}". PHP_EOL);
@@ -330,6 +341,7 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
     }
   }
   
+  ECHO "Dumping other pages" . PHP_EOL;
   foreach($allPages as $p){
     if(strstr($p->getFullTitle(), ":") == FALSE){
 	 //ECHO $p->getFullTitle() . PHP_EOL;
