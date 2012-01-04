@@ -350,6 +350,7 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
   }
   
   echo "Full base category tree" . PHP_EOL;
+  fwrite($fMacro, $baseCat->toTexMacro());
   foreach($baseCat->getFullCategoryTree() as $c){
     if($c->namespace == "Category"){
       if((in_array($c->getTitle(), $categories) == FALSE) && (in_array($c->getFullTitle(), $cat) == FALSE)) { //!!!  
