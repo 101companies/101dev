@@ -395,6 +395,7 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
   fclose($fFeatures);
   
   $fCategories = fopen($texFolder . "categories.tex", "w+");
+  fwrite($fCategories, "\\cwiki{" . getTexCommandName($baseCat->getTitle()) . "}" . PHP_EOL);
   foreach($baseCat->getFullCategoryTree() as $c){
     if($c->namespace == "Category"){
       fwrite($fCategories, "\\cwiki{" . getTexCommandName($c->getTitle()) . "}" . PHP_EOL);
