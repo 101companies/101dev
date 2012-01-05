@@ -432,7 +432,9 @@
 		 * @return Associative array of revision data.
 		 **/
 		function revisions ( $page, $count = 1, $dir = 'older', $content = false, $revid = null, $wait = true, $getrbtok = false, $dieonerror = true, $redirects = false ) {
-			$x = $this->http->get( $this->apiurl . '?action=query&prop=revisions&titles=' . urlencode( $page ) . '&rvlimit=' . urlencode( $count ) . '&rvprop=timestamp|ids|user|comment' . ( ( $content ) ? '|content':'' ) . '&format=php&meta=userinfo&rvdir=' . urlencode( $dir ) . ( ( $revid !== null ) ? '&rvstartid=' . urlencode( $revid ):'' ) . ( ( $getrbtok == true ) ? '&rvtoken=rollback':'' ) . ( ( $redirects == true ) ? '&redirects':'' ) );
+			$u = $this->apiurl . '?action=query&prop=revisions&titles=' . urlencode( $page ) . '&rvlimit=' . urlencode( $count ) . '&rvprop=timestamp|ids|user|comment' . ( ( $content ) ? '|content':'' ) . '&format=php&meta=userinfo&rvdir=' . urlencode( $dir ) . ( ( $revid !== null ) ? '&rvstartid=' . urlencode( $revid ):'' ) . ( ( $getrbtok == true ) ? '&rvtoken=rollback':'' ) . ( ( $redirects == true ) ? '&redirects':'' );
+		//	ECHO "Get content for URL: " . $u . PHP_EOL;
+			$x = $this->http->get($u);
 			$x = unserialize( $x );
 			if ( $revid !== null ) {
 				$found = false;

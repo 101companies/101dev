@@ -32,7 +32,7 @@ function getAllPages(){
 }
 
 function get101companiesPages(){
-	$pages = getWpapi()->listprefix("101companies:", 4);
+	$pages = getWpapi()->listprefix("", 4);
 	return $pages;
 }
 
