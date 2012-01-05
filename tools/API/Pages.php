@@ -121,6 +121,7 @@ class Page{
  public $lastrev;
  public $creation;
  public $bibs;
+ public $objective;
  
  function getTitle(){
   if(strpos($this->title,":") === FALSE)
@@ -194,7 +195,7 @@ class Page{
   $this->discussion = extractContent($this->content, "==Discussion==");
   $this->description = extractContent($this->content, "==Description==");
   $this->technologies = extractContent($this->content, "==Technologies==");
-  
+  $this->objective = extractContent($this->objective, "==Objective==");
  }
 
   function getSections(){

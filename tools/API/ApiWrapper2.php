@@ -12,13 +12,20 @@ class Wiki{
     }  
       
     function getAllPages(){
+	    ECHO "Getting all pages" . PHP_EOL;
         $allPages = array();
         $pages = getAllPages();
         foreach($pages as $p){
             $page = new Page($content = $p['title']);
+            echo $page->getFullTitle() . PHP_EOL;
             array_push($allPages, $page);
         }
-        
+        $pages101 = get101companiesPages(); //!!
+        foreach($pages101 as $p){
+	     	$page = new Page($content = $p['title']);
+            array_push($allPages, $page);
+			ECHO "101companies page found" . PHP_EOL;
+        } 
         return $allPages;
     }
     function getLanguagePages(){

@@ -31,6 +31,11 @@ function getAllPages(){
  return $pages;
 }
 
+function get101companiesPages(){
+	$pages = getWpapi()->listprefix("101companies:", 4);
+	return $pages;
+}
+
 function getAllImplementations(){
   echo "getting all implementations";
    $impl = getWpapi()->listprefix("101implementation:");

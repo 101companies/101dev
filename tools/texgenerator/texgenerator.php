@@ -82,6 +82,9 @@ if($args['mode'] == 'dump'){
    $wiki = new Wiki();
    $f = fopen($texFolderDump . "macros.tex", "w+");
    $allPages = $wiki->getAllPages();
+   //echo "DUMP: " . PHP_EOL;
+   //var_dump($allPages);
+   echo "Getting categories pages";
    $catPages = $wiki->getCategoryPages();
    echo "Dumping wiki content..." . PHP_EOL;
    $pages = array();
@@ -89,6 +92,7 @@ if($args['mode'] == 'dump'){
    
    $content = "";
    foreach($pages as $page){
+	ECHO $page->getTitle() . PHP_EOL;
     $tex = $page->dumpToTex();
     if(strstr($tex, "CategorymetaTitle") == FALSE){
       $content .= $tex;
