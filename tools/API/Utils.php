@@ -442,7 +442,7 @@ class formatter{
     }
     
     function handleBold($text){
-     $pattern =  '/\'\'\'((\w*|\d*|\s*|\-*|\:*)*)\'\'\'/'; //'/\'\'(.*)\'\'/';
+     $pattern =  '/\'\'((\w*|\W*|\d*|\s*|\-*|\:*|\[*|\]|\|*)*)\'\'/'; //'/\'\'(.*)\'\'/';
      $replacement = '\\textbf{\1}';
      return preg_replace($pattern, $replacement, $text);
     }
