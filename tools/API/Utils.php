@@ -389,12 +389,12 @@ class formatter{
      $text = str_replace('lang="haskell"  enclose="none">','lang="haskell">', $text);
      $pattern = '/<syntaxhighlight lang=\"([a-zA-Z]*)\">((\s*|.|:|=|>|<|\s)*)<\/syntaxhighlight>/'; 
      preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
-     /*   foreach($matches as $match){
+     foreach($matches as $match){
         $pattern = '<syntaxhighlight lang="' . $match[1] .'">' . $match[2] .'</syntaxhighlight>';   
         $replacement = '\begin{ttfamily}'.$match[2].'\end{ttfamily}';    
         $replacement = pprint($replacement);
         $text = str_replace($pattern, $replacement, $text);
-	} */
+	}
      
      $text = str_replace('&','\&',$text);
            
@@ -435,7 +435,7 @@ class formatter{
           $newText .= $line.PHP_EOL;
         
       }      
-      $pattern =  '/\'\'((\w*|\W*|\d*|\s*|\-*)*)\'\'/'; //'/\'\'(.*)\'\'/';
+      $pattern =  '/\'\'((\w*|\W*|\d*|\s*|\-*|\:*|\[*|\]|\|*)*)\'\'/'; //'/\'\'(.*)\'\'/';
       $replacement = '\\textit{\1}';
       return preg_replace($pattern, $replacement, $newText);
    
