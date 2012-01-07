@@ -105,6 +105,7 @@ function extractContent($content, $pattern){
    }
   $preLine = $line;
   }
+  //ECHO "extract content for " . $pattern . var_dump($res);
   return $res;
 }
 

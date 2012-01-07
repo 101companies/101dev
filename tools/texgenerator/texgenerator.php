@@ -89,6 +89,7 @@ if($args['mode'] == 'dump'){
    echo "Dumping wiki content..." . PHP_EOL;
    $pages = array();
    $pages = array_merge($catPages, $allPages);
+   $pages = $allPages;
    
    $content = "";
    foreach($pages as $page){
