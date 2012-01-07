@@ -303,7 +303,7 @@ class formatter{
      }
      
      
-     $pattern =  '/\[\[(:)?((\w|\d|\s|\/|\-|\.|\#)+):((\w|\d|\s|\/|\-|\.|\#)+)\|((\w|\d|\s|\/|\-|\.|\#)+)\]\]/';
+     $pattern =  '/\[\[(:)?((\w|\d|\s|\/|\-|\.|\#)+):((\w|\d|\s|\/|\-|\.|\#)+)\|((\w|\d|\s|\/|\-|\.|\#\')+)\]\]/';
      $replacement = '\\wikiref{\2:\4}{\6}';
      $text = preg_replace($pattern, $replacement, $text);
     
@@ -400,9 +400,11 @@ class formatter{
            
      $text = str_replace('<nowiki>','',str_replace('</nowiki>','',$text)); 
      $text = str_replace('$','\$',$text);
-     $text = formatter::handleCites($text);
-     $text = formatter::handleBold($text);                                       
+     $text = formatter::handleCites($text); 
+     $text = formatter::handleBoldAndItalicSpecialCase($text); //we need this because regex cannot handle -> '''                     
      $text = formatter::italic2Textit($text); 
+     $text = formatter::handleBold($text); 
+	 var_dump($text);  
      $text = str_replace('->','$\rightarrow$',$text);
      $text = str_replace('=>','$\Rightarrow$',$text); 
      $text = str_replace('<','$<$',$text);
@@ -426,6 +428,12 @@ class formatter{
      return trim($res);  
    }
    
+    function handleBoldAndItalicSpecialCase($tex){
+	 $pattern =  '/\'\'\'((\w*|\W*|\d*|\s*|\-*|\:*|\[*|\]|\|*|\}*|\{*|\\*)*)\'\'\'/'; //'/\'\'(.*)\'\'/';
+	 $replacement = '\\textit{\textbf{\1}}';
+	 return preg_replace($pattern, $replacement, $tex);
+    }
+
     function italic2Textit($text){
       $newText = '';
       foreach(preg_split( '/\r\n|\r|\n/', $text) as $line) {
@@ -442,7 +450,7 @@ class formatter{
     }
     
     function handleBold($text){
-     $pattern =  '/\'\'((\w*|\W*|\d*|\s*|\-*|\:*|\[*|\]|\|*)*)\'\'/'; //'/\'\'(.*)\'\'/';
+     $pattern =  '/\'((\w*|\W*|\d*|\s*|\-*|\:*|\[*|\]*|\|*)+)\'/'; //'/\'\'(.*)\'\'/';
      $replacement = '\\textbf{\1}';
      return preg_replace($pattern, $replacement, $text);
     }

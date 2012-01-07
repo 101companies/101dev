@@ -19,7 +19,7 @@ class Wiki{
             $page = new Page($content = $p['title']);
             echo $page->getFullTitle() . PHP_EOL;
             array_push($allPages, $page);
-        }
+        }  
         $pages101 = get101companiesPages(); //!!
         foreach($pages101 as $p){
 	     	$page = new Page($content = $p['title']);
@@ -27,6 +27,7 @@ class Wiki{
 			ECHO "101companies page found: " .  $page->getFullTitle() . PHP_EOL;	
         } 
         return $allPages;
+       // var_dump($allPages);
     }
     function getLanguagePages(){
       $res = array();
