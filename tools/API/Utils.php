@@ -303,7 +303,7 @@ class formatter{
      }
      
      
-     $pattern =  '/\[\[(:)?((\w|\d|\s|\/|\-|\.|\#)+):((\w|\d|\s|\/|\-|\.|\#)+)\|((\w|\d|\s|\/|\-|\.|\#\')+)\]\]/';
+     $pattern =  '/\[\[(:)?((\w|\d|\s|\/|\-|\.|\#)+):((\w|\d|\s|\/|\-|\.|\#)+)\|((\w|\d|\s|\/|\-|\.|\#|\')+)\]\]/';
      $replacement = '\\wikiref{\2:\4}{\6}';
      $text = preg_replace($pattern, $replacement, $text);
     
@@ -443,7 +443,7 @@ class formatter{
           $newText .= $line.PHP_EOL;
         
       }      
-      $pattern =  '/\'\'((\w*|\W*|\d*|\s*|\-*|\:*|\[*|\]|\|*|\}*|\{*|\\\*)*)\'\'/'; //'/\'\'(.*)\'\'/';
+      $pattern =  '/\'\'((\w*|\W*|\d*|\s*|\-*|\:*|\[*|\]*|\(*|\)*|\|*|\}*|\{*|\\\*)*)\'\'/'; //'/\'\'(.*)\'\'/';
       $replacement = '\\textit{\1}';
       return preg_replace($pattern, $replacement, $newText);
    
