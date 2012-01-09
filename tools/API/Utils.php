@@ -302,6 +302,9 @@ class formatter{
         $text = preg_replace($pattern, $replacement, $text);
      }
      
+      $pattern =  '/\[\[(:)?((\w|\d|\s|\/|\-|\.|\#)+):((\w|\d|\s|\/|\-|\.|\#)+)\|((\w|\d|\s|\/|\-|\.|\#|\')+)\]\]/';
+     $replacement = '\\wikiref{\2:\4}{\6}';
+     $text = preg_replace($pattern, $replacement, $text);
      
      $pattern =  '/\[\[(:)?((\w|\d|\s|\/|\-|\.|\#)+):((\w|\d|\s|\/|\-|\.|\#)+)\|((\w|\d|\s|\/|\-|\.|\#|\')+)\]\]/';
      $replacement = '\\wikiref{\2:\4}{\6}';
@@ -340,6 +343,14 @@ class formatter{
      
      $pattern =  '/\[\[((\w|\d|\s|\/|\-|\.|\#)+)\|((\w|\d|\s|\/|\-|\.|\#)+)\]\]/';
      $replacement = '\\wikiref{\1}{\3}';
+     $text = preg_replace($pattern, $replacement, $text);
+     
+     $pattern = '/\[http\:\/\/(([^\s])*)\s*(.+)\]/';
+     $replacement = '\\href{http://\1}{\3}';
+     $text = preg_replace($pattern, $replacement, $text);
+     
+     $pattern = '/\[http\:\/\/(([^\s])*)\]/';
+     $replacement = '\\href{http://\1}{http://\1}';
      $text = preg_replace($pattern, $replacement, $text);
      
      $pattern = '/<pre>((\s*|.|\s)*)<\/pre>/';
@@ -404,7 +415,7 @@ class formatter{
      $text = formatter::handleBoldAndItalicSpecialCase($text); //we need this because regex cannot handle -> '''                     
      $text = formatter::italic2Textit($text); 
      $text = formatter::handleBold($text); 
-	 var_dump($text);  
+	 
      $text = str_replace('->','$\rightarrow$',$text);
      $text = str_replace('=>','$\Rightarrow$',$text); 
      $text = str_replace('<','$<$',$text);
@@ -443,7 +454,7 @@ class formatter{
           $newText .= $line.PHP_EOL;
         
       }      
-      $pattern =  '/\'\'((\w*|\W*|\d*|\s*|\-*|\:*|\[*|\]*|\(*|\)*|\|*|\}*|\{*|\\\*)*)\'\'/'; //'/\'\'(.*)\'\'/';
+      $pattern =  '/\'\'(([^\'])+)\'\'/'; //'/\'\'(.*)\'\'/';
       $replacement = '\\textit{\1}';
       return preg_replace($pattern, $replacement, $newText);
    
