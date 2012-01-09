@@ -443,7 +443,7 @@ class formatter{
           $newText .= $line.PHP_EOL;
         
       }      
-      $pattern =  '/\'\'((\w*|\W*|\d*|\s*|\-*|\:*|\[*|\]|\|*|\}*|\{*|\\*)*)\'\'/'; //'/\'\'(.*)\'\'/';
+      $pattern =  '/\'\'((\w*|\W*|\d*|\s*|\-*|\:*|\[*|\]|\|*|\}*|\{*|\\\*)*)\'\'/'; //'/\'\'(.*)\'\'/';
       $replacement = '\\textit{\1}';
       return preg_replace($pattern, $replacement, $newText);
    

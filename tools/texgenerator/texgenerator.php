@@ -82,6 +82,7 @@ if($args['mode'] == 'dump'){
    $wiki = new Wiki();
    $f = fopen($texFolderDump . "macros.tex", "w+");
    $allPages = $wiki->getAllPages();
+   echo "FOOOOO";
    //echo "DUMP: " . PHP_EOL;
    //var_dump($allPages);
    echo "Getting categories pages";
@@ -92,10 +93,20 @@ if($args['mode'] == 'dump'){
    $pages = $allPages;
    
    $content = "";
+   $i = 0;
    foreach($pages as $page){
 	ECHO $page->getTitle() . PHP_EOL;
     $tex = $page->dumpToTex();
     if(strstr($tex, "CategorymetaTitle") == FALSE){
+      var_dump($tex);
+      $content .= $tex;
+    }
+   }
+   foreach($catPages as $page){
+	ECHO $page->getTitle() . PHP_EOL;
+    $tex = $page->dumpToTex();
+    if(strstr($tex, "CategorymetaTitle") == FALSE){
+      var_dump($tex);
       $content .= $tex;
     }
    }
@@ -288,6 +299,11 @@ else if ($args['mode'] == 'ttcContents') {
 
 else if($args['mode'] == 'content'){ //generate tex wiki pages representation
   $wiki = new Wiki();
+  
+  ECHO "Getting categories".PHP_EOL;
+  $catPages = $wiki->getCategoryPages();
+  var_dump($catPages);
+  
   ECHO "Getting 101implementation category" . PHP_EOL;
   $catImpl = new CategoryPage("101implementation");
   ECHO "Getting all implementation pages" . PHP_EOL;
