@@ -304,7 +304,7 @@ class formatter{
      
      
      $pattern =  '/\[\[(:)?((\w|\d|\s|\/|\-|\.|\#)+):((\w|\d|\s|\/|\-|\.|\#)+)\|((\w|\d|\s|\/|\-|\.|\#|\')+)\]\]/';
-     $replacement = '\\wikiref{\2:\4}{\6}'; 
+     $replacement = '\\wikiref{\2:\4}{\6}';
      $text = preg_replace($pattern, $replacement, $text);
     
      //  --- recognize specific links ---
@@ -402,10 +402,9 @@ class formatter{
      $text = str_replace('$','\$',$text);
      $text = formatter::handleCites($text); 
      $text = formatter::handleBoldAndItalicSpecialCase($text); //we need this because regex cannot handle -> '''                     
-	 $text = formatter::italic2Textit($text); 
-	 //var_dump($text); 
+     $text = formatter::italic2Textit($text); 
      $text = formatter::handleBold($text); 
-	  
+	 var_dump($text);  
      $text = str_replace('->','$\rightarrow$',$text);
      $text = str_replace('=>','$\Rightarrow$',$text); 
      $text = str_replace('<','$<$',$text);
@@ -444,7 +443,7 @@ class formatter{
           $newText .= $line.PHP_EOL;
         
       }      
-      $pattern =  '/\'\'((\w*|\W*|\d*|\s*|\-*|\:*|\[*|\]|\|*|\}*|\{*|\\*)*)\'\'/'; //'/\'\'(.*)\'\'/';
+      $pattern =  '/\'\'((\w*|\W*|\d*|\s*|\-*|\:*|\[*|\]*|\(*|\)*|\|*|\}*|\{*|\\\*)*)\'\'/'; //'/\'\'(.*)\'\'/';
       $replacement = '\\textit{\1}';
       return preg_replace($pattern, $replacement, $newText);
    

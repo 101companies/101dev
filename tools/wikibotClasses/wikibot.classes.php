@@ -522,7 +522,7 @@
 		 * @param $prefix Only enumerate categories with this prefix.  (Default null)
 		 * @return Associative array of category list metadata.
 		 **/
-		function listcategories ( &$start = null, $limit = 50, $dir = 'ascending', $prefix = null ) {
+		function listcategories ( &$start = null, $limit = 50000, $dir = 'ascending', $prefix = null ) {
 			$append = '';
 			if ( $start != null ) $append .= '&acfrom=' . urlencode( $start );
 			if ( $limit != null ) $append .= '&aclimit=' . urlencode( $limit );
