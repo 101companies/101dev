@@ -188,6 +188,8 @@ class Page{
   $this->sections = array();
   $this->rawDump = array();
   $this->content = getPageContent($title);
+  if ($this->content == NULL)
+   return false;
   $this->lastrev = getRivison($title,'older');
   $this->creation = getRivison($title,'newer');
   $this->getSections();
@@ -323,6 +325,8 @@ class CategoryPage extends Page{
  }
  
  function getShallowTex(){
+   if ($this->content == NULL)
+   	return "";
    $tex = "\\tree{" . $this->getTitle() . "}{" . ($this->intent) . "}{\n" ;
    foreach($this->members as $m){
      $tex .= "\\tab\\" . $this->getObjType($m) . "{" . formatter::handleLinks($m->getFullTitle()) . "}{". ($m->intent) . "}\n";
@@ -352,6 +356,8 @@ class CategoryPage extends Page{
  }
  
  function getDeepTex(){
+  if ($this->content == NULL)
+   	return "";
   $tex = "\\tree{" . $this->getTitle() . "}{" . formatter::toTex($this->intent) . "}{\n" ;
   $level = 0;
   foreach($this->members as $m){
@@ -361,6 +367,8 @@ class CategoryPage extends Page{
   return $tex;
  }
  function toTexMacro(){
+ 	if ($this->content == NULL)
+   		return "";
     $tex = "\\newcommand{\\". getTexCommandName($this->getTitle()) . "CategoryTitle}{". $this->getTitle() ."}" . PHP_EOL;
     $tex .= "\\newcommand{\\". getTexCommandName($this->getTitle()) . "CategoryIntent}{". formatter::toTex($this->intent) ."}" . PHP_EOL;
     $tex .= "\\newcommand{\\". getTexCommandName($this->getTitle()) . "CategoryDescription}{". formatter::toTex($this->description) ."}" . PHP_EOL;
@@ -368,6 +376,8 @@ class CategoryPage extends Page{
  }
  
  function dumpToTex(){
+   if ($this->content == NULL)
+   	return "";
   return parent::dumpToTex();
  }
 }

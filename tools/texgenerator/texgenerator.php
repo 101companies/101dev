@@ -82,7 +82,6 @@ if($args['mode'] == 'dump'){
    $wiki = new Wiki();
    $f = fopen($texFolderDump . "macros.tex", "w+");
    $allPages = $wiki->getAllPages();
-   echo "FOOOOO";
    //echo "DUMP: " . PHP_EOL;
    //var_dump($allPages);
    echo "Getting categories pages";
@@ -106,7 +105,6 @@ if($args['mode'] == 'dump'){
 	ECHO $page->getTitle() . PHP_EOL;
     $tex = $page->dumpToTex();
     if(strstr($tex, "CategorymetaTitle") == FALSE){
-      var_dump($tex);
       $content .= $tex;
     }
    }
@@ -129,7 +127,7 @@ else if($args['mode'] == 'ontology'){ //generate ontology
   foreach($allCategories as $cat){
    $fileName = $cat->getFileName() . ".tex";
    $f = fopen($outputShallowFolder . $fileName, 'w+') or die("can't open file");
-   $tex = $cat->getShallowTex();
+   $tex = $cat->getShallowTex();	
    $text = formatter::toTex($tex);
    fwrite($f, $text . PHP_EOL);
  /*  foreach (explode(PHP_EOL, $tex) as $line)
@@ -179,7 +177,6 @@ else if ($args['mode'] == 'implContents') {
     // adding to implementations.tex
     if ($title != $nTitle){
       if ($s->issues != ''){
-        echo "FOOOOO";
         $implsTex .= '\\iuwiki{'.$pureTitle.'}'.PHP_EOL;
       } else {
         $implsTex .= '\\iwiki{'.$pureTitle.'}'.PHP_EOL;
