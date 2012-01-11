@@ -68,5 +68,5 @@ $allFeatures = array();
 
 writeFile("TechnologiesInImplementations.txt", $allTechnologies);
 writeFile("LanguagesInImplementations.txt", $allLanguages);
-writeFile("FeaturesPerImplementations.txt", $allFeatures);
+writeFile("FeaturesInImplementations.txt", $allFeatures);
 
