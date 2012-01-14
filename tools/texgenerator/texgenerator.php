@@ -61,6 +61,22 @@ class OntyGenerator{
  
   return $categoryFile;
  }
+
+function generateCategoryOnlyFile(){
+  $categoryFile = "";
+  $allCategories = $this->catPage->getFullCategoryTree();
+  foreach($allCategories as $cat){
+	if($cat->namespace == "Category"){
+     $symbols = array(" ", "/");
+     $fileName = str_replace($symbols, "_", $cat->getTitle());     
+     $categoryFile .= "\categoryfile{" . $fileName ."}" . PHP_EOL;
+   }
+  }
+
+  return $categoryFile;
+ }
+
+
  
  function generateShallowTexStructure($catPage){
    $shallowTex = "\\tree{" . $catPage->getTitle() . "}{" . escape($catPage->intent) . "}{\n" ;
@@ -119,10 +135,15 @@ else if($args['mode'] == 'ontology'){ //generate ontology
   $base = new CategoryPage("Base");
   $generator = new OntyGenerator($base);
   $categoryFile = $generator->generateCategoryFile();
-
   $f = fopen($dataFolder . "files.tex", 'w+') or die("can't open file");
   fwrite($f, $categoryFile);
   fclose($f);
+	
+  $categoryFile = $generator->generateCategoryOnlyFile();
+  $f = fopen($dataFolder . "filesCategory.tex", 'w+') or die("can't open file");
+  fwrite($f, $categoryFile);
+  fclose($f);
+
   echo PHP_EOL . "generating shallow ontology";
   $allCategories = $base->getFullCategoryTree();
   foreach($allCategories as $cat){
@@ -155,8 +176,7 @@ else if($args['mode'] == 'ontology'){ //generate ontology
 
   echo PHP_EOL . "generating classification ontology";
   foreach($allCategories as $cat){
-   if($cat->namespace == "Category"){
-       $tex = $cat->getDeepTex();
+       $tex = $cat->getClassifyTex();
 	   $fileName = $cat->getFileName() . ".tex";
 	   $f = fopen($outputClassificationFolder . $fileName, 'w+') or die("can't open file");
 	   foreach (explode(PHP_EOL, $tex) as $line)
@@ -164,7 +184,6 @@ else if($args['mode'] == 'ontology'){ //generate ontology
 	     $line = formatter::toTex($line);
 	     fwrite($f, $line . PHP_EOL);
 	   }
-   }
    fclose($f);
   }
   

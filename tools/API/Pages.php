@@ -366,6 +366,19 @@ class CategoryPage extends Page{
   $tex .= "}";  
   return $tex;
  }
+
+function getClassifyTex(){
+  if ($this->content == NULL)
+   	return "";
+  $tex = "\\tree{" . $this->getTitle() . "}{" . formatter::toTex($this->intent) . "}{\n" ;
+  $level = 0;
+  foreach($this->members as $m){
+   if($m->namespace == "Category")	$tex .= $this->writeWithIdent($m, $level);
+  }
+  $tex .= "}";  
+  return $tex;
+ }
+
  function toTexMacro(){
  	if ($this->content == NULL)
    		return "";
