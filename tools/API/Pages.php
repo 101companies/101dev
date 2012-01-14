@@ -355,10 +355,13 @@ class CategoryPage extends Page{
    return $tex;
  }
 
- private function writeWithIdentCategoresOnly($cat, $level){
+ private function writeWithIdentCategoriesOnly($cat, $level){
    $tex .= $this->getIntetByLevel($level) . "\\" . $this->getObjType($cat) ."{" . formatter::handleLinks($cat->getFullTitle()) . "}{". ($cat->intent) . "}\n";
    foreach($cat->members as $c){
-	if($c->namespace == "Category") $tex .= $this->writeWithIdent($c, $level + 1); 
+	if($c->namespace == "Category") { 
+		//ECHO "writeWithIdentCategoriesOnly" . PHP_EOL;
+		//var_dump($c);
+		$tex .= $this->writeWithIdentCategoriesOnly($c, $level + 1); }
    }
    
    return $tex;
@@ -381,7 +384,7 @@ function getClassifyTex(){
   $tex = "\\tree{" . $this->getTitle() . "}{" . formatter::toTex($this->intent) . "}{\n" ;
   $level = 0;
   foreach($this->members as $m){
-   if($m->namespace == "Category")	$tex .= $this->writeWithIdentCategoresOnly($m, $level);
+   if($m->namespace == "Category")	{ $tex .= $this->writeWithIdentCategoriesOnly($m, $level); }
   }
   $tex .= "}";  
   return $tex;
