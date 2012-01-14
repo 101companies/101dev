@@ -6,6 +6,7 @@ ini_set('display_errors','On');
  
 $outputShallowFolder = BASE_PATH . "texgenerator/tex/ontology/data/shallow/";
 $outputDeepFolder = BASE_PATH . "texgenerator/tex/ontology/data/deep/";
+$outputClassificationFolder = BASE_PATH . "texgenerator/tex/ontology/data/classification/";
 $dataFolder = BASE_PATH . "texgenerator/tex/ontology/data/";
 
 $texFolder = BASE_PATH . "texgenerator/tex/content/data/";
@@ -149,7 +150,22 @@ else if($args['mode'] == 'ontology'){ //generate ontology
      $line = formatter::toTex($line);
      fwrite($f, $line . PHP_EOL);
     }
-   fclose($fh);
+   fclose($f);
+  }
+
+  echo PHP_EOL . "generating classification ontology";
+  foreach($allCategories as $cat){
+   if($cat->namespace == "Category"){
+    $tex = $cat->getDeepTex();
+	   $fileName = $cat->getFileName() . ".tex";
+	   $f = fopen($outputClassificationFolder . $fileName, 'w+') or die("can't open file");
+	   foreach (explode(PHP_EOL, $tex) as $line)
+	   {
+	     $line = formatter::toTex($line);
+	     fwrite($f, $line . PHP_EOL);
+	   }
+   }
+   fclose($f);
   }
   
 }
