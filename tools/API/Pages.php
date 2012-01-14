@@ -329,7 +329,7 @@ class CategoryPage extends Page{
    	return "";
    $tex = "\\tree{" . $this->getTitle() . "}{" . ($this->intent) . "}{\n" ;
    foreach($this->members as $m){
-     $tex .= "\\tab\\" . $this->getObjType($m) . "{" . formatter::handleLinks($m->getFullTitle()) . "}{". ($m->intent) . "}\n";
+     $tex .= "\\tab\\" . $this->getObjType($m) . "{" . formatter::handleLinks($m->getFullTitle()) . "}{".  formatter::toTex(($m->intent)) . "}\n";
      //"{\\wikiref{" . $m->getFullTitle() . "}{".handleUmlauts($m->getTitle()) ."}}{". formatter::toTex($m->intent) . "}\n";
    }
    $tex .= "}";
