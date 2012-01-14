@@ -22,6 +22,7 @@ content-only:
 
 onto:
 	make up
+	mkdir -p tex/ontology/data/classification/
 	make onto-only
 
 onto-only:
