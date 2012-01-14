@@ -156,7 +156,7 @@ else if($args['mode'] == 'ontology'){ //generate ontology
   echo PHP_EOL . "generating classification ontology";
   foreach($allCategories as $cat){
    if($cat->namespace == "Category"){
-    $tex = $cat->getDeepTex();
+       $tex = $cat->getDeepTex();
 	   $fileName = $cat->getFileName() . ".tex";
 	   $f = fopen($outputClassificationFolder . $fileName, 'w+') or die("can't open file");
 	   foreach (explode(PHP_EOL, $tex) as $line)
