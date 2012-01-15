@@ -398,6 +398,7 @@ class formatter{
      $text = str_replace($pattern, $match[5], $text); //av: quick fix by Thomas
      $text = str_replace('lang="haskell" enclose="none">','lang="haskell">', $text);
      $text = str_replace('lang="haskell"  enclose="none">','lang="haskell">', $text);
+     /*
      $pattern = '/<syntaxhighlight lang=\"([a-zA-Z]*)\">((\s*|.|:|=|>|<|\s)*)<\/syntaxhighlight>/'; 
      preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
      foreach($matches as $match){
@@ -406,7 +407,7 @@ class formatter{
         $replacement = pprint($replacement);
         $text = str_replace($pattern, $replacement, $text);
 	}
-     
+     */
      $text = str_replace('&','\&',$text);
            
      $text = str_replace('<nowiki>','',str_replace('</nowiki>','',$text)); 
@@ -461,9 +462,20 @@ class formatter{
     }
     
     function handleBold($text){
-     $pattern =  '/\'(([^\'])+)\'/'; //'/\'\'(.*)\'\'/';
+     if (startsWith('\'',$text)){
+     	echo 'WAS PREFIX';
+     	$text = 'REPLACETHISINTEXTP '.$text;
+     }
+     if (endsWith('\'', $text)){
+     	echo 'WAS SUFFIX';
+     	$text = $text.' SREPLACETHISINTEXT';
+     }
+     $pattern =  '/\s\'(([^\'])+)\'\s/'; //'/\'\'(.*)\'\'/';
      $replacement = '\\textbf{\1}';
-     return preg_replace($pattern, $replacement, $text);
+     $text = preg_replace($pattern, $replacement, $text);;
+     $text = str_replace('REPLACETHISINTEXTP ','',$text);
+     return str_replace(' SREPLACETHISINTEXT','',$text);
+     
     }
      
     
