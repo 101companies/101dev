@@ -332,7 +332,13 @@ else if ($args['mode'] == 'ttcContents') {
 
 else if($args['mode'] == 'content'){ //generate tex wiki pages representation
   $wiki = new Wiki();
-  
+ 
+  $fMacro = fopen($texFolder . "macros.tex", "w+"); 
+	
+  $baseCat = new CategoryPage("Category:Base");
+  fwrite($fMacro, $baseCat->toTexMacro());
+
+ 
   ECHO "Getting categories".PHP_EOL;
   $catPages = $wiki->getCategoryPages();
   var_dump($catPages);
@@ -350,15 +356,11 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
   //echo "Number of technology pages"; 
   // echo sizeof($allTechnologies) ;
   $catFeature = new CategoryPage("101feature");
-  $baseCat = new CategoryPage("Base");
   
   ECHO "Getting all other pages" . PHP_EOL;
   $allPages = $wiki->getAllPages();  
  
   $fImpl = fopen($texFolder . 'implementations.tex', 'w+');
-  $fMacro = fopen($texFolder . "macros.tex", "w+");
-  //$baseCat = new CategoryPage("Category:Base");
-  //fwrite($fMacro, $baseCat->toTexMacro());
   foreach($impl as $i){
     fwrite($fImpl, "\\iwiki{" . getTexCommandName($i->getTitle()) . "}" . PHP_EOL);
     // echo PHP_EOL . $i->getTitle() . PHP_EOL;
@@ -406,7 +408,6 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
   }
   
   echo "Full base category tree" . PHP_EOL;
-  fwrite($fMacro, $baseCat->toTexMacro());
   foreach($baseCat->getFullCategoryTree() as $c){
     if($c->namespace == "Category"){
       if((in_array($c->getTitle(), $categories) == FALSE) && (in_array($c->getFullTitle(), $cat) == FALSE)) { //!!!  
