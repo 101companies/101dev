@@ -135,9 +135,9 @@ else if($args['mode'] == 'ontology'){ //generate ontology
   $base = new CategoryPage("Base");
   $generator = new OntyGenerator($base);
   $categoryFile = $generator->generateCategoryFile();
-  $f = fopen($dataFolder . "files.tex", 'w+') or die("can't open file");
-  fwrite($f, $categoryFile);
-  fclose($f);
+  //$f = fopen($dataFolder . "files.tex", 'w+') or die("can't open file");
+  //fwrite($f, $categoryFile);
+  //fclose($f);
 	
   $categoryFile = $generator->generateCategoryOnlyFile();
   $f = fopen($dataFolder . "filesCategory.tex", 'w+') or die("can't open file");
@@ -149,16 +149,15 @@ else if($args['mode'] == 'ontology'){ //generate ontology
   
   foreach($allCategories as $cat){
    $fileName = $cat->getFileName() . ".tex";
-   $f = fopen($outputShallowFolder . $fileName, 'w+') or die("can't open file");
-   $tex = $cat->getShallowTex();	
+   $tex = $cat->getShallowTex();
+   $f = fopen($outputShallowFolder . $fileName, 'w+') or die("can't open file");	
    //$text = formatter::toTex($tex);
-   fwrite($f, $text . PHP_EOL);
+   //fwrite($f, $text . PHP_EOL);
    foreach (explode(PHP_EOL, $tex) as $line)
    {
     $line = formatter::toTex($line);
     fwrite($f, $line . PHP_EOL);
    } 
-   fwrite($f, $tex);
    fclose($f);
   }
   

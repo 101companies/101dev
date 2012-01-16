@@ -324,19 +324,7 @@ class CategoryPage extends Page{
   return "instance";
  }
  
- function getShallowTex(){
-   if ($this->content == NULL)
-   	return "";
-   $tex = "\\tree{" . $this->getTitle() . "}{" . ($this->intent) . "}{\n" ;
-   foreach($this->members as $m){
-     $tex .= "\\tab\\" . $this->getObjType($m) . "{" . formatter::handleLinks($m->getFullTitle()) . "}{".  formatter::toTex(($m->intent)) . "}\n";
-     //"{\\wikiref{" . $m->getFullTitle() . "}{".handleUmlauts($m->getTitle()) ."}}{". formatter::toTex($m->intent) . "}\n";
-   }
-   $tex .= "}";
-   
-   return $tex;
- }
- 
+
  private function getIntetByLevel($level){
   $default = "\\tab";
   for($i = 0; $i <= $level - 1; $i++){
@@ -368,8 +356,7 @@ class CategoryPage extends Page{
  }
  
  function getDeepTex(){
-  if ($this->content == NULL)
-   	return "";
+  if ($this->content == NULL) return "";
   $tex = "\\tree{" . $this->getTitle() . "}{" . formatter::toTex($this->intent) . "}{\n" ;
   $level = 0;
   foreach($this->members as $m){
@@ -378,6 +365,19 @@ class CategoryPage extends Page{
   $tex .= "}";  
   return $tex;
  }
+
+ function getShallowTex(){
+   if ($this->content == NULL)	return "";
+   $tex = "\\tree{" . $this->getTitle() . "}{" . formatter::toTex($this->intent) . "}{\n" ;
+   foreach($this->members as $m){
+     $tex .= "\\tab\\" . $this->getObjType($m) . "{" . formatter::handleLinks($m->getFullTitle()) . "}{".  ($m->intent) . "}\n";
+     //"{\\wikiref{" . $m->getFullTitle() . "}{".handleUmlauts($m->getTitle()) ."}}{". formatter::toTex($m->intent) . "}\n";
+   }
+   $tex .= "}";
+   
+   return $tex;
+ }
+
 
 function getClassifyTex(){
   if ($this->content == NULL) return "";
