@@ -356,7 +356,7 @@ else if($args['mode'] == 'content'){ //generate tex wiki pages representation
  
   $fImpl = fopen($texFolder . 'implementations.tex', 'w+');
   $fMacro = fopen($texFolder . "macros.tex", "w+");
-   $baseCat = new CategoryPage("Category:Base");
+  $baseCat = new CategoryPage("Category:Base");
   fwrite($fMacro, $baseCat->toTexMacro());
   foreach($impl as $i){
     fwrite($fImpl, "\\iwiki{" . getTexCommandName($i->getTitle()) . "}" . PHP_EOL);
