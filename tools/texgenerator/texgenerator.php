@@ -146,18 +146,19 @@ else if($args['mode'] == 'ontology'){ //generate ontology
 
   echo PHP_EOL . "generating shallow ontology";
   $allCategories = $base->getFullCategoryTree();
+  
   foreach($allCategories as $cat){
    $fileName = $cat->getFileName() . ".tex";
    $f = fopen($outputShallowFolder . $fileName, 'w+') or die("can't open file");
    $tex = $cat->getShallowTex();	
    //$text = formatter::toTex($tex);
    fwrite($f, $text . PHP_EOL);
- /*  foreach (explode(PHP_EOL, $tex) as $line)
+   foreach (explode(PHP_EOL, $tex) as $line)
    {
     $line = formatter::toTex($line);
     fwrite($f, $line . PHP_EOL);
-   } */
-    //fwrite($f, $tex);
+   } 
+   fwrite($f, $tex);
    fclose($f);
   }
   
