@@ -151,13 +151,13 @@ else if($args['mode'] == 'ontology'){ //generate ontology
    $fileName = $cat->getFileName() . ".tex";
    $tex = $cat->getShallowTex();
    $f = fopen($outputShallowFolder . $fileName, 'w+') or die("can't open file");	
-   $text = formatter::toTex($tex);
+   //$text = formatter::toTex($tex);
    //fwrite($f, $text . PHP_EOL);
-  /* foreach (explode(PHP_EOL, $tex) as $line)
+   foreach (explode(PHP_EOL, $tex) as $line)
    {
     $line = formatter::toTex($line);
     fwrite($f, $line . PHP_EOL);
-   } */
+   } 
    fclose($f);
   }
   
