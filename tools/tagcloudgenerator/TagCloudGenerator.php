@@ -56,8 +56,9 @@ $allFeatures = array();
  $catPage = new CategoryPage("101implementation");
  $implementationPages = $catPage->getImplementations();
  #$languagePages = $wiki->getLanguagePages();
-
+ $implementations = array();
  foreach($implementationPages as $ip){
+   array_push($implementations, $ip->getTitle());	
    $technologies = $ip->getTechs();
    $languages = $ip->getLangs();
    $features = $ip->getFeats();
@@ -69,4 +70,27 @@ $allFeatures = array();
 writeFile("TechnologiesInImplementations.txt", $allTechnologies);
 writeFile("LanguagesInImplementations.txt", $allLanguages);
 writeFile("FeaturesInImplementations.txt", $allFeatures);
+
+$myFile =  $GLOBALS['cloudy_data_home'] . "macros.tex";
+$fh = fopen($myFile, 'w') or die("can't open file");
+
+$numberOfImplementations = count(array_unique($implementations));
+fwrite($fh, "\\newcommand{\\numberOfImplementations}{" . $numberOfImplementations . "}" . PHP_EOL);
+
+$numberOfTechnologiesTags = count($allTechnologies, SORT_STRING);
+$numberOfTechnologiesTagged = count(array_unique($allTechnologies));
+fwrite($fh, "\\newcommand{\\numberOfTechnologiesTags}{" . $numberOfTechnologiesTags . "}" . PHP_EOL);
+fwrite($fh, "\\newcommand{\\numberOfTechnologiesTagged}{" . $numberOfTechnologiesTagged . "}" . PHP_EOL);
+
+$numberOfLanguagesTags = count($allLanguages, SORT_STRING);
+$numberOfLanguagesTagged = count(array_unique($allLanguages));
+fwrite($fh, "\\newcommand{\\numberOfLanguagesTags}{" . $numberOfLanguagesTags . "}" . PHP_EOL);
+fwrite($fh, "\\newcommand{\\numberOfLanguagesTagged}{" . $numberOfLanguagesTagged . "}" . PHP_EOL);
+
+$numberOfFeaturesTags = count($allFeatures, SORT_STRING);
+$numberOfFeaturesTagged = count(array_unique($allFeatures));
+fwrite($fh, "\\newcommand{\\numberOfFeaturesTags}{" . $numberOfFeaturesTags . "}" . PHP_EOL);
+fwrite($fh, "\\newcommand{\\numberOfFeaturesTagged}{" . $numberOfFeaturesTagged . "}" . PHP_EOL);
+fclose($fh);
+
 
