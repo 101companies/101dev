@@ -394,20 +394,19 @@ class formatter{
         $replacement = '\lstinputlisting[xleftmargin=20pt]{\texgen/files/' . $fname . "}"; //, language=' . $match[1] .$sourceText. //../../files/
         $text = str_replace($pattern, $replacement, $text);
      }
-     
+     /*
      $text = str_replace($pattern, $match[5], $text); //av: quick fix by Thomas
      $text = str_replace('lang="haskell" enclose="none">','lang="haskell">', $text);
      $text = str_replace('lang="haskell"  enclose="none">','lang="haskell">', $text);
-     /*
-     $pattern = '/<syntaxhighlight lang=\"([a-zA-Z]*)\">((\s*|.|:|=|>|<|\s)*)<\/syntaxhighlight>/'; 
+     */
+     $pattern = '/<syntaxhighlight lang=\"([a-zA-Z]*)\" enclose=\"none\">((\s*|.|:|=|>|<|\s|\(|\)|\[|\]|\{|\})*)<\/syntaxhighlight>/'; 
      preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
      foreach($matches as $match){
-        $pattern = '<syntaxhighlight lang="' . $match[1] .'">' . $match[2] .'</syntaxhighlight>';   
+        $pattern = '<syntaxhighlight lang="' . $match[1] .'" enclose=\"none\">' . $match[2] .'</syntaxhighlight>';   
         $replacement = '\begin{ttfamily}'.$match[2].'\end{ttfamily}';    
-        $replacement = pprint($replacement);
         $text = str_replace($pattern, $replacement, $text);
 	}
-     */
+     
      $text = str_replace('&','\&',$text);
            
      $text = str_replace('<nowiki>','',str_replace('</nowiki>','',$text)); 
