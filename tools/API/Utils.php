@@ -402,7 +402,7 @@ class formatter{
      $pattern = '/<syntaxhighlight lang=\"([a-zA-Z]*)\" enclose=\"none\">((\s*|.|:|=|>|<|\s|\(|\)|\[|\]|\{|\})*)<\/syntaxhighlight>/'; 
      preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
      foreach($matches as $match){
-        $pattern = '<syntaxhighlight lang="' . $match[1] .'" enclose=\"none\">' . $match[2] .'</syntaxhighlight>';   
+        $pattern = '<syntaxhighlight lang="' . $match[1] .'" enclose="none">' . $match[2] .'</syntaxhighlight>';   
         $replacement = '\begin{ttfamily}'.$match[2].'\end{ttfamily}';    
         $text = str_replace($pattern, $replacement, $text);
 	}
