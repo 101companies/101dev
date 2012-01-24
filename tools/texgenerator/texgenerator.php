@@ -204,7 +204,7 @@ else if ($args['mode'] == 'implContents') {
   foreach($titles as $title){
     $pureTitle = str_replace('101implementation:','',$title); 
     $ucTitle = ucfirst($pureTitle);
-    $implTexTit = 'impls/impl'.$ucTitle.'.tex';
+    $implTexTit = 'impls/impl'.str_replace('5','Five',$ucTitle).'.tex';
     
     // adding to mactro
     $macroTex .= '\\input{../../../101dev/tools/texgenerator/tex/impl/data/'.$implTexTit.'}'.PHP_EOL;
@@ -212,12 +212,12 @@ else if ($args['mode'] == 'implContents') {
     // adding to implementations.tex
     if ($title != $nTitle){
       if ($s->issues != ''){
-        $implsTex .= '\\iuwiki{'.$pureTitle.'}'.PHP_EOL;
+        $implsTex .= '\\iuwiki{'.str_replace('5','Five',$pureTitle).'}'.PHP_EOL;
       } else {
-        $implsTex .= '\\iwiki{'.$pureTitle.'}'.PHP_EOL;
+        $implsTex .= '\\iwiki{'.str_replace('5','Five',$pureTitle).'}'.PHP_EOL;
       }
     } else {
-      $implsTex .= '\\inwiki{'.$pureTitle.'}'.PHP_EOL;
+      $implsTex .= '\\inwiki{'.str_replace('5','Five',$pureTitle).'}'.PHP_EOL;
     }
     
     
@@ -229,10 +229,10 @@ else if ($args['mode'] == 'implContents') {
     
     $implMacroTex = $s->toTexMacro();
     if ($title == $nTitle){
-    $implMacroTex .= "\\newcommand{\\". str_replace('_','', str_replace(' ','',$s->getTitle())) . "ImplNote}{".$nNote."}".PHP_EOL;
+    $implMacroTex .= "\\newcommand{\\". str_replace('_','', str_replace(' ','',str_replace('5','Five',$s->getTitle()))) . "ImplNote}{".$nNote."}".PHP_EOL;
     } 
     $implMacroTex = formatter::intLinks($implMacroTex, array_merge($titles,$otherTitles));
-    $implMacroTex .= "\\newcommand{\\". str_replace('_','', str_replace(' ','',$s->getTitle())) . "ImplLabel}{". str_replace('_','', str_replace(' ','',$s->getTitle())) ."}" . PHP_EOL;
+    $implMacroTex .= "\\newcommand{\\". str_replace('_','', str_replace(' ','',str_replace('5','Five',$s->getTitle()))) . "ImplLabel}{". str_replace('_','', str_replace(' ','',$s->getTitle())) ."}" . PHP_EOL;
     fwrite($fImplMacro,$implMacroTex);
     fclose($fImplMacro);
     echo 'DONE'.PHP_EOL;
