@@ -11,7 +11,6 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 public class TransformerClassVisitor extends ClassVisitor implements Opcodes {
-	
 	 private final Tracer tracer;
 	 private String currentClass;
 	 private HashMap<String,String> fieldsigmap=new HashMap<String,String>();
@@ -24,11 +23,8 @@ public class TransformerClassVisitor extends ClassVisitor implements Opcodes {
 
 	    }
 	 
-	 
-	 
 	  @Override
-	    public void visit(final int version,final int access,final String name,final String signature,final String superName,final String[] interfaces)
-	    {
+	  public void visit(final int version,final int access,final String name,final String signature,final String superName,final String[] interfaces){
 		  
 		  	this.currentClass=name;
 		  	this.superName=superName;
@@ -38,7 +34,6 @@ public class TransformerClassVisitor extends ClassVisitor implements Opcodes {
 	  
 	  
 	  public FieldVisitor visitField(int access, String name, String desc, String signature, Object value){
-		  
 		  fieldsigmap.put(name, desc);
 		//  System.out.println("field: "+access+" "+name+" "+desc+" "+signature+" "+value);
 		return	 super.visitField(access, name, desc, signature, value);
@@ -46,19 +41,14 @@ public class TransformerClassVisitor extends ClassVisitor implements Opcodes {
 			  
 	  
 	  public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
-		  
-	
 		    MethodVisitor mv = cv.visitMethod(access, name, desc, signature, exceptions);
 		   
 		//    System.out.println("VISITING METHOD "+name);
-		    
 		    mv = new TransformerMethodVisitor(mv,name,superName,tracer,currentClass,fieldsigmap,((access&ACC_STATIC)!=0));
-		    
 		    return mv;
 		  }
 			  
 	  public void visitEnd(){
-		  
 	//	  super.visitField(ACC_PRIVATE + ACC_STATIC, "mega_trace_transformation_INTERNAL", "Ljava/lang/Object;", null,null);
 		  
 	//	  System.out.println("leaving class...");

@@ -12,10 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class JUnitConstructorTest extends TestCommon{
-	
 	private static ConstructorTestTracer tracer;
-
-
 
 	@Before
 	public void setUp() throws Exception {
@@ -25,7 +22,6 @@ public class JUnitConstructorTest extends TestCommon{
 		
 		execute();
 	}
-
 
 	@Test
 	public void constructorTest() {
@@ -116,5 +112,4 @@ public class JUnitConstructorTest extends TestCommon{
 		}
 		
 	}
-
 }

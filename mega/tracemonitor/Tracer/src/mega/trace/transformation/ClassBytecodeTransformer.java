@@ -13,18 +13,12 @@ public class ClassBytecodeTransformer {
 	}
 	
 public byte[] transformClassBytecode(byte[] bcode){
-
-		
 		ClassReader cr = new ClassReader(bcode);
 		//ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
 		ClassWriter cw = new ClassWriter(0);
-		TransformerClassVisitor tcv=new TransformerClassVisitor(cw,tracer);
+		TransformerClassVisitor tcv = new TransformerClassVisitor(cw,tracer);
 	
 		cr.accept(tcv, 0);
 		return cw.toByteArray();
-
-		
-		
 	}
-
 }

@@ -28,8 +28,6 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 	 
 	 private final boolean useDUPNEWMethod=false; //UPDATE: KEEP SET TO FALSE!!! IGNORE://I wasn't sure if it is secure in every case to DUP immediately after NEW to get the "callee" object for AfterConstructorCall or if it is better to do this within BeforeConstructorCall. Problem is: if BeforeConstructorCall injection is disabled it would _still_ be necessary to PUSH the whole stack. 
 	 
-	 
-
 	public TransformerMethodVisitor(final MethodVisitor mv,String thisname,String superName,Tracer tracer,String classname,HashMap<String,String> fieldsigmap,boolean isStatic) {
 			super(ASM4, mv);
 	        this.tracer=tracer;
@@ -39,7 +37,6 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 	        this.staticmethod=isStatic;
 	        this.name=thisname;
 	        this.superName=superName;
-	
 	    }
 	    
 

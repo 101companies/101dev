@@ -10,5 +10,4 @@ package mega.trace.transformation;
 public enum TracerLink {
 	//kicked out: DIRTY,FIELD
 	TLINK_STATIC,TLINK_IDMAP
-
 }
