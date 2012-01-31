@@ -4,10 +4,7 @@ import java.util.LinkedList;
 import mega.trace.core.Tracer;
 import mega.trace.event.*;
 
-
-
-public class TestTracer extends Tracer{
-	
+public class TestTracer extends Tracer{	
 	LinkedList<TraceEvent> trace;
 	LinkedList<LinkedList<Object>> tracestack;
 	LinkedList<Object[]> tracecall;
@@ -145,7 +142,4 @@ public class TestTracer extends Tracer{
 		System.out.println("Caller class:"+getCallerClassname());
 		System.out.println("Caller reference set:"+(o!=null));
 	}
-	
-
-
 }

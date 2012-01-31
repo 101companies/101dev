@@ -6,9 +6,7 @@ import mega.trace.event.*;
 
 
 public interface TracingInterface {
-	
 	/*Callbacks*/
-	
 	
 	public void anyEvent(TraceEvent e);
 	
@@ -53,7 +51,4 @@ public interface TracingInterface {
 	public Object getStackValue(int index);
 	public int getStackSize();
 	public LinkedList<Object> cloneStack();
-	
-	
-
 }
