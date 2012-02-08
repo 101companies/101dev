@@ -1,3 +1,7 @@
-tools/texgenerator/tex/impl/
-tools/texgenerator/tex/ttc/
-tools/texgenerator/tex/files/
+tools/texgenerator/tex/impl/*.*
+tools/texgenerator/tex/ttc/*.*
+tools/texgenerator/tex/files/*.*
+tools/texgenerator/tex/impl/data/*.*
+tools/texgenerator/tex/ttc/data/*.*
+tools/texgenerator/tex/impl/data/impls/*.*
+tools/texgenerator/tex/ttc/data/ttcs/*.*
