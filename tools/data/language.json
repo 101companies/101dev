@@ -1,0 +1,274 @@
+[
+{
+	"name":"ASCII",
+	"summary":"",
+	"implementations":[]
+},
+{
+	"name":"AspectJ",
+	"summary":"a [[:Category:aspect-oriented programming language]] based on [[Language:Java]]",
+	"implementations":[{"name":"aspectJ"}]
+},
+{
+	"name":"CSS",
+	"summary":"A [[:Category:style sheet language]] for [[Web programming|web]] documents",
+	"implementations":[{"name":"gwt"},
+		{"name":"happstack"},
+		{"name":"haskellCGI"},
+		{"name":"jsf"},
+		{"name":"zend"}]
+},
+{
+	"name":"CSharp",
+	"summary":"an [[:Category:OO programming language]]",
+	"description":"The correct title of this technology is C#. \n\nThe substitution or omission of a # sign is because of Wiki-related technical restrictions.",
+	"implementations":[{"name":"csharp"},
+		{"name":"csharpLinqToXml"},
+		{"name":"ef"},
+		{"name":"linq2DataSet"},
+		{"name":"linq2Sql"},
+		{"name":"silverlight"},
+		{"name":"wcf"},
+		{"name":"wcfRest"},
+		{"name":"wp7"},
+		{"name":"wpf"},
+		{"name":"xsdClasses"},
+		{"name":"xsdDataSet"}]
+},
+{
+	"name":"Cobol",
+	"summary":"the programming language of choice for information systems in commerce (until recently)",
+	"implementations":[]
+},
+{
+	"name":"Cobol 85",
+	"summary":"a standardized version of [[Language:Cobol]]",
+	"implementations":[{"name":"cobol"}]
+},
+{
+	"name":"Ecore",
+	"summary":"the metamodel based on the EMOF standard",
+	"description":"Ecore is an essential component of [[Technology:EMF]].",
+	"implementations":[{"name":"emf"}]
+},
+{
+	"name":"Erlang",
+	"summary":"a programming language used to build massively scalable soft real-time systems with requirements on high availability",
+	"implementations":[{"name":"erlang"}]
+},
+{
+	"name":"FSharp",
+	"summary":"a [[:Category:Functional programming language|functional]] [[:Category:OO programming language|OO]] programming language",
+	"implementations":[{"name":"fsharp"}]
+},
+{
+	"name":"GReTL",
+	"summary":"a language for graph transformation ",
+	"implementations":[{"name":"jgralab"}]
+},
+{
+	"name":"HQL",
+	"summary":"The [[Technology:Hibernate]] Query Language",
+	"implementations":[{"name":"hibernate"},
+		{"name":"seam"}]
+},
+{
+	"name":"HSQLDialect",
+	"summary":"the [[Technology:Hibernate]]-specific dialect of [[Language:SQL]]",
+	"implementations":[{"name":"hibernate"}]
+},
+{
+	"name":"HTML",
+	"summary":"a markup language for documents on the WWW",
+	"description":"HTML supports the domain of web document authoring and publishing.",
+	"implementations":[{"name":"gwt"},
+		{"name":"zend"}]
+},
+{
+	"name":"HTML5",
+	"summary":"a [[:Category:Markup_language|Markup Language]] for [[:Category:Web programming]]",
+	"description":"HTML5 is a [[:Category:Markup_language|markup language]], which extends the current [[Language:HTML]]-Standard with several features like [[offline storage]], [[canvas]] and some more.",
+	"implementations":[{"name":"html5XMLHttpRequest"},
+		{"name":"html5ajax"},
+		{"name":"html5indexedDatabase"},
+		{"name":"html5local"},
+		{"name":"html5session"},
+		{"name":"html5tree"}]
+},
+{
+	"name":"Haskell",
+	"summary":"''the'' [[:Category:functional programming language]]",
+	"implementations":[{"name":"dph"},
+		{"name":"happstack"},
+		{"name":"haskellCGI"},
+		{"name":"haskellConcurrent"},
+		{"name":"haskellDB"},
+		{"name":"haskellLogger"},
+		{"name":"haskellParser"},
+		{"name":"hdbc"},
+		{"name":"hxt"},
+		{"name":"hxtPickler"},
+		{"name":"syb"},
+		{"name":"wxHaskell"}]
+},
+{
+	"name":"Haskell 98",
+	"summary":"a standardized version of [[Language:Haskell]]",
+	"implementations":[{"name":"haskell"}]
+},
+{
+	"name":"Java",
+	"summary":"an [[:Category:OO programming language]]",
+	"description":"See elsewhere for the [[Technology:Java platform]] and the [[Technology:Java SE]].",
+	"implementations":[{"name":"antlrAcceptor"},
+		{"name":"antlrLexer"},
+		{"name":"antlrObjects"},
+		{"name":"antlrParser"},
+		{"name":"antlrTrees"},
+		{"name":"dom"},
+		{"name":"emf"},
+		{"name":"gwt"},
+		{"name":"hadoop"},
+		{"name":"hibernate"},
+		{"name":"hibernate2"},
+		{"name":"javaComposition"},
+		{"name":"javaExorcism"},
+		{"name":"javaInheritance"},
+		{"name":"javaLexer"},
+		{"name":"javaMultithreading"},
+		{"name":"javaParseLib"},
+		{"name":"javaParser"},
+		{"name":"javaRmi"},
+		{"name":"javaScanner"},
+		{"name":"javaStatic"},
+		{"name":"javaSyb"},
+		{"name":"javaTemplate"},
+		{"name":"javaTree"},
+		{"name":"javaVisitor"},
+		{"name":"javawsClient"},
+		{"name":"javawsServer"},
+		{"name":"jaxbChoice"},
+		{"name":"jaxbComposition"},
+		{"name":"jaxbExtension"},
+		{"name":"jaxbSubstitution"},
+		{"name":"jdbc"},
+		{"name":"jdbc2"},
+		{"name":"jdom"},
+		{"name":"jgralab"},
+		{"name":"jsf"},
+		{"name":"sax"},
+		{"name":"seam"},
+		{"name":"strutsAnnotation"},
+		{"name":"strutsXml"},
+		{"name":"swing"},
+		{"name":"xom"},
+		{"name":"xpathAPI"}]
+},
+{
+	"name":"JavaScript",
+	"summary":"a Java-like scripting language with substantial language features",
+	"implementations":[{"name":"happstack"},
+		{"name":"html5XMLHttpRequest"},
+		{"name":"html5ajax"},
+		{"name":"html5indexedDatabase"},
+		{"name":"html5local"},
+		{"name":"html5session"},
+		{"name":"html5tree"},
+		{"name":"webDSL"}]
+},
+{
+	"name":"PHP",
+	"summary":"A [[:Category:scripting language]] for [[server-side scripting]]",
+	"description":"PHP is a [[server-side scripting|server-side]] [[:Category:scripting language]] with conformities to [[Language:C]], [[Language:C++|C++]], [[Language:Perl]] and [[Language:Java]]\n\n[[Category:Scripting language]]",
+	"implementations":[{"name":"zend"}]
+},
+{
+	"name":"SQL",
+	"summary":"A [[:Category:query language]] for databases",
+	"implementations":[{"name":"haskellDB"},
+		{"name":"hdbc"},
+		{"name":"hibernate"},
+		{"name":"hibernate2"},
+		{"name":"html5ajax"},
+		{"name":"html5tree"},
+		{"name":"jdbc"},
+		{"name":"jdbc2"},
+		{"name":"mySql"},
+		{"name":"sqlServer"}]
+},
+{
+	"name":"Scala",
+	"summary":"a [[:Category:Functional programming language|functional]] [[:Category:OO programming language|OO]] programming language",
+	"implementations":[{"name":"kiama"},
+		{"name":"scala2"},
+		{"name":"scalaXML"}]
+},
+{
+	"name":"Smalltalk",
+	"summary":"an  object-oriented, dynamically typed programming language",
+	"implementations":[{"name":"moose"},
+		{"name":"seaside"}]
+},
+{
+	"name":"Unicode",
+	"summary":"",
+	"implementations":[]
+},
+{
+	"name":"XHTML",
+	"summary":"a markup language for documents on the WWW",
+	"description":"XHTML is a derivative or dialect of [[Language:HTML]].\n\nIt is more strictly XML-based.",
+	"implementations":[{"name":"happstack"},
+		{"name":"haskellCGI"},
+		{"name":"jsf"},
+		{"name":"seam"}]
+},
+{
+	"name":"XML",
+	"summary":"",
+	"implementations":[{"name":"dom"},
+		{"name":"gwt"},
+		{"name":"hibernate"},
+		{"name":"hibernate2"},
+		{"name":"html5XMLHttpRequest"},
+		{"name":"hxt"},
+		{"name":"hxtPickler"},
+		{"name":"jaxbChoice"},
+		{"name":"jaxbComposition"},
+		{"name":"jaxbExtension"},
+		{"name":"jaxbSubstitution"},
+		{"name":"jdom"},
+		{"name":"jsf"},
+		{"name":"sax"},
+		{"name":"strutsXml"},
+		{"name":"xom"},
+		{"name":"xpathAPI"},
+		{"name":"xquery"},
+		{"name":"xslt"}]
+},
+{
+	"name":"XPath",
+	"summary":"a query language for XML documents",
+	"implementations":[{"name":"xpathAPI"}]
+},
+{
+	"name":"XQuery",
+	"summary":"an XML language for XML processing, specifically for querying",
+	"implementations":[{"name":"xquery"}]
+},
+{
+	"name":"XSD",
+	"summary":"TBD",
+	"implementations":[{"name":"jaxbChoice"},
+		{"name":"jaxbComposition"},
+		{"name":"jaxbExtension"},
+		{"name":"jaxbSubstitution"},
+		{"name":"sax"},
+		{"name":"xslt"}]
+},
+{
+	"name":"XSLT",
+	"summary":"an XML language for XML processing, specifically for transformation",
+	"implementations":[{"name":"xslt"}]
+}
+]
