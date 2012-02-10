@@ -1,23 +1,9 @@
 <?php
-define ('DEBUG',1) ;
 
-// absolute path to the 101dev package
-define('ABSPATH_BASE',dirname(dirname(__DIR__)).'/') ;
-
-// the directory where the megalib is installed 
-define('ABSPATH_MEGALIB',ABSPATH_BASE.'../megalib/') ;
-
-// the directory where the files are looked for
-define('ABSPATH_DATA_DIRECTORY',ABSPATH_BASE.'tools/data/') ;
-
+require_once '../config/configRDF101.php' ;
 require_once ABSPATH_MEGALIB.'SimpleGraph.php' ;
 require_once ABSPATH_MEGALIB.'SimpleGraphAsRDF.php' ;
 require_once ABSPATH_MEGALIB.'HTML.php' ;
-
-define('SCHEMA101FILE','Schema101.ss') ;
-define('DATA101PREFIX','http://data.101companies.org/data/') ;
-define('ONTOLOGY101PREFIX','http://data.101companies.org/schema#') ;
-
 
 
 /**
@@ -59,7 +45,7 @@ function loadJsonFileIntoGraph($graph, $entitykind) {
   $entities_array = json_decode($json,true)  ;
   if ($entities_array == NULL) {
     die ("Error in loading $filename : "
-         ."json_last_error=".json_last_error_message()) ;
+         ."json_last_error=".jsonLastErrorMessage()) ;
   }
   //print_r($entities_array) ;
   
@@ -113,7 +99,6 @@ function loadJsonFileIntoGraph($graph, $entitykind) {
 }
 
 
-
 //------------------------------------------------------------------------
 //--- loading the json file to a simple graph structure ------------------
 //------------------------------------------------------------------------  
@@ -140,15 +125,15 @@ if (DEBUG) echo '<h1>Converting to RDF triples</h1>' ;
   
 $graphasrdf = new SimpleGraphAsRDF() ;
 $graphasrdf->addSimpleGraph($graph,DATA101PREFIX,ONTOLOGY101PREFIX) ;
-echo arrayMapToHTMLTable($graphasrdf->getTriples()) ;
+// echo arrayMapToHTMLTable($graphasrdf->getTriples()) ;
+$tripleSet = $graphasrdf->getTripleSet() ;
 
-
-//$store->reset() ;
-//$triples=simpleGraphToRDFtripletSet($graph,ONTOLOGY101PREFIX) ;
-//saveTriplesToRDFStore($triples,$store,GRAPH101URI) ;
-
-
-
-
+//------------------------------------------------------------------------
+//--- saving the triples to the RDF store --------------------------------
+//------------------------------------------------------------------------  
+if (DEBUG) echo '<h1>Saving the triples into the "'.STORE101.'" RDF store</h1>' ;
+$store = get101Store() ;
+$n = $store->loadTripleSet($tripleSet,COMPLETE101RESOURCEURI,false) ;
+if (DEBUG) echo '<p>'.$n.' triples inserted into the store' ;
 
 
