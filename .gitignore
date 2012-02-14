@@ -5,3 +5,4 @@ tools/texgenerator/tex/impl/data/*.*
 tools/texgenerator/tex/ttc/data/*.*
 tools/texgenerator/tex/impl/data/impls/*.*
 tools/texgenerator/tex/ttc/data/ttcs/*.*
+tools/do-not-commit/
