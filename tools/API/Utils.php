@@ -391,11 +391,9 @@ class formatter{
         fclose($f);
         
         $pattern = '<syntaxhighlight lang="' . $match[1] .'"'.$match[2].'>' . $match[5] .'</syntaxhighlight>';
-<<<<<<< HEAD
+
         $replacement = '\lstinputlisting[xleftmargin=20pt, style=' . $match[1] . ' ' . $sourceText . ']{\texgen/files/' . $fname . "}"; //, language=' . $match[1] .$sourceText. //../../files/
-=======
-        $replacement = '\lstinputlisting[xleftmargin=20pt, style=' . $match[1] . ']{\texgen/files/' . $fname . "}"; //, language=' . $match[1] .$sourceText. //../../files/
->>>>>>> fe76ffdc19eacd331c6f91e5c4ed5581399a9657
+
         $text = str_replace($pattern, $replacement, $text);
      }
      /*
