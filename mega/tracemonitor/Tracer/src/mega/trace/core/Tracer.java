@@ -43,7 +43,7 @@ import java.util.LinkedList;
 import mega.trace.event.*;
 
 import mega.trace.transformation.ClassBytecodeTransformer;
-import mega.trace.transformation.TracerLink;
+
 
 
 public abstract class Tracer implements TracingInterface{
@@ -52,16 +52,9 @@ public abstract class Tracer implements TracingInterface{
 	
 	protected TraceClassLoader classloader;
 	
-	//link support:
-	protected static TracerLink link;	
-	//support for TLINK_IDMAP:
 	public static final HashMap<Integer,Tracer> map=new HashMap<Integer,Tracer>();
 	protected static int uidcount=0;
 	protected int uid=0;
-	
-	//support for TLINK_STATIC:
-	public static Tracer staticTracer=null;
-	
 
 	//Argument stack
 	private LinkedList<Object> stack;
@@ -71,17 +64,12 @@ public abstract class Tracer implements TracingInterface{
 	private String currentRefClass;
 	private String currentSourceClass;		
 
-
-
-
-
 	public Tracer(){
 		uidcount++;
 		uid			=	uidcount;
-		staticTracer=	this;
 		stack		=	new LinkedList<Object>();
 		currentRef	=	null;
-	
+		map.put(new Integer(uid), this);
 	}
 	
 	
@@ -159,10 +147,8 @@ public abstract class Tracer implements TracingInterface{
 
 	
 	
-	public int getuid() {return uid;}
-	
-	public static TracerLink getLinkMethod()				{return link;}
-	public static void setLinkMethod(TracerLink l)			{link=l;}
+	public int getID() {return uid;}
+
 	
 
 	
@@ -186,6 +172,10 @@ public abstract class Tracer implements TracingInterface{
 		if(name.startsWith("mega.trace."))
 			return false;
 		return traceClass(name);
+	}
+	
+	public static Tracer getTracer(int tracerID){
+		return ((Tracer)map.get(new Integer(tracerID)));
 	}
 	
 	public void dispatchEvent(TraceEvent e){

@@ -235,8 +235,8 @@ class formatter{
     }
    
     public static function sourceLinks($title,$text) {
-      $pattern = '/\[this!!(([^\]])+\/)*((\d|\w)+)(\.(\d|\w)+)?( (\d|\w)+(\.(\d|\w)+)?)?\]/';
-      $sfURL = 'http://developers.svn.sourceforge.net/viewvc/developers/repository/101companies/implementations/';
+      $pattern = '/\[this!!(([^\]])+\/)*((\d|\w)+)(\.(\d|\w)+)?( (\d|\w)+(\.(\d|\w)+)*?)?\]/';
+      $sfURL = 'https://github.com/101companies/101implementations/blob/master/';
       $sfProject = str_replace('101implementation:','',$title);
       $replacement = '\\begin{small}\\textsf{\\href{'.$sfURL.$sfProject.'/\1'.'\3\5'.'?view=markup}{\3\5}}\\end{small}';
       $newText = preg_replace($pattern,$replacement,$text);
@@ -371,7 +371,7 @@ class formatter{
      $replacement = '\begin{ttfamily}\1\end{ttfamily}';
      $text = preg_replace($pattern, $replacement, $text);
      
-     $sfURL = 'http://developers.svn.sourceforge.net/viewvc/developers/repository/101companies/implementations/';
+     $sfURL = 'https://github.com/101companies/101implementations/blob/master/';
      $text = str_replace(" line>",">", $text);
      $pattern = '/<syntaxhighlight lang=\"([a-zA-Z]*)\"(\s*(source=\"(.*)\")?\s*)>((\s*|.|\s)*)<\/syntaxhighlight>/'; 
      preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);  
@@ -391,7 +391,9 @@ class formatter{
         fclose($f);
         
         $pattern = '<syntaxhighlight lang="' . $match[1] .'"'.$match[2].'>' . $match[5] .'</syntaxhighlight>';
-        $replacement = '\lstinputlisting[xleftmargin=20pt]{\texgen/files/' . $fname . "}"; //, language=' . $match[1] .$sourceText. //../../files/
+
+        $replacement = '\lstinputlisting[xleftmargin=20pt, style=' . $match[1] . ' ' . $sourceText . ']{\texgen/files/' . $fname . "}"; //, language=' . $match[1] .$sourceText. //../../files/
+
         $text = str_replace($pattern, $replacement, $text);
      }
      /*

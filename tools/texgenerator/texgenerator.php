@@ -212,12 +212,12 @@ else if ($args['mode'] == 'implContents') {
     // adding to implementations.tex
     if ($title != $nTitle){
       if ($s->issues != ''){
-        $implsTex .= '\\iuwiki{'.str_replace('5','Five',$pureTitle).'}'.PHP_EOL;
+        $implsTex .= '\\iuwiki{'.str_replace('5','Five',$pureTitle).'}\\newpage'.PHP_EOL;
       } else {
-        $implsTex .= '\\iwiki{'.str_replace('5','Five',$pureTitle).'}'.PHP_EOL;
+        $implsTex .= '\\iwiki{'.str_replace('5','Five',$pureTitle).'}\\newpage'.PHP_EOL;
       }
     } else {
-      $implsTex .= '\\inwiki{'.str_replace('5','Five',$pureTitle).'}'.PHP_EOL;
+      $implsTex .= '\\inwiki{'.str_replace('5','Five',$pureTitle).'}\\newpage'.PHP_EOL;
     }
     
     
