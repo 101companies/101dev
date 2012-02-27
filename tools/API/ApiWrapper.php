@@ -122,6 +122,27 @@ function getTopLevelMembers($categoryTitle){
       return $categoryNames;
 }
 
+function getOntology() {
+	$categories = getWpapi()->listcategories();
+    $ontology = array();
+    foreach($categories as $c){
+      $ontology[$c['*']] = array();
+      $ontology[$c['*']]['categories'] = array();
+      $ontology[$c['*']]['members'] = array();
+      $subCategories = getSubCategories($c['*']);
+      foreach($subCategories as $sc){
+       array_push($ontology[$c['*']]['categories'], $sc);
+      }
+      $pages = getWpapi()->categorymembers("Category:" . $c['*']);
+      foreach($pages as $p) {
+      	if(substr_count($p['title'],"Category") != 1) {
+      		array_push($ontology[$c['*']]['members'], $p['title']);	
+      	}
+      }
+   }
+   return $ontology;
+}
+
 function getCategories(){
    $categories = getWpapi()->listcategories();
    $categoryNames = array();
