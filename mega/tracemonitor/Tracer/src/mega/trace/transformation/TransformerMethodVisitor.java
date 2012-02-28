@@ -25,9 +25,6 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 	private static final int FLAG_INTERFACE=4;
 	private static final int FLAG_VIRTUAL=8;
 
-
-	private final boolean useDUPNEWMethod=false; //UPDATE: KEEP SET TO FALSE!!! IGNORE://I wasn't sure if it is secure in every case to DUP immediately after NEW to get the "callee" object for AfterConstructorCall or if it is better to do this within BeforeConstructorCall. Problem is: if BeforeConstructorCall injection is disabled it would _still_ be necessary to PUSH the whole stack. 
-
 	public TransformerMethodVisitor(final MethodVisitor mv,String thisname,String superName,Tracer tracer,String classname,HashMap<String,String> fieldsigmap,boolean isStatic) {
 		super(ASM4, mv);
 		this.tracer=tracer;
@@ -137,15 +134,9 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 		default:
 			throw new Error("TransformerMethodVisitor, visitMethodInsn default.");			
 
-
 		}
 
-
-
 	}
-
-
-
 
 	private void insertDispatcherCall(){
 		mv.visitMethodInsn(INVOKEVIRTUAL, "mega/trace/core/Tracer", "dispatchEvent", "(Lmega/trace/event/TraceEvent;)V");
@@ -223,7 +214,7 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 
 		if((flags&FLAG_CONSTRUCTOR)!=0){
 			if(!tracer.injectBeforeConstructorCall(classname)){
-				if(!useDUPNEWMethod && tracer.injectAfterConstructorCall(classname)){
+				if(tracer.injectAfterConstructorCall(classname)){
 					//ugly!
 					insertLookup();
 					insertPushArguments(desc,(flags&FLAG_STATIC)!=0,true,owner);
@@ -248,7 +239,7 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 
 		insertLookup();
 
-		insertPushArguments(desc,((flags&FLAG_STATIC)+(flags&FLAG_CONSTRUCTOR))!=0,((flags&FLAG_CONSTRUCTOR)!=0) && !useDUPNEWMethod && tracer.injectAfterConstructorCall(classname),owner);
+		insertPushArguments(desc,((flags&FLAG_STATIC)+(flags&FLAG_CONSTRUCTOR))!=0,((flags&FLAG_CONSTRUCTOR)!=0) && tracer.injectAfterConstructorCall(classname),owner);
 		insertPushSource(staticmethod,classname);
 		mv.visitInsn(DUP); 
 
@@ -521,6 +512,9 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 
 
 	private void insertLookup(){
+		mv.visitIntInsn(SIPUSH, tracer.getID());
+		mv.visitMethodInsn(INVOKESTATIC, "mega/trace/core/Tracer", "getTracer", "(I)Lmega/trace/core/Tracer;");
+		/*
 		switch(Tracer.getLinkMethod()){
 		case TLINK_STATIC:
 			insertStaticLookup();
@@ -528,9 +522,9 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 		case TLINK_IDMAP:
 			insertIDMAPLookup();
 			break;
-		}
+		}*/
 	}
-
+/*
 	private void insertIDMAPLookup(){
 		mv.visitFieldInsn(GETSTATIC, "mega/trace/core/Tracer", "map", "Ljava/util/HashMap;");
 		mv.visitTypeInsn(NEW, "java/lang/Integer");
@@ -545,7 +539,7 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 	private void insertStaticLookup(){
 		mv.visitFieldInsn(GETSTATIC, "mega/trace/core/Tracer", "staticTracer", "Lmega/trace/core/Tracer;");
 	}
-
+*/
 	private void insertBooleanValue(boolean b){
 		if(b)
 		{
