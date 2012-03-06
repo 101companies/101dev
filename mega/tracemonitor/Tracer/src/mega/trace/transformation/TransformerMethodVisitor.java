@@ -19,7 +19,6 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 
 	private boolean staticmethod;
 
-
 	private static final int FLAG_STATIC=1;
 	private static final int FLAG_CONSTRUCTOR=2;
 	private static final int FLAG_INTERFACE=4;
@@ -514,32 +513,8 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 	private void insertLookup(){
 		mv.visitIntInsn(SIPUSH, tracer.getID());
 		mv.visitMethodInsn(INVOKESTATIC, "mega/trace/core/Tracer", "getTracer", "(I)Lmega/trace/core/Tracer;");
-		/*
-		switch(Tracer.getLinkMethod()){
-		case TLINK_STATIC:
-			insertStaticLookup();
-			break;
-		case TLINK_IDMAP:
-			insertIDMAPLookup();
-			break;
-		}*/
 	}
-/*
-	private void insertIDMAPLookup(){
-		mv.visitFieldInsn(GETSTATIC, "mega/trace/core/Tracer", "map", "Ljava/util/HashMap;");
-		mv.visitTypeInsn(NEW, "java/lang/Integer");
-		mv.visitInsn(DUP);
-		mv.visitIntInsn(BIPUSH, tracer.getuid());
-		mv.visitMethodInsn(INVOKESPECIAL, "java/lang/Integer", "<init>", "(I)V");
-		mv.visitMethodInsn(INVOKEVIRTUAL, "java/util/HashMap", "get", "(Ljava/lang/Object;)Ljava/lang/Object;");
-		mv.visitTypeInsn(CHECKCAST, tracerpath);
-
-	}
-
-	private void insertStaticLookup(){
-		mv.visitFieldInsn(GETSTATIC, "mega/trace/core/Tracer", "staticTracer", "Lmega/trace/core/Tracer;");
-	}
-*/
+	
 	private void insertBooleanValue(boolean b){
 		if(b)
 		{

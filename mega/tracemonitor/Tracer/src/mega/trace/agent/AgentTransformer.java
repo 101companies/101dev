@@ -18,12 +18,21 @@ public class AgentTransformer implements ClassFileTransformer{
 	
 	@Override
 	public byte[] transform(ClassLoader cloader, String s, Class<?> c, ProtectionDomain pdomain, byte[] bcode) throws IllegalClassFormatException {
+        
+        if(s.startsWith("java/") || s.startsWith("sun/"))
+        	return bcode;
 		
-		if(c.isAnnotationPresent(NoTrace.class))
-			return bcode; //TODO: check if "return null" also works instead.
+		//if(c.isAnnotationPresent(NoTrace.class))
+			//return bcode; //TODO: check if "return null" also works instead.
+		
 		
 		ClassBytecodeTransformer t = new ClassBytecodeTransformer(tracer);
-		return t.transformClassBytecode(bcode);
+	
+		byte[] newcode;
+		
+		newcode = t.transformClassBytecode(bcode);
+		
+		return newcode;
 	}
 
 }
