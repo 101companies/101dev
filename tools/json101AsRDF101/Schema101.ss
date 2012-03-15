@@ -18,7 +18,7 @@
       name:string@ ;
       intent: string? ; 
       discussion:string? ;
-      // categories:category* ;
+      categories:category* ;
       // members:  ????
     }
     
