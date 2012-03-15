@@ -1,10 +1,11 @@
 <?php
 
 define('BASE_PATH',str_replace('jsongenerator','',dirname(__FILE__)));
+define('BASE101URL','http://101companies.org/index.php/');
 error_reporting(E_ALL);
 ini_set('display_errors','On');
-require_once('../API/ApiWrapper2.php');
-require_once('../API/ApiWrapper.php');
+require_once(BASE_PATH.'/../API/ApiWrapper2.php');
+require_once(BASE_PATH.'/../API/ApiWrapper.php');
 
 if(function_exists('lcfirst') === false) {
     function lcfirst($str) {
@@ -26,6 +27,7 @@ function concJSON($title) {
 	$page = new Page($title);
 	$top = array();
   	$top['name'] = $title;
+  	$top['url'] = BASE101URL.$title;
   	$top['intent'] = $page->intent;
   	if ($page->intent == null)
   		$top['intent'] = "";
@@ -43,6 +45,7 @@ function catJSON($title, $subcs, $members) {
 	$page = new Page("Category:".$title);
 	$top = array();
   	$top['name'] = $title;
+  	$top['url'] = BASE101URL.'Category:'.$title;
   	$top['intent'] = $page->intent;
   	if ($page->intent == null)
   		$top['intent'] = "";
@@ -62,6 +65,7 @@ function implJSON($title,&$indexs){
   $page = new ImplementationPage("101implementation:".$title);
   $top = array();
   $top['name'] = $title;
+  $top['url'] = BASE101URL.'101implementation:'.$title;  
   $top['summary'] = $page->intent;
   if($page->intent == null)
     $top['summary'] = "";
@@ -136,6 +140,7 @@ function featJSON($title, $impltitles,$indexs){
   $page = new FeaturePage("101feature:".$title);
   $top = array();
   $top['name'] = $title;
+  $top['url'] = BASE101URL.'101feature:'.$title;
   $top['summary'] = $page->intent;
   if($page->intent == null)
     $top['summary'] = "";
@@ -164,6 +169,7 @@ function langJSON($title, $impltitles,$indexs){
   $page = new LanguagePage("Language:".$title);
   $top = array();
   $top['name'] = $title;
+  $top['url'] = BASE101URL.'Language:'.$title;
   $top['summary'] = $page->intent;
   if($page->intent == null)
     $top['summary'] = "";
@@ -188,6 +194,7 @@ function techJSON($title, $impltitles,$indexs){
   $page = new TechnologyPage("Technology:".$title);
   $top = array();
   $top['name'] = $title;
+  $top['url'] = BASE101URL.'Technology:'.$title;
   $top['summary'] = $page->intent;
   if($page->intent == null)
     $top['summary'] = "";
@@ -208,9 +215,13 @@ function techJSON($title, $impltitles,$indexs){
 }
 
 function emptyJSON($title, $type, $impltitles, $indexs){
+  $prefixs['feature'] = "101feature";
+  $prefixs['language'] = "Language";
+  $prefixs['technology'] = "Technology";
   echo "Generating empty JSON for ".$type." \"".$title."\"... ";
   $top = array();
   $top['name'] = $title;
+  $top['url'] = $indexs[$prefixs[$type].':'.$title];
   $top['summary'] = "";
   $impls = array();
   foreach($impltitles as $impltitle){
@@ -221,9 +232,6 @@ function emptyJSON($title, $type, $impltitles, $indexs){
   $wrapper = array();
   $wrapper['op'] = "insert";
   $prefixs = array();
-  $prefixs['feature'] = "101feature";
-  $prefixs['language'] = "Language";
-  $prefixs['technology'] = "Technology";
   $wrapper['id'] = $indexs[$prefixs[$type].':'.$title];
   $wrapper['type'] = "technology";  
   $wrapper['entry'] = $top;
