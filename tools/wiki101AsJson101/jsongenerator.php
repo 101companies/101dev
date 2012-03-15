@@ -27,7 +27,11 @@ function concJSON($title) {
 	$top = array();
   	$top['name'] = $title;
   	$top['intent'] = $page->intent;
+  	if ($page->intent == null)
+  		$top['intent'] = "";
 	$top['dicussion'] = $page->discussion;
+	if ($page->dicussion == null)
+  		$top['dicussion'] = "";
 	$result = array();
   	$result['json'] = '$'.json_encode($top).'$';    
  	echo "DONE".PHP_EOL;
@@ -40,7 +44,11 @@ function catJSON($title, $subcs, $members) {
 	$top = array();
   	$top['name'] = $title;
   	$top['intent'] = $page->intent;
+  	if ($page->intent == null)
+  		$top['intent'] = "";
 	$top['dicussion'] = $page->discussion;
+	if ($page->dicussion == null)
+  		$top['dicussion'] = "";
 	$top['categories'] = $subcs;
 	$top['members'] = $members;
 	$result = array();
