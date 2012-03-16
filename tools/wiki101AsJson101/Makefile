@@ -1,5 +1,5 @@
 all:
-	mkdir data
+	mkdir -p data
 	php jsongenerator.php
 
 clean: 
