@@ -36,10 +36,9 @@ define('RDF_SCHEMA_101_PREFIX_URL',URL_PROJECT_101_URL.'/schema#') ;
 define('RDF_SCHEMA_101_PREFIX','s101') ;
 
 define('RDF_WIKI_101_NAMED_GRAPH',URL_PROJECT_101_URL.'/dumps/Wiki101Full.rdf') ;
-define('RDF_CODE_101_NAMED_GRAPH',URL_PROJECT_101_URL.'/dumps/Code101Full.rdf') ;
-
-
-
+define('RDF_CODE_101_NAMED_GRAPH',URL_PROJECT_101_URL.'/dumps/Repository101Full.rdf') ;
+define('RDF_WIKI_101_DATA_GENERATED_CORE_FILENAME',ABSPATH_DATA_GENERATED.'Wiki101Full') ;
+ 
 require_once ABSPATH_MEGALIB.'RDF.php' ;
 /**
  * Return the 101 store.
