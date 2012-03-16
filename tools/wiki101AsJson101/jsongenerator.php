@@ -26,11 +26,12 @@ function concJSON($title) {
 	echo "Generating JSON for concept or term \"".$title."\"... ";
 	$page = new Page($title);
 	$top = array();
-  	#$top['name'] = $title;
-  	$top['url'] = BASE101URL.$title;
-  	$top['intent'] = $page->intent;
-  	if ($page->intent == null)
-  		$top['intent'] = "";
+  $top['name'] = $title;
+  $top['prefix'] = '';
+  $top['url'] = BASE101URL.$title;
+  $top['intent'] = $page->intent;
+  if ($page->intent == null)
+  	$top['intent'] = "";
 	$top['dicussion'] = $page->discussion;
 	if ($page->dicussion == null)
   		$top['dicussion'] = "";
@@ -44,10 +45,11 @@ function catJSON($title, $subcs, $members) {
 	echo "Generating JSON for category \"".$title."\"... ";
 	$page = new Page("Category:".$title);
 	$top = array();
-  	#$top['name'] = $title;
-  	$top['url'] = BASE101URL.'Category:'.$title;
-  	$top['intent'] = $page->intent;
-  	if ($page->intent == null)
+  $top['name'] = $title;
+  $top['prefix'] = 'Category';
+  $top['url'] = BASE101URL.'Category:'.$title;
+  $top['intent'] = $page->intent;
+  if ($page->intent == null)
   		$top['intent'] = "";
 	$top['dicussion'] = $page->discussion;
 	if ($page->dicussion == null)
@@ -76,7 +78,8 @@ function implJSON($title,&$indexs){
   echo "Generating JSON for implementation \"".$title."\"... ";
   $page = new ImplementationPage("101implementation:".$title);
   $top = array();
-  #$top['name'] = $title;
+  $top['name'] = $title;
+  $top['prefix'] = '101implementation';
   $top['url'] = BASE101URL.'101implementation:'.$title;  
   $top['summary'] = $page->intent;
   if($page->intent == null)
@@ -151,7 +154,8 @@ function featJSON($title, $impltitles,$indexs){
   echo "Generating JSON for feature \"".$title."\"... ";
   $page = new FeaturePage("101feature:".$title);
   $top = array();
-  #$top['name'] = $title;
+  $top['name'] = $title;
+  $top['prefix'] = '101feature';
   $top['url'] = BASE101URL.'101feature:'.$title;
   $top['summary'] = $page->intent;
   if($page->intent == null)
@@ -180,7 +184,8 @@ function langJSON($title, $impltitles,$indexs){
   echo "Generating JSON for language \"".$title."\"... ";
   $page = new LanguagePage("Language:".$title);
   $top = array();
-  #$top['name'] = $title;
+  $top['name'] = $title;
+  $top['prefix'] = 'Language';
   $top['url'] = BASE101URL.'Language:'.$title;
   $top['summary'] = $page->intent;
   if($page->intent == null)
@@ -205,7 +210,8 @@ function techJSON($title, $impltitles,$indexs){
   echo "Generating JSON for technology \"".$title."\"... ";
   $page = new TechnologyPage("Technology:".$title);
   $top = array();
-  #$top['name'] = $title;
+  $top['name'] = $title;
+  $top['prefix'] = 'Technology';
   $top['url'] = BASE101URL.'Technology:'.$title;
   $top['summary'] = $page->intent;
   if($page->intent == null)
@@ -232,7 +238,8 @@ function emptyJSON($title, $type, $impltitles, $indexs){
   $prefixs['technology'] = "Technology";
   echo "Generating empty JSON for ".$type." \"".$title."\"... ";
   $top = array();
-  #$top['name'] = $title;
+  $top['name'] = $title;
+  $top['prefix'] = $prefixs[$type];
   $top['url'] = $indexs[$prefixs[$type].':'.$title];
   $top['summary'] = "";
   $impls = array();

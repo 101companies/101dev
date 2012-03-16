@@ -129,12 +129,11 @@ function getOntology() {
       $ontology[$c['*']] = array();
       $ontology[$c['*']]['categories'] = array();
       $ontology[$c['*']]['members'] = array();
-      $subCategories = getSubCategories($c['*']);
-      foreach($subCategories as $sc){
-       array_push($ontology[$c['*']]['categories'], $sc);
-      }
-      $pages = getWpapi()->categorymembers("Category:" . $c['*']);
+      $pages = getWpapi()->categorymembers("Category:" . $c['*']);	
       foreach($pages as $p) {
+      	if(substr_count($p['title'],"Category") > 0) {
+      		array_push($ontology[$c['*']]['categories'], $p['title']);	
+      	}
       	if(substr_count($p['title'],"Category") != 1) {
       		array_push($ontology[$c['*']]['members'], $p['title']);	
       	}
