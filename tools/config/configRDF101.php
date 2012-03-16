@@ -15,8 +15,8 @@ define('RDF_101_STORE_NAME','s101') ;
 
 -------------------------------------------------------------------*/
 
-require_once '../config/configGlobal.php' ;  
 require_once '../config/localConfigRDF101.php' ;  // file missing? See above!!!
+require_once '../config/configGlobal.php' ;  
 
 // information for the database containing the s101 rdf store
 require_once ABSPATH_MEGALIB.'config/configRDF.php' ;
