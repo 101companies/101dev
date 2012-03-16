@@ -1,4 +1,4 @@
-package mega.test.data;
+package mega.test.JUnit.tracer;
 
 
 public class ConstructorTestTracer extends TestTracer {

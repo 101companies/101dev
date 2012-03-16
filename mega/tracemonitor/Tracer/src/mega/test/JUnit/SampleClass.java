@@ -1,4 +1,4 @@
-package mega.test.data;
+package mega.test.JUnit;
 
 public class SampleClass {
 	
@@ -15,7 +15,7 @@ public class SampleClass {
 	public static void main(){
 		
 		c = 5;
-		
+	
 		new SampleClass(c).mult(2);
 
 	}

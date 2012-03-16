@@ -1,16 +1,20 @@
-package mega.test;
+package mega.test.JUnit;
 
 import java.lang.reflect.InvocationTargetException;
+
+import mega.trace.core.TraceConfiguration;
 import mega.trace.core.Tracer;
 
 public class TestCommon {
 
 	private static Class<?> tracedClass;
 
+
 	protected void setUpTracer(Tracer tracer) throws Exception {
 
 		
-		tracedClass = tracer.loadClass("mega.test.data.SampleClass", true);
+		TraceConfiguration.registerTracer(tracer);
+		tracedClass = TraceConfiguration.loadClass("mega.test.JUnit.SampleClass", true);
 		
 
 	}

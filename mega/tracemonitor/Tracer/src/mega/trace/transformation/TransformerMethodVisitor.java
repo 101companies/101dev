@@ -10,7 +10,7 @@ import org.objectweb.asm.Opcodes;
 
 public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 	private final Tracer tracer;
-	private final String tracerpath;
+//	private final String tracerpath;
 	private final String classname;
 	private final String name;
 	private final String superName;
@@ -27,7 +27,7 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 	public TransformerMethodVisitor(final MethodVisitor mv,String thisname,String superName,Tracer tracer,String classname,HashMap<String,String> fieldsigmap,boolean isStatic) {
 		super(ASM4, mv);
 		this.tracer=tracer;
-		this.tracerpath=tracer.getClass().getName().replace('.', '/');
+	//	this.tracerpath=tracer.getClass().getName().replace('.', '/');
 		this.classname=classname.replace('/','.');
 		this.poplist=new LinkedList<String[]>();
 		this.staticmethod=isStatic;
@@ -91,6 +91,8 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 
 	public void visitMethodInsn(int opcode,String owner,String targetname,String desc){
 
+		System.out.println("OMG "+targetname);
+		
 		switch(opcode){
 
 		case INVOKEVIRTUAL:
@@ -165,8 +167,15 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 		mv.visitMethodInsn(INVOKESPECIAL, "mega/trace/event/LocalVariableAssignmentEvent", "<init>", "(Ljava/lang/String;Ljava/lang/String;)V");
 
 		insertDispatcherCall();
+		
+		if(signature.equals("L?")){
+			mv.visitMethodInsn(INVOKEVIRTUAL, "mega/trace/core/Tracer", "popL", "()Ljava/lang/Object;");
+			mv.visitInsn(POP);
+		}else{			
+			insertPopArguments(true);
+		}
 
-		insertPopArguments(true);
+		
 
 	}
 
@@ -351,7 +360,7 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 	private void insertPushArguments(String desc,boolean dontPushFRef,boolean duplicateFRef,String calleeClass){
 		//"pushes" all arguments of method description desc via n times tracer.pushX
 		//assumes reference to tracer is on top of the stack & keeps reference
-
+		System.out.println("now pushing "+desc);
 		int i;
 		char c;
 
@@ -380,8 +389,9 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 			}
 
 			if(ref){
-
-				if(c=='L'){
+				//if the current letter equals 'L' than position i could be the beginning
+				//of the class' reference string. It could also be just a 'L' within the string.
+				if(c=='L' && notWithinReference(desc,i)){
 					insertPushArgument(buff,dontPushFRef,true,false);
 					ref=false;
 					buff="";
@@ -423,6 +433,21 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 		mv.visitMethodInsn(INVOKEVIRTUAL, "mega/trace/core/Tracer", "setCalleeClass", "(Ljava/lang/String;)V");
 
 	}
+	
+	
+	private boolean notWithinReference(String desc,int pos){
+		//true if desc[pos] is not within a class reference
+		//avoid such things as Ljava/util/LinkedList;
+		
+		while(--pos>=0){
+			if(desc.charAt(pos) == 'L')
+				return false;
+			if(desc.charAt(pos) == ';')
+				return true;			
+		}
+		
+		return true;
+	}
 
 	private void insertPopArguments(boolean isStatic){
 		//assumes reference to tracer on top & discards this reference!
@@ -449,24 +474,45 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 				mv.visitTypeInsn(CHECKCAST, a[2]);
 
 			if(i.hasNext())
-				mv.visitInsn(SWAP); //put tracer reference on top again
+			{//put tracer reference on top again
+				
+				if(a[3].equals("D") || a[3].equals("J")){ //"pop'ed" 2 word value? SWAP would not work...
+					mv.visitInsn(DUP2_X1);
+					mv.visitInsn(POP2);
+				}else{
+					mv.visitInsn(SWAP); //1 word value: just swap it
+				}
+			}
 
 
 		}
 
 		poplist.clear(); //welldone.
+		
 	}
+
 
 	private void insertPushArgument(String type,boolean isStatic,boolean isReference,boolean pushTarget){
 		//"pushes" one argument via tracer.pushX & keeps reference
 		//assumes reference to tracer is on top of the stack and argument is below
-
+		
+		System.out.println("push "+type);
+		
 		if((!pushTarget)||(pushTarget&&!isStatic)) 
 		{
 			//duplicate tracer reference and pull argument on top of the stack
 			//top -> low : argument, tracer, tracer
-			mv.visitInsn(DUP_X1); 
-			mv.visitInsn(SWAP); 
+			
+			//double and long have to be handled different(2 words on stack)
+			if(type.equals("D") || type.equals("J")){
+				mv.visitInsn(DUP_X2);
+				mv.visitInsn(DUP_X2);
+				mv.visitInsn(POP);
+			}else{
+ 				mv.visitInsn(DUP_X1); 
+				mv.visitInsn(SWAP);
+			}
+			
 		}else{
 			//no more arguments available. just duplicate tracer ref.
 			mv.visitInsn(DUP);
@@ -491,20 +537,20 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 
 			if(!type.equals("java/lang/Object"))
 			{
-				addToPoplist("popL","()Ljava/lang/Object;",type);
+				addToPoplist("popL","()Ljava/lang/Object;",type,"L");
 			}else{
-				addToPoplist("popL","()Ljava/lang/Object;",null);
+				addToPoplist("popL","()Ljava/lang/Object;",null,"L");
 			}
 
 			mv.visitMethodInsn(INVOKEVIRTUAL, "mega/trace/core/Tracer", "pushL", "(Ljava/lang/Object;)V");
 		}else{
-			addToPoplist("pop"+type,"()"+type,null);
+			addToPoplist("pop"+type,"()"+type,null,type);
 			mv.visitMethodInsn(INVOKEVIRTUAL, "mega/trace/core/Tracer", "push"+type, "("+type+")V");
 		}
 	}
 
-	private void addToPoplist(String f,String t,String cast){
-		String[] a={f,t,cast};
+	private void addToPoplist(String f,String t,String cast,String desc){
+		String[] a={f,t,cast,desc};
 		poplist.addLast(a);	
 	}
 

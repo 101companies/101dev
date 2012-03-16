@@ -1,9 +1,10 @@
-package mega.test;
+package mega.test.JUnit;
 
 import static org.junit.Assert.*;
 
 import java.util.LinkedList;
-import mega.test.data.VarTestTracer;
+
+import mega.test.JUnit.tracer.VarTestTracer;
 import mega.trace.event.*;
 
 import org.junit.Before;
@@ -43,6 +44,9 @@ public class JUnitVarAssignTest extends TestCommon{
 		
 		int count=1;
 		
+		if(events.isEmpty())
+			fail();
+		
 		for(TraceEvent e : events){
 			
 			stack = stacks.removeFirst();
@@ -67,9 +71,9 @@ public class JUnitVarAssignTest extends TestCommon{
 				assertTrue(o.getClass().getName().equals("java.lang.Integer"));
 				assertTrue(((Integer)o).intValue() == 5);
 				
-				assertEquals(callclass[0],"mega.test.data.SampleClass");
+				assertEquals(callclass[0],"mega.test.JUnit.SampleClass");
 				assertTrue(call[0]==null); //from static method
-				assertEquals(callclass[1],"mega.test.data.SampleClass");
+				assertEquals(callclass[1],"mega.test.JUnit.SampleClass");
 				assertTrue(call[1]==null); //to static field..
 				
 			break;
@@ -87,9 +91,9 @@ public class JUnitVarAssignTest extends TestCommon{
 				assertTrue(o.getClass().getName().equals("java.lang.Integer"));
 				assertTrue(((Integer)o).intValue() == 5);
 				
-				assertEquals(callclass[0],"mega.test.data.SampleClass");
+				assertEquals(callclass[0],"mega.test.JUnit.SampleClass");
 				assertTrue(call[0]!=null); //within object(constructor)
-				assertEquals(callclass[1],"mega.test.data.SampleClass");
+				assertEquals(callclass[1],"mega.test.JUnit.SampleClass");
 				assertTrue(call[1]!=null); //to non static member field..
 				assertTrue(call[0]==call[1]); //within the same object
 				
@@ -99,7 +103,7 @@ public class JUnitVarAssignTest extends TestCommon{
 			case 3:
 				assertEquals(e.getClass().getName(),"mega.trace.event.LocalVariableAssignmentEvent");
 				
-				assertEquals(callclass[0],"mega.test.data.SampleClass");
+				assertEquals(callclass[0],"mega.test.JUnit.SampleClass");
 				assertTrue(call[0]!=null);
 				assertTrue(call[0]==old); //same object...
 				
@@ -117,7 +121,7 @@ public class JUnitVarAssignTest extends TestCommon{
 			case 4:
 				assertEquals(e.getClass().getName(),"mega.trace.event.LocalVariableAssignmentEvent");
 				
-				assertEquals(callclass[0],"mega.test.data.SampleClass");
+				assertEquals(callclass[0],"mega.test.JUnit.SampleClass");
 				assertTrue(call[0]!=null);
 				assertTrue(call[0]==old); //same object again...
 				

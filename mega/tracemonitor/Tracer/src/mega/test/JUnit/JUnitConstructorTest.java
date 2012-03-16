@@ -1,10 +1,10 @@
-package mega.test;
+package mega.test.JUnit;
 
 import static org.junit.Assert.*;
 
 import java.util.LinkedList;
 
-import mega.test.data.ConstructorTestTracer;
+import mega.test.JUnit.tracer.ConstructorTestTracer;
 import mega.trace.event.*;
 
 
@@ -25,6 +25,7 @@ public class JUnitConstructorTest extends TestCommon{
 
 	@Test
 	public void constructorTest() {
+		
 		LinkedList<TraceEvent> events=tracer.getEvents();
 		
 		LinkedList<LinkedList<Object>> stacks=tracer.getStacks();
@@ -41,6 +42,9 @@ public class JUnitConstructorTest extends TestCommon{
 		
 		int count=1;
 		
+		if(events.isEmpty())
+			fail();
+		
 		for(TraceEvent e : events){
 			
 			stack = stacks.removeFirst();
@@ -54,10 +58,10 @@ public class JUnitConstructorTest extends TestCommon{
 			case 1:
 				assertEquals(e.getClass().getName(),"mega.trace.event.BeforeConstructorCallEvent");
 				
-				assertEquals(callclass[0],"mega.test.data.SampleClass");
-				assertEquals(callclass[1],"mega.test.data.SampleClass");
+				assertEquals(callclass[0],"mega.test.JUnit.SampleClass");
+				assertEquals(callclass[1],"mega.test.JUnit.SampleClass");
 			
-				assertEquals(((BeforeConstructorCallEvent)e).getOwner(),"mega/test/data/SampleClass");
+				assertEquals(((BeforeConstructorCallEvent)e).getOwner(),"mega/test/JUnit/SampleClass");
 				assertEquals(((BeforeConstructorCallEvent)e).getDesc(),"(I)V");
 				assertTrue(!((BeforeConstructorCallEvent)e).isStatic());
 				assertTrue(stack.size()==1);
@@ -70,16 +74,16 @@ public class JUnitConstructorTest extends TestCommon{
 			break;
 			case 2:
 				assertEquals(e.getClass().getName(),"mega.trace.event.AfterConstructorCallEvent");
-				assertEquals(callclass[0],"mega.test.data.SampleClass");
+				assertEquals(callclass[0],"mega.test.JUnit.SampleClass");
 				assertTrue(call[1]!=null);
-				assertTrue(call[1].getClass().getName().equals("mega.test.data.SampleClass"));
+				assertTrue(call[1].getClass().getName().equals("mega.test.JUnit.SampleClass"));
 		
 			break;	
 			
 			case 3:
 				assertEquals(e.getClass().getName(),"mega.trace.event.BeforeConstructorCallEvent");
 				
-				assertEquals(callclass[0],"mega.test.data.SampleClass");
+				assertEquals(callclass[0],"mega.test.JUnit.SampleClass");
 				assertEquals(callclass[1],"java.lang.StringBuilder");
 			
 				

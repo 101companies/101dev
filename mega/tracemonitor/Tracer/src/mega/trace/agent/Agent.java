@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.lang.instrument.Instrumentation;
 import java.util.jar.JarFile;
 
-import mega.test.data.FullTestTracer;
+import mega.trace.core.TraceConfiguration;
 import mega.trace.core.Tracer;
 
 /*
  * support for javaagent
  * usage: 
- *   1. edit the 'Agent' class source code and apply one or more Tracer; see below within premain()
+ *   1. edit the mega.trace.core.TraceConfiguration class source code and apply one or more Tracer
  *   2. export the project's src folder as a jar with a special manifest file:
  *   Open src -> export and click java -> JAR File.
  *   Call the file something like tracer.jar
@@ -30,7 +30,7 @@ public class Agent {
 	private static final String asmlib="asm-all-4.0.jar";
 
 	public static void premain(String args, Instrumentation i) {
-		
+
 		try {
 			i.appendToSystemClassLoaderSearch(new JarFile(asmlib));
 		} catch (IOException e) {
@@ -38,14 +38,14 @@ public class Agent {
 			System.out.println(e.toString());
 			System.exit(1);
 		}
-		
-		/*apply tracer:	
-		* 	Tracer mytracer=new YOUR_TRACER_GOES_HERE();
-		* 	i.addTransformer(mytracer);
-		*/
-		Tracer tracer=new FullTestTracer();
-		i.addTransformer(new AgentTransformer(tracer));
+		System.out.println("go!");
 
+		//query TraceConfiguration to get the tracer(s) and apply them
+		for(Tracer t:TraceConfiguration.getTracerList()){
+			i.addTransformer(new AgentTransformer(t));
+		}
+		
+		System.exit(0);
 	}
 	
 	

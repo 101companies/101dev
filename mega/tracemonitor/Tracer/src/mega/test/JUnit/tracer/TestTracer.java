@@ -1,4 +1,4 @@
-package mega.test.data;
+package mega.test.JUnit.tracer;
 
 import java.util.LinkedList;
 import mega.trace.core.Tracer;
@@ -19,8 +19,7 @@ public class TestTracer extends Tracer{
 	}
 	
 	public boolean traceClass(String name) {
-		
-		return (name.equals("mega.test.data.SampleClass"));
+		return (name.equals("mega.test.JUnit.SampleClass"));
 	}
 	
 	public LinkedList<TraceEvent> getEvents() {return trace;}

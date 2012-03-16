@@ -50,14 +50,14 @@ public abstract class Tracer implements TracingInterface{
 	
 	
 	
-	protected TraceClassLoader classloader;
+	
 	
 	public static final HashMap<Integer,Tracer> map=new HashMap<Integer,Tracer>();
 	protected static int uidcount=0;
 	protected int uid=0;
 
 	//Argument stack
-	private LinkedList<Object> stack;
+	protected LinkedList<Object> stack;
 	//current object
 	private Object currentRef;
 	private Object currentSource;	
@@ -79,7 +79,7 @@ public abstract class Tracer implements TracingInterface{
 	//You may overload the following methods:
 	
 	//exclude classes from tracing. false=do not trace at all
-	public boolean traceClass(String name) {return false;} 
+	public abstract boolean traceClass(String name);
 	
 	//Trace variable assignments? If the member flag is set it is a member field and it may be static when isStatic is set.
 	//if the member flag is not set it is a local variable and isStatic is always false, too.
@@ -109,7 +109,16 @@ public abstract class Tracer implements TracingInterface{
 	
 	//=================================================================================================
 	
-
+	public boolean ignoreClass(String pname){
+	/*//pname.startsWith("javax/")/*
+		if(pname.startsWith("java/") || pname.startsWith("javax/") || pname.startsWith("sun/")) //ignoring java.* is essential...
+			return true;
+		if(pname.startsWith("org/eclipse/jdt/internal/") || pname.startsWith("org/junit/") || pname.startsWith("junit/"))
+			return true;	*/	
+		return false;
+	}
+	
+	
 		public final Object getCallee() {
 			return currentRef;
 		}
@@ -151,7 +160,7 @@ public abstract class Tracer implements TracingInterface{
 
 	
 
-	
+/*	
 	public Class<?> loadClass(String name,boolean resolve) throws ClassNotFoundException{
 	
 		if(classloader==null)
@@ -162,6 +171,7 @@ public abstract class Tracer implements TracingInterface{
 		return classloader.loadClass(name, resolve);
 		
 	}
+	*/
 	
 	public byte[] transformClassBytecode(byte[] b){
 		return new ClassBytecodeTransformer(this).transformClassBytecode(b);
@@ -169,7 +179,7 @@ public abstract class Tracer implements TracingInterface{
 	
 	public final boolean checkTransform(String name){
 
-		if(name.startsWith("mega.trace."))
+		if(ignoreClass(name))
 			return false;
 		return traceClass(name);
 	}

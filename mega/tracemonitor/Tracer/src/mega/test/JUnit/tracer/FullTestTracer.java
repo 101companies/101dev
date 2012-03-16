@@ -1,7 +1,12 @@
-package mega.test.data;
+package mega.test.JUnit.tracer;
 
 
 public class FullTestTracer extends TestTracer {
+	
+	@Override
+	public boolean traceClass(String name) {
+		return (name.startsWith("/mega/test/data/SampleClass2"));
+	}
 
 //enable full code injection
 	public boolean injectVariableCall(String varname,boolean member,boolean isStatic) {return true;}
