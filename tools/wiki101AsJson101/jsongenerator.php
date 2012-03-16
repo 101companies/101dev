@@ -27,7 +27,7 @@ function concJSON($title) {
 	$page = new Page($title);
 	$top = array();
   $top['name'] = $title;
-  $top['prefix'] = '';
+  $top['type'] = 'Concept';
   $top['url'] = BASE101URL.$title;
   $top['intent'] = $page->intent;
   if ($page->intent == null)
@@ -46,7 +46,7 @@ function catJSON($title, $subcs, $members) {
 	$page = new Page("Category:".$title);
 	$top = array();
   $top['name'] = $title;
-  $top['prefix'] = 'Category';
+  $top['type'] = 'Category';
   $top['url'] = BASE101URL.'Category:'.$title;
   $top['intent'] = $page->intent;
   if ($page->intent == null)
@@ -79,7 +79,7 @@ function implJSON($title,&$indexs){
   $page = new ImplementationPage("101implementation:".$title);
   $top = array();
   $top['name'] = $title;
-  $top['prefix'] = '101implementation';
+  $top['type'] = 'Implementation';
   $top['url'] = BASE101URL.'101implementation:'.$title;  
   $top['summary'] = $page->intent;
   if($page->intent == null)
@@ -155,7 +155,7 @@ function featJSON($title, $impltitles,$indexs){
   $page = new FeaturePage("101feature:".$title);
   $top = array();
   $top['name'] = $title;
-  $top['prefix'] = '101feature';
+  $top['type'] = 'Feature';
   $top['url'] = BASE101URL.'101feature:'.$title;
   $top['summary'] = $page->intent;
   if($page->intent == null)
@@ -185,7 +185,7 @@ function langJSON($title, $impltitles,$indexs){
   $page = new LanguagePage("Language:".$title);
   $top = array();
   $top['name'] = $title;
-  $top['prefix'] = 'Language';
+  $top['type'] = 'Language';
   $top['url'] = BASE101URL.'Language:'.$title;
   $top['summary'] = $page->intent;
   if($page->intent == null)
@@ -211,7 +211,7 @@ function techJSON($title, $impltitles,$indexs){
   $page = new TechnologyPage("Technology:".$title);
   $top = array();
   $top['name'] = $title;
-  $top['prefix'] = 'Technology';
+  $top['type'] = 'Technology';
   $top['url'] = BASE101URL.'Technology:'.$title;
   $top['summary'] = $page->intent;
   if($page->intent == null)
@@ -239,7 +239,7 @@ function emptyJSON($title, $type, $impltitles, $indexs){
   echo "Generating empty JSON for ".$type." \"".$title."\"... ";
   $top = array();
   $top['name'] = $title;
-  $top['prefix'] = $prefixs[$type];
+  $top['type'] = ucfirst($type);
   $top['url'] = $indexs[$prefixs[$type].':'.$title];
   $top['summary'] = "";
   $impls = array();
@@ -328,11 +328,13 @@ $techuse = array();
 $jsons = array();
 $missing = array();
 $implj = array();
+$fti = array();
 foreach($impltitles as $impltitle){
    $result = implJSON($impltitle,$indexs);
    array_push($jsons, $result['json']);
    #array_push($implj, $result['json']);
    $implj['101implementation:'.$impltitle] = $result['json'];
+   array_push($fti, '101implementation:'.$impltitle);
    foreach($result['feats'] as $feato){
      $feat = $feato['name'];
      if (array_key_exists($feat, $coverage))
@@ -373,51 +375,67 @@ foreach($impltitles as $impltitle){
    	array_push($missing,$misso);
    }
 }
-$all .= '"implementations":'. saveJSON('implementation', $implj).PHP_EOL.','.PHP_EOL;
+$all .= '"ImplementationMembers":'. json_encode($fti).PHP_EOL.','.PHP_EOL;
+$all .= '"Implementation":'. saveJSON('implementation', $implj).PHP_EOL.','.PHP_EOL;
 var_dump($missing);
 $concj = array();
+$ftco = array();
 foreach($conctitles as $conctitle) {
   $result = concJSON($conctitle);
   array_push($jsons, $result['json']);
   #array_push($concj, $result['json']);
   $concj[$conctitle] = $result['json'];
+  array_push($ftco, $conctitle);
 }
-$all .= '"concepts":'. saveJSON('concept', $concj).PHP_EOL.','.PHP_EOL;
+$all .= '"ConceptMembers":'. json_encode($ftco).PHP_EOL.','.PHP_EOL;
+$all .= '"Concept":'. saveJSON('concept', $concj).PHP_EOL.','.PHP_EOL;
 
 $catj = array();
+$ftca = array();
 foreach($ontology as $x => $info) {
   $result = catJSON($x, $info['categories'], $info['members']);
   array_push($jsons, $result['json']);
   #array_push($catj, $result['json']);
   $catj['Category:'.$x] = $result['json'];
+  array_push($ftca, 'Category:'.$x);
 }
-$all .= '"categories":'. saveJSON('category', $catj).PHP_EOL.','.PHP_EOL;
+$all .= '"CategoryMembers":'. json_encode($ftca).PHP_EOL.','.PHP_EOL;
+$all .= '"Category":'. saveJSON('category', $catj).PHP_EOL.','.PHP_EOL;
 
 $featj = array();
+$ftf = array();
 foreach($feattitles as $feattitle){
   $result = featJSON($feattitle, $coverage[lcfirst($feattitle)],$indexs);
   array_push($jsons, $result['json']);
   #array_push($featj, $result['json']);
   $featj['101feature:'.$feattitle] = $result['json'];
+  array_push($ftf, '101feature:'.$feattitle);
 }
-$all .= '"features":'. saveJSON('feature', $featj).PHP_EOL.','.PHP_EOL;
+$all .= '"FeatureMembers":'. json_encode($ftf).PHP_EOL.','.PHP_EOL;
+$all .= '"Feature":'. saveJSON('feature', $featj).PHP_EOL.','.PHP_EOL;
 $langj = array();
+$ftl = array();
 foreach($langtitles as $langtitle){
   $result = langJSON($langtitle, $languse[$langtitle],$indexs);
   array_push($jsons, $result['json']);
   #array_push($langj, $result['json']);
   $langj['Language:'.$langtitle] = $result['json'];
+  array_push($ftl, 'Language:'.$langtitle);
 }
-$all .= '"languages":'. saveJSON('language', $langj).PHP_EOL.','.PHP_EOL;
+$all .= '"LanguageMembers":'. json_encode($ftl).PHP_EOL.','.PHP_EOL;
+$all .= '"Language":'. saveJSON('language', $langj).PHP_EOL.','.PHP_EOL;
 $techj = array();
+$ftt = array();
 foreach($techtitles as $techtitle){
   $result = techJSON($techtitle, $techuse[$techtitle],$indexs);
   array_push($jsons, $result['json']);
   #array_push($techj, $result['json']);
   $techj['Technology:'.$techtitle] = $result['json'];
+  array_push($ftt, 'Technology:'.$techtitle);
 }
 var_dump($langj);
-$all .= '"technologies":'. saveJSON('technology', $techj).PHP_EOL.PHP_EOL.'}'.PHP_EOL;
+$all .= '"TechnologyMembers":'. json_encode($ftt).PHP_EOL.','.PHP_EOL;
+$all .= '"Technology":'. saveJSON('technology', $techj).PHP_EOL.PHP_EOL.'}'.PHP_EOL;
 foreach($missing as $m){
   switch ($m['type']) {
 	case "feature":
