@@ -16,8 +16,8 @@ $graphasrdf = new SimpleGraphAsRDF() ;
 $graphasrdf->addSimpleGraph($graph,RDF_DATA_101_PREFIX_URL,RDF_SCHEMA_101_PREFIX_URL) ;
 
 // Save the triples in different file format
+if (DEBUG) echo "<h2>Saving the triples in files</h2>" ;
 $tripleset = $graphasrdf->getTripleSet() ;
-
 $formats=array(
     'HTML'=>'.html',
     'GraphML'=>'.graphml',
@@ -25,13 +25,15 @@ $formats=array(
     'RDF'=>'.rdf',
     'RDFJSON'=>'.json',
     'NTriples'=>'.nt') ;
-
 foreach ($formats as $format => $extension) {
   $filename = RDF_WIKI_101_DATA_GENERATED_CORE_FILENAME.$extension ;
-  if (DEBUG) echo "<h2>Saving triples to $filename</h2>" ;
+  if (DEBUG) echo "<li>Saving triples to $filename</li>" ;
   $tripleset->save($format,RDF_WIKI_101_DATA_GENERATED_CORE_FILENAME.$extension) ;
 }
 
+
+
+if (DEBUG) echo "<h2>Saving the triples in the RDF store</h2>" ;
 // Save the triples in the RDF101 store
 $store101 = get101Store() ;
 //$store101->reset() ;

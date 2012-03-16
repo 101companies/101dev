@@ -3,55 +3,82 @@
 // ! means 1
 // ? means 0..1
 // * means *
-// This file is used in the context of the transformation json101AsRdf101
-// Only the class and attributes listed below will be converted
-// There could be more in the original json file.
-// Names should be the same as those in the json files.
+// This file is used in particular in the context of the transformation json101AsRdf101
+// Only the classes and attributes listed below will be converted
+// This means that there could be more classes and attributes in the original json file.
+// Attributes names should be the same as those in the json files.
+// There is a mapping file for the binding between class and top level category.   
+
+
+// Note (1): Some fields are currently ignored because the fact that they contain XML
+// leads to problems in graphml generation. Will be fixed later. 
+   
+Category {
+  id: string@ ;
+  name: string! ;
+  type: string! ;
+  url: string! ;
+  intent: string? ; 
+  // discussion:string? ;  // See Note (1)
+  categories: Category* ;
+  languageMembers: Language* ;
+  conceptMembers: Concept* ;
+  featureMembers: Feature* ;
+  implementationMembers: Implementation* ;
+  technologyMembers: Technology*
+}   
     
-    concept {
-      name:string@ ;
-      intent:string? ;
-      // discussion:string?
-    }
+Concept {
+  id: string@ ;
+  name: string! ;
+  type: string! ;
+  url: string! ;
+  intent:string? ;
+  // discussion:string?   // See Note (1)
+}
+        
+Feature {
+  id: string@ ;
+  name: string! ;
+  type: string! ;
+  url: string! ;
+  summary:string! ;
+  // description:string? ;  // See Note (1)
+  // illustration:string? ; // See Note (1)
+  implementations:Implementation*
+}
     
-    category {
-      name:string@ ;
-      intent: string? ; 
-      // discussion:string? ;
-      categories:category* ;
-      // members:  ????
-    }
+Implementation {
+  id: string@ ;
+  name: string! ;
+  type: string! ;
+  url: string! ;
+  summary: string! ;
+  // motivation: string! ;  // See Note (1)
+  features: Feature* ;
+  languages: Language* ;
+  technologies: Technology* ;
+  // usage:string?  // See Note (1)
+}
     
-    feature {
-      name:string@ ;
-      summary:string! ;
-      // description:string? ;
-      // illustration:string? ;
-      implementations:implementation*
-    }
+Language {
+  id: string@ ;
+  name: string! ;
+  type: string! ;
+  url: string! ;
+  summary: string! ;
+  // description: string? ;  // See Note (1)
+  implementations: Implementation*
+}
     
-    implementation {
-      name:string@ ;
-      summary:string! ;
-      // motivation:string! ;
-      features:feature* ;
-      languages:language* ;
-      technologies:technology* ;
-      // usage:string?
-    }
-    
-    language {
-      name:string@ ;
-      summary:string! ;
-      // description:string? ;
-      implementations:implementation*
-    }
-    
-    technology {
-      name:string@ ; 
-      summary:string! ; 
-      // description:string? ; 
-      implementations:implementation*
-    }
+Technology {
+  id: string@ ;
+  name: string! ;
+  type: string! ;
+  url: string! ;
+  summary: string! ; 
+  // description: string? ;   // See Note (1)
+  implementations: Implementation*
+}
 
 
