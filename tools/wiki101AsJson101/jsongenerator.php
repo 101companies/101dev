@@ -87,7 +87,7 @@ function implJSON($title,&$indexs){
   $missingFeats = array();
   foreach($page->getFeats() as $feat){
    	   $feato = array();
-       $feato['name'] = lcfirst($feat);
+       $feato['name'] = '101feature:'.$feat;
        array_push($feats, $feato);
        if ( $indexs['101feature:'.$feat] == NULL) {
        	array_push($missingFeats, $feat);
@@ -102,7 +102,7 @@ function implJSON($title,&$indexs){
   $missingLangs = array();
   foreach($page->getLangs() as $lang){
   	  $lango = array();
-      $lango['name'] = $lang;
+      $lango['name'] = 'Language:'.$lang;
       array_push($langs, $lango);
       if ($indexs['Language:'.$lang] == NULL) {
         array_push($missingLangs, $lang);
@@ -116,7 +116,7 @@ function implJSON($title,&$indexs){
   $missingTechs = array();
   foreach($page->getTechs() as $tech){
       $techo = array();
-      $techo['name'] = $tech;
+      $techo['name'] = 'Technology:'.$tech;
       array_push($techs, $techo);
       if ($indexs['Technology:'.$tech] == NULL) {
       	array_push($missingTechs, $tech);
@@ -325,7 +325,7 @@ foreach($impltitles as $impltitle){
    $result = implJSON($impltitle,$indexs);
    array_push($jsons, $result['json']);
    #array_push($implj, $result['json']);
-   $implj[$impltitle] = $result['json'];
+   $implj['101implementation:'.$impltitle] = $result['json'];
    foreach($result['feats'] as $feato){
      $feat = $feato['name'];
      if (array_key_exists($feat, $coverage))
@@ -382,7 +382,7 @@ foreach($ontology as $x => $info) {
   $result = catJSON($x, $info['categories'], $info['members']);
   array_push($jsons, $result['json']);
   #array_push($catj, $result['json']);
-  $catj[$x] = $result['json'];
+  $catj['Category:'.$x] = $result['json'];
 }
 $all .= '"categories":'. saveJSON('category', $catj).PHP_EOL.','.PHP_EOL;
 
@@ -391,7 +391,7 @@ foreach($feattitles as $feattitle){
   $result = featJSON($feattitle, $coverage[lcfirst($feattitle)],$indexs);
   array_push($jsons, $result['json']);
   #array_push($featj, $result['json']);
-  $featj[$feattitle] = $result['json'];
+  $featj['101feature:'.$feattitle] = $result['json'];
 }
 $all .= '"features":'. saveJSON('feature', $featj).PHP_EOL.','.PHP_EOL;
 $langj = array();
@@ -399,7 +399,7 @@ foreach($langtitles as $langtitle){
   $result = langJSON($langtitle, $languse[$langtitle],$indexs);
   array_push($jsons, $result['json']);
   #array_push($langj, $result['json']);
-  $langj[$langtitle] = $result['json'];
+  $langj['Language:'.$langtitle] = $result['json'];
 }
 $all .= '"languages":'. saveJSON('language', $langj).PHP_EOL.','.PHP_EOL;
 $techj = array();
@@ -407,7 +407,7 @@ foreach($techtitles as $techtitle){
   $result = techJSON($techtitle, $techuse[$techtitle],$indexs);
   array_push($jsons, $result['json']);
   #array_push($techj, $result['json']);
-  $techj[$techtitle] = $result['json'];
+  $techj['Technology:'.$techtitle] = $result['json'];
 }
 var_dump($langj);
 $all .= '"technologies":'. saveJSON('technology', $techj).PHP_EOL.PHP_EOL.'}'.PHP_EOL;
@@ -427,7 +427,7 @@ foreach($missing as $m){
   array_push($jsons, $result['json']);
 }
 #saveJSON('101knowledge', $jsons);
-$file = fopen('./data/all.json','w+');
+$file = fopen('../data/generated/all.json','w+');
 fwrite($file, $all);
 fclose($file);
 
