@@ -11,13 +11,13 @@
     concept {
       name:string@ ;
       intent:string? ;
-      discussion:string?
+      // discussion:string?
     }
     
     category {
       name:string@ ;
       intent: string? ; 
-      discussion:string? ;
+      // discussion:string? ;
       categories:category* ;
       // members:  ????
     }
@@ -25,32 +25,32 @@
     feature {
       name:string@ ;
       summary:string! ;
-      description:string? ;
-      illustration:string? ;
+      // description:string? ;
+      // illustration:string? ;
       implementations:implementation*
     }
     
     implementation {
       name:string@ ;
       summary:string! ;
-      motivation:string! ;
+      // motivation:string! ;
       features:feature* ;
       languages:language* ;
       technologies:technology* ;
-      usage:string?
+      // usage:string?
     }
     
     language {
       name:string@ ;
       summary:string! ;
-      description:string? ;
+      // description:string? ;
       implementations:implementation*
     }
     
     technology {
       name:string@ ; 
       summary:string! ; 
-      description:string? ; 
+      // description:string? ; 
       implementations:implementation*
     }
 
