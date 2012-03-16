@@ -42,6 +42,11 @@ function concJSON($title) {
 }
 
 function catJSON($title, $subcs, $members) {
+  $prefix2Type['Language'] = 'language';
+  $prefix2Type[''] = 'concept';
+  $prefix2Type['101feature'] = 'feature';
+  $prefix2Type['101implementation'] = "implementation";
+  $prefix2Type['Technology'] = 'technology';
 	echo "Generating JSON for category \"".$title."\"... ";
 	$page = new Page("Category:".$title);
 	$top = array();
@@ -62,12 +67,24 @@ function catJSON($title, $subcs, $members) {
   	}
 	$top['categories'] = $subs;
 	$mems = array();
-	foreach($members as $member){
-		$memo = array();
-		$memo['name'] = $member;
-		array_push($mems, $memo);
+  foreach ($prefix2Type as $prefix => $type) {
+    $mems[$type] = array();
+  }
+	foreach($members as $member){  
+    $curPrefix = getNamespace($member);
+    $memo = array();
+    $memo['name'] = $member;
+    foreach($prefix2Type as $prefix => $type){
+      if ($curPrefix == $prefix) {
+        array_push($mems[$type], $memo);
+      }
+          
+    }
 	}
-	$top['members'] = $mems;
+  foreach($mems as $type => $members){
+    $top[$type.'Members'] = $members;  
+  }
+	
 	$result = array();
   	$result['json'] = '$'.json_encode($top).'$';    
  	echo "DONE".PHP_EOL;
@@ -375,7 +392,7 @@ foreach($impltitles as $impltitle){
    	array_push($missing,$misso);
    }
 }
-$all .= '"ImplementationMembers":'. json_encode($fti).PHP_EOL.','.PHP_EOL;
+#$all .= '"ImplementationMembers":'. json_encode($fti).PHP_EOL.','.PHP_EOL;
 $all .= '"Implementation":'. saveJSON('implementation', $implj).PHP_EOL.','.PHP_EOL;
 var_dump($missing);
 $concj = array();
@@ -387,7 +404,7 @@ foreach($conctitles as $conctitle) {
   $concj[$conctitle] = $result['json'];
   array_push($ftco, $conctitle);
 }
-$all .= '"ConceptMembers":'. json_encode($ftco).PHP_EOL.','.PHP_EOL;
+#$all .= '"ConceptMembers":'. json_encode($ftco).PHP_EOL.','.PHP_EOL;
 $all .= '"Concept":'. saveJSON('concept', $concj).PHP_EOL.','.PHP_EOL;
 
 $catj = array();
@@ -399,7 +416,7 @@ foreach($ontology as $x => $info) {
   $catj['Category:'.$x] = $result['json'];
   array_push($ftca, 'Category:'.$x);
 }
-$all .= '"CategoryMembers":'. json_encode($ftca).PHP_EOL.','.PHP_EOL;
+#$all .= '"CategoryMembers":'. json_encode($ftca).PHP_EOL.','.PHP_EOL;
 $all .= '"Category":'. saveJSON('category', $catj).PHP_EOL.','.PHP_EOL;
 
 $featj = array();
@@ -411,7 +428,7 @@ foreach($feattitles as $feattitle){
   $featj['101feature:'.$feattitle] = $result['json'];
   array_push($ftf, '101feature:'.$feattitle);
 }
-$all .= '"FeatureMembers":'. json_encode($ftf).PHP_EOL.','.PHP_EOL;
+#$all .= '"FeatureMembers":'. json_encode($ftf).PHP_EOL.','.PHP_EOL;
 $all .= '"Feature":'. saveJSON('feature', $featj).PHP_EOL.','.PHP_EOL;
 $langj = array();
 $ftl = array();
@@ -422,7 +439,7 @@ foreach($langtitles as $langtitle){
   $langj['Language:'.$langtitle] = $result['json'];
   array_push($ftl, 'Language:'.$langtitle);
 }
-$all .= '"LanguageMembers":'. json_encode($ftl).PHP_EOL.','.PHP_EOL;
+#$all .= '"LanguageMembers":'. json_encode($ftl).PHP_EOL.','.PHP_EOL;
 $all .= '"Language":'. saveJSON('language', $langj).PHP_EOL.','.PHP_EOL;
 $techj = array();
 $ftt = array();
@@ -433,8 +450,7 @@ foreach($techtitles as $techtitle){
   $techj['Technology:'.$techtitle] = $result['json'];
   array_push($ftt, 'Technology:'.$techtitle);
 }
-var_dump($langj);
-$all .= '"TechnologyMembers":'. json_encode($ftt).PHP_EOL.','.PHP_EOL;
+#$all .= '"TechnologyMembers":'. json_encode($ftt).PHP_EOL.','.PHP_EOL;
 $all .= '"Technology":'. saveJSON('technology', $techj).PHP_EOL.PHP_EOL.'}'.PHP_EOL;
 foreach($missing as $m){
   switch ($m['type']) {
