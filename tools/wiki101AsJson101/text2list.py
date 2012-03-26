@@ -1,7 +1,6 @@
 import re
 import json
 
-
 def text2List(text):
 	textstart = 0
 	for textm in re.finditer("\[\[([^\[\|]+)(\|([^\[]+))?\]\]",text):
@@ -16,7 +15,6 @@ def listify(json, textsections):
 			for attr in json[t][e]:
 				if attr in textsections:
 					json[t][e][attr] = list(text2List(json[t][e][attr]))				
-
 
 json101 = json.load(open("../data/generated/all.json"))		
 listify(json101,['discussion', 'dicussion', 'architecture', 'intent', 'motivation', 'issues', 'usage', 'description', 'summary', 'illustration'])
