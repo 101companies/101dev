@@ -5,7 +5,7 @@ public class FullTestTracer extends TestTracer {
 	
 	@Override
 	public boolean traceClass(String name) {
-		return (name.startsWith("/mega/test/data/SampleClass2"));
+		return (name.startsWith("org/softlang/"));
 	}
 
 //enable full code injection

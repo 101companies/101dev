@@ -10,7 +10,6 @@ import org.objectweb.asm.Opcodes;
 
 public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 	private final Tracer tracer;
-//	private final String tracerpath;
 	private final String classname;
 	private final String name;
 	private final String superName;
@@ -27,7 +26,6 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 	public TransformerMethodVisitor(final MethodVisitor mv,String thisname,String superName,Tracer tracer,String classname,HashMap<String,String> fieldsigmap,boolean isStatic) {
 		super(ASM4, mv);
 		this.tracer=tracer;
-	//	this.tracerpath=tracer.getClass().getName().replace('.', '/');
 		this.classname=classname.replace('/','.');
 		this.poplist=new LinkedList<String[]>();
 		this.staticmethod=isStatic;
@@ -45,7 +43,7 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 
 
 		if((opcode==PUTSTATIC||opcode==PUTFIELD)&&(tracer.injectVariableCall(name,true,opcode==PUTSTATIC)))
-			insertMemberVariableCall(name,opcode==PUTSTATIC,desc,owner);
+			insertMemberVariableCall(name,opcode==PUTSTATIC,desc,owner); //member field assignment event
 
 		super.visitFieldInsn(opcode,owner,name,desc);
 	}
@@ -83,7 +81,7 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 		}
 
 		if(call && tracer.injectVariableCall(""+var,false,false))
-			insertLocalVariableCall(var,info);
+			insertLocalVariableCall(var,info); //locale var assignment event
 
 		super.visitVarInsn(opcode, var);
 
@@ -91,7 +89,7 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 
 	public void visitMethodInsn(int opcode,String owner,String targetname,String desc){
 
-		System.out.println("OMG "+targetname);
+		
 		
 		switch(opcode){
 
@@ -140,20 +138,21 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 	}
 
 	private void insertDispatcherCall(){
+		//call tracer. one argument on top(class TraceEvent), then tracer reference
 		mv.visitMethodInsn(INVOKEVIRTUAL, "mega/trace/core/Tracer", "dispatchEvent", "(Lmega/trace/event/TraceEvent;)V");
 	}
 
 	private void insertLocalVariableCall(int index,String signature){
 
-		insertLookup();
+		insertLookup(); 
 
-		if(signature.equals("L?")){
+		if(signature.equals("L?")){ //unknown type, handle special
 			insertLVarPushArgumentWorkaround();
 		}else{			
-			insertPushArguments("("+signature+")",true,false,classname);
+			insertPushArguments("("+signature+")",true,false,classname); //use normal push
 		}
 
-		insertPushSource(staticmethod,classname);
+		insertPushSource(staticmethod,classname); //set caller
 		mv.visitInsn(DUP); 
 
 		mv.visitTypeInsn(NEW, "mega/trace/event/LocalVariableAssignmentEvent");
@@ -163,16 +162,16 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 		mv.visitLdcInsn(""+index);
 		mv.visitLdcInsn(signature);
 
-
+		//create event
 		mv.visitMethodInsn(INVOKESPECIAL, "mega/trace/event/LocalVariableAssignmentEvent", "<init>", "(Ljava/lang/String;Ljava/lang/String;)V");
-
+		//pass event to tracer
 		insertDispatcherCall();
 		
-		if(signature.equals("L?")){
+		if(signature.equals("L?")){ //this is handled special, object was not popped from the jvm stack but only copied so it has to removed from the tracer's 'virtual' stack
 			mv.visitMethodInsn(INVOKEVIRTUAL, "mega/trace/core/Tracer", "popL", "()Ljava/lang/Object;");
 			mv.visitInsn(POP);
 		}else{			
-			insertPopArguments(true);
+			insertPopArguments(true); //otherwise use default pop algorithm
 		}
 
 		
@@ -211,20 +210,24 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 	}
 
 
-	@SuppressWarnings("unused")
+
 	private void insertBeforeMethodCall(String methodName,String desc,String owner,int flags)
 	{
+		
+		//create a before method call event
+		//could be constructor, a regular method or an interface call
 
 		String event=null;
 
-		if(isSuperConstructorCall(methodName,desc,owner))
+		if(isSuperConstructorCall(methodName,desc,owner)) //ignore, we can not insert code before the initial super() of a constructor was executed
 			return;
 
 		if((flags&FLAG_CONSTRUCTOR)!=0){
 			if(!tracer.injectBeforeConstructorCall(classname)){
 				if(tracer.injectAfterConstructorCall(classname)){
-					//ugly!
-					insertLookup();
+					//if one is only interested in objects after creation but not in the initial constructor call itself we can handle it this way
+					//usually the BeforeConstructorCall DUP the object so the AfterConstructorCall can take it. 
+					insertLookup(); 
 					insertPushArguments(desc,(flags&FLAG_STATIC)!=0,true,owner);
 					insertPopArguments((flags&FLAG_STATIC)!=0);
 				}
@@ -245,13 +248,15 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 		}
 
 
-		insertLookup();
+		insertLookup(); //get tracer reference
 
 		insertPushArguments(desc,((flags&FLAG_STATIC)+(flags&FLAG_CONSTRUCTOR))!=0,((flags&FLAG_CONSTRUCTOR)!=0) && tracer.injectAfterConstructorCall(classname),owner);
-		insertPushSource(staticmethod,classname);
+		//push the method/constructor/interface arguments. in case of a constructor call we duplicate the reference to the new object to take it away with AfterConstructorCallEvent later 
+		
+		insertPushSource(staticmethod,classname); //set source class/reference
 		mv.visitInsn(DUP); 
 
-		mv.visitTypeInsn(NEW, "mega/trace/event/"+event);
+		mv.visitTypeInsn(NEW, "mega/trace/event/"+event); //create the specific event
 		mv.visitInsn(DUP);
 
 
@@ -263,22 +268,24 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 
 		mv.visitLdcInsn(desc);
 
+		//constructor call of the new event
 		mv.visitMethodInsn(INVOKESPECIAL, "mega/trace/event/"+event, "<init>", "(Ljava/lang/String;Ljava/lang/String;ZLjava/lang/String;)V");
 
+		
+		//pass event to tracer
 		insertDispatcherCall();
 
 		//reference to tracer still on top!
-
+		//get arguments back to the JVM stack
 		insertPopArguments((flags&FLAG_STATIC)!=0);
 
 	}
 
-
-
-	@SuppressWarnings("unused")
 	private void insertAfterMethodCall(String methodName,String desc,String owner,int flags)
 	{
 		String event=null;
+		
+		//nothing special, see BeforeMethodCall
 
 		if(isSuperConstructorCall(methodName,desc,owner))
 			return;
@@ -299,18 +306,54 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 		}else{
 			throw new Error("TransformerMethodVisitor, insertAfterMethodCall");
 		}
-
+		
 		insertLookup();
+		
+		boolean popReturnValue=false;
 
-		if((flags&FLAG_CONSTRUCTOR)!=0){
+		if((flags&FLAG_CONSTRUCTOR)!=0){ //when a constructor is called, the object to whom the constructor belongs is saved in setCallee
 			mv.visitInsn(DUP_X1);
 			mv.visitInsn(SWAP);
 			mv.visitMethodInsn(INVOKEVIRTUAL, "mega/trace/core/Tracer", "setCallee", "(Ljava/lang/Object;)V");
+		}else{ //a method/interface returned, so we push its return value on the tracer's stack
+			String rvalue = desc.split("\\)")[1];
+			if(!rvalue.equals("V")) //do not push void....
+			{
+				
+				popReturnValue=true;
+	
+				if(rvalue.startsWith("L")) //handle object
+					{
+					mv.visitInsn(SWAP);
+					mv.visitInsn(DUP_X1);
+					mv.visitMethodInsn(INVOKEVIRTUAL, "mega/trace/core/Tracer", "pushL", "(Ljava/lang/Object;)V");
+					}
+				else
+					{
+					if(rvalue.equals("J")||rvalue.equals("D")) //float&double have 2 stack words
+					{
+						mv.visitInsn(DUP_X2);	
+						mv.visitInsn(POP);	
+						mv.visitInsn(DUP2_X1);	
+					}else{ //int only 1
+						mv.visitInsn(SWAP);
+						mv.visitInsn(DUP_X1);
+					}
+					
+					mv.visitMethodInsn(INVOKEVIRTUAL, "mega/trace/core/Tracer", "push"+rvalue, "("+rvalue+")V");
+					
+					}
+				
+				insertLookup();
+				mv.visitInsn(DUP);
+		
+			}
 		}
 
 		insertPushSource(staticmethod,classname);
-
-
+		
+		
+		
 		mv.visitTypeInsn(NEW, "mega/trace/event/"+event);
 		mv.visitInsn(DUP);
 		mv.visitLdcInsn(methodName);
@@ -321,6 +364,10 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 		mv.visitMethodInsn(INVOKESPECIAL, "mega/trace/event/"+event, "<init>", "(Ljava/lang/String;Ljava/lang/String;ZLjava/lang/String;)V");
 
 		insertDispatcherCall();
+
+		if(popReturnValue){
+			mv.visitMethodInsn(INVOKEVIRTUAL, "mega/trace/core/Tracer", "drop", "()V");
+		}
 
 	}
 
@@ -344,9 +391,7 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 	}
 
 	private void insertLVarPushArgumentWorkaround(){
-		// *   TODO: currently missing type information of local vars. Can be achieved by checking visitLocalVariable()
-		// *   but this is called after visitMethod... => apply two MethodVisitors?
-		//
+		//no local var typ information available.. so this workaround
 		mv.visitInsn(DUP);	
 		mv.visitLdcInsn(classname);
 		mv.visitMethodInsn(INVOKEVIRTUAL, "mega/trace/core/Tracer", "setCalleeClass", "(Ljava/lang/String;)V");
@@ -360,7 +405,7 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 	private void insertPushArguments(String desc,boolean dontPushFRef,boolean duplicateFRef,String calleeClass){
 		//"pushes" all arguments of method description desc via n times tracer.pushX
 		//assumes reference to tracer is on top of the stack & keeps reference
-		System.out.println("now pushing "+desc);
+	
 		int i;
 		char c;
 
@@ -454,6 +499,7 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 
 		if(poplist.isEmpty()) //no arguments to pop?
 		{
+	
 			mv.visitInsn(POP); //don't forget to remove reference of tracer 
 			return;
 		}
@@ -495,9 +541,7 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 	private void insertPushArgument(String type,boolean isStatic,boolean isReference,boolean pushTarget){
 		//"pushes" one argument via tracer.pushX & keeps reference
 		//assumes reference to tracer is on top of the stack and argument is below
-		
-		System.out.println("push "+type);
-		
+
 		if((!pushTarget)||(pushTarget&&!isStatic)) 
 		{
 			//duplicate tracer reference and pull argument on top of the stack
@@ -557,6 +601,7 @@ public class TransformerMethodVisitor extends MethodVisitor implements Opcodes{
 
 
 	private void insertLookup(){
+		//lookup the corresponding tracer by its id
 		mv.visitIntInsn(SIPUSH, tracer.getID());
 		mv.visitMethodInsn(INVOKESTATIC, "mega/trace/core/Tracer", "getTracer", "(I)Lmega/trace/core/Tracer;");
 	}

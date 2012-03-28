@@ -1,39 +1,5 @@
 package mega.trace.core;
 
-/* 
- * Just for testing, without any optimization!
- * Extend Tracer class to implement your own tracer
- * Take a look at TracingInterface to see which callbacks are available.
- * Implement those you like. Then change options for code injection because of performance:
- * 
- * (1) Enable code injection of wanted callbacks by overloading inject* methods. At default, no class will
- *     be modified/traced!
- * (2) If you only use one Tracer call setLinkMethod(TracerLink.TLINK_STATIC); (much faster than default).
- * (3) Then instantiate your Tracer. Do not forget to call super()!
- * 
- * After that there are several ways to (load and) transform classes:
- * (1) At runtime via yourTracerInstance.loadClass(CLASS) - transforms, loads and returns class CLASS
- * (2) using java agent. See mega.agent.* 
- * (3) replace java's default classloader(also by passing an extra argument to the JVM). NOT IMPLEMENTED YET 
- *
- * Please note that (nearly) every trace event holds a reference to its corresponding object thus preventing
- * the garbage collector to free the object while the reference exists! 
- * 
- * The Tracer Class also offers Caller and Callee methods where caller returns the object/class which caused the event and
- * callee returns the object/class that was affected by the event.
- *   
- *   Speed:
- *   Optimization is, of course, possible. This is just a test.
- *   
- *   Other ideas:
- *   Maybe allow to keep stack when popping to provide argument support for After*Call events? 
- *   Would be possible to also include WithinMethodCallEvent, WithinConstructorCallEvent,.. which gets created
- *   whenever a method gets entered.
- *   
- *   TODO: currently missing type information of local vars. Can be achieved by checking visitLocalVariable()
- *   but this is called after visitMethod... => apply two MethodVisitors?
-*/
-
 
 
 import java.util.HashMap;
@@ -47,11 +13,7 @@ import mega.trace.transformation.ClassBytecodeTransformer;
 
 
 public abstract class Tracer implements TracingInterface{
-	
-	
-	
-	
-	
+
 	public static final HashMap<Integer,Tracer> map=new HashMap<Integer,Tracer>();
 	protected static int uidcount=0;
 	protected int uid=0;
@@ -108,16 +70,7 @@ public abstract class Tracer implements TracingInterface{
 	
 	
 	//=================================================================================================
-	
-	public boolean ignoreClass(String pname){
-	/*//pname.startsWith("javax/")/*
-		if(pname.startsWith("java/") || pname.startsWith("javax/") || pname.startsWith("sun/")) //ignoring java.* is essential...
-			return true;
-		if(pname.startsWith("org/eclipse/jdt/internal/") || pname.startsWith("org/junit/") || pname.startsWith("junit/"))
-			return true;	*/	
-		return false;
-	}
-	
+
 	
 		public final Object getCallee() {
 			return currentRef;
@@ -159,28 +112,11 @@ public abstract class Tracer implements TracingInterface{
 	public int getID() {return uid;}
 
 	
-
-/*	
-	public Class<?> loadClass(String name,boolean resolve) throws ClassNotFoundException{
-	
-		if(classloader==null)
-			{
-			 classloader=new TraceClassLoader(this.getClass().getClassLoader(),this);
-			}
-		
-		return classloader.loadClass(name, resolve);
-		
-	}
-	*/
-	
 	public byte[] transformClassBytecode(byte[] b){
 		return new ClassBytecodeTransformer(this).transformClassBytecode(b);
 	}
 	
 	public final boolean checkTransform(String name){
-
-		if(ignoreClass(name))
-			return false;
 		return traceClass(name);
 	}
 	
@@ -323,6 +259,8 @@ public abstract class Tracer implements TracingInterface{
 		return (((Boolean)stack.removeLast()).booleanValue());
 	}	
 
-	
+	public final void drop(){
+		stack.removeLast();
+	}
 
 }

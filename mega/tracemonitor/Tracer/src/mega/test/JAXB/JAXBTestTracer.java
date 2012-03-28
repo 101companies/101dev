@@ -10,9 +10,9 @@ package mega.test.JAXB;
 
 import java.util.LinkedList;
 
+
 import mega.trace.core.Tracer;
 import mega.trace.event.TraceEvent;
-
 public class JAXBTestTracer extends Tracer{
 	
 	LinkedList<TraceEvent> trace;
@@ -20,7 +20,10 @@ public class JAXBTestTracer extends Tracer{
 	LinkedList<Object[]> tracecall;
 	LinkedList<String[]> tracecallclass;
 	
+	
+	
 	JAXBMapper mapper;
+	int count;
 	
 	public JAXBTestTracer(){
 		super();
@@ -28,7 +31,7 @@ public class JAXBTestTracer extends Tracer{
 		tracecall=new LinkedList<Object[]>();
 		tracecallclass=new LinkedList<String[]>();
 		tracestack=new LinkedList<LinkedList<Object>>();	
-		
+		count=0;
 		mapper=new JAXBMapper(this);
 		
 		Runtime.getRuntime().addShutdownHook(mapper);
@@ -36,17 +39,16 @@ public class JAXBTestTracer extends Tracer{
 	}
 	
 	public boolean traceClass(String name) {
-		return (name.startsWith("org/softlang/"));
+		return (name.startsWith("javax/"))||(name.startsWith("org/softlang/"));
 	}
-	
-	/*inject everywhere to get all events.. could be optimized*/
-	public boolean injectVariableCall(String varname,boolean member,boolean isStatic) {return true;}
+
+	public boolean injectVariableCall(String varname,boolean member,boolean isStatic) {return false;}
 	public boolean injectBeforeMethodCall(String classname,String methodname) {return true;}
 	public boolean injectAfterMethodCall(String classname,String methodname) {return true;}
 	public boolean injectBeforeConstructorCall(String classname) {return true;}
 	public boolean injectAfterConstructorCall(String classname) {return true;}
-	public boolean injectBeforeInterfaceCall(String classname,String methodname) {return false;}
-	public boolean injectAfterInterfaceCall(String classname,String methodname) {return false;}
+	public boolean injectBeforeInterfaceCall(String classname,String methodname) {return true;}
+	public boolean injectAfterInterfaceCall(String classname,String methodname) {return true;}
 	
 	
 
@@ -61,6 +63,7 @@ public class JAXBTestTracer extends Tracer{
 	
 		//this method of storing events is not nice because it prevents the garbage collector from deleting any traced object.
 
+		count++;
 		
 		trace.addLast(e);	
 		tracestack.addLast(cloneStack());
@@ -70,6 +73,15 @@ public class JAXBTestTracer extends Tracer{
 		
 		tracecall.addLast(o);
 		tracecallclass.addLast(s);
+		
+				
 	}
+	
+	protected TraceSet getWholeEvent(int i){
+		return new TraceSet(trace.get(i),tracestack.get(i),tracecall.get(i),tracecallclass.get(i));
+	}
+	
+	protected int getEventCount() {return count;}
+	
 	
 }

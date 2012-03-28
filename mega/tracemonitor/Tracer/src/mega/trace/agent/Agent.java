@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.lang.instrument.Instrumentation;
 import java.util.jar.JarFile;
 
+import mega.test.JUnit.tracer.FullTestTracer;
 import mega.trace.core.TraceConfiguration;
 import mega.trace.core.Tracer;
 
@@ -27,10 +28,14 @@ import mega.trace.core.Tracer;
 
 public class Agent {
 
-	private static final String asmlib="asm-all-4.0.jar";
+	private static String asmlib="asm-all-4.0.jar";
 
 	public static void premain(String args, Instrumentation i) {
-
+		
+		if(args!=null)
+			if(args.equals("verbose"))
+				TraceConfiguration.registerTracer(new FullTestTracer());
+		
 		try {
 			i.appendToSystemClassLoaderSearch(new JarFile(asmlib));
 		} catch (IOException e) {
@@ -38,15 +43,17 @@ public class Agent {
 			System.out.println(e.toString());
 			System.exit(1);
 		}
-		System.out.println("go!");
 
 		//query TraceConfiguration to get the tracer(s) and apply them
 		for(Tracer t:TraceConfiguration.getTracerList()){
 			i.addTransformer(new AgentTransformer(t));
 		}
 		
-		System.exit(0);
 	}
 	
 	
-}
+		
+	}
+	
+	
+

@@ -48,8 +48,10 @@ public class TestTracer extends Tracer{
 //==== Everything below is just for fun! ====
 //===========================================
 		
-		
-			
+		printEventInformation(e);
+	}
+	
+	public void printEventInformation(TraceEvent e){
 		System.out.println("\nTrace Event.");
 		System.out.println("Eventclass: "+e.getClass().getName());
 		
