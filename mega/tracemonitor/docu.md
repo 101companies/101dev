@@ -18,9 +18,9 @@ Without using eclipse, the command line for tracing a program would look like:
 Always make sure asm-all-4.0.jar is in the same folder as tracer.jar
 ## Implementation ##
 Structure:
-![structure](structure.png)
+![structure](https://github.com/101companies/101dev/tree/master/mega/tracemonitor/structure.png)
 Flow:
-![flow](flow.png)
+![flow](https://github.com/101companies/101dev/tree/master/mega/tracemonitor/flow.png)
 ## Utilization ##
 ASM is a bytecode engineering framework. Therefore, additional (tracing-)code is to be injected at load time to pass information to the trace monitor. At this point, a [java agent](http://docs.oracle.com/javase/6/docs/api/java/lang/instrument/package-summary.html) was used to add a transformer (containing the tracer) to the instrumentation using the premain (see mega.trace.agent.Agent). At this point ASM libraries are imported.
 The AgentTransformer class ensures that transformations are done only on permitted packages (since java's standard libraries are protected) using the static method TraceConfiguration.prohibitedPackage. In addition, custom packages can be excluded from tracing via mega.trace.core.Tracer.traceClass.
