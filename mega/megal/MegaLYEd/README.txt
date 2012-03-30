@@ -11,6 +11,7 @@ that comes with yed, and in particular to add the MegaL/yEd palettes.
 yEd saves its configuration in the user home directory. The exact
 location depends on the operating system. On windows for instance 
 it is in C:\Documents and Settings\<theUser>\Application Data\yWorks\yEd.
+On MacOS: /Users/<theUser>/Library/yWorks/yEd 
 
 Create an archive of the configuration directory.
 Remove the yEd/palettes directory.
