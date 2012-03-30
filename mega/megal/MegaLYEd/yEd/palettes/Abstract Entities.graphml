@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:y="http://www.yworks.com/xml/graphml" xmlns:yed="http://www.yworks.com/xml/yed/3" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.1/ygraphml.xsd">
+  <!--Created by yFiles for Java 2.9-->
+  <key for="graphml" id="d0" yfiles.type="resources"/>
+  <key for="port" id="d1" yfiles.type="portgraphics"/>
+  <key for="port" id="d2" yfiles.type="portgeometry"/>
+  <key for="port" id="d3" yfiles.type="portuserdata"/>
+  <key attr.name="yed.palette.node.name" attr.type="string" for="node" id="d4"/>
+  <key attr.name="Palette ToolTip" attr.type="string" for="node" id="d5"/>
+  <key attr.name="url" attr.type="string" for="node" id="d6"/>
+  <key attr.name="description" attr.type="string" for="node" id="d7"/>
+  <key for="node" id="d8" yfiles.type="nodegraphics"/>
+  <key attr.name="yed.palette.edge.name" attr.type="string" for="edge" id="d9"/>
+  <key attr.name="Palette ToolTip" attr.type="string" for="edge" id="d10"/>
+  <key attr.name="url" attr.type="string" for="edge" id="d11"/>
+  <key attr.name="description" attr.type="string" for="edge" id="d12"/>
+  <key for="edge" id="d13" yfiles.type="edgegraphics"/>
+  <graph edgedefault="directed" id="G">
+    <node id="n0">
+      <data key="d4"><![CDATA[78f0badc-4dcd-4a69-922c-8077edfc6ef6]]></data>
+      <data key="d5"><![CDATA[:Thing]]></data>
+      <data key="d6"/>
+      <data key="d7"><![CDATA[:Thing]]></data>
+      <data key="d8">
+        <y:GenericNode configuration="ShinyPlateNode3">
+          <y:Geometry height="30.0" width="70.0" x="0.0" y="30.0"/>
+          <y:Fill color="#F5F5F5" transparent="false"/>
+          <y:BorderStyle color="#999999" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="14" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="21.1513671875" modelName="internal" modelPosition="c" textColor="#333333" visible="true" width="42.91015625" x="13.544921875" y="4.42431640625">:Thing</y:NodeLabel>
+          <y:StyleProperties>
+            <y:Property class="java.lang.Double" name="ModernNodeRadius" value="5.0"/>
+          </y:StyleProperties>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n1">
+      <data key="d4"><![CDATA[ca3f85eb-3a28-45fd-bc9d-1cc1e742b7ae]]></data>
+      <data key="d5"><![CDATA[:Set]]></data>
+      <data key="d6"/>
+      <data key="d7"><![CDATA[:Set]]></data>
+      <data key="d8">
+        <y:GenericNode configuration="ShinyPlateNode3">
+          <y:Geometry height="30.0" width="70.0" x="100.0" y="30.0"/>
+          <y:Fill color="#F5F5F5" transparent="false"/>
+          <y:BorderStyle color="#999999" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="14" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="21.1513671875" modelName="internal" modelPosition="c" textColor="#333333" visible="true" width="28.9033203125" x="20.54833984375" y="4.42431640625">:Set</y:NodeLabel>
+          <y:StyleProperties>
+            <y:Property class="java.lang.Double" name="ModernNodeRadius" value="5.0"/>
+          </y:StyleProperties>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n2">
+      <data key="d4"><![CDATA[1a8d1352-20a7-4af3-86ac-39b056e5ddc1]]></data>
+      <data key="d5"><![CDATA[:Function]]></data>
+      <data key="d6"/>
+      <data key="d7"><![CDATA[:Function]]></data>
+      <data key="d8">
+        <y:GenericNode configuration="ShinyPlateNode3">
+          <y:Geometry height="30.0" width="70.0" x="200.0" y="30.0"/>
+          <y:Fill color="#F5F5F5" transparent="false"/>
+          <y:BorderStyle color="#999999" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="14" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="21.1513671875" modelName="internal" modelPosition="c" textColor="#333333" visible="true" width="32.013671875" x="18.9931640625" y="4.42431640625">:Fun</y:NodeLabel>
+          <y:StyleProperties>
+            <y:Property class="java.lang.Double" name="ModernNodeRadius" value="5.0"/>
+          </y:StyleProperties>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n3">
+      <data key="d4"><![CDATA[a920196a-98aa-475b-a7c3-469990d1bc47]]></data>
+      <data key="d5"><![CDATA[:FunctionApplication]]></data>
+      <data key="d6"/>
+      <data key="d7"><![CDATA[:FunctionApplication]]></data>
+      <data key="d8">
+        <y:GenericNode configuration="ShinyPlateNode3">
+          <y:Geometry height="30.0" width="69.99999999999977" x="300.0" y="30.0"/>
+          <y:Fill color="#F5F5F5" transparent="false"/>
+          <y:BorderStyle color="#999999" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="14" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="21.1513671875" modelName="internal" modelPosition="c" textColor="#333333" visible="true" width="33.5654296875" x="18.217285156249886" y="4.42431640625">:FAp</y:NodeLabel>
+          <y:StyleProperties>
+            <y:Property class="java.lang.Double" name="ModernNodeRadius" value="5.0"/>
+          </y:StyleProperties>
+        </y:GenericNode>
+      </data>
+    </node>
+  </graph>
+  <data key="d0">
+    <y:Resources/>
+  </data>
+</graphml>
