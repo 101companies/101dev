@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import mega.test.JAXB.JAXBTestTracer;
 
 /*
+ * Just register all tracer below
  * 
  * Currently mega.test.JAXB.JAXBTestTracer is used 
  * 
@@ -18,6 +19,7 @@ public class TraceConfiguration {
 	private static LinkedList<Tracer> tracerlist= new LinkedList<Tracer>();
 	private static TraceClassLoader classloader= new TraceClassLoader(TraceConfiguration.class.getClassLoader());
 
+	
 	static{
 		
 		/*
@@ -30,7 +32,7 @@ public class TraceConfiguration {
 		*/
 		
 		registerTracer(new JAXBTestTracer());
-	
+		
 		
 	}
 
@@ -50,6 +52,7 @@ public class TraceConfiguration {
 	}
 	
 	public static boolean prohibitedPackage(String name){
+
 		return (name.replace('.','/').startsWith("java/") || name.replace('.','/').startsWith("javax/") ||name.replace('.','/').startsWith("sun/") || name.replace('.','/').startsWith("mega/trace/"));
 	}
 

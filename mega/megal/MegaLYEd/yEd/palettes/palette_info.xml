@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<palette.information>
+  <palette.section palette.id="Documentation" palette.visibility="true"/>
+  <palette.section palette.id="Abstract Entities" palette.visibility="true"/>
+  <palette.section palette.id="Conceptual Entities" palette.visibility="true"/>
+  <palette.section palette.id="Digital Entities" palette.visibility="true"/>
+  <palette.section palette.id="Unamed Relations" palette.visibility="true"/>
+  <palette.section palette.id="Core Relations" palette.visibility="true"/>
+  <palette.section palette.id="Dependency Relations" palette.visibility="true"/>
+  <palette.section palette.id="Representation Relations" palette.visibility="true"/>
+  <palette.section palette.id="Dataflow Relations" palette.visibility="true"/>
+  <palette.section palette.id="current.elements.palette" palette.visibility="true"/>
+  <palette.section palette.id="bpmn.palette" palette.visibility="false"/>
+  <palette.section palette.id="computers.palette" palette.visibility="false"/>
+  <palette.section palette.id="edges.palette" palette.visibility="false"/>
+  <palette.section palette.id="erd.palette" palette.visibility="false"/>
+  <palette.section palette.id="flowchart.palette" palette.visibility="false"/>
+  <palette.section palette.id="groupNodes.palette" palette.visibility="false"/>
+  <palette.section palette.id="modernNodes.palette" palette.visibility="false"/>
+  <palette.section palette.id="people.palette" palette.visibility="false"/>
+  <palette.section palette.id="shapeNodes.palette" palette.visibility="false"/>
+  <palette.section palette.id="tableNodes.palette" palette.visibility="false"/>
+  <palette.section palette.id="uml.palette" palette.visibility="false"/>
+</palette.information>

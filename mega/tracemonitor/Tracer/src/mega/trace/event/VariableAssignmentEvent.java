@@ -1,6 +1,6 @@
 package mega.trace.event;
 
-public class VariableAssignmentEvent extends TraceEvent {
+public abstract class VariableAssignmentEvent extends TraceEvent {
 
 	private final String varname;
 	private final String signature;

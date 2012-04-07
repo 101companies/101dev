@@ -1,6 +1,6 @@
 package mega.trace.event;
 
-public class MethodCallEvent extends TraceEvent{
+public abstract class MethodCallEvent extends TraceEvent{
 
 	private final String methodName;
 	private final boolean isStatic;

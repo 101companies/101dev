@@ -2,6 +2,8 @@ package mega.trace.event;
 
 public class MemberVariableAssignmentEvent extends VariableAssignmentEvent {
 	
+	//assigned value on stack
+	
 	private final boolean isStatic;
 
 	public MemberVariableAssignmentEvent(String varname,String signature,boolean isStatic) {
@@ -10,9 +12,6 @@ public class MemberVariableAssignmentEvent extends VariableAssignmentEvent {
 	}
 	
 	public boolean getStatic() {return isStatic;}
-	
-	//public String getSignature() {
-	//	throw new Error("not yet implemented");
-	//}	
+
 
 }

@@ -5,8 +5,15 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Hashtable;
-
 import mega.trace.transformation.ClassBytecodeTransformer;
+
+/*
+ * 
+ * Custom classloader
+ * 
+ * !use javaagent instead!
+ */
+
 
 public class TraceClassLoader extends ClassLoader{
 
@@ -28,18 +35,13 @@ public class TraceClassLoader extends ClassLoader{
 
 	public synchronized Class<?> loadClassByPath(final String name, final String resource, final boolean resolve) throws ClassNotFoundException
 	{
-		
-	
-		
-		//System.out.println("loadClass: "+name);	
-
 		Class<?> c = (Class<?>)table.get(name);
 		if(c!=null)
 			return c;
 
 		c=super.findLoadedClass(name);
 		if(c!=null){
-			//	System.out.println("Class already loaded by parent.");
+
 				if (resolve) {
 					resolveClass(c);
 					} 
@@ -49,7 +51,7 @@ public class TraceClassLoader extends ClassLoader{
 		if(TraceConfiguration.prohibitedPackage(name))
 			{
 			
-			//	System.out.println("prohibited package found, using findSystemClass()..\n");
+			
 				c=super.findSystemClass(name);
 				if(c!=null)
 				{
@@ -59,8 +61,7 @@ public class TraceClassLoader extends ClassLoader{
 				}
 			}
 			
-	//	System.out.println("Class new! Name="+name);
-
+	
 		InputStream is = getResourceAsStream(resource);
 		c = this.loadClassFromStream(name, is);
 
@@ -68,11 +69,8 @@ public class TraceClassLoader extends ClassLoader{
 			resolveClass(c); 
 		} 
 
-
 		table.put(name, c);
 
-		//System.out.println("Class done. Name="+name+"\n");
-		
 		return c;
 
 	}

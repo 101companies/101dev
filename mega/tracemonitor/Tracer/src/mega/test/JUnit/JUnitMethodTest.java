@@ -95,7 +95,6 @@ public class JUnitMethodTest extends TestCommon{
 			break;	
 			case 3:
 				assertEquals(e.getClass().getName(),"mega.trace.event.AfterMethodCallEvent");
-				assertTrue(stack.size()==0);
 				assertEquals(callclass[0],"mega.test.JUnit.SampleClass");
 				assertEquals(callclass[1],"mega.test.JUnit.SampleClass");
 				assertTrue(call[0]!=null);
