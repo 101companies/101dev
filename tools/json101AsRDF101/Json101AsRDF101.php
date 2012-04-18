@@ -15,21 +15,11 @@ $graph = jsonGraphToSimpleGraph(
 $graphasrdf = new SimpleGraphAsRDF() ;
 $graphasrdf->addSimpleGraph($graph,RDF_DATA_101_PREFIX_URL,RDF_SCHEMA_101_PREFIX_URL) ;
 
-// Save the triples in different file format
+// Save the triples in different file formats
 if (DEBUG) echo "<h2>Saving the triples in files</h2>" ;
 $tripleset = $graphasrdf->getTripleSet() ;
-$formats=array(
-    'HTML'=>'.html',
-    'GraphML'=>'.graphml',
-    'Turtle'=>'.ttl',
-    'RDF'=>'.rdf',
-    'RDFJSON'=>'.json',
-    'NTriples'=>'.nt') ;
-foreach ($formats as $format => $extension) {
-  $filename = RDF_WIKI_101_DATA_GENERATED_CORE_FILENAME.$extension ;
-  if (DEBUG) echo "<li>Saving triples to $filename</li>" ;
-  $tripleset->save($format,RDF_WIKI_101_DATA_GENERATED_CORE_FILENAME.$extension) ;
-}
+$formats='HTML,GraphML,Turtle,RDFXML,RDFJSON,NTriples' ;
+$tripleset->saveFiles($formats,RDF_WIKI_101_DATA_GENERATED_CORE_FILENAME) ;
 
 
 

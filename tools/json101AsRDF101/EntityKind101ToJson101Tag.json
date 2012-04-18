@@ -1,8 +1,8 @@
 {
-  "implementation" : "implementations",
-  "concept"        : "concepts",
-  "category"       : "categories",
-  "feature"        : "features",
-  "language"       : "languages",
-  "technology"     : "technologies"
+  "Implementation" : "Implementation",
+  "Concept"        : "Concept",
+  "Category"       : "Category",
+  "Feature"        : "Feature",
+  "Language"       : "Language",
+  "Technology"     : "Technology"
 }
