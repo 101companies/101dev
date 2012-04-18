@@ -1,0 +1,18 @@
+_:CompanyDotXSD  rdf:type   mgl:File .
+_:CompanyDotXSD  rdfs:label   "Company.xsd" .
+_:CompanyDotXSD  mgl:elementOf  lang:XSD .
+_:CompanyDotXSD  mgl:partOf   impl:xsdClasses .
+_:CompanyDotXSD mgl:correspondsTo _:CompanyDotCs .
+_:CompanyDotXSD mgl:in _:CompanyXSD2CSDotBat .
+_:CompanyDotXSD mgl:filename  "./Company.xsd" .
+  
+_:CompanyElement rdf:type   mgl:FileFragment .
+_:CompanyElement rdfs:label   "Company" .
+_:CompanyElement mgl:partOf   _:CompanyDotXSD .
+_:CompanyElement mgl:correspondsTo _:CompanyClass .
+_:CompanyElement mgl:xpathLocation "//Company" .
+		
+
+		
+		
+		

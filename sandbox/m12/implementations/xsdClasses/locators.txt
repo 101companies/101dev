@@ -1,0 +1,18 @@
+Company.xsd
+  Company	xpath://xs:element[@name='Company']	L25-51
+		name	xpath://xs:element[@name='Company']/xs:element[@name='Name']	L7
+	Department	xpath://xs:element[@name='Company']	L59-110
+	Employee	xpath://xs:element[@name='Company']	L118-155
+	
+Company.cs
+	Company	glex:class Company	L4-11
+		nameField	glex:private . nameField ;	L27
+		Name	glex:public . Name { * }	L32-39
+	Department	glex:class Department	L13-20
+	Employee	glex:class	Employee	L22-28
+	
+xsd.exe
+	${types}.xsd	->	${types}.cs
+		complexType ${type}	->	class ${type}
+			basicType ${element} -> field ${element}Field
+			basicType ${element} -> property ${element}
