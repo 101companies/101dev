@@ -157,7 +157,7 @@
           </data>
           <graph edgedefault="directed" id="n0::n2:">
             <node id="n0::n2::n0">
-              <data key="d7"><![CDATA[Company.xsd__Employee.html]]></data>
+              <data key="d7"><![CDATA[Company.xsd__Employee.html#L-22]]></data>
               <data key="d8"><![CDATA[:Fragment]]></data>
               <data key="d9">
                 <y:GenericNode configuration="ShinyPlateNode3">
@@ -172,7 +172,7 @@
               </data>
             </node>
             <node id="n0::n2::n1">
-              <data key="d7"><![CDATA[Company.xsd__Department.html]]></data>
+              <data key="d7"><![CDATA[Company.xsd__Department.html#L-13]]></data>
               <data key="d8"><![CDATA[:Fragment]]></data>
               <data key="d9">
                 <y:GenericNode configuration="ShinyPlateNode3">
@@ -187,7 +187,7 @@
               </data>
             </node>
             <node id="n0::n2::n2">
-              <data key="d7"><![CDATA[Company.xsd__Company.html]]></data>
+              <data key="d7"><![CDATA[Company.xsd__Company.html#L-4]]></data>
               <data key="d8"><![CDATA[:Fragment]]></data>
               <data key="d9">
                 <y:GenericNode configuration="ShinyPlateNode3">
@@ -269,7 +269,7 @@
           </data>
           <graph edgedefault="directed" id="n0::n4:">
             <node id="n0::n4::n0">
-              <data key="d7"><![CDATA[Company.cs__Employee.html]]></data>
+              <data key="d7"><![CDATA[Company.cs__Employee.html#L-118]]></data>
               <data key="d8"><![CDATA[:Fragment]]></data>
               <data key="d9">
                 <y:GenericNode configuration="ShinyPlateNode3">
@@ -284,7 +284,7 @@
               </data>
             </node>
             <node id="n0::n4::n1">
-              <data key="d7"><![CDATA[Company.cs__Department.html]]></data>
+              <data key="d7"><![CDATA[Company.cs__Department.html#L-59]]></data>
               <data key="d8"><![CDATA[:Fragment]]></data>
               <data key="d9">
                 <y:GenericNode configuration="ShinyPlateNode3">
@@ -299,7 +299,7 @@
               </data>
             </node>
             <node id="n0::n4::n2">
-              <data key="d7"><![CDATA[Company.cs__Company.html]]></data>
+              <data key="d7"><![CDATA[Company.cs__Company.html#L-25]]></data>
               <data key="d8"><![CDATA[:Fragment]]></data>
               <data key="d9">
                 <y:GenericNode configuration="ShinyPlateNode3">
@@ -446,7 +446,7 @@
       </graph>
     </node>
     <node id="n1" yfiles.foldertype="group">
-      <data key="d7"><![CDATA[http://101companies.org/index.php/Technology:xsd.exe]]></data>
+      <data key="d7"><![CDATA[http://101companies.org/index.php/Technology:.NET]]></data>
       <data key="d8"><![CDATA[xsdDotExe:Technology]]></data>
       <data key="d9">
         <y:ProxyAutoBoundsNode>
