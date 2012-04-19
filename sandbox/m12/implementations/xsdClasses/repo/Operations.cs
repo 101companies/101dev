@@ -5,7 +5,7 @@ using System.Text;
 
 namespace xsdClasses
 {
-    public static class Features
+    public static class Operations
     {
         public static double Total(Company company)
         {
