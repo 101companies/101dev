@@ -103,7 +103,7 @@
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#999999" type="dashed" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
-          <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="9" fontStyle="italic" hasLineColor="false" height="15.02587890625" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#808080" visible="true" width="50.5380859375" x="14.73095703125" y="-7.512939453125007">dependsOn<y:LabelModel>
+          <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="9" fontStyle="italic" hasLineColor="false" height="14.599609375" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#808080" visible="true" width="53.7724609375" x="13.11376953125" y="-7.299804687500007">dependsOn<y:LabelModel>
               <y:RotatedDiscreteEdgeLabelModel angle="0.0" autoRotationEnabled="true" candidateMask="128" distance="0.0" positionRelativeToSegment="false"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -123,7 +123,7 @@
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#999999" type="dashed" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
-          <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="9" fontStyle="italic" hasLineColor="false" height="15.02587890625" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#808080" visible="true" width="22.00439453125" x="28.997802734375" y="-7.512939453125">calls<y:LabelModel>
+          <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="9" fontStyle="italic" hasLineColor="false" height="14.599609375" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#808080" visible="true" width="23.37109375" x="28.314453125" y="-7.2998046875">calls<y:LabelModel>
               <y:RotatedDiscreteEdgeLabelModel angle="0.0" autoRotationEnabled="true" candidateMask="128" distance="0.0" positionRelativeToSegment="false"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -143,7 +143,7 @@
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#999999" type="dashed" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
-          <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="9" fontStyle="italic" hasLineColor="false" height="15.02587890625" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#808080" visible="true" width="37.50830078125" x="21.245849609375" y="-7.512939453125007">refersTo<y:LabelModel>
+          <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="9" fontStyle="italic" hasLineColor="false" height="14.599609375" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#808080" visible="true" width="40.509765625" x="19.7451171875" y="-7.299804687500007">refersTo<y:LabelModel>
               <y:RotatedDiscreteEdgeLabelModel angle="0.0" autoRotationEnabled="true" candidateMask="128" distance="0.0" positionRelativeToSegment="false"/>
             </y:LabelModel>
             <y:ModelParameter>

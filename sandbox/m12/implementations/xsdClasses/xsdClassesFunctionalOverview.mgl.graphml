@@ -61,7 +61,7 @@
           <y:Geometry height="28.362045761016105" width="105.69189453125" x="30.935183182973788" y="-276.6418754959536"/>
           <y:Fill color="#9999FF" transparent="false"/>
           <y:BorderStyle hasColor="false" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="95.69189453125" x="5.0" y="2.992790458633067">Company.xml</y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="21.666015625" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="104.751953125" x="0.469970703125" y="3.348015068008067">Company.xml</y:NodeLabel>
           <y:StyleProperties>
             <y:Property class="java.lang.Double" name="ModernNodeRadius" value="5.0"/>
           </y:StyleProperties>
@@ -75,7 +75,7 @@
           <y:Geometry height="28.362045761016105" width="97.3642578125" x="35.09900154234879" y="-165.64895696236613"/>
           <y:Fill color="#9999FF" transparent="false"/>
           <y:BorderStyle hasColor="false" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="br" textColor="#000000" visible="true" width="87.3642578125" x="6.0" y="1.9855809172661054">Company.cs</y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="21.666015625" modelName="internal" modelPosition="br" textColor="#000000" visible="true" width="92.54248046875" x="0.82177734375" y="2.6960301360161054">Company.cs</y:NodeLabel>
           <y:StyleProperties>
             <y:Property class="java.lang.Double" name="ModernNodeRadius" value="5.0"/>
           </y:StyleProperties>
@@ -89,7 +89,7 @@
           <y:Geometry height="28.36204576101605" width="110.70166015625" x="28.430300370473788" y="-223.82997984287408"/>
           <y:Fill color="#99FF99" transparent="false"/>
           <y:BorderStyle hasColor="false" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="15" fontStyle="italic" hasBackgroundColor="false" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="tl" textColor="#000000" visible="true" width="100.70166015625" x="4.0" y="4.0">XDEClassGen</y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="15" fontStyle="italic" hasBackgroundColor="false" hasLineColor="false" height="21.666015625" modelName="internal" modelPosition="tl" textColor="#000000" visible="true" width="99.5517578125" x="4.0" y="4.0">XDEClassGen</y:NodeLabel>
           <y:StyleProperties>
             <y:Property class="java.lang.Double" name="ModernNodeRadius" value="5.0"/>
           </y:StyleProperties>
@@ -103,7 +103,7 @@
           <y:Geometry height="28.362045761016105" width="143.2138671875" x="203.26164499968843" y="-247.0732042378769"/>
           <y:Fill color="#9999FF" transparent="false"/>
           <y:BorderStyle hasColor="false" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="br" textColor="#000000" visible="true" width="133.2138671875" x="6.0" y="1.9855809172661054">megaCompany.xml</y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="21.666015625" modelName="internal" modelPosition="br" textColor="#000000" visible="true" width="144.74951171875" x="-5.53564453125" y="2.6960301360161054">megaCompany.xml</y:NodeLabel>
           <y:StyleProperties>
             <y:Property class="java.lang.Double" name="ModernNodeRadius" value="5.0"/>
           </y:StyleProperties>
@@ -117,7 +117,7 @@
           <y:Geometry height="28.362045761016105" width="166.55615234375" x="191.59050242156343" y="-84.2247096868553"/>
           <y:Fill color="#9999FF" transparent="false"/>
           <y:BorderStyle hasColor="false" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="br" textColor="#000000" visible="true" width="156.55615234375" x="6.0" y="1.9855809172661054">megaCompanyCut.xml</y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="21.666015625" modelName="internal" modelPosition="br" textColor="#000000" visible="true" width="170.04736328125" x="-7.4912109375" y="2.6960301360161054">megaCompanyCut.xml</y:NodeLabel>
           <y:StyleProperties>
             <y:Property class="java.lang.Double" name="ModernNodeRadius" value="5.0"/>
           </y:StyleProperties>
@@ -131,7 +131,7 @@
           <y:Geometry height="28.36204576101605" width="124.0390625" x="212.84904734343843" y="-165.64895696236607"/>
           <y:Fill color="#99FF99" transparent="false"/>
           <y:BorderStyle hasColor="false" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="15" fontStyle="italic" hasBackgroundColor="false" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="bl" textColor="#000000" visible="true" width="114.0390625" x="4.0" y="1.9855809172660486">cutCompanyXml</y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="15" fontStyle="italic" hasBackgroundColor="false" hasLineColor="false" height="21.666015625" modelName="internal" modelPosition="bl" textColor="#000000" visible="true" width="122.798828125" x="4.0" y="2.6960301360160486">cutCompanyXml</y:NodeLabel>
           <y:StyleProperties>
             <y:Property class="java.lang.Double" name="ModernNodeRadius" value="5.0"/>
           </y:StyleProperties>
@@ -165,7 +165,7 @@ The diagram should be upgraded to the MegaL 0.7]]></data>
           <y:Geometry height="28.362045761016077" width="138.07421875" x="-122.87218986390121" y="-84.2247096868553"/>
           <y:Fill color="#FEFEFE" transparent="false"/>
           <y:BorderStyle color="#999999" type="line" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="node_size" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="28.362045761016077" modelName="custom" textColor="#000000" visible="true" width="138.07421875" x="4.0" y="5.6843418860808015E-14">See the tooltip here<y:LabelModel>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_size" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="28.362045761016077" modelName="custom" textColor="#000000" visible="true" width="138.07421875" x="4.0" y="0.0">See the tooltip here<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -309,7 +309,7 @@ The diagram should be upgraded to the MegaL 0.7]]></data>
           <y:Path sx="0.0" sy="0.0" tx="43.302789133386455" ty="0.0"/>
           <y:LineStyle color="#999999" type="dashed" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
-          <y:EdgeLabel alignment="center" anchorX="-12.336003633278267" anchorY="-8.125481078928374" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" height="16.2509765625" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#808080" upX="-1.2246467991473532E-16" upY="1.0" visible="true" width="55.708984375" x="-68.04498800827827" y="-8.125481078928381">dependsOn<y:LabelModel>
+          <y:EdgeLabel alignment="center" anchorX="-10.539128633278267" anchorY="-7.888664672678374" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" height="15.77734375" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#808080" upX="-1.2246467991473532E-16" upY="1.0" visible="true" width="59.302734375" x="-69.84186300827827" y="-7.888664672678381">dependsOn<y:LabelModel>
               <y:RotatedDiscreteEdgeLabelModel angle="0.0" autoRotationEnabled="true" candidateMask="128" distance="0.0" positionRelativeToSegment="false"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -326,7 +326,7 @@ The diagram should be upgraded to the MegaL 0.7]]></data>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.885178810810828"/>
           <y:LineStyle color="#009900" type="line" width="7.0"/>
           <y:Arrows source="none" target="short"/>
-          <y:EdgeLabel alignment="center" backgroundColor="#009900" distance="2.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" height="16.2509765625" modelName="centered" modelPosition="center" preferredPlacement="center_right" ratio="0.5" textColor="#FFFFFF" visible="true" width="11.783203125" x="-5.8916142776553215" y="18.399516865347493">in</y:EdgeLabel>
+          <y:EdgeLabel alignment="center" backgroundColor="#009900" distance="2.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" height="15.77734375" modelName="centered" modelPosition="center" preferredPlacement="center_right" ratio="0.5" textColor="#FFFFFF" visible="true" width="13.0966796875" x="-6.5483525589053215" y="18.636333271597493">in</y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
       </data>
@@ -337,7 +337,7 @@ The diagram should be upgraded to the MegaL 0.7]]></data>
           <y:Path sx="0.0" sy="-5.311072864864855" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#009900" type="line" width="7.0"/>
           <y:Arrows source="none" target="short"/>
-          <y:EdgeLabel alignment="center" backgroundColor="#009900" distance="2.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" height="16.2509765625" modelName="centered" modelPosition="center" preferredPlacement="center_right" ratio="0.5" textColor="#FFFFFF" visible="true" width="17.9013671875" x="-8.950696308905322" y="18.37379771019421">out</y:EdgeLabel>
+          <y:EdgeLabel alignment="center" backgroundColor="#009900" distance="2.0" fontFamily="Dialog" fontSize="10" fontStyle="plain" hasLineColor="false" height="15.77734375" modelName="centered" modelPosition="center" preferredPlacement="center_right" ratio="0.5" textColor="#FFFFFF" visible="true" width="20.0888671875" x="-10.044446308905322" y="18.61061411644421">out</y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
       </data>
