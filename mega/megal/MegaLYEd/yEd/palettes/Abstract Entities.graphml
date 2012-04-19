@@ -26,7 +26,7 @@
           <y:Geometry height="30.0" width="70.0" x="0.0" y="30.0"/>
           <y:Fill color="#F5F5F5" transparent="false"/>
           <y:BorderStyle color="#999999" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="14" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="21.1513671875" modelName="internal" modelPosition="c" textColor="#333333" visible="true" width="42.91015625" x="13.544921875" y="4.42431640625">:Thing</y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="14" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.48828125" modelName="internal" modelPosition="c" textColor="#333333" visible="true" width="47.435546875" x="11.2822265625" y="4.755859375">:Thing</y:NodeLabel>
           <y:StyleProperties>
             <y:Property class="java.lang.Double" name="ModernNodeRadius" value="5.0"/>
           </y:StyleProperties>
@@ -43,7 +43,7 @@
           <y:Geometry height="30.0" width="70.0" x="100.0" y="30.0"/>
           <y:Fill color="#F5F5F5" transparent="false"/>
           <y:BorderStyle color="#999999" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="14" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="21.1513671875" modelName="internal" modelPosition="c" textColor="#333333" visible="true" width="28.9033203125" x="20.54833984375" y="4.42431640625">:Set</y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="14" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.48828125" modelName="internal" modelPosition="c" textColor="#333333" visible="true" width="29.005859375" x="20.4970703125" y="4.755859375">:Set</y:NodeLabel>
           <y:StyleProperties>
             <y:Property class="java.lang.Double" name="ModernNodeRadius" value="5.0"/>
           </y:StyleProperties>
@@ -60,7 +60,7 @@
           <y:Geometry height="30.0" width="70.0" x="200.0" y="30.0"/>
           <y:Fill color="#F5F5F5" transparent="false"/>
           <y:BorderStyle color="#999999" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="14" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="21.1513671875" modelName="internal" modelPosition="c" textColor="#333333" visible="true" width="32.013671875" x="18.9931640625" y="4.42431640625">:Fun</y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="14" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.48828125" modelName="internal" modelPosition="c" textColor="#333333" visible="true" width="33.3125" x="18.34375" y="4.755859375">:Fun</y:NodeLabel>
           <y:StyleProperties>
             <y:Property class="java.lang.Double" name="ModernNodeRadius" value="5.0"/>
           </y:StyleProperties>
@@ -77,7 +77,7 @@
           <y:Geometry height="30.0" width="69.99999999999977" x="300.0" y="30.0"/>
           <y:Fill color="#F5F5F5" transparent="false"/>
           <y:BorderStyle color="#999999" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="14" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="21.1513671875" modelName="internal" modelPosition="c" textColor="#333333" visible="true" width="33.5654296875" x="18.217285156249886" y="4.42431640625">:FAp</y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="14" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.48828125" modelName="internal" modelPosition="c" textColor="#333333" visible="true" width="34.40625" x="17.796874999999886" y="4.755859375">:FAp</y:NodeLabel>
           <y:StyleProperties>
             <y:Property class="java.lang.Double" name="ModernNodeRadius" value="5.0"/>
           </y:StyleProperties>

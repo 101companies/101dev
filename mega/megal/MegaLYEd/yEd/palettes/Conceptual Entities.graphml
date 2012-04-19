@@ -16,7 +16,7 @@
   <key attr.name="description" attr.type="string" for="edge" id="d12"/>
   <key for="edge" id="d13" yfiles.type="edgegraphics"/>
   <graph edgedefault="directed" id="G">
-    <node id="n0" yfiles.foldertype="group">
+    <node id="n0" yfiles.foldertype="folder">
       <data key="d4"><![CDATA[a4b5ff68-664b-4965-ba2a-dbf50238a6fa]]></data>
       <data key="d5"><![CDATA[:FunctionApplication]]></data>
       <data key="d6"/>
@@ -28,7 +28,7 @@
               <y:Geometry height="78.0" width="110.0" x="-855.7728159716818" y="380.52662654867265"/>
               <y:Fill color="#99FF99" transparent="false"/>
               <y:BorderStyle color="#006600" type="dotted" width="1.0"/>
-              <y:NodeLabel alignment="left" autoSizePolicy="content" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="bolditalic" hasBackgroundColor="false" hasLineColor="false" height="22.37646484375" horizontalTextPosition="right" iconData="1" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#006600" verticalTextPosition="top" visible="true" width="53.15771484375" x="0.0" y="0.0">FAp</y:NodeLabel>
+              <y:NodeLabel alignment="left" autoSizePolicy="content" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="bolditalic" hasBackgroundColor="false" hasLineColor="false" height="21.666015625" horizontalTextPosition="right" iconData="1" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#006600" verticalTextPosition="top" visible="true" width="53.59716796875" x="0.0" y="0.0">FAp</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
               <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
               <y:NodeBounds considerNodeLabelSize="true"/>
@@ -39,7 +39,7 @@
               <y:Geometry height="30.0" width="74.0" x="100.0" y="90.0"/>
               <y:Fill color="#99FF99" transparent="false"/>
               <y:BorderStyle color="#006600" type="dotted" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="content" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="bolditalic" hasBackgroundColor="false" hasLineColor="false" height="22.37646484375" horizontalTextPosition="right" iconData="2" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#006600" verticalTextPosition="top" visible="true" width="53.15771484375" x="0.0" y="0.0">FAp</y:NodeLabel>
+              <y:NodeLabel alignment="right" autoSizePolicy="content" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="bolditalic" hasBackgroundColor="false" hasLineColor="false" height="21.666015625" horizontalTextPosition="right" iconData="2" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#006600" verticalTextPosition="top" visible="true" width="53.59716796875" x="0.0" y="0.0">FAp</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
               <y:State closed="true" closedHeight="30.0" closedWidth="74.0" innerGraphDisplayEnabled="false"/>
               <y:NodeBounds considerNodeLabelSize="true"/>
@@ -51,7 +51,7 @@
       </data>
       <graph edgedefault="directed" id="n0:"/>
     </node>
-    <node id="n1" yfiles.foldertype="group">
+    <node id="n1" yfiles.foldertype="folder">
       <data key="d4"><![CDATA[88f3a831-1fc6-45cb-81c8-a0de683939d6]]></data>
       <data key="d5"><![CDATA[:Function]]></data>
       <data key="d6"/>
@@ -63,7 +63,7 @@
               <y:Geometry height="78.0" width="110.0" x="-872.4456419662046" y="379.0172686725665"/>
               <y:Fill color="#CCFFCC" transparent="false"/>
               <y:BorderStyle color="#006600" type="dotted" width="1.0"/>
-              <y:NodeLabel alignment="left" autoSizePolicy="content" borderDistance="0.0" fontFamily="Colonna MT" fontSize="15" fontStyle="bolditalic" hasBackgroundColor="false" hasLineColor="false" height="20.0" horizontalTextPosition="right" iconData="1" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#006600" verticalTextPosition="top" visible="true" width="49.45166015625" x="0.0" y="0.0">Fun</y:NodeLabel>
+              <y:NodeLabel alignment="left" autoSizePolicy="content" borderDistance="0.0" fontFamily="Colonna MT" fontSize="15" fontStyle="bolditalic" hasBackgroundColor="false" hasLineColor="false" height="20.0" horizontalTextPosition="right" iconData="1" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#006600" verticalTextPosition="top" visible="true" width="46.96875" x="0.0" y="0.0">Fun</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
               <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
               <y:NodeBounds considerNodeLabelSize="true"/>
@@ -74,7 +74,7 @@
               <y:Geometry height="30.0" width="70.0" x="0.0" y="90.0"/>
               <y:Fill color="#CCFFCC" transparent="false"/>
               <y:BorderStyle color="#006600" type="dotted" width="1.0"/>
-              <y:NodeLabel alignment="left" autoSizePolicy="content" borderDistance="0.0" fontFamily="Colonna MT" fontSize="15" fontStyle="bolditalic" hasBackgroundColor="false" hasLineColor="false" height="20.0" horizontalTextPosition="right" iconData="2" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#006600" verticalTextPosition="top" visible="true" width="49.45166015625" x="0.0" y="0.0">Fun</y:NodeLabel>
+              <y:NodeLabel alignment="left" autoSizePolicy="content" borderDistance="0.0" fontFamily="Colonna MT" fontSize="15" fontStyle="bolditalic" hasBackgroundColor="false" hasLineColor="false" height="20.0" horizontalTextPosition="right" iconData="2" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#006600" verticalTextPosition="top" visible="true" width="46.96875" x="0.0" y="0.0">Fun</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
               <y:State closed="true" closedHeight="30.0" closedWidth="70.0" innerGraphDisplayEnabled="false"/>
               <y:NodeBounds considerNodeLabelSize="true"/>
@@ -86,7 +86,7 @@
       </data>
       <graph edgedefault="directed" id="n1:"/>
     </node>
-    <node id="n2" yfiles.foldertype="group">
+    <node id="n2" yfiles.foldertype="folder">
       <data key="d4"><![CDATA[bd61feb3-25c9-432e-83b7-1a0960932548]]></data>
       <data key="d5"><![CDATA[:Technology]]></data>
       <data key="d6"/>
@@ -98,7 +98,7 @@
               <y:Geometry height="78.0" width="110.0" x="-897.2801575646022" y="434.10883115044254"/>
               <y:Fill color="#CCCCCC" transparent="false"/>
               <y:BorderStyle color="#333333" type="dotted" width="1.0"/>
-              <y:NodeLabel alignment="left" autoSizePolicy="content" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="bolditalic" hasBackgroundColor="false" hasLineColor="false" height="22.37646484375" horizontalTextPosition="right" iconData="3" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#333333" verticalTextPosition="top" visible="true" width="49.84716796875" x="0.0" y="0.0">Tec</y:NodeLabel>
+              <y:NodeLabel alignment="left" autoSizePolicy="content" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="bolditalic" hasBackgroundColor="false" hasLineColor="false" height="21.666015625" horizontalTextPosition="right" iconData="3" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#333333" verticalTextPosition="top" visible="true" width="51.12158203125" x="0.0" y="0.0">Tec</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
               <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
               <y:NodeBounds considerNodeLabelSize="true"/>
@@ -106,12 +106,12 @@
               <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
             </y:GroupNode>
             <y:GroupNode>
-              <y:Geometry height="30.0" width="71.0" x="800.0" y="30.0"/>
+              <y:Geometry height="30.0" width="72.0" x="800.0" y="30.0"/>
               <y:Fill color="#CCCCCC" transparent="false"/>
               <y:BorderStyle color="#333333" type="dotted" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="content" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="bolditalic" hasBackgroundColor="false" hasLineColor="false" height="22.37646484375" horizontalTextPosition="right" iconData="4" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#333333" verticalTextPosition="top" visible="true" width="49.84716796875" x="0.0" y="0.0">Tec</y:NodeLabel>
+              <y:NodeLabel alignment="right" autoSizePolicy="content" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="bolditalic" hasBackgroundColor="false" hasLineColor="false" height="21.666015625" horizontalTextPosition="right" iconData="4" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#333333" verticalTextPosition="top" visible="true" width="51.12158203125" x="0.0" y="0.0">Tec</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
-              <y:State closed="true" closedHeight="30.0" closedWidth="71.0" innerGraphDisplayEnabled="false"/>
+              <y:State closed="true" closedHeight="30.0" closedWidth="72.0" innerGraphDisplayEnabled="false"/>
               <y:NodeBounds considerNodeLabelSize="true"/>
               <y:Insets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
               <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
@@ -121,7 +121,7 @@
       </data>
       <graph edgedefault="directed" id="n2:"/>
     </node>
-    <node id="n3" yfiles.foldertype="group">
+    <node id="n3" yfiles.foldertype="folder">
       <data key="d4"><![CDATA[edce1e7a-af5e-4063-ac1e-15aab5ca3afb]]></data>
       <data key="d5"><![CDATA[:Language]]></data>
       <data key="d6"/>
@@ -133,7 +133,7 @@
               <y:Geometry height="78.0" width="110.0" x="-891.2327208765545" y="338.2646060176992"/>
               <y:Fill color="#FFCC99" transparent="false"/>
               <y:BorderStyle color="#990033" type="dotted" width="1.0"/>
-              <y:NodeLabel alignment="left" autoSizePolicy="content" borderDistance="0.0" fontFamily="Colonna MT" fontSize="15" fontStyle="bolditalic" hasBackgroundColor="false" hasLineColor="false" height="20.0" horizontalTextPosition="right" iconData="5" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#990033" verticalTextPosition="top" visible="true" width="51.32666015625" x="0.0" y="0.0">Lng</y:NodeLabel>
+              <y:NodeLabel alignment="left" autoSizePolicy="content" borderDistance="0.0" fontFamily="Colonna MT" fontSize="15" fontStyle="bolditalic" hasBackgroundColor="false" hasLineColor="false" height="20.0" horizontalTextPosition="right" iconData="5" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#990033" verticalTextPosition="top" visible="true" width="48.84375" x="0.0" y="0.0">Lng</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
               <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
               <y:NodeBounds considerNodeLabelSize="true"/>
@@ -144,7 +144,7 @@
               <y:Geometry height="30.0" width="70.0" x="700.0" y="30.0"/>
               <y:Fill color="#FFCC99" transparent="false"/>
               <y:BorderStyle color="#990033" type="dotted" width="1.0"/>
-              <y:NodeLabel alignment="left" autoSizePolicy="content" borderDistance="0.0" fontFamily="Colonna MT" fontSize="14" fontStyle="bolditalic" hasBackgroundColor="false" hasLineColor="false" height="20.0" horizontalTextPosition="right" iconData="6" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#990033" verticalTextPosition="top" visible="true" width="49.5048828125" x="0.0" y="0.0">Lng</y:NodeLabel>
+              <y:NodeLabel alignment="left" autoSizePolicy="content" borderDistance="0.0" fontFamily="Colonna MT" fontSize="14" fontStyle="bolditalic" hasBackgroundColor="false" hasLineColor="false" height="20.0" horizontalTextPosition="right" iconData="6" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#990033" verticalTextPosition="top" visible="true" width="47.1875" x="0.0" y="0.0">Lng</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
               <y:State closed="true" closedHeight="30.0" closedWidth="70.0" innerGraphDisplayEnabled="false"/>
               <y:NodeBounds considerNodeLabelSize="true"/>
@@ -183,7 +183,7 @@
           <y:Geometry height="30.0" width="70.0" x="100.0" y="30.0"/>
           <y:Fill color="#CCCCCC" transparent="false"/>
           <y:BorderStyle color="#333333" type="dotted" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="14" fontStyle="bolditalic" hasBackgroundColor="false" hasLineColor="false" height="21.1513671875" horizontalTextPosition="right" iconData="8" iconTextGap="2" modelName="internal" modelPosition="tl" textColor="#333333" verticalTextPosition="bottom" visible="true" width="50.7861328125" x="4.0" y="4.0">:Tec</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="14" fontStyle="bolditalic" hasBackgroundColor="false" hasLineColor="false" height="20.48828125" horizontalTextPosition="right" iconData="8" iconTextGap="2" modelName="internal" modelPosition="tl" textColor="#333333" verticalTextPosition="bottom" visible="true" width="50.7724609375" x="4.0" y="4.0">:Tec</y:NodeLabel>
           <y:StyleProperties>
             <y:Property class="java.lang.Double" name="ModernNodeRadius" value="5.0"/>
           </y:StyleProperties>
@@ -217,7 +217,7 @@
           <y:Geometry height="30.0" width="70.0" x="300.0" y="30.0"/>
           <y:Fill color="#99FF99" transparent="false"/>
           <y:BorderStyle color="#006600" type="dotted" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="15" fontStyle="italic" hasBackgroundColor="false" hasLineColor="false" height="22.37646484375" horizontalTextPosition="right" iconTextGap="4" image="9" modelName="internal" modelPosition="tl" textColor="#006600" verticalTextPosition="top" visible="true" width="55.67724609375" x="4.0" y="4.0">:FAp</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="15" fontStyle="italic" hasBackgroundColor="false" hasLineColor="false" height="21.666015625" horizontalTextPosition="right" iconTextGap="4" image="9" modelName="internal" modelPosition="tl" textColor="#006600" verticalTextPosition="top" visible="true" width="56.578125" x="4.0" y="4.0">:FAp</y:NodeLabel>
           <y:StyleProperties>
             <y:Property class="java.lang.Double" name="ModernNodeRadius" value="5.0"/>
           </y:StyleProperties>
@@ -234,7 +234,7 @@
           <y:Geometry height="30.0" width="70.0" x="400.0" y="30.0"/>
           <y:Fill color="#FFFF00" transparent="false"/>
           <y:BorderStyle color="#333300" type="dotted" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Colonna MT" fontSize="14" fontStyle="bolditalic" hasBackgroundColor="false" hasLineColor="false" height="20.0" horizontalTextPosition="right" iconData="10" iconTextGap="2" modelName="internal" modelPosition="tl" textColor="#333333" verticalTextPosition="bottom" visible="true" width="46.96484375" x="4.0" y="4.0">:Cat</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Colonna MT" fontSize="14" fontStyle="bolditalic" hasBackgroundColor="false" hasLineColor="false" height="20.0" horizontalTextPosition="right" iconData="10" iconTextGap="2" modelName="internal" modelPosition="tl" textColor="#333333" verticalTextPosition="bottom" visible="true" width="43.875" x="4.0" y="4.0">:Cat</y:NodeLabel>
           <y:StyleProperties>
             <y:Property class="java.lang.Double" name="ModernNodeRadius" value="5.0"/>
           </y:StyleProperties>
@@ -251,7 +251,7 @@
           <y:Geometry height="30.0" width="70.0" x="500.0" y="30.0"/>
           <y:Fill color="#FF99CC" transparent="false"/>
           <y:BorderStyle color="#333333" type="dotted" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Colonna MT" fontSize="14" fontStyle="bolditalic" hasBackgroundColor="false" hasLineColor="false" height="20.0" horizontalTextPosition="right" iconData="11" iconTextGap="2" modelName="internal" modelPosition="tl" textColor="#333333" verticalTextPosition="bottom" visible="true" width="46.52734375" x="4.0" y="4.0">:Stk</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Colonna MT" fontSize="14" fontStyle="bolditalic" hasBackgroundColor="false" hasLineColor="false" height="20.0" horizontalTextPosition="right" iconData="11" iconTextGap="2" modelName="internal" modelPosition="tl" textColor="#333333" verticalTextPosition="bottom" visible="true" width="43.4375" x="4.0" y="4.0">:Stk</y:NodeLabel>
           <y:StyleProperties>
             <y:Property class="java.lang.Double" name="ModernNodeRadius" value="5.0"/>
           </y:StyleProperties>
@@ -268,7 +268,7 @@
           <y:Geometry height="30.0" width="70.0" x="600.0" y="30.0"/>
           <y:Fill color="#990000" transparent="false"/>
           <y:BorderStyle color="#990000" type="dotted" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Colonna MT" fontSize="14" fontStyle="bolditalic" hasBackgroundColor="false" hasLineColor="false" height="20.0" horizontalTextPosition="right" iconData="12" iconTextGap="2" modelName="internal" modelPosition="tl" textColor="#FFFFFF" verticalTextPosition="bottom" visible="true" width="44.927734375" x="4.0" y="4.0">:Ftr</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Colonna MT" fontSize="14" fontStyle="bolditalic" hasBackgroundColor="false" hasLineColor="false" height="20.0" horizontalTextPosition="right" iconData="12" iconTextGap="2" modelName="internal" modelPosition="tl" textColor="#FFFFFF" verticalTextPosition="bottom" visible="true" width="41.837890625" x="4.0" y="4.0">:Ftr</y:NodeLabel>
           <y:StyleProperties>
             <y:Property class="java.lang.Double" name="ModernNodeRadius" value="5.0"/>
           </y:StyleProperties>
