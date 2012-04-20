@@ -10,9 +10,15 @@ Company.cs
 		Name	glex:public . Name { * }	L32-39
 	Department	glex:class Department	L13-20
 	Employee	glex:class	Employee	L22-28
+
+Demo.cs
+	CutAcmeCorp	glex: public .	CutAcmeCorp ( ) { * } L38-43
+		
 	
 xsd.exe
 	${types}.xsd	->	${types}.cs
 		complexType ${type}	->	class ${type}
 			basicType ${element} -> field ${element}Field
 			basicType ${element} -> property ${element}
+
+			
