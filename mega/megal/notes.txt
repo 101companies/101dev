@@ -1,0 +1,68 @@
+[Entity] name {, name}* { RelationPath [Entity] name {, name*} } . 
+
+
+Where 
+  Entity = Language | Artefact | File | Function | FunctionApplication ...
+  Relation = dependsOn | elementOf | partOf | subsetOf | hasRange | ...
+  RelationPath = Relation 
+
+At the moment just Relation, but I'll add something inspired by traski algebra / sparrql 1.1path 
+because I've implemented part of it on myRDF library. Basically with compose, etc).
+
+This is just the syntax you have indeed and the semantics should be ovbious.
+
+Langage A subsetOf B .
+Language B .
+B partOf C partOf D .
+E transformedIn G transformedIn R .
+E,F elementOF I,G .
+
+The last sequence is "naturally"  (IMHO)  equivalent to
+E elementOf I .
+E elementOf G .
+F elementOf I .
+F elementOf G .
+
+
+deserialize : XML -> ClrObj
+==>
+  Function deserialize
+  XML domainOf deserialize
+  deserialize hasRange ClrObj
+
+Bu there is also the function application (with argument either abstract or concrete value)
+eserialize(ACMECompany.xml) -> ACMECompany.clr
+translates to
+FunctionApplication deserialize_app_1
+ACMECompany.xml in deserialize_app_1
+deserialize_app_1 out ACMECompany.clr
+deserialize_app_1 elementOf deserialize
+obviously this is boring, but this is what is actually in the notation f(x) -> y	
+	
+
+
+=== object language ===
+
+ACME : Company {
+   title = "ACME"
+   employees = {bob, ... }
+} 
+bob : Employee {
+   ...
+}
+...
+
+where ... is an allowed symbol for elusion.
+
+
+
+
+
+
+
+== Artefact Viewpoint ==
+The artefact viewpoint is based on the most concrete things engineering what to see at first and
+almost all nodes are clickable and concrete. What is missing in the example is dynamic object
+in CLR. the idea is to save runtime object to make it browsable. For instance if we were using php, 
+I would create a var_dump file and save it in ACMECompany.php.txt  and ACMECompanyCut.php.txt. 
+We could also use json, etc. We can also have for the sake of presentation a small language like
