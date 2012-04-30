@@ -16,7 +16,7 @@ The overall set of possible flags is:
 
 One can move a page/category, promotion/demotion is detected:
 
-    python refactor.py rename \<oldtitle\> \<newtitle\> [-- \<flags\>]
+    python refactor.py rename <oldtitle> <newtitle> [-- <flags>]
     
 Allowed flags: *dropchilds*, *force*, *noredirect*, *removePrefix*
              
@@ -24,7 +24,7 @@ Allowed flags: *dropchilds*, *force*, *noredirect*, *removePrefix*
 
 One can promote a page to become a category:
 
-    python refactor.py promote \<pagetitle\> [\<categorytitle\>] [-- \<flags\>]
+    python refactor.py promote <pagetitle> [<categorytitle>] [-- <flags>]
 
 In case \<categorytitle\> is missing Category:\<pagetitle\> is used.
     
@@ -34,7 +34,7 @@ Allowed flags: *force*, *noredirect*, *removePrefix*
 
 One can demote a category to become a page:
 
-    python refactor.py demote \<categorytitle\> [\<pagetitle\>] [-- \<flags\>]
+    python refactor.py demote <categorytitle> [<pagetitle>] [-- <flags>]
 
 In case \<pagetitle\> is missing \<categorytitle\> without "Category:" is used.
     
