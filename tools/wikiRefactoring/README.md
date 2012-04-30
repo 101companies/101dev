@@ -1,3 +1,7 @@
+# Configuration
+
+All you have to do to configure the tool for you wiki is to change the URL of the API in [refactor.py](https://github.com/101companies/101dev/edit/master/tools/wikiRefactoring/refactor.py)
+
 # Flags
 
 The overall set of possible flags is:
