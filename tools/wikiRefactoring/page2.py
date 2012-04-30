@@ -34,12 +34,13 @@ class Page2(page.Page):
 		return map(lambda x: x['title'], apiresponse['query']['backlinks'])
 
 	def rewriteReferences(self, pagetitles, newtitle):
+		print pagetitles, newtitle
 		for pn in pagetitles:
 			page = Page2(self.site, title=pn)
 			page.rewriteInternlink(self.title, newtitle)
 
 
-	def rewriteInternlink(self, clink, nlink, nlinktext=""):
+	def rewriteInternlink(self, clink, nlink, nlinktext=""):	
 		''' Rewrite all given link on this page and return the new wikitext
 
 		olink - the current name of the intern link
@@ -74,15 +75,15 @@ class Page2(page.Page):
 		self.edit(text=ntext)
 		return ntext
 
-	def promote(self, title=False, removePrefix=False, force=False, delete=True, reason=False, watch=False, unwatch=False):
+	def promote(self, title=False, removePrefix=False, force=False, reason=False, watch=False, unwatch=False):
 		''' Promote a page to a category 
 
 		newtitle - title of the category
 		removePrefix - when using the page title as the category title remove the prefix
 		force - in case the category already exists, delete it
-		delete - delete the promoted page
 		'''
 		if not self.exists:
+			print self.getWikiText()
 			raise page.NoPage
 		if self.title.startswith("Category:"):
 			raise NotPromotable
@@ -95,13 +96,12 @@ class Page2(page.Page):
 		if cat.exists and not force:
 			raise AlreadyExists
 		cat.edit(text=self.getWikiText())	
-		self.rewriteReferences(self.getBacklinks(), "Category:" + title)
-		if delete:
-			self.delete(reason=reason, watch=watch, unwatch=unwatch)
+		self.rewriteReferences(self.getBacklinks(), title)
+		self.delete(reason=reason, watch=watch, unwatch=unwatch)
 		return cat
 
 
-	def intermove(self, mvto, reason=False, movetalk=False, noredirect=False, watch=False, unwatch=False, removePrefix=False, force=False, delete=True):
+	def intermove(self, mvto, reason=False, movetalk=False, noredirect=False, watch=False, unwatch=False, removePrefix=False, force=False):
 		''' Move page or promote it and rename links on backlinking pages
 
 		force, removePrefix, delete - see promote()
@@ -110,7 +110,7 @@ class Page2(page.Page):
 		fromCat =  self.title.startswith("Category:")
 		toCat = mvto.startswith("Category:")
 		if not fromCat and toCat:
-			self.promote(title=mvto, removePrefix=removePrefix, force=force, delete=delete)
+			self.promote(title=mvto, removePrefix=removePrefix, force=force)
 		else:
 			mvtopage = Page2(self.site, title=mvto)
 			if mvtopage.exists:
@@ -118,5 +118,5 @@ class Page2(page.Page):
 					mvtopage.delete(reason=reason, watch=watch, unwatch=unwatch)
 				else:
 					raise AlreadyExists
+			self.rewriteReferences(self.getBacklinks(), mvto)		
 			page.Page.move(self, mvto, reason=reason, movetalk=movetalk, noredirect=noredirect, watch=watch, unwatch=unwatch)
-			self.rewriteReferences(self.getBacklinks, mvto)

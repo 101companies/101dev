@@ -28,18 +28,17 @@ class Category2(page2.Page2, category.Category):
 		page2.Page2.__init__(self, wiki=wiki, title=title, check=check, followRedir=followRedir, section=section, sectionnumber=sectionnumber, pageid=pageid)
 		category.Category.__init__(self, site=wiki, title=re.sub("Category:", "", title), check=check, followRedir=followRedir, section=section, sectionnumber=sectionnumber, pageid=pageid)
 
-	def demote(self, title=False, dropchilds=False, force=False, delete=True, reason=False, watch=False, unwatch=False):
+	def demote(self, title=False, dropchilds=False, force=False, reason=False, watch=False, unwatch=False):
 		''' Demote a category to a page
 
 		newtitle - title of the page
 		force - in case the page already exists, delete it
-		delete - delete the demoted category
 		'''
 		if not self.exists:
 			raise page.NoPage
-		if title.startswith("Category:"):
+		if title and title.startswith("Category:"):
 			raise NotNonCategoryTitle		
-		if self.getAllMembers and not dropchilds:
+		if self.getAllMembers() and not dropchilds:
 			raise NonEmptyCategory
 		if not title:
 			title = self.title.split("Category:")[1]
@@ -48,19 +47,18 @@ class Category2(page2.Page2, category.Category):
 			raise page2.AlreadyExists
 		page.edit(text=self.getWikiText())	
 		self.rewriteReferences(self.getBacklinks() + self.getAllMembers(titleonly=True), title)
-		if delete:
-			self.delete(reason=reason, watch=watch, unwatch=unwatch)
+		self.delete(reason=reason, watch=watch, unwatch=unwatch)
 
-	def intermove(self, mvto, force=False, delete=True, reason=False, movetalk=False, noredirect=False, watch=False, unwatch=False, dropchilds=False):
+	def intermove(self, mvto, force=False, reason=False, movetalk=False, noredirect=False, watch=False, unwatch=False, dropchilds=False):
 		''' Move category by deleting and creating a new page or demote the category to a page.
 		Rename links on backlinking pages.
 
-		force and delete - see demote()
+		force - see demote()
 		other arguments - see python-wikitools documentation
 		'''
 		toCat = mvto.startswith("Category:")
 		if not toCat:
-			demote(mvto, force=force, delete=delete, reason=reason, watch=watch, unwatch=unwatch, dropchilds=dropchilds)
+			demote(mvto, force=force, reason=reason, watch=watch, unwatch=unwatch, dropchilds=dropchilds)
 		else:
 			mvtocat = Category2(self.site, title=mvto)
 			if mvtocat.exists:
