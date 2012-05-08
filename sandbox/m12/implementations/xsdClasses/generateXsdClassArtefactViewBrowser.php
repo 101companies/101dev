@@ -1,4 +1,5 @@
 <?php
+require_once '../../../../configs/main.config.local.php' ;
 require_once '../../../../../megalib/YEdGraphBrowser.php' ;
 
 define('ROOTDIR','.') ;

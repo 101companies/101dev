@@ -1,0 +1,15 @@
+_:xmlTypes rdf:type mgl:File .
+_:xmlTypes rdfs:label "xmlTypes" .
+_:xmlTypes mgl:elementOf lang:XSD .
+_:xmlTypes mgl:inputOf _:classgen .
+
+_:xmlDoc rdf:type mgl:File .
+_:xmlDoc rdfs:label "xmlDoc" .
+_:xmlDoc mgl:elementOf lang:XML .
+_:xmlDoc mgl:conformsTo _:xmlTypes .
+_:xmlDoc mgl:inputOf _:classgen .
+
+_:classgen_app_1 rdf:type mgl:FunctionApplication .
+_:classgen_app_1 rdfs:label "classgen" .
+_:classgen_app_1 rdf:elementOf _:classgen .
+_:classgen_app_1 rdf:hasOutput _:ooTypes .
