@@ -1,0 +1,37 @@
+body {
+	font-family: Arial;
+	text-decoration: underline;
+	font-weight: bold;
+
+}
+
+.topview {
+	width: 98%;
+	border-radius: 10px;
+	margin: 10px auto 0px auto;
+	padding: 10px 10px 10px 10px;
+	background-color: rgb(210,210,230);
+
+}
+
+#graphicview {
+	overflow: auto;
+	height: 75%;
+}
+
+#graphic {
+	margin-top: 10px;
+	margin-left: 10px;
+	width: 100%;
+}
+
+img {
+	-moz-box-shadow: 0 0 5px #888;
+	-webkit-box-shadow: 0 0 5px#888;
+	box-shadow: 0 0 5px #888;
+	border-radius: 10px;
+}
+
+#detailview {
+	height: 37%;
+}
