@@ -1,0 +1,80 @@
+body {
+	font-family: Arial;
+	font-weight: bold;
+}
+
+.topview {
+	width: 98%;
+	border-radius: 10px;
+	margin: 10px auto 0px auto;
+	padding: 10px 10px 0px 10px;
+	background-color: rgb(210,210,230);
+}
+
+#graphicview {
+	overflow: auto;
+	height: 72%;
+}
+
+#graphiccontent {
+	height: 90%;
+	position: relative;
+	margin-bottom: 100px;
+}
+
+#graphics {
+	margin-top: 10px;
+	margin-left: 10px;
+	width: 95%;
+	height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+#imagewrapper {
+	-moz-box-shadow: 0 0 5px #888;
+	-webkit-box-shadow: 0 0 5px#888;
+	box-shadow: 0 0 5px #888;
+	border-radius: 10px;
+	position: absolute;
+	z-index: -3;
+}
+
+#svgwrapper {
+	margin-top: 10px;
+	margin-left: 10px;
+	width: 100%;
+	height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+svg {
+	height: 100%;
+	width: 100%;
+	cursor: pointer;
+}
+
+#detailview {
+	height: 28%;
+	overflow: auto;
+}
+
+#detailcontent {
+	width: 100%;
+}
+
+#detailcontent iframe {
+	width: 100%;
+}
+
+rect {
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+}
