@@ -19,7 +19,7 @@ var loadImage= function(artefactname) {
 
 var loadAreas = function(artefactname) {
 	$("#mapwrapper").append($("<map>").attr({name: "map"}))
-	$.getJSON("implementations/" + artefactname + "/" + artefactname + "ArtefactView.megal.map.json", function(data) {
+	$.getJSON("../MegaModels/implementations/" + artefactname + "/" + artefactname + "ArtefactView.megal.map.json", function(data) {
     $.each(data, function(i, d){
       d.title = d.href
       d.href = "javascript:void(0);"
