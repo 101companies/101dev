@@ -14,7 +14,7 @@ $(document).ready(function () {
 });
 
 var loadImage= function(artefactname) {
-	$("#imagewrapper").append($("<img>").attr({src:"implementations/" + artefactname + "/" + artefactname + "ArtefactView.megal.png", usemap : "#map"}))
+	$("#imagewrapper").append($("<img>").attr({src:"../MegaModels/implementations/" + artefactname + "/" + artefactname + "ArtefactView.megal.png", usemap : "#map"}))
 }
 
 var loadAreas = function(artefactname) {

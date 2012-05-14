@@ -3,6 +3,6 @@ var displayComponent = function(r,d) {
 	if (isExternal) {
 		$("#detailcontent").html($("<iframe>").attr({src:d.title}))
 	} else {
-		$("#detailcontent").load("implementations/" + r + "/" + d.title);
+		$("#detailcontent").load("../MegaModels/implementations/" + r + "/" + d.title);
 	}
 }
