@@ -12,8 +12,16 @@ body {
 }
 
 #graphicview {
+	width: 70%;
+	float: left;
 	overflow: auto;
 	height: 72%;
+}
+
+#fileview {
+	width: 25%;
+	float: right;
+		height: 72%;
 }
 
 #graphiccontent {
