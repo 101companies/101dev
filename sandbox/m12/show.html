@@ -5,15 +5,32 @@
 		<script type="text/javascript" src="./js/jquery.svg.min.js"></script>
 		<script type="text/javascript" src="./js/graphics.js"></script>
 		<script type="text/javascript" src="./js/navigation.js"></script>
-		<script type="text/javascript" src="./js/file-exporation.js"></script>
+		<script type="text/javascript" src="./js/file-exploration.js"></script>
 		<script type="text/javascript" src="./js/init.js"></script>
 		<link rel="stylesheet" type="text/css" href="./css/style.css">
 	</head>
 	<body>
 	</body>
 		<div id="top">
-			<div class="topview" id="graphicview">Graphical View<hr><div id="graphiccontent"></div></div>
-			<div class="topview" id="fileview">Graphical View<hr><div id="graphiccontent"></div></div>
+			<!--div class="topview" id="graphicview">Graphical View<hr><div id="graphiccontent"></div></div-->
+			<div class="topview" id="selectionview">
+				<div class="viewinfo">Selection of contribution components</div>
+				<div class="subselectionview" id="fileview">
+					<div class="subviewinfo">Files</div><hr>
+				</div>
+				<div class="subselectionview" id="languageview">
+					<div class="subviewinfo">Languages</div><hr>
+				</div>
+				<div class="subselectionview" id="technologyview">
+					<div class="subviewinfo">Technologies</div><hr>
+				</div>
+				<div class="subselectionview" id="fragmentview">
+					<div class="subviewinfo">Fragments</div><hr>
+				</div>
+			</div>
 		</div>
-		<div class="topview" id="detailview">Detailed View<hr><div id="detailcontent"></div></div>
+		<div class="topview" id="detailview">
+			<div class="viewinfo">Detailed View</div><hr>
+			<div id="detailcontent"></div>
+		</div>
 </html>

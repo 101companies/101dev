@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  var artefactname = window.location.search.replace("?","")
+  /*var artefactname = window.location.search.replace("?","")
   if (!artefactname) 
   	$("#graphicview").append($("<strong>").html("<br/>No artefact name given in URL"))
   else {
@@ -10,7 +10,11 @@ $(document).ready(function () {
       append($("<div>").attr({id : "mapwrapper"}))
   	loadImage(artefactname)
   	loadAreas(artefactname)
-  }
+    
+  }*/
+  $("#selectionview").children().each(function(){
+    $(this).width((100 / ($(this).parent().children().size() - 1) - 1) + "%")
+  })
 });
 
 var loadImage= function(artefactname) {

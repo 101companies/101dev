@@ -1,27 +1,57 @@
 body {
 	font-family: Arial;
 	font-weight: bold;
+	background-color: #AEC0DD;
 }
 
 .topview {
 	width: 98%;
 	border-radius: 10px;
-	margin: 10px auto 0px auto;
+	margin: 10px auto 20px auto;
 	padding: 10px 10px 0px 10px;
 	background-color: rgb(210,210,230);
+	box-shadow: 0 0 5px 5px #888;
 }
 
 #graphicview {
 	width: 70%;
 	float: left;
 	overflow: auto;
-	height: 72%;
+	height: 60%;
 }
 
-#fileview {
-	width: 25%;
-	float: right;
-		height: 72%;
+#selectionview {
+	width: 98%;
+	height: 60%;
+	background-color: #274779;
+	padding: 10px 1% 30px 1%;
+}
+
+.subselectionview {
+	float: left;
+	border-radius: 10px;
+	background-color: rgb(210,210,230);
+	width: 33%;
+	margin: 10px 0.25% 10px 0.25%;
+	height: 95%;
+	padding: 0px 0.25% 0px 0.25%;
+	text-shadow: 0 -1px 1px #FFFFFF, 0 1px 1px #666666;
+}
+
+.viewinfo {
+	font-family:  "Verdana", "Arial";
+	color: #274779;
+	text-shadow: 0 -1px 1px #FFFFFF, 0 1px 1px #666666;
+}
+
+#selectionview .viewinfo {
+	color: white;
+}
+
+.subviewinfo {
+	font-family:  "Verdana", "Arial";
+	margin: 5px 0px 0px 10px;
+	color: #274779;
 }
 
 #graphiccontent {
@@ -69,8 +99,10 @@ svg {
 }
 
 #detailview {
-	height: 28%;
-	overflow: auto;
+	width: 98%;
+	height: 25%;
+	background-color: rgb(210,210,230);
+	padding: 10px 1% 30px 1%;
 }
 
 #detailcontent {
