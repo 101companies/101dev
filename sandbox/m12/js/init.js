@@ -12,9 +12,27 @@ $(document).ready(function () {
   	loadAreas(artefactname)
     
   }*/
-  $("#selectionview").children().each(function(){
-    $(this).width((100 / ($(this).parent().children().size() - 1) - 1) + "%")
+  contribname = window.location.search.replace("?","")
+  $("#selectionview").children().each(function(i){
+    if (i > 0) $(this).width((100 / ($(this).parent().children().size() - 1) - 1) + "%")
   })
+  if (contribname == "") {
+    $("#selectionview .viewinfo").append($("<b>").addClass("noSelInfo").text("No contribution selected"))
+  } else {
+    initFileExplorer(contribname)
+  }
+  /*console.log($html); // jQuery(title, <TextNode textContent="This is the body">)
+  console.log($html.find("body")); // jQuery()
+  console.log($html.find("title")); // jQuery()
+  console.log($html.filter("title")); // jQuery(title)
+  var tree = new dhtmlXTreeObject("files","30%","30%",0);
+  tree.setImagePath("./imgs/");
+  tree.enableCheckBoxes(false);
+  tree.enableTreeImages(false);
+  tree.loadXML("foo.xml");
+  tree._hAdI = true;
+  tree.attachEvent("onOpenStart", function(id,state){if (state < 0) {tree.insertNewChild(id,id+100,"New Node 2",0,0,0,0,"")};return true});
+  //$("body").click(function(){(tree.insertNewChild(1,4,"New Node 2",0,0,0,0,""))});*/
 });
 
 var loadImage= function(artefactname) {

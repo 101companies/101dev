@@ -3,9 +3,12 @@
 		<title>xsdClasses</title>
 		<script type="text/javascript" src="./js/jquery-1.7.2.min.js"></script>
 		<script type="text/javascript" src="./js/jquery.svg.min.js"></script>
+		<script type="text/javascript" src="./js/dhtmlxcommon.js"></script>
+		<script type="text/javascript" src="./js/dhtmlxtree.js"></script>
 		<script type="text/javascript" src="./js/graphics.js"></script>
 		<script type="text/javascript" src="./js/navigation.js"></script>
 		<script type="text/javascript" src="./js/file-exploration.js"></script>
+		<script type="text/javascript" src="./js/source-exploration.js"></script>
 		<script type="text/javascript" src="./js/init.js"></script>
 		<link rel="stylesheet" type="text/css" href="./css/style.css">
 	</head>
@@ -14,9 +17,10 @@
 		<div id="top">
 			<!--div class="topview" id="graphicview">Graphical View<hr><div id="graphiccontent"></div></div-->
 			<div class="topview" id="selectionview">
-				<div class="viewinfo">Selection of contribution components</div>
+				<div class="viewinfo" id="selinfo">Selection of contribution components</div>
 				<div class="subselectionview" id="fileview">
 					<div class="subviewinfo">Files</div><hr>
+					<div id="files"></div>
 				</div>
 				<div class="subselectionview" id="languageview">
 					<div class="subviewinfo">Languages</div><hr>
@@ -30,7 +34,7 @@
 			</div>
 		</div>
 		<div class="topview" id="detailview">
-			<div class="viewinfo">Detailed View</div><hr>
+			<div class="viewinfo">Source View</div><hr>
 			<div id="detailcontent"></div>
 		</div>
 </html>
