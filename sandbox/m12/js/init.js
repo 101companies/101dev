@@ -14,12 +14,22 @@ $(document).ready(function () {
   }*/
   contribname = window.location.search.replace("?","")
   $("#selectionview").children().each(function(i){
-    if (i > 0) $(this).width((100 / ($(this).parent().children().size() - 1) - 1) + "%")
+    if (i > 0) $(this).width((100 / ($(this).parent().children().size() - 1) - 0.5) + "%")
   })
   if (contribname == "") {
     $("#selectionview .viewinfo").append($("<b>").addClass("noSelInfo").text("No contribution selected"))
   } else {
-    initFileExplorer(contribname)
+    $.ajax({url: "../101repo/contributions/" + contribname + "/index.summary.json",
+        dataType: 'json',
+        success:  function(data) {
+          initFileExplorer(contribname, data)
+          initLanguageExplorer(contribname, data)
+        },
+        error: function(s) {
+          if (s.status == 404) 
+            $("#selectionview .viewinfo").append($("<b>").addClass("noSelInfo").text("Contribution " + contrib + " not found."))
+        }
+      });
   }
   /*console.log($html); // jQuery(title, <TextNode textContent="This is the body">)
   console.log($html.find("body")); // jQuery()

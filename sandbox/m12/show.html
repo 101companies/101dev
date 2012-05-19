@@ -8,8 +8,10 @@
 		<script type="text/javascript" src="./js/graphics.js"></script>
 		<script type="text/javascript" src="./js/navigation.js"></script>
 		<script type="text/javascript" src="./js/file-exploration.js"></script>
+		<script type="text/javascript" src="./js/language-exploration.js"></script>
 		<script type="text/javascript" src="./js/source-exploration.js"></script>
 		<script type="text/javascript" src="./js/init.js"></script>
+		<script type="text/javascript" src="./js/flotr2.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="./css/style.css">
 	</head>
 	<body>
@@ -17,19 +19,21 @@
 		<div id="top">
 			<!--div class="topview" id="graphicview">Graphical View<hr><div id="graphiccontent"></div></div-->
 			<div class="topview" id="selectionview">
-				<div class="viewinfo" id="selinfo">Selection of contribution components</div>
+				<div class="viewinfo" id="selinfo">Selection of contribution components and aspects</div>
 				<div class="subselectionview" id="fileview">
 					<div class="subviewinfo">Files</div><hr>
 					<div id="files"></div>
 				</div>
 				<div class="subselectionview" id="languageview">
 					<div class="subviewinfo">Languages</div><hr>
+					<div id="languages"></div>
+					<div id="langstats"></div>
 				</div>
 				<div class="subselectionview" id="technologyview">
 					<div class="subviewinfo">Technologies</div><hr>
 				</div>
 				<div class="subselectionview" id="fragmentview">
-					<div class="subviewinfo">Fragments</div><hr>
+					<div class="subviewinfo">Tags</div><hr>
 				</div>
 			</div>
 		</div>
