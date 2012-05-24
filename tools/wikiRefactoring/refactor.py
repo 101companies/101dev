@@ -4,7 +4,7 @@ from wikitools import wiki
 import page2
 import category2
 
-apiurl = "http://localhost/api.php"
+apiurl = "http://101companies.org/api.php"
 wiki101 = wiki.Wiki(apiurl)
 
 def dorename(titles, flags):
