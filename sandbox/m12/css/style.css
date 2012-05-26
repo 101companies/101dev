@@ -41,6 +41,8 @@ hr {
 	margin: 10px 0.25% 10px 0.25%;
 	height: 95%;
 	padding: 0px 0.0% 0px 0.0%;
+	padding-bottom: 15px;
+
 	text-shadow: 0 0px 10px #FFFFFF, 0 1px 1px #666666;
 	box-shadow: 0 0 10px 1px black,inset 0 0 10px 1px #888;
 }
@@ -137,18 +139,22 @@ rect {
 	font-family:  "Verdana", "Arial";
 	height: 82%;
 	font-size: 1px;
+	overflow: scroll;
 }
 
 
-#languages {
+.selcontent {
 	float:left;
 	margin-left: 10px;
 	font-family:  "Verdana", "Arial";
 	height: 82%;
 	font-size: small;
+	width: 97%;
+	overflow: scroll;
+
 }
 
-#languages b {
+.selcontent b {
 	border-radius: 4px;
 	padding: 1px;
 }
@@ -159,8 +165,32 @@ rect {
 	color: red;
 }
 
-#langstats {
-	margin-left: 60%;
+.stats {
+	margin-left: 50%;
 	margin-top: 0%;
 	height:40%;
+}
+
+
+/* some CSS for dhtmlxtree components */
+.selectedTreeRow ,.selectedTreeRow_lor{
+	background-color: #274779;
+	border-radius: 5px;
+	color: white;
+	box-shadow: 0 0 1px 1px ,inset 0 0 3px 0px #888;
+}
+
+.standartTreeRow_lor {
+	background-color: rgb(230,230,230);
+	border-radius: 5px;
+}
+
+.containerTableStyle {
+	overflow : auto;
+}
+
+.crossselection {
+	border-radius: 2px;
+	background-color: gray;
+	float: left;
 }
