@@ -31,7 +31,6 @@ var LangTechExplorer = function($, kind, domid) {
 
 	return {
 		init : function(contribname, data) {
-			alert(domid)
 			contrib = contribname
 			tree = new dhtmlXTreeObject(domid,"30%","30%",0)
 			tree.setImagePath("./imgs/")
