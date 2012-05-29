@@ -5,7 +5,7 @@ All you have to do to configure the tool for you wiki is to change the URL of th
 # Flags
 
 The overall set of possible flags is:
- * *dropchilds* - in case demotion is de
+ * *dropchilds* - in case of demotion drop category childs
  * *force* - overwrite possibly existing target of moving/promotion/demotion
  * *noredirect* - do not create any redirections for deleted pages
  * *removePrefix* - in case of promotion remove any title prefix 
