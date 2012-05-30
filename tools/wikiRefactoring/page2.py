@@ -122,4 +122,4 @@ class Page2(page.Page):
 				else:
 					raise AlreadyExists
 			self.rewriteReferences(self.getBacklinks(), mvto)		
-			page.Page.move(self, mvto, reason=reason, movetalk=movetalk, noredirect=noredirect, watch=watch, unwatch=unwatch)
+			page.Page.move(self, mvto, reason=reason, movetalk=movetalk, noredirect=True, watch=watch, unwatch=unwatch)
