@@ -47,7 +47,7 @@ class Category2(page2.Page2, category.Category):
 			raise page2.AlreadyExists
 		page.edit(text=self.getWikiText())	
 		self.rewriteReferences(self.getBacklinks() + self.getAllMembers(titleonly=True), title)
-		self.delete(reason=reason, watch=watch, unwatch=unwatch)
+		self.delete(reason=reason, watch=watch, unwatch=unwatch, noredirect=True)
 
 	def intermove(self, mvto, force=False, reason=False, movetalk=False, noredirect=False, watch=False, unwatch=False, dropchilds=False):
 		''' Move category by deleting and creating a new page or demote the category to a page.
@@ -63,7 +63,7 @@ class Category2(page2.Page2, category.Category):
 			mvtocat = Category2(self.site, title=mvto)
 			if mvtocat.exists:
 				if force:
-					mvtocat.delete()
+					mvtocat.delete(noredirect=True)
 				else:	
 					raise page2.AlreadyExists
 			mvtocat.edit(text=self.getWikiText())

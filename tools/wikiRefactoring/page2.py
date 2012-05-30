@@ -100,7 +100,7 @@ class Page2(page.Page):
 			raise AlreadyExists
 		cat.edit(text=self.getWikiText())	
 		self.rewriteReferences(self.getBacklinks(), title)
-		self.delete(reason=reason, watch=watch, unwatch=unwatch)
+		self.delete(reason=reason, watch=watch, unwatch=unwatch, noredirect=True)
 		return cat
 
 
@@ -118,7 +118,7 @@ class Page2(page.Page):
 			mvtopage = Page2(self.site, title=mvto)
 			if mvtopage.exists:
 				if force:
-					mvtopage.delete(reason=reason, watch=watch, unwatch=unwatch)
+					mvtopage.delete(reason=reason, watch=watch, unwatch=unwatch, noredirect=True)
 				else:
 					raise AlreadyExists
 			self.rewriteReferences(self.getBacklinks(), mvto)		
