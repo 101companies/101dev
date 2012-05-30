@@ -51,7 +51,7 @@ class Page2(page.Page):
 		toCat = nlink.startswith("Category:")
 		ntext = self.getWikiText()
 		offset = 0
-		for textm in re.finditer("(\[\[:?)" + re.escape(clink.replace(" ", "_")) + "(\|[^\[]+)?(\]\])", self.getWikiText().replace(" ", "_")):
+		for textm in re.finditer("(\[\[:?)(" + re.escape(clink.replace(" ", "_")) + ")(\|[^\[]+)?(\]\])", self.getWikiText().replace(" ", "_"), re.IGNORECASE):
 			if fromCat and not toCat and not textm.group(1).endswith(":"):
 				ntext = ntext[:textm.start() + offset] + ntext[textm.end() + offset:]
 				offset = offset - len(textm.group(0))
@@ -62,13 +62,16 @@ class Page2(page.Page):
 				openb = "[["
 			else:
 				openb = textm.group(1)
-			if nlinktext == "" and textm.group(2):
-				lt = textm.group(2)
+			if nlinktext == "" and textm.group(3) and nlink.count(":") == 0:
+				lt = textm.group(3)
 			elif nlinktext != "":
 				lt = "|" + nlinktext
 			else:
 				lt = ""
+			if textm.group(2)[0].islower() :
+				nlink = nlink[0].lower() + nlink[1:]
 			newlink = (openb + nlink + lt + "]]").replace("_"," ")
+
 			print "Replacing", textm.group(0), "by", newlink, "on", self.title
 			ntext = ntext[:textm.start() + offset] +  newlink + ntext[textm.end() + offset:]
 			offset =  offset + len(newlink) - len(textm.group(0))
