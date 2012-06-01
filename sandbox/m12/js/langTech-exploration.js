@@ -1,4 +1,4 @@
-var LangTechExplorer = function($, kind, domid) {
+var LangTechExplorer = function($, kind) {
 	var colorSchema = ['#00A8F0', '#C0D800', '#CB4B4B', '#4DA74D', '#9440ED']
 	var tree
 	var contrib
@@ -32,21 +32,28 @@ var LangTechExplorer = function($, kind, domid) {
 	return {
 		init : function(contribname, data) {
 			contrib = contribname
-			tree = new dhtmlXTreeObject(domid,"30%","30%",0)
+			tree = new dhtmlXTreeObject(kind + "tree","30%","30%",0)
 			tree.setImagePath("./imgs/")
 			tree.enableCheckBoxes(false)
 			tree.enableTreeImages(false)
 			tree.loadXML("filebase.xml")
 			tree.enableHighlighting(true)
-			$("#" + domid).css("overflow-y", "auto")
+			$(kind + "tree").css("overflow-y", "auto")
 			$(".containerTableStyle").css({width: "100%" , height:"100%"})
+			$("#" + kind + "view .tagger").bind("click", function() {
+				var id = tree.getSelectedItemId()
+				if (id) {
+					TagExplorer.showFileTags(contribname, id)
+				}
+			})
 			tree.attachEvent("onClick", function(id) {
 					tree.selectItem(id, false)
 					if (id.indexOf("l:") != 0) {
 						FileExplorer.selectFile(id)
-						SourceExplorer.showSource(id)
 						LanguageExplorer.selectFile(id)
 						TechnologyExplorer.selectFile(id)
+						SourceExplorer.showSource(id)
+						tree.clearSelection(id);
 					}
 					return true
 				})
@@ -57,11 +64,12 @@ var LangTechExplorer = function($, kind, domid) {
 						stats.push({data : [[0,data.ncloc]], label : x})
 						tree.insertNewChild(0, kind + ":" + x, "<b class=\"node\" style=\"background-color: " + colorSchema[i] +"\">" + x + "</b>")
 						$.each(data.allFiles, function(id, fn) {
-							tree.insertNewChild(kind + ":" + x, fn.path, "<div class=\"crossselection\"></div>" + id.split("/").pop())
+							tree.insertNewChild(kind + ":" + x, fn.path, id.split("/").pop())
 						})
 						i++
 					}
 				})
+				//$("#" + domid).append($("<div>").attr(domid + "stats"))
 				insertStat(stats)
 		},
 		selectFile : function(filepath) {

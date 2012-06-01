@@ -134,13 +134,7 @@ rect {
 	cursor: pointer;
 }
 
-#files {
-	margin-left: 10px;
-	font-family:  "Verdana", "Arial";
-	height: 82%;
-	font-size: 1px;
-	overflow: scroll;
-}
+
 
 
 .selcontent {
@@ -149,8 +143,8 @@ rect {
 	font-family:  "Verdana", "Arial";
 	height: 82%;
 	font-size: small;
-	width: 97%;
-	overflow: scroll;
+	width: 95%;
+	z-index: -1;
 
 }
 
@@ -166,6 +160,7 @@ rect {
 }
 
 .stats {
+	margin-right: 10%;
 	margin-left: 50%;
 	margin-top: 0%;
 	height:40%;
@@ -189,8 +184,28 @@ rect {
 	overflow : auto;
 }
 
-.crossselection {
+.crossselector, .tagger{
 	border-radius: 2px;
 	background-color: gray;
-	float: left;
+	float: right;
+	top: 0;
+	margin: 1% 2.5% 0 0;
+	padding: 3px;
+	font-size: 8px;
+	cursor: pointer;
+}
+
+a {
+	color: rgb(40,40,40);
+}
+
+.highlight {
+	background-color: rgb(190,190,140);
+}
+
+
+.jstree-leaf a .jstree-icon {
+	width: 0px;
+	background-image: url();
+	background-color: transparent;
 }

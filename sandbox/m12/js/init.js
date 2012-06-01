@@ -23,8 +23,9 @@ $(document).ready(function () {
         dataType: 'json',
         success:  function(data) {
           FileExplorer.init(contribname, data)
-          LanguageExplorer.init(contribname, data.allFiles.geshiLanguageDistribution)
+          LanguageExplorer.init(contribname, data.allFiles.languageDistribution)
           TechnologyExplorer.init(contribname, data.allFiles.technologyDistribution)
+          TagExplorer.init(contribname)
         },
         error: function(s) {
           if (s.status == 404) 

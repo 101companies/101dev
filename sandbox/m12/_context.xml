@@ -1,0 +1,6 @@
+<?xml version='1.0' ?>
+<menu id="0">
+		<item text="Red" id="edit_Red"/>	
+		<item text="Green" id="edit_Green"/>	
+		<item text="Blue" id="edit_Blue"/>	
+</menu>

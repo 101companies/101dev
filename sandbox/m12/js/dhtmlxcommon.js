@@ -1,4 +1,4 @@
-//v.3.0 build 110707
+//v.3.0 build 110713
 
 /*
 Copyright DHTMLX LTD. http://www.dhtmlx.com
@@ -49,7 +49,7 @@ dhtmlxEventable=function(a){a.attachEvent=function(a,c,d){a="ev_"+a.toLowerCase(
 g.innerHTML=b.text;g.className=b.type;a.defPosition=="bottom"&&a.area.firstChild?a.area.insertBefore(g,a.area.firstChild):a.area.appendChild(g);a.timers[b.id]=window.setTimeout(function(){a.hide(b.id)},b.lifetime);a.pull[b.id]=g;return b.id};a.defTimeout=4E3;a.defPosition="top";a.pull={};a.timers={};a.seed=(new Date).valueOf();a.uid=function(){return a.seed++};a.hideAll=function(){for(var b in a.pull)a.hide(b)};a.hide=function(b){var c=a.pull[b];c&&c.parentNode&&(c.parentNode.removeChild(c),window.clearTimeout(a.timers[b]),
 delete a.pull[b])}})();
 
-//v.3.0 build 110707
+//v.3.0 build 110713
 
 /*
 Copyright DHTMLX LTD. http://www.dhtmlx.com
