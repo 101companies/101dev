@@ -25,7 +25,7 @@ body {
 	height: 40%;
 	background-color: #274779;
 	box-shadow: 0 0 19px 1px black,inset 0 0 10px 1px #173060;
-	padding: 10px 1% 30px 1%;
+	padding: 10px 1% 40px 1%;
 }
 
 hr {
@@ -110,7 +110,7 @@ svg {
 
 #detailview {
 	width: 98%;
-	height: 47%;
+	height: 43%;
 	background-color: rgb(210,210,230);
 	padding: 10px 1% 30px 1%;
 	box-shadow: 0 0 19px 1px black,inset 0 0 10px 1px #888;
@@ -145,6 +145,7 @@ rect {
 	font-size: small;
 	width: 95%;
 	z-index: -1;
+	overflow: auto;
 
 }
 
@@ -208,4 +209,42 @@ a {
 	width: 0px;
 	background-image: url();
 	background-color: transparent;
+}
+
+.jstree-leaf a, .jstree-open a, .jstree-closed a {
+	font-weight: normal;
+}
+
+.jstree-default .jstree-clicked, .jstree-default .jstree-hovered {
+	border-radius: 2px;
+}
+
+.label > a {
+	font-weight: bold;
+	border-radius: 5px;
+}
+
+.color1 > a {
+	background-color: #00A8F0;
+}
+
+.color2 > a {
+	background-color: #C0D800;
+	
+}
+.color3 > a {
+	background-color: #CB4B4B;
+}
+
+.color4 > a {
+	background-color: #4DA74D;	
+}
+
+.color5 > a {
+	background-color: #9440ED;	
+}
+
+.label a .jstree-icon{
+	width: 0px;
+	background-image: url();
 }

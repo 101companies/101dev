@@ -1,6 +1,5 @@
 var LangTechExplorer = function($, kind) {
 	var colorSchema = ['#00A8F0', '#C0D800', '#CB4B4B', '#4DA74D', '#9440ED']
-	var tree
 	var contrib
 	var graph
 	var kind
@@ -32,52 +31,53 @@ var LangTechExplorer = function($, kind) {
 	return {
 		init : function(contribname, data) {
 			contrib = contribname
-			tree = new dhtmlXTreeObject(kind + "tree","30%","30%",0)
-			tree.setImagePath("./imgs/")
-			tree.enableCheckBoxes(false)
-			tree.enableTreeImages(false)
-			tree.loadXML("filebase.xml")
-			tree.enableHighlighting(true)
-			$(kind + "tree").css("overflow-y", "auto")
-			$(".containerTableStyle").css({width: "100%" , height:"100%"})
-			$("#" + kind + "view .tagger").bind("click", function() {
-				var id = tree.getSelectedItemId()
-				if (id) {
-					TagExplorer.showFileTags(contribname, id)
+			var treedata = []
+			var stats = []
+			var i = 0;
+			var langTechs = []
+			$.each(data, function(langTech, langTechdata) {
+				langTechs.push(("c:" + langTech).escape())
+				i++;
+				stats.push({data : [[0,langTechdata.ncloc]], label : langTech})
+				var node = {
+					data : langTech,
+					"attr" : { id : "c:" + langTech, class : "label " + "color" + i},
+					children : []
 				}
+				$.each(langTechdata.allFiles, function(f, fn){
+					node.children.push({
+						data : f.split("/").last(),
+						"attr" : { "id" : fn.path }
+					})
+				})
+				treedata.push(node)
 			})
-			tree.attachEvent("onClick", function(id) {
-					tree.selectItem(id, false)
-					if (id.indexOf("l:") != 0) {
-						FileExplorer.selectFile(id)
-						LanguageExplorer.selectFile(id)
-						TechnologyExplorer.selectFile(id)
-						SourceExplorer.showSource(id)
-						tree.clearSelection(id);
-					}
-					return true
+			$("#" + kind + "tree").jstree({
+				"json_data" : {data : treedata},
+				"plugins" : [ "themes", "json_data", "crrm" , "ui"]
+			}).bind("loaded.jstree", function(){
+				$.each(langTechs, function(i, lt){
+					$("#" + kind + "tree").jstree("open_node", $("#" + lt))
 				})
-				stats = []
-				i = 0
-				$.each(data, function(x, data) {
-					if (x) {
-						stats.push({data : [[0,data.ncloc]], label : x})
-						tree.insertNewChild(0, kind + ":" + x, "<b class=\"node\" style=\"background-color: " + colorSchema[i] +"\">" + x + "</b>")
-						$.each(data.allFiles, function(id, fn) {
-							tree.insertNewChild(kind + ":" + x, fn.path, id.split("/").pop())
-						})
-						i++
-					}
-				})
-				//$("#" + domid).append($("<div>").attr(domid + "stats"))
-				insertStat(stats)
+			}).bind("click.jstree", function(event,data){
+				var nodeid = $(event.target).closest("li").attr("id")
+				if (!nodeid.startswith("c:")) {
+					TagExplorer.selectFile(nodeid)
+					FileExplorer.selectFile(nodeid)
+					SourceExplorer.showSource(nodeid)
+					LanguageExplorer.selectFile(nodeid)
+					TechnologyExplorer.selectFile(nodeid)
+				} else {
+					window.location = "http://www.101companies.org/index.php/" + kind.ucfirst() + ":" + nodeid.replace("c:", "")
+				}
+			})	
+			insertStat(stats)
 		},
 		selectFile : function(filepath) {
-			tree.focusItem(filepath)
-			tree.selectItem(filepath)
+			$("#" + kind + "tree").jstree("deselect_all").jstree("select_node","#" + filepath.escape());
 		}
 	}
 }
 
-var LanguageExplorer = LangTechExplorer(jQuery, "language", "languages")
-var TechnologyExplorer = LangTechExplorer(jQuery, "technology", "technologies")
+var LanguageExplorer = LangTechExplorer(jQuery, "language")
+var TechnologyExplorer = LangTechExplorer(jQuery, "technology")

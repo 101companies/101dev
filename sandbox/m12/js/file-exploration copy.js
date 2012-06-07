@@ -18,15 +18,16 @@ var FileExplorer = function($) {
 	}
 
 	var fillDir = function(id, files, dirs) {
+		tree.deleteChildItems(id)
 		$.each(files, function(i, fn) {
-			 $("#files").jstree("create", $("#" + id), "inside",  { "data" : i , "attr" : { "id" : fn.path }}, null, true);
+			tree.insertNewChild(id, fn.path, i)
 		})
 		$.each(dirs, function(j, fn) {
 			if (fn.path) {
-				$("#files").jstree("create", $("#" + id), "inside",  { "data" : j , "attr" : { "id" : j }}, function() {
-						$("#files").jstree("create", $("#" + j), "inside",  "initially_open" : [], { "data" : "Loading directory content..." , "attr" : { "id" : fn.path }}, null, true);
-					}, true
-				);
+				tree.insertNewChild(id, fn.path, j)
+				tree._hAdI = true;
+				tree.insertNewChild(fn.path, "temp", "Loading directory content...")
+				tree._hAdI = false;
 			}
 		})
 	}
@@ -36,22 +37,28 @@ var FileExplorer = function($) {
 
 		init : function(contribname, summary) {
 			contrib = contribname
-			$("#files").jstree({
-				"json_data" : { "data" : [
-                    { 
-                        "data" : contribname, 
-                        "attr" : { "id" : "root" },
-                        "children" : [ ]
-
-                    },
-                ]},
-				"plugins" : [ "themes", "json_data", "crrm" , "ui"]
-			}).bind("loaded.jstree", function(){
-				fillDir("root", summary.directFiles.directFiles, summary.directSubdirectories)	
+			tree = new dhtmlXTreeObject("files","30%","30%",0);
+			tree.setImagePath("./imgs/")
+			tree.loadXML("filebase.xml")
+			tree.enableHighlighting(true)
+			tree.insertNewChild(0,"/",contrib)
+			$("#files").css("overflow-y", "auto")
+			$(".containerTableStyle").css({width: "100%" , height:"100%"})
+			tree.attachEvent("onClick", function(id) {
+				if (id.substr(-1) !== "/") {
+					LanguageExplorer.selectFile(id)
+					TechnologyExplorer.selectFile(id)
+					SourceExplorer.showSource(id)
+				}
+				return true
 			})
-
-			
-			
+			tree.attachEvent("onDblClick", function() {return false})
+			tree.attachEvent("onOpenStart", function(id,state){
+				if (state < 0)
+					loadDir(id)
+				return true
+			});
+			fillDir("/", summary.directFiles.directFiles, summary.directSubdirectories)
 		},
 
 		selectFile : function(filepath) {
@@ -63,8 +70,8 @@ var FileExplorer = function($) {
 					loadDir(x)
 			})
 			loadDir(last,function() {tree.focusItem(filepath); tree.selectItem(filepath)})
-			//tree.focusItem(filepath)
-			//tree.selectItem(filepath)
+			tree.focusItem(filepath)
+			tree.selectItem(filepath)
 			
 		}
 	}

@@ -1,5 +1,4 @@
 var FileExplorer = function($) {
-	var tree
 	var contrib
 	var loadedDirs = []
 
@@ -18,16 +17,14 @@ var FileExplorer = function($) {
 	}
 
 	var fillDir = function(id, files, dirs) {
-		tree.deleteChildItems(id)
 		$.each(files, function(i, fn) {
-			tree.insertNewChild(id, fn.path, i)
+			 $("#files").jstree("create", $("#" + id.escape()), "inside",  { "data" : i , "attr" : { "id" : fn.path , "class" : "filenode" }}, null, true);
 		})
 		$.each(dirs, function(j, fn) {
 			if (fn.path) {
-				tree.insertNewChild(id, fn.path, j)
-				tree._hAdI = true;
-				tree.insertNewChild(fn.path, "temp", "Loading directory content...")
-				tree._hAdI = false;
+				$("#files").jstree("create", $("#" + id.escape()), "inside",  { "data" : j,  "attr" : { "id" : fn.path + "/"}, "state" : "closed", "children" : [ { "data" : "Loading directory content..." , "attr" : { "id" : fn.path + "dummy"}}]}, function(e) {
+					}, true
+				);
 			}
 		})
 	}
@@ -37,42 +34,47 @@ var FileExplorer = function($) {
 
 		init : function(contribname, summary) {
 			contrib = contribname
-			tree = new dhtmlXTreeObject("files","30%","30%",0);
-			tree.setImagePath("./imgs/")
-			tree.loadXML("filebase.xml")
-			tree.enableHighlighting(true)
-			tree.insertNewChild(0,"/",contrib)
-			$("#files").css("overflow-y", "auto")
-			$(".containerTableStyle").css({width: "100%" , height:"100%"})
-			tree.attachEvent("onClick", function(id) {
-				if (id.substr(-1) !== "/") {
-					LanguageExplorer.selectFile(id)
-					TechnologyExplorer.selectFile(id)
-					SourceExplorer.showSource(id)
+			$("#files").jstree({
+				"json_data" : { "data" : [
+					{ 
+						"data" : contribname, 
+						"attr" : { "id" : "root" },
+						"children" : []
+					},
+				]},
+				"plugins" : [ "themes", "json_data", "crrm" , "ui"]
+			}).bind("loaded.jstree", function(){
+				fillDir("root", summary.directFiles.directFiles, summary.directSubdirectories)	
+				$("#files").bind("open_node.jstree", function(event, data){
+					var node = data.args[0][0]
+					if (node && node.id != "root") {
+						loadDir(node.id)
+					}
+				})
+			}).bind("click.jstree", function(event,data){
+				var nodeid = $(event.target).closest("li").attr("id")
+				if (!nodeid.endswith("/") && nodeid != "root") {
+					SourceExplorer.showSource(nodeid)
+					LanguageExplorer.selectFile(nodeid)
+					TechnologyExplorer.selectFile(nodeid)
 				}
-				return true
-			})
-			tree.attachEvent("onDblClick", function() {return false})
-			tree.attachEvent("onOpenStart", function(id,state){
-				if (state < 0)
-					loadDir(id)
-				return true
-			});
-			fillDir("/", summary.directFiles.directFiles, summary.directSubdirectories)
+			})	
 		},
 
 		selectFile : function(filepath) {
-			pwds = []
+			var pwds = []
 			filepath.split("/").reduce(function(agg, x, i) {return pwds[i] = agg + "/" + x})
 			pwds.pop()
-			last = pwds.pop()
-			$.each(pwds.splice(3), function(i,x) {
-					loadDir(x)
-			})
-			loadDir(last,function() {tree.focusItem(filepath); tree.selectItem(filepath)})
-			tree.focusItem(filepath)
-			tree.selectItem(filepath)
-			
+			var last = pwds.pop()
+			if (pwds.length > 3) {
+				$.each(pwds.splice(3), function(i,x) {
+						loadDir(x + "/")
+				})
+				loadDir(last + "/",function() {
+					$("#files").jstree("deselect_all").jstree("select_node","#" + filepath.escape());
+				})
+			}
+			$("#files").jstree("deselect_all").jstree("select_node","#" + filepath.escape());
 		}
 	}
 
