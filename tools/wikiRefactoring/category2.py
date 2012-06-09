@@ -68,5 +68,5 @@ class Category2(page2.Page2, category.Category):
 					raise page2.AlreadyExists
 			mvtocat.edit(text=self.getWikiText())
 			self.rewriteReferences(self.getBacklinks() + self.getAllMembers(titleonly=True), mvto)
-			self.delete(reason=reason, watch=watch, unwatch=unwatch, noredirect=True)
+			self.delete(reason=reason, watch=watch, unwatch=unwatch)
 
