@@ -3,7 +3,8 @@ var TagExplorer = function($) {
 	var fdata
 
 	return {
-		init : function(contribname) {
+		init : function(contribname,data) {
+			alert(data)
 			contrib = contribname
 			$.ajax({url: "../101repo/contributions/" + contribname + "/index.fragments.json",
 	        	dataType: 'json',

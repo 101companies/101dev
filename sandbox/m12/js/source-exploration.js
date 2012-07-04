@@ -12,7 +12,7 @@ var SourceExplorer = function($) {
 				currentSource = path
 				$("#detailcontent").
 					html("Loading source code...").
-					load("../101repo" + path + ".html", function() {if (callback) callback()})
+					load("../" + path + ".geshi.html", function() {if (callback) callback()})
 			} else {
 				if (callback)
 					callback()

@@ -10,40 +10,70 @@
 		<script type="text/javascript" src="./js/graphics.js"></script>
 		<script type="text/javascript" src="./js/navigation.js"></script>
 		<script type="text/javascript" src="./js/file-exploration.js"></script>
-		<script type="text/javascript" src="./js/langTech-exploration.js"></script>
-		<script type="text/javascript" src="./js/tag-exploration.js"></script>
+		<script type="text/javascript" src="./js/cat-exploration.js"></script>
+		<!--script type="text/javascript" src="./js/tag-exploration.js"></script-->
 		<script type="text/javascript" src="./js/source-exploration.js"></script>
 		<script type="text/javascript" src="./js/init.js"></script>
 		<script type="text/javascript" src="./js/flotr2.min.js"></script>
+		<script type="text/javascript" src="./js/jquery.dropkick-1.0.0.js"></script>
 		<link rel="stylesheet" type="text/css" href="./css/style.css">
+		<link rel="stylesheet" type="text/css" href="./css/dropkick.css">
+		<link rel="stylesheet" type="text/css" href="./css/blank_theme.css">
 	</head>
 	<body>
 	</body>
 		<div id="top">
 			<!--div class="topview" id="graphicview">Graphical View<hr><div id="graphiccontent"></div></div-->
 			<div class="topview" id="selectionview">
-				<div class="viewinfo" id="selinfo">Selection of contribution components and aspects</div>
+				<div id="topinfo">
+					<div class="viewinfo" id="selinfo"><div id="pathselection"></div></div>
+				</div>
 				<div class="subselectionview" id="fileview">
 					<div class="subviewinfo">Files
 					</div><hr>
 					<div class="selcontent" id="files"></div>
 				</div>
 				<div class="subselectionview" id="languageview">
-					<div class="subviewinfo">Languages
+					<div class="subviewinfo">
+						<select id="sel1" name="sel1" class="default" tabindex="2">
+							<option value="concepts">Concepts</option>
+							<option value="features">Features</option>
+	      					<option value="languages">Languages</option>
+					      	<option value="technologies">Technologies</option>
+					      	<option value="terms">Terms</option>
+					      	<option value="phrases">Phrases</option>
+					    </select>
 					</div><hr>
-					<div class="selcontent" id="languagetree"></div>
+					<div class="selcontent" id="sel1tree"></div>
 					
 					<div class="stats" id="languagestats"></div>
 				</div>
 				<div class="subselectionview" id="technologyview">
-					<div class="subviewinfo">Technologies
+					<div class="subviewinfo">
+						<select id="sel2" name="sel2" class="default" tabindex="2">
+							<option value="concepts">Concepts</option>
+							<option value="features">Features</option>
+	      					<option value="languags">Languages</option>
+					      	<option value="technologies">Technologies</option>
+					      	<option value="terms">Terms</option>
+					      	<option value="phrases">Phrases</option>
+					    </select>
 					</div><hr>
-					<div class="selcontent" id="technologytree"></div>
+					<div class="selcontent" id="sel2tree"></div>
 					<div class="stats" id="technologystats"></div>
 				</div>
 				<div class="subselectionview" id="tagview">
-					<div class="subviewinfo">Tags</div><hr>
-					<div class="selcontent" id="tagtree"></div>
+					<div class="subviewinfo">
+						<select id="sel3" name="sel3" class="default" tabindex="2">
+							<option value="concepts">Concepts</option>
+							<option value="features">Features</option>
+	      					<option value="languages">Languages</option>
+					      	<option value="technologies">Technologies</option>
+					      	<option value="terms">Terms</option>
+					      	<option value="phrases">Phrases</option>
+					    </select>
+					</div><hr>
+					<div class="selcontent" id="sel3tree"></div>
 				</div>
 			</div>
 		</div>

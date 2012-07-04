@@ -34,27 +34,34 @@ $(document).ready(function () {
 		loadAreas(artefactname)
 		
 	}*/
-	contribname = window.location.search.replace("?","")
+	path = window.location.search.replace("?","")
 	$("#selectionview").children().each(function(i){
 		if (i > 0) $(this).width((100 / ($(this).parent().children().size() - 1) - 0.5) + "%")
 	})
-	if (contribname == "") {
-		$("#selectionview .viewinfo").append($("<b>").addClass("noSelInfo").text("No contribution selected"))
+	$("#path").text(path)
+	if (false && path == "") {
+		//$("#selectionview .viewinfo").append($("<b>").addClass("noSelInfo").text("No contribution selected"))
 	} else {
-		$.ajax({url: "../101repo/contributions/" + contribname + "/index.summary.json",
+		$.ajax({url: "../" + path + "/index.json",
 				dataType: 'json',
 				success:  function(data) {
-					FileExplorer.init(contribname, data)
-					LanguageExplorer.init(contribname, data.allFiles.languageDistribution)
-					TechnologyExplorer.init(contribname, data.allFiles.technologyDistribution)
-					TagExplorer.init(contribname)
+					FileExplorer.init(path, data)
+					$('.default').dropkick({change : function(value, label){
+						CExplorers[this.attr("name")].populate(path,data,value)
+					}});
+					CExplorers["sel1"].populate(path,data,"languages")
+					CExplorers["sel2"].populate(path,data,"technologies")
+					CExplorers["sel3"].populate(path,data,"terms")
 				},
 				error: function(s) {
 					if (s.status == 404) 
-						$("#selectionview .viewinfo").append($("<b>").addClass("noSelInfo").text("Contribution " + contrib + " not found."))
+						$("#selectionview .viewinfo").append($("<b>").addClass("noSelInfo").text("" + path + " not found."))
 				}
 			});
 	}
+	$("#sel1").val("languages")
+	$("#sel2").val("technologies")
+	$("#sel3").val("terms")
 	/*tree.setImagePath("./imgs/");
 	tree.enableCheckBoxes(false);
 	tree.enableTreeImages(false);
@@ -63,4 +70,6 @@ $(document).ready(function () {
 	tree.attachEvent("onOpenStart", function(id,state){if (state < 0) {tree.insertNewChild(id,id+100,"New Node 2",0,0,0,0,"")};return true});
 	//$("body").click(function(){(tree.insertNewChild(1,4,"New Node 2",0,0,0,0,""))});*/
 });
-
+$(document).ready(function(){
+	//$('.sel1').dropkick();
+});

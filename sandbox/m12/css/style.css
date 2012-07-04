@@ -4,6 +4,14 @@ body {
 	background-color: #AEC0DD;
 }
 
+li {
+	list-style: none;
+}
+
+#dk_options_inner {
+	padding-left: 0px;
+}
+
 .topview {
 	width: 98%;
 	border-radius: 7px;
@@ -62,6 +70,7 @@ hr {
 	font-family:  "Verdana", "Arial";
 	margin: 5px 0px 0px 10px;
 	color: #274779;
+	height: 30px;
 }
 
 #graphiccontent {
@@ -152,6 +161,17 @@ rect {
 .selcontent b {
 	border-radius: 4px;
 	padding: 1px;
+}
+
+#pathselection {
+	height: 17px;
+	margin-left: 10px;
+	margin-top: -5px;
+	margin-bottom: 0px;
+}
+
+#pathselection a {
+	color:  white;
 }
 
 .noSelInfo {
