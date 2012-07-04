@@ -69,8 +69,9 @@ var CategoryExplorer = function($,sel) {
 						e.selectFile(nodeid)
 					})
 				} else {
-					if (nodeid)
+					if (nodeid) {
 						window.location = "http://www.101companies.org/index.php/" + kind2Prefix[selection] + nodeid.replace("c:", "")
+					}
 				}
 			})	
 			$("#" + sel + "tree").jstree("close_all", -1);
