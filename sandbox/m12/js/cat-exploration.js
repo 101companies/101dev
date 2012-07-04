@@ -58,7 +58,7 @@ var CategoryExplorer = function($,sel) {
 			})
 			$("#" + sel + "tree").jstree({
 				"json_data" : {data : treedata},
-				"plugins" : [ "themes", "json_data", "crrm" , "ui"],
+				"plugins" : [ "themes", "json_data", "crrm" , "ui","sort"],
 				 "initially_open" : []
 			}).bind("click.jstree", function(event,data){	
 				var nodeid = $("#" + sel + "tree").jstree('get_selected').attr("id")

@@ -17,10 +17,10 @@ var FileExplorer = function($) {
 	}
 
 	var fillDir = function(id, files, dirs) {
-		$.each(files, function(i, fn) {
+		$.each(files.sort().reverse(), function(i, fn) {
 			 $("#files").jstree("create", $("#" + id.escape()), "inside",  { "data" : fn , "attr" : { "id" :  id + fn , "class" : "filenode" }}, null, true);
 		})
-		$.each(dirs, function(j, fn) {
+		$.each(dirs.sort().reverse(), function(j, fn) {
 			if (fn) {
 				$("#files").jstree("create", $("#" + id.escape()), "inside",  { "data" : fn,  "attr" : { "id" : id + fn + "/"}, "state" : "closed", "children" : [ { "data" : "Loading directory content..." , "attr" : { "id" : fn + "dummy"}}]}, function(e) {
 					}, true
