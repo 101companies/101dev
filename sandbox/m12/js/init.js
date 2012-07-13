@@ -42,6 +42,7 @@ $(document).ready(function () {
 	if (false && path == "") {
 		//$("#selectionview .viewinfo").append($("<b>").addClass("noSelInfo").text("No contribution selected"))
 	} else {
+		document.title = path.split("/")[1]
 		$.ajax({url: "../" + path + "/index.json",
 				dataType: 'json',
 				success:  function(data) {
