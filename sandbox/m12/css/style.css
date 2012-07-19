@@ -163,6 +163,11 @@ rect {
 	padding: 1px;
 }
 
+.selcontent img {
+	margin-top: 100px;
+	margin-left: 100px;
+}
+
 #pathselection {
 	height: 17px;
 	margin-left: 10px;
