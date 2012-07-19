@@ -3,7 +3,7 @@ var FileExplorer = function($) {
 	var loadedDirs = []
 
 	var loadDir = function(id, callback) {
-		if (id != "/" & loadedDirs.indexOf(id) == -1) {
+		if (id != "/" && loadedDirs.indexOf(id) == -1) {
 			$.ajax({url: "../" + path + "/" + id + "index.json",
 					dataType: 'json',
 					success : function(data) {
@@ -13,7 +13,8 @@ var FileExplorer = function($) {
 							callback()
 					}
 			})
-		}
+		} else if (callback)
+				callback()
 	}
 
 	var fillDir = function(id, files, dirs) {
@@ -86,17 +87,19 @@ var FileExplorer = function($) {
 			var pwds = []
 			filepath.split("/").reduce(function(agg, x, i) {return pwds[i] = agg + "/" + x},"")
 			pwds.pop()
-			var last = pwds.pop()
-			//alert(pwds.length)
-			if (pwds && last) {
-				$.each(pwds, function(i,x) {
-						loadDir(x + "/")
-				})
-				loadDir(last + "/",function() {
-					$("#files").jstree("deselect_all").jstree("select_node","#" + ("/" + filepath).escape());
+			if (pwds.first()){
+				loadDir(pwds.first() + "/", function lambda(){
+					pwds = pwds.splice(1)
+					if(pwds.length > 0) {
+						loadDir(pwds.first() + "/", lambda)
+					}
+					else 
+						$("#files").jstree("deselect_all").jstree("select_node","#" + ("/" + filepath).escape());
 				})
 			}
-			$("#files").jstree("deselect_all").jstree("select_node","#" + ("/" + filepath).escape());
+			else {
+				$("#files").jstree("deselect_all").jstree("select_node","#" + ("/" + filepath).escape());
+			}
 		}
 	}
 
