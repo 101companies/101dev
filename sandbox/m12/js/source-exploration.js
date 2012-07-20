@@ -1,13 +1,24 @@
 var SourceExplorer = function($) {
 	var currentSource = ""
 
+
+	var setInfoText = function(text) {
+		$("#detailview .viewinfo").text(text)
+	}
+
 	return {
 		init : function() {
 			$('#detailcontent').bind("click",(function(s){console.log(s)}))
 			$("#files").css("overflow-y", "auto")
 		},
 
+		showPage: function(url) {
+			setInfoText("Wiki view")
+			$("#detailcontent").html($("<iframe>").attr({src : url}))
+		},
+
 		showSource: function(path,callback) {
+			setInfoText("Source view")
 			if (path != currentSource) {
 				currentSource = path
 				$("#detailcontent").
@@ -20,6 +31,7 @@ var SourceExplorer = function($) {
 		},
 
 		showSourceAndHighlight : function(path, ranges) {
+			console.log(ranges)
 			$("#detailcontent pre .li1").removeClass("highlight")
 			this.showSource(path, function() {
 				baseid = $("#detailcontent pre").attr("id")
@@ -29,7 +41,7 @@ var SourceExplorer = function($) {
 						$("#" + baseid + "-" + i).addClass("highlight")
 						i++
 					}
-					$("#detailcontent").animate({scrollTop: ($("#" + baseid + "-" + range.from).offset().top - $("#" + baseid + "-1").offset().top)}, 200)
+					//$("#detailcontent").animate({scrollTop: ($("#" + baseid + "-" + range.from).offset().top - $("#" + baseid + "-1").offset().top)}, 200)
 				})
 			})
 		}
