@@ -7,7 +7,7 @@ var SourceExplorer = function($) {
 	}
 
 	var highlightSource = function(meta) {
-		$("#detailcontent pre .li1").removeClass("highlight")
+		$("#detailcontent pre ol li").removeClass("highlight")
 		if (meta && meta[0].lines) {
 			baseid = $("#detailcontent pre").attr("id")
 			var i = meta[0].lines.from
