@@ -1,0 +1,21 @@
+#tooltip {
+	position: absolute;
+	z-index: 3000;
+	border: 1px solid;
+	border-color: transparent;
+	background-color: #AEC0DD;
+	padding: 5px;
+	opacity: 0.75;
+	border-radius: 3px;
+	box-shadow: 0 0 3px 1px black;
+}
+
+#tooltip .first {
+	color: red;
+}
+
+#tooltip .second {
+	color: green;
+}
+
+#tooltip h3, #tooltip div { margin: 0; }

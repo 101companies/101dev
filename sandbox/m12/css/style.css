@@ -62,6 +62,8 @@ hr {
 }
 
 #selinfo {
+	margin-top: 5px;
+	margin-bottom: 5px;
 	color: white;
 	width: 100%	;
 }
@@ -119,10 +121,17 @@ svg {
 
 #detailview {
 	width: 98%;
-	height: 43%;
+	height: 45%;
 	background-color: rgb(210,210,230);
 	padding: 10px 1% 30px 1%;
 	box-shadow: 0 0 19px 1px black,inset 0 0 10px 1px #888;
+	y-overflow: hidden;
+}
+
+#detailcontent iframe {
+	width: 90%;
+	height: 90%;
+
 }
 
 

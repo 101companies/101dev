@@ -12,6 +12,7 @@
 		<script type="text/javascript" src="./js/file-exploration.js"></script>
 		<script type="text/javascript" src="./js/cat-exploration.js"></script>
 		<!--script type="text/javascript" src="./js/tag-exploration.js"></script-->
+		<script type="text/javascript" src="./js/jquery.tooltip.min.js"></script>
 		<script type="text/javascript" src="./js/source-exploration.js"></script>
 		<script type="text/javascript" src="./js/init.js"></script>
 		<script type="text/javascript" src="./js/flotr2.min.js"></script>
@@ -19,9 +20,9 @@
 		<link rel="stylesheet" type="text/css" href="./css/style.css">
 		<link rel="stylesheet" type="text/css" href="./css/dropkick.css">
 		<link rel="stylesheet" type="text/css" href="./css/blank_theme.css">
+		<link rel="stylesheet" type="text/css" href="./css/jquery.tooltip.css" />
 	</head>
 	<body>
-	</body>
 		<div id="top">
 			<!--div class="topview" id="graphicview">Graphical View<hr><div id="graphiccontent"></div></div-->
 			<div class="topview" id="selectionview">
@@ -75,7 +76,9 @@
 			</div>
 		</div>
 		<div class="topview" id="detailview">
-			<div class="viewinfo">Source View</div><hr>
+			<div class="viewinfo">Details View</div><hr>
 			<div id="detailcontent"></div>
 		</div>
+		<div id="tooltip" style="display: none; top: 183px; left: 86px; right: auto; " class="viewport-bottom"><h3 style="display: none; "></h3><div class="body"><img src="http://jquery.bassistance.de/tooltip/demo/image.png"></div><div class="url" style="display: none; "></div></div>
+	</body>
 </html>

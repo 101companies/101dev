@@ -40,18 +40,19 @@ var CategoryExplorer = function($,sel) {
 			var i = 0;
 			var cats = []
 			$.each(data, function(cat, catdata) {
+				console.log(cat)
 				cats.push(("c:" + cat).escape())
 				stats.push({data : [[0,catdata.metrics.ncloc]], label : cat})
 				var node = {
 					data : cat,
-					"attr" : { id : "c:" + cat, class : "label " + "color" + i},
+					"attr" : { id : "c:" + cat, class : "cat label " + "color" + i},
 					children : [],
 					"initially_open" : []
 				}
 				$.each(catdata.files, function(f, fn){
 					node.children.push({
 						data : f.split("/").last(),
-						"attr" : { "id" : contribname + "/" +  f }
+						"attr" : { "id" : contribname + "/" + f, class : cat + "leaf"},
 					})
 				})
 				treedata.push(node)
@@ -60,22 +61,44 @@ var CategoryExplorer = function($,sel) {
 				"json_data" : {data : treedata},
 				"plugins" : [ "themes", "json_data", "crrm" , "ui","sort"],
 				 "initially_open" : []
-			}).bind("click.jstree", function(event,data){	
-				var nodeid = $("#" + sel + "tree").jstree('get_selected').attr("id")
+			}).bind("click.jstree", function(event,edata){	
+				var nodeid = $("#" + sel + "tree").jstree('get_selected').attr("id")				
 				if (nodeid && !nodeid.startswith("c:")) {
-					FileExplorer.selectFile(nodeid)
-					SourceExplorer.showSource(nodeid)
+					var cat = $("#" + sel + "tree").jstree('get_selected').closest(".cat").attr("id").split(":")[1]
+					metadata = fdata[selection][cat]['files'][nodeid.replace(contribname + "/","")]
+					if (metadata[1])
+						SourceExplorer.showSourceAndHighlight(nodeid,[metadata[1]['lines']])
+					else
+						SourceExplorer.showSource(nodeid)
+					FileExplorer.selectFile(nodeid)					
+					console.log(nodeid)
 					$.each(CExplorers, function(s,e){
 						e.selectFile(nodeid)
 					})
 				} else {
 					if (nodeid) {
-						window.location = "http://www.101companies.org/index.php/" + kind2Prefix[selection] + nodeid.replace("c:", "")
+						var url = "http://www.101companies.org/index.php/" + kind2Prefix[selection] + nodeid.replace("c:", "")
+						SourceExplorer.showPage(url)
 					}
 				}
-			})	
-			$("#" + sel + "tree").jstree("close_all", -1);
-			//insertStat(stats)
+			}).bind("loaded.jstree",function() {
+				$("#" + sel + "tree .jstree-closed").each(function(i,element){
+					if (element.id) {
+						var cat = element.id.replace("c:","")
+						$("." + cat + "leaf").each(function(j,element2){
+							$(this).tooltip({
+								track : true,
+								delay: 0,
+								showURL: false,
+								bodyHandler: function() {
+									return ('This is <b class="first">' + this.id.split("/").last() + '</b> in <b class="second">' + cat + '</b>');
+								}
+							});
+						})
+					}
+				});
+				$("#" + sel + "tree").jstree("close_all", -1);
+			})
 		},
 		selectFile : function(filepath) {
 			$("#" + sel + "tree").jstree("deselect_all").jstree("select_node","#" + filepath.escape());
