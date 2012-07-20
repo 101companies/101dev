@@ -17,24 +17,32 @@ var SourceExplorer = function($) {
 			$("#detailcontent").html($("<iframe>").attr({src : url}))
 		},
 
-		showSource: function(path,callback) {
+		showSource: function(path,meta) {
+			
+
 			setInfoText("Source view")
 			if (path != currentSource) {
 				currentSource = path
 				$("#detailcontent").
 					html("Loading source code...").
-					load("../" + path + ".geshi.html", function() {if (callback) callback()})
-			} else {
-				if (callback)
-					callback()
-			}
+					load("../" + path + ".geshi.html", function() {
+						if (meta && meta[0].lines) {
+							baseid = $("#detailcontent pre").attr("id")
+							var i = meta[0].lines.from
+							while (i <= meta[0].lines.to) {
+								$("#" + baseid + "-" + i).addClass("highlight")
+								i++
+							}
+						}
+					})
+			} 
 		},
 
 		showSourceAndHighlight : function(path, ranges) {
-			console.log(ranges)
 			$("#detailcontent pre .li1").removeClass("highlight")
 			this.showSource(path, function() {
 				baseid = $("#detailcontent pre").attr("id")
+				alert(baseid)
 				$.each(ranges, function(i, range) {
 					var i = range.from
 					while (i <= range.to) {

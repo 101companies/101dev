@@ -40,7 +40,6 @@ var CategoryExplorer = function($,sel) {
 			var i = 0;
 			var cats = []
 			$.each(data, function(cat, catdata) {
-				console.log(cat)
 				cats.push(("c:" + cat).escape())
 				stats.push({data : [[0,catdata.metrics.ncloc]], label : cat})
 				var node = {
@@ -65,13 +64,9 @@ var CategoryExplorer = function($,sel) {
 				var nodeid = $("#" + sel + "tree").jstree('get_selected').attr("id")				
 				if (nodeid && !nodeid.startswith("c:")) {
 					var cat = $("#" + sel + "tree").jstree('get_selected').closest(".cat").attr("id").split(":")[1]
-					metadata = fdata[selection][cat]['files'][nodeid.replace(contribname + "/","")]
-					if (metadata[1])
-						SourceExplorer.showSourceAndHighlight(nodeid,[metadata[1]['lines']])
-					else
-						SourceExplorer.showSource(nodeid)
+					meta = fdata[selection][cat]['files'][nodeid.replace(contribname + "/","")]
+					SourceExplorer.showSource(nodeid,meta)
 					FileExplorer.selectFile(nodeid)					
-					console.log(nodeid)
 					$.each(CExplorers, function(s,e){
 						e.selectFile(nodeid)
 					})
@@ -97,7 +92,6 @@ var CategoryExplorer = function($,sel) {
 						})
 					}
 				});
-				$("#" + sel + "tree").jstree("close_all", -1);
 			})
 		},
 		selectFile : function(filepath) {
