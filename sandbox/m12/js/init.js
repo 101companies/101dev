@@ -25,6 +25,7 @@ Array.prototype.last = function() {
 
 
 $(document).ready(function () {
+
 	/*var artefactname = window.location.search.replace("?","")
 	if (!artefactname) 
 		$("#graphicview").append($("<strong>").html("<br/>No artefact name given in URL"))
@@ -51,7 +52,7 @@ $(document).ready(function () {
 			document.title = splitp[1]
 		else
 			document.title = splitp[0]
-		$.ajax({url: "../" + path + "/index.json",
+		$.ajax({url: "../data/resources/" + path + "/index.json",
 				dataType: 'json',
 				success:  function(data) {
 					FileExplorer.init(path, data)
@@ -71,14 +72,5 @@ $(document).ready(function () {
 	$("#sel1").val("languages")
 	$("#sel2").val("technologies")
 	$("#sel3").val("terms")
-	/*tree.setImagePath("./imgs/");
-	tree.enableCheckBoxes(false);
-	tree.enableTreeImages(false);
-	tree.loadXML("foo.xml");
-	tree._hAdI = true;
-	tree.attachEvent("onOpenStart", function(id,state){if (state < 0) {tree.insertNewChild(id,id+100,"New Node 2",0,0,0,0,"")};return true});
-	//$("body").click(function(){(tree.insertNewChild(1,4,"New Node 2",0,0,0,0,""))});*/
-});
-$(document).ready(function(){
-	//$('.sel1').dropkick();
+
 });

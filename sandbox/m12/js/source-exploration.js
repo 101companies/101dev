@@ -37,7 +37,7 @@ var SourceExplorer = function($) {
 				currentSource = path
 				$("#detailcontent").
 					html("Loading source code...").
-					load("../" + path + ".geshi.html", function() {
+					load("../data/resources/" + path + ".geshi.html", function() {
 						highlightSource(meta)
 					})
 			} else {
