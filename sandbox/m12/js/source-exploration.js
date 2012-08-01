@@ -37,7 +37,7 @@ var SourceExplorer = function($) {
 				currentSource = path
 				$("#detailcontent").
 					html("Loading source code...").
-					load("../data/resources/" + path + ".geshi.html", function() {
+					load("http://black42.uni-koblenz.de/production/101worker/data/resources/" + path + ".geshi.html", function() {
 						highlightSource(meta)
 					})
 			} else {
