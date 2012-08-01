@@ -52,7 +52,7 @@ $(document).ready(function () {
 			document.title = splitp[1]
 		else
 			document.title = splitp[0]
-		$.ajax({url: "http://black42.uni-koblenz.de/production/101worker/data/resources/" + path + "/index.json",
+		$.ajax({url: "http://data.101companies.org/resources/" + path + "/index.json",
 				dataType: 'json',
 				success:  function(data) {
 					FileExplorer.init(path, data)
