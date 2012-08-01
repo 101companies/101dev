@@ -4,7 +4,7 @@ var FileExplorer = function($) {
 
 	var loadDir = function(id, callback) {
 		if (id != "/" && loadedDirs.indexOf(id) == -1) {
-			$.ajax({url: "http://data.101companies.org/resources/" + path + "/" + id + "index.json",
+			$.ajax({url: "http://explorer.101companies.org/data/resources/" + path + "/" + id + "index.json",
 					dataType: 'json',
 					success : function(data) {
 						loadedDirs = loadedDirs.concat([id])

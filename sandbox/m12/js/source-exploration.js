@@ -37,7 +37,7 @@ var SourceExplorer = function($) {
 				currentSource = path
 				$("#detailcontent").
 					html("Loading source code...").
-					load("http://data.101companies.org/resources/" + path + ".geshi.html", function() {
+					load("http://explorer.101companies.org/data/resources/" + path + ".geshi.html", function() {
 						highlightSource(meta)
 					})
 			} else {

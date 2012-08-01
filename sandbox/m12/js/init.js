@@ -52,7 +52,7 @@ $(document).ready(function () {
 			document.title = splitp[1]
 		else
 			document.title = splitp[0]
-		$.ajax({url: "http://data.101companies.org/resources/" + path + "/index.json",
+		$.ajax({url: "http://explorer.101companies.org/data/resources/" + path + "/index.json",
 				dataType: 'json',
 				success:  function(data) {
 					FileExplorer.init(path, data)
