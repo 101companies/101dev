@@ -46,7 +46,8 @@ $(document).ready(function () {
 	$("#selectionview").children().each(function(i){
 		if (i > 0) $(this).width((100 / ($(this).parent().children().size() - 1) - 0.5) + "%")
 	})
-	$("#path").text(path
+	$("#path").text(path)
+
 	if (false && path == "") {
 		//$("#selectionview .viewinfo").append($("<b>").addClass("noSelInfo").text("No contribution selected"))
 	} else {
