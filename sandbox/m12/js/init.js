@@ -43,6 +43,8 @@ $(document).ready(function () {
 		
 	}*/
 	path = window.location.search.replace("?","")
+	if (path.endswith("/"))
+		path = path.substring(0,path.length - 1)
 	$("#selectionview").children().each(function(i){
 		if (i > 0) $(this).width((100 / ($(this).parent().children().size() - 1) - 0.5) + "%")
 	})
