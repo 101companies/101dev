@@ -1,3 +1,6 @@
+var App = {}
+App.dataURL = "http://explorer.101companies.org";
+
 String.prototype.escape = function() {
 	return this.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/])/g,'\\$1')
 }
@@ -43,7 +46,7 @@ $(document).ready(function () {
 	$("#selectionview").children().each(function(i){
 		if (i > 0) $(this).width((100 / ($(this).parent().children().size() - 1) - 0.5) + "%")
 	})
-	$("#path").text(path)
+	$("#path").text(path
 	if (false && path == "") {
 		//$("#selectionview .viewinfo").append($("<b>").addClass("noSelInfo").text("No contribution selected"))
 	} else {
@@ -52,7 +55,7 @@ $(document).ready(function () {
 			document.title = splitp[1]
 		else
 			document.title = splitp[0]
-		$.ajax({url: "http://explorer.101companies.org/data/resources/" + path + "/index.json",
+		$.ajax({url: App.dataURL + "/data/resources/" + path + "/index.json",
 				dataType: 'json',
 				success:  function(data) {
 					FileExplorer.init(path, data)
@@ -72,5 +75,8 @@ $(document).ready(function () {
 	$("#sel1").val("languages")
 	$("#sel2").val("technologies")
 	$("#sel3").val("terms")
+	$(".subselectionview").ajaxComplete(function() {
+		$(this).show()
+	})
 
 });

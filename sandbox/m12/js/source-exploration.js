@@ -8,7 +8,7 @@ var SourceExplorer = function($) {
 
 	var highlightSource = function(meta) {
 		$("#detailcontent pre ol li").removeClass("highlight")
-		if (meta && meta[0].lines) {
+		if (meta && meta[0] && meta[0].lines) {
 			baseid = $("#detailcontent pre").attr("id")
 			var i = meta[0].lines.from
 			while (i <= meta[0].lines.to) {
@@ -17,7 +17,6 @@ var SourceExplorer = function($) {
 			}
 			$("#detailcontent").animate({scrollTop: ($("#" + baseid + "-" + meta[0].lines.from).offset().top - $("#" + baseid + "-1").offset().top)}, 200)
 		}
-		
 	}
 
 	return {
@@ -37,7 +36,7 @@ var SourceExplorer = function($) {
 				currentSource = path
 				$("#detailcontent").
 					html("Loading source code...").
-					load("http://explorer.101companies.org/data/resources/" + path + ".geshi.html", function() {
+					load(App.dataURL + "/data/resources/" + path + ".geshi.html", function() {
 						highlightSource(meta)
 					})
 			} else {
