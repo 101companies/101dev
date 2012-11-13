@@ -1,5 +1,5 @@
 var App = {}
-App.dataURL = "http://explorer.101companies.org";
+App.dataURL = "";
 
 String.prototype.escape = function() {
 	return this.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/])/g,'\\$1')
@@ -42,13 +42,15 @@ $(document).ready(function () {
 		loadAreas(artefactname)
 		
 	}*/
-	path = window.location.search.replace("?","")
+	var path = window.location.search.replace("?","")
+	var datapath = App.dataURL + "/data/resources/" + path + "/index.json"
 	if (path.endswith("/"))
 		path = path.substring(0,path.length - 1)
 	$("#selectionview").children().each(function(i){
 		if (i > 0) $(this).width((100 / ($(this).parent().children().size() - 1) - 0.5) + "%")
 	})
 	$("#path").text(path)
+	$("#export a").attr('href', datapath)
 
 	if (false && path == "") {
 		//$("#selectionview .viewinfo").append($("<b>").addClass("noSelInfo").text("No contribution selected"))
@@ -58,7 +60,7 @@ $(document).ready(function () {
 			document.title = splitp[1]
 		else
 			document.title = splitp[0]
-		$.ajax({url: App.dataURL + "/data/resources/" + path + "/index.json",
+		$.ajax({url: datapath,
 				dataType: 'json',
 				success:  function(data) {
 					FileExplorer.init(path, data)

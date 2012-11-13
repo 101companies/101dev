@@ -1,7 +1,7 @@
 body {
 	font-family: Arial;
 	font-weight: bold;
-	background-color: #AEC0DD;
+	background-color:white;
 }
 
 
@@ -12,11 +12,11 @@ body {
 
 .topview {
 	width: 98%;
-	border-radius: 7px;
+	border-radius: 3px;
 	margin: 10px auto 20px auto;
 	padding: 10px 10px 0px 10px;
-	background-color: rgb(210,210,230);
-	box-shadow: 0 0 19px 1px black,inset 0 0 5px 0.1px black;
+	background-color: #EEEEEE;
+	box-shadow: 0 0 9px 1px black,inset 0 0 5px 0.1px black;
 }
 
 #graphicview {
@@ -30,19 +30,19 @@ body {
 	width: 98%;
 	height: 40%;
 	background-color: #274779;
-	box-shadow: 0 0 19px 1px black,inset 0 0 10px 1px #173060;
-	padding: 10px 1% 40px 1%;
+	box-shadow: 0 0 9px 1px black,inset 0 0 0px 1px #173060;
+	padding: 10px 1% 50px 1%;
 }
 
 hr {
 
 	border-top-color: #274779;
-	border-bottom-color: white;
+	border-bottom-color: #EEEEEE;
 }
 .subselectionview {
 	float: left;
-	border-radius: 7px;
-	background-color: rgb(210,210,230);
+	border-radius: 2px;
+	background-color: #EEEEEE;
 	width: 33%;
 	margin: 10px 0.25% 10px 0.25%;
 	height: 95%;
@@ -50,19 +50,21 @@ hr {
 	padding-bottom: 15px;
 
 	text-shadow: 0 0px 10px #FFFFFF, 0 1px 1px #666666;
-	box-shadow: 0 0 10px 1px black,inset 0 0 10px 1px #888;
+	box-shadow: 0 0 10px 1px black,inset 0 0 1px 1px #888;
 }
 
 .viewinfo {
 	font-family:  "Verdana", "Arial";
 	color: #274779;
+	height: 15px;
 	text-shadow: 0 1px 1px black, 0 1px 1px #666666;
 }
 
 #selinfo {
-	margin-top: 5px;
-	margin-bottom: 5px;
-	color: white;
+	margin-top: 0px;
+	margin-bottom: 3px;
+	padding-bottom: 8px;
+	color: #EEEEEE;
 	width: 100%	;
 }
 
@@ -119,10 +121,10 @@ svg {
 
 #detailview {
 	width: 98%;
-	height: 45%;
-	background-color: rgb(210,210,230);
+	height: 40%;
+	background-color: #EEEEEE;
 	padding: 10px 1% 30px 1%;
-	box-shadow: 0 0 19px 1px black,inset 0 0 10px 1px #888;
+	box-shadow: 0 0 9px 1px black,inset 0 0 0px 1px #888;
 	y-overflow: hidden;
 }
 
@@ -176,14 +178,30 @@ rect {
 }
 
 #pathselection {
+	float: left;
 	height: 17px;
 	margin-left: 10px;
-	margin-top: -5px;
+	margin-top: 1px;
 	margin-bottom: 0px;
 }
 
 #pathselection a {
-	color:  white;
+	color:  #EEEEEE;
+}
+
+#export {
+	float: right;
+	background-color: #EEEEEE;
+	border-radius: 2px;
+	padding: 5px 5px 5px 5px;
+	color: black;
+	box-shadow: 0 0 1px 1px ,inset 0 0 3px 0px #888;
+}
+
+#export a {
+	text-decoration: none;
+	font-size: 12px;
+	color: black;
 }
 
 .noSelInfo {
@@ -204,7 +222,7 @@ rect {
 .selectedTreeRow ,.selectedTreeRow_lor{
 	background-color: #274779;
 	border-radius: 5px;
-	color: white;
+	color: #EEEEEE;
 	box-shadow: 0 0 1px 1px ,inset 0 0 3px 0px #888;
 }
 
