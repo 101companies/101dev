@@ -80,7 +80,7 @@ class Page2(page.Page):
 			print "Replacing", textm.group(0), "by", newlink, "on", self.title
 			ntext = ntext[:textm.start() + offset] +  newlink + ntext[textm.end() + offset:]
 			offset =  offset + len(newlink) - len(textm.group(0))
-		#self.edit(text=ntext)
+		self.edit(text=ntext)
 		return ntext
 
 	def promote(self, title=False, removePrefix=False, force=False, reason=False, watch=False, unwatch=False):
