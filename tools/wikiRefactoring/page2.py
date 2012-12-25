@@ -10,11 +10,11 @@ from wikitools import page
 from wikitools import category
 
 class AlreadyExists(wiki.WikiError):
-	'''Page already exists'''	
+	'''Page already exists'''
 
 class NotPromotable(wiki.WikiError):
 	'''Page is already a category'''
-	
+
 class Page2(page.Page):
 
 	def __init__(self, wiki, title=False, check=True, followRedir=False, section=False, sectionnumber=False, pageid=False):
@@ -40,19 +40,20 @@ class Page2(page.Page):
 			page.rewriteInternlink(self.title, newtitle)
 
 
-	def rewriteInternlink(self, clink, nlink, nlinktext=""):	
+	def rewriteInternlink(self, clink, nlink, nlinktext=""):
 		''' Rewrite all given link on this page and return the new wikitext
 
 		olink - the current name of the intern link
 		nlink - the new name of the intern link
 		nlinkname - new text for the new intern link
 		'''
-		fromCat = clink.startswith("Category:")		
+		fromCat = clink.startswith("Category:")
 		toCat = nlink.startswith("Category:")
 		ntext = self.getWikiText()
 		offset = 0
-		for textm in re.finditer("(\[\[:?)(" + re.escape(clink.replace(" ", "_")) + ")(\|[^\[]+)?(\]\])", self.getWikiText().replace(" ", "_"), re.IGNORECASE):
-			if fromCat and not toCat and not textm.group(1).endswith(":"):
+		for textm in re.finditer("(\[\[:?)([^:]+::)?(" + re.escape(clink.replace(" ", "_")) + ")(\|[^\[]+)?(\]\])", self.getWikiText().replace(" ", "_"), re.IGNORECASE):
+			print textm.groups()
+			if fromCat and not toCat and not textm.group().endswith(":"):
 				ntext = ntext[:textm.start() + offset] + ntext[textm.end() + offset:]
 				offset = offset - len(textm.group(0))
 				continue
@@ -62,24 +63,28 @@ class Page2(page.Page):
 				openb = "[["
 			else:
 				openb = textm.group(1)
-			if nlinktext == "" and textm.group(3) and nlink.count(":") == 0:
-				lt = textm.group(3)
+			if nlinktext == "" and textm.group(4) and nlink.count(":") == 0:
+				lt = textm.group(4)
 			elif nlinktext != "":
 				lt = "|" + nlinktext
 			else:
 				lt = ""
-			if textm.group(2)[0].islower() :
+			if textm.group(3)[0].islower() :
 				nlink = nlink[0].lower() + nlink[1:]
-			newlink = (openb + nlink + lt + "]]").replace("_"," ")
+			if textm.group(2):
+				prop = textm.group(2)
+			else:
+				prop = ""
+			newlink = (openb + prop + nlink + lt + "]]").replace("_"," ")
 
 			print "Replacing", textm.group(0), "by", newlink, "on", self.title
 			ntext = ntext[:textm.start() + offset] +  newlink + ntext[textm.end() + offset:]
 			offset =  offset + len(newlink) - len(textm.group(0))
-		self.edit(text=ntext)
+		#self.edit(text=ntext)
 		return ntext
 
 	def promote(self, title=False, removePrefix=False, force=False, reason=False, watch=False, unwatch=False):
-		''' Promote a page to a category 
+		''' Promote a page to a category
 
 		newtitle - title of the category
 		removePrefix - when using the page title as the category title remove the prefix
@@ -98,7 +103,7 @@ class Page2(page.Page):
 		cat = category.Category(self.site, title)
 		if cat.exists and not force:
 			raise AlreadyExists
-		cat.edit(text=self.getWikiText())	
+		cat.edit(text=self.getWikiText())
 		self.rewriteReferences(self.getBacklinks(), title)
 		self.delete(reason=reason, watch=watch, unwatch=unwatch)
 		return cat
@@ -121,7 +126,7 @@ class Page2(page.Page):
 					mvtopage.delete(reason=reason, watch=watch, unwatch=unwatch)
 				else:
 					raise AlreadyExists
-			self.rewriteReferences(self.getBacklinks(), mvto)		
+			self.rewriteReferences(self.getBacklinks(), mvto)
 			t = self.title
 			page.Page.move(self, mvto, reason=reason, movetalk=movetalk, noredirect=True, watch=watch, unwatch=unwatch)
 			tod = Page2(self.site, title=t)
