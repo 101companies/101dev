@@ -4,7 +4,7 @@
 
 	<groupId>groovy</groupId>
 	<artifactId>groovy</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>Gremlin101</version>
 	<packaging>jar</packaging>
 
 	<name>groovy</name>
@@ -63,6 +63,10 @@
 			<artifactId>openrdf-sesame-onejar-osgi</artifactId>
 			<version>2.1.1</version>
 		</dependency>
-
+		<dependency>
+			<groupId>net.sf.jung</groupId>
+			<artifactId>jung-algorithms</artifactId>
+			<version>2.0.1</version>
+		</dependency>
 	</dependencies>
 </project>
