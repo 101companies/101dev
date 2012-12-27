@@ -6,6 +6,12 @@ tools/texgenerator/tex/ttc/data/*
 tools/texgenerator/tex/impl/data/impls/*
 tools/texgenerator/tex/ttc/data/ttcs/*
 tools/do-not-commit/
+tools/101Gremlin/target/*
 local/*
 configs/*.config.local.*
 
+ripple.log
+tools/Semantic101/.idea
+*.class
+tools/101Gremlin/blueprints.log
+tools/Semantic101/blueprints.log
