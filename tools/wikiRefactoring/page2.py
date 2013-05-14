@@ -63,7 +63,7 @@ class Page2(page.Page):
 				openb = "[["
 			else:
 				openb = textm.group(1)
-			if nlinktext == "" and textm.group(4) and nlink.count(":") == 0:
+			if nlinktext == "" and textm.group(4):
 				lt = textm.group(4)
 			elif nlinktext != "":
 				lt = "|" + nlinktext
