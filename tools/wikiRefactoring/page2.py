@@ -51,7 +51,7 @@ class Page2(page.Page):
 		toCat = nlink.startswith("Category:")
 		ntext = self.getWikiText()
 		offset = 0
-		for textm in re.finditer("(\[\[:?)([^:]+::)?(" + re.escape(clink.replace(" ", "_")) + ")(\|[^\[]+)?(\]\])", self.getWikiText().replace(" ", "_"), re.IGNORECASE):
+		for textm in re.finditer("(\[\[:?)([^:]+::)?\s*(" + re.escape(clink.replace(" ", "_")) + ")\s*(\|[^\[]+)?(\]\])", self.getWikiText().replace(" ", "_"), re.IGNORECASE):
 			print textm.groups()
 			if fromCat and not toCat and not textm.group().endswith(":"):
 				ntext = ntext[:textm.start() + offset] + ntext[textm.end() + offset:]
