@@ -14,5 +14,4 @@
         <servlet-name>SemanticEndpoint</servlet-name>
         <url-pattern>/doQuery</url-pattern>
     </servlet-mapping>
-
 </web-app>

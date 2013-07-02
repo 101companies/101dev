@@ -10,6 +10,7 @@
   <palette.section palette.id="Representation Relations" palette.visibility="true"/>
   <palette.section palette.id="Dataflow Relations" palette.visibility="true"/>
   <palette.section palette.id="current.elements.palette" palette.visibility="true"/>
+  <palette.section palette.id="Test" palette.visibility="true"/>
   <palette.section palette.id="bpmn.palette" palette.visibility="false"/>
   <palette.section palette.id="computers.palette" palette.visibility="false"/>
   <palette.section palette.id="edges.palette" palette.visibility="false"/>
