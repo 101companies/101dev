@@ -13,7 +13,7 @@
   <key for="edge" id="d9" yfiles.type="edgegraphics"/>
   <graph edgedefault="directed" id="G">
     <node id="n0">
-      <data key="d4"><![CDATA[http://101companies.org/Language:XML]]></data>
+      <data key="d4"><![CDATA[http://101companies.org/wiki/Language:XML]]></data>
       <data key="d6">
         <y:GenericNode configuration="ShinyPlateNode3">
           <y:Geometry height="28.0" width="138.25" x="-133.1509984576512" y="-165.46793408185806"/>
@@ -27,7 +27,7 @@
       </data>
     </node>
     <node id="n1">
-      <data key="d4"><![CDATA[http://101companies.org/Language:XML]]></data>
+      <data key="d4"><![CDATA[http://101companies.org/wiki/Language:XML]]></data>
       <data key="d6">
         <y:GenericNode configuration="ShinyPlateNode3">
           <y:Geometry height="28.362045761016077" width="38.6435546875" x="-83.34777580140121" y="-276.64187549595357"/>
@@ -41,7 +41,7 @@
       </data>
     </node>
     <node id="n2">
-      <data key="d4"><![CDATA[http://101companies.org/Language:XML]]></data>
+      <data key="d4"><![CDATA[http://101companies.org/wiki/Language:XML]]></data>
       <data key="d6">
         <y:GenericNode configuration="ShinyPlateNode3">
           <y:Geometry height="28.362045761016063" width="90.4189453125" x="-109.23547111390121" y="-218.32992557740306"/>
@@ -55,7 +55,7 @@
       </data>
     </node>
     <node id="n3">
-      <data key="d4"><![CDATA[http://101companies.org/Language:XML]]></data>
+      <data key="d4"><![CDATA[http://101companies.org/wiki/Language:XML]]></data>
       <data key="d6">
         <y:GenericNode configuration="ShinyPlateNode3">
           <y:Geometry height="28.362045761016105" width="105.69189453125" x="30.935183182973788" y="-276.6418754959536"/>
@@ -69,7 +69,7 @@
       </data>
     </node>
     <node id="n4">
-      <data key="d4"><![CDATA[http://101companies.org/Language:XML]]></data>
+      <data key="d4"><![CDATA[http://101companies.org/wiki/Language:XML]]></data>
       <data key="d6">
         <y:GenericNode configuration="ShinyPlateNode3">
           <y:Geometry height="28.362045761016105" width="97.3642578125" x="35.09900154234879" y="-165.64895696236613"/>
@@ -83,7 +83,7 @@
       </data>
     </node>
     <node id="n5">
-      <data key="d4"><![CDATA[http://101companies.org/Language:XML]]></data>
+      <data key="d4"><![CDATA[http://101companies.org/wiki/Language:XML]]></data>
       <data key="d6">
         <y:GenericNode configuration="ShinyPlateNode3">
           <y:Geometry height="28.36204576101605" width="110.70166015625" x="28.430300370473788" y="-223.82997984287408"/>
@@ -97,7 +97,7 @@
       </data>
     </node>
     <node id="n6">
-      <data key="d4"><![CDATA[http://101companies.org/Language:XML]]></data>
+      <data key="d4"><![CDATA[http://101companies.org/wiki/Language:XML]]></data>
       <data key="d6">
         <y:GenericNode configuration="ShinyPlateNode3">
           <y:Geometry height="28.362045761016105" width="143.2138671875" x="203.26164499968843" y="-247.0732042378769"/>
@@ -111,7 +111,7 @@
       </data>
     </node>
     <node id="n7">
-      <data key="d4"><![CDATA[http://101companies.org/Language:XML]]></data>
+      <data key="d4"><![CDATA[http://101companies.org/wiki/Language:XML]]></data>
       <data key="d6">
         <y:GenericNode configuration="ShinyPlateNode3">
           <y:Geometry height="28.362045761016105" width="166.55615234375" x="191.59050242156343" y="-84.2247096868553"/>
@@ -125,7 +125,7 @@
       </data>
     </node>
     <node id="n8">
-      <data key="d4"><![CDATA[http://101companies.org/Language:XML]]></data>
+      <data key="d4"><![CDATA[http://101companies.org/wiki/Language:XML]]></data>
       <data key="d6">
         <y:GenericNode configuration="ShinyPlateNode3">
           <y:Geometry height="28.36204576101605" width="124.0390625" x="212.84904734343843" y="-165.64895696236607"/>
@@ -139,7 +139,7 @@
       </data>
     </node>
     <node id="n9">
-      <data key="d4"><![CDATA[http://101companies.org/Language:XML]]></data>
+      <data key="d4"><![CDATA[http://101companies.org/wiki/Language:XML]]></data>
       <data key="d6">
         <y:GenericNode configuration="ShinyPlateNode3">
           <y:Geometry height="28.362045761016077" width="41.275390625" x="381.9119730262422" y="-269.27489118383045"/>

@@ -667,7 +667,7 @@
       </graph>
     </node>
     <node id="n2">
-      <data key="d7"><![CDATA[http://101companies.org/Language:XSD]]></data>
+      <data key="d7"><![CDATA[http://101companies.org/wiki/Language:XSD]]></data>
       <data key="d8"><![CDATA[:Language]]></data>
       <data key="d9">
         <y:GenericNode configuration="ShinyPlateNode3">
@@ -712,7 +712,7 @@
       </data>
     </node>
     <node id="n5">
-      <data key="d7"><![CDATA[http://101companies.org/Language:CSharp]]></data>
+      <data key="d7"><![CDATA[http://101companies.org/wiki/Language:CSharp]]></data>
       <data key="d8"><![CDATA[:Language]]></data>
       <data key="d9">
         <y:GenericNode configuration="ShinyPlateNode3">
