@@ -59,7 +59,7 @@
       </data>
       <graph edgedefault="directed" id="n0:">
         <node id="n0::n0" yfiles.foldertype="group">
-          <data key="d7"><![CDATA[http://101companies.org/index.php/Technology:xsd.exe]]></data>
+          <data key="d7"><![CDATA[http://101companies.org/wiki/Technology:xsd.exe]]></data>
           <data key="d8"><![CDATA[xsd.exe:Technology]]></data>
           <data key="d9">
             <y:ProxyAutoBoundsNode>
@@ -91,7 +91,7 @@
           </data>
           <graph edgedefault="directed" id="n0::n0:">
             <node id="n0::n0::n0">
-              <data key="d7"><![CDATA[http://101companies.org/index.php/Technology:xsd.exe#Language:CSharpFromXsd]]></data>
+              <data key="d7"><![CDATA[http://101companies.org/wiki/Technology:xsd.exe#Language:CSharpFromXsd]]></data>
               <data key="d8"><![CDATA[:Language]]></data>
               <data key="d9">
                 <y:GenericNode configuration="ShinyPlateNode3">
@@ -106,7 +106,7 @@
               </data>
             </node>
             <node id="n0::n0::n1">
-              <data key="d7"><![CDATA[http://101companies.org/index.php/Technology:xsd.exe#Function:xsdToClasses]]></data>
+              <data key="d7"><![CDATA[http://101companies.org/wiki/Technology:xsd.exe#Function:xsdToClasses]]></data>
               <data key="d8"><![CDATA[:Function]]></data>
               <data key="d9">
                 <y:GenericNode configuration="ShinyPlateNode3">
@@ -123,7 +123,7 @@
           </graph>
         </node>
         <node id="n0::n1">
-          <data key="d7"><![CDATA[http://101companies.org/index.php/Dotnet:System.Xml.Serialization]]></data>
+          <data key="d7"><![CDATA[http://101companies.org/wiki/Dotnet:System.Xml.Serialization]]></data>
           <data key="d8"><![CDATA[:Artefact]]></data>
           <data key="d9">
             <y:GenericNode configuration="ShinyPlateNode3">
@@ -140,7 +140,7 @@
       </graph>
     </node>
     <node id="n1" yfiles.foldertype="group">
-      <data key="d7"><![CDATA[http://101companies.org/index.php/101implementation:xsdClasses]]></data>
+      <data key="d7"><![CDATA[http://101companies.org/wiki/101implementation:xsdClasses]]></data>
       <data key="d8"><![CDATA[:Implementation]]></data>
       <data key="d9">
         <y:ProxyAutoBoundsNode>
@@ -608,7 +608,7 @@
       </data>
     </node>
     <node id="n3">
-      <data key="d7"><![CDATA[http://101companies.org/index.php/Language:CSharp]]></data>
+      <data key="d7"><![CDATA[http://101companies.org/wiki/Language:CSharp]]></data>
       <data key="d8"><![CDATA[:Language]]></data>
       <data key="d9">
         <y:GenericNode configuration="ShinyPlateNode3">
@@ -623,7 +623,7 @@
       </data>
     </node>
     <node id="n4">
-      <data key="d7"><![CDATA[http://101companies.org/index.php/Language:XSD]]></data>
+      <data key="d7"><![CDATA[http://101companies.org/wiki/Language:XSD]]></data>
       <data key="d8"><![CDATA[:Language]]></data>
       <data key="d9">
         <y:GenericNode configuration="ShinyPlateNode3">
@@ -638,7 +638,7 @@
       </data>
     </node>
     <node id="n5">
-      <data key="d7"><![CDATA[http://101companies.org/index.php/Language:XML]]></data>
+      <data key="d7"><![CDATA[http://101companies.org/wiki/Language:XML]]></data>
       <data key="d8"><![CDATA[XML:Language]]></data>
       <data key="d9">
         <y:GenericNode configuration="ShinyPlateNode3">
