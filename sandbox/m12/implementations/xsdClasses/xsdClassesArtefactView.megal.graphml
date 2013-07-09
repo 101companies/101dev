@@ -27,7 +27,7 @@
   <graph edgedefault="directed" id="G">
     <data key="d10"><![CDATA[Hello]]></data>
     <node id="n0" yfiles.foldertype="group">
-      <data key="d7"><![CDATA[http://101companies.org//Technology:.NET_XML_Serialization]]></data>
+      <data key="d7"><![CDATA[http://101companies.org/Technology:.NET_XML_Serialization]]></data>
       <data key="d8"><![CDATA[xsdDotExe:Technology]]></data>
       <data key="d9">
         <y:ProxyAutoBoundsNode>
