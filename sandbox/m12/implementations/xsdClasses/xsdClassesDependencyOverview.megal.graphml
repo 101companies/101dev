@@ -27,7 +27,7 @@
   <graph edgedefault="directed" id="G">
     <data key="d10"/>
     <node id="n0" yfiles.foldertype="folder">
-      <data key="d7"><![CDATA[http://101companies.org/index.php/Technology:xsd.exe]]></data>
+      <data key="d7"><![CDATA[http://101companies.org/wiki/Technology:xsd.exe]]></data>
       <data key="d8"><![CDATA[xsdDotExe:Technology]]></data>
       <data key="d9">
         <y:ProxyAutoBoundsNode>
@@ -682,7 +682,7 @@
       </data>
     </node>
     <node id="n3">
-      <data key="d7"><![CDATA[http://101companies.org/index.php/Language:XML]]></data>
+      <data key="d7"><![CDATA[http://101companies.org/wiki/Language:XML]]></data>
       <data key="d8"><![CDATA[XML:Language]]></data>
       <data key="d9">
         <y:GenericNode configuration="ShinyPlateNode3">
