@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:y="http://www.yworks.com/xml/graphml" xmlns:yed="http://www.yworks.com/xml/yed/3" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.1/ygraphml.xsd">
-  <!--Created by yFiles for Java 2.9-->
+  <!--Created by yEd 3.12.2-->
   <key for="graphml" id="d0" yfiles.type="resources"/>
   <key for="port" id="d1" yfiles.type="portgraphics"/>
   <key for="port" id="d2" yfiles.type="portgeometry"/>
@@ -19,7 +19,7 @@
       <data key="d5"><![CDATA[:File]]></data>
       <data key="d6">
         <y:GenericNode configuration="ShinyPlateNode3">
-          <y:Geometry height="30.0" width="70.0" x="61.49417781286547" y="115.47655487712018"/>
+          <y:Geometry height="30.0" width="70.0" x="61.49417781286547" y="112.27655487712019"/>
           <y:Fill color="#9999FF" transparent="false"/>
           <y:BorderStyle hasColor="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="21.666015625" horizontalTextPosition="right" iconData="1" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000080" verticalTextPosition="bottom" visible="true" width="52.13232421875" x="4.0" y="4.0">Doc</y:NodeLabel>
@@ -34,7 +34,7 @@
       <data key="d5"><![CDATA[:Artefact]]></data>
       <data key="d6">
         <y:GenericNode configuration="ShinyPlateNode3">
-          <y:Geometry height="30.0" width="65.20000000000002" x="370.4541778128654" y="115.47655487712018"/>
+          <y:Geometry height="30.0" width="65.20000000000002" x="372.8541778128654" y="112.27655487712019"/>
           <y:Fill color="#9999FF" transparent="false"/>
           <y:BorderStyle hasColor="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="21.666015625" horizontalTextPosition="right" iconTextGap="2" image="2" modelName="internal" modelPosition="tl" textColor="#000080" verticalTextPosition="bottom" visible="true" width="47.65673828125" x="4.0" y="4.0">Obj</y:NodeLabel>
@@ -49,10 +49,10 @@
       <data key="d5"><![CDATA[:Language]]></data>
       <data key="d6">
         <y:GenericNode configuration="ShinyPlateNode3">
-          <y:Geometry height="30.0" width="70.0" x="368.0541778128654" y="236.55798494479598"/>
+          <y:Geometry height="30.0" width="70.0" x="432.0541778128654" y="202.957984944796"/>
           <y:Fill color="#FFCC99" transparent="false"/>
           <y:BorderStyle color="#990033" type="dotted" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Colonna MT" fontSize="14" fontStyle="italic" hasBackgroundColor="false" hasLineColor="false" height="20.0" horizontalTextPosition="right" iconTextGap="2" image="3" modelName="internal" modelPosition="tl" textColor="#990033" verticalTextPosition="bottom" visible="true" width="59.1875" x="4.0" y="4.0">ClrObj</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Colonna MT" fontSize="14" fontStyle="italic" hasBackgroundColor="false" hasLineColor="false" height="20.48828125" horizontalTextPosition="right" iconTextGap="2" image="3" modelName="internal" modelPosition="tl" textColor="#990033" verticalTextPosition="bottom" visible="true" width="65.408203125" x="4.0" y="4.0">ClrObj</y:NodeLabel>
           <y:StyleProperties>
             <y:Property class="java.lang.Double" name="ModernNodeRadius" value="5.0"/>
           </y:StyleProperties>
@@ -64,10 +64,10 @@
       <data key="d5"><![CDATA[:Language]]></data>
       <data key="d6">
         <y:GenericNode configuration="ShinyPlateNode3">
-          <y:Geometry height="30.0" width="70.0" x="359.82667536700137" y="-149.04689024575964"/>
+          <y:Geometry height="30.0" width="85.5" x="424.3041778128654" y="-98.64689024575962"/>
           <y:Fill color="#FFCC99" transparent="false"/>
           <y:BorderStyle color="#990033" type="dotted" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Colonna MT" fontSize="14" fontStyle="italic" hasBackgroundColor="false" hasLineColor="false" height="20.0" horizontalTextPosition="right" iconTextGap="2" image="3" modelName="internal" modelPosition="tl" textColor="#990033" verticalTextPosition="bottom" visible="true" width="39.349609375" x="4.0" y="4.0">C#</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Colonna MT" fontSize="14" fontStyle="italic" hasBackgroundColor="false" hasLineColor="false" height="20.48828125" horizontalTextPosition="right" iconTextGap="2" image="3" modelName="internal" modelPosition="tl" textColor="#990033" verticalTextPosition="bottom" visible="true" width="43.7451171875" x="4.0" y="4.0">C#'</y:NodeLabel>
           <y:StyleProperties>
             <y:Property class="java.lang.Double" name="ModernNodeRadius" value="5.0"/>
           </y:StyleProperties>
@@ -79,10 +79,10 @@
       <data key="d5"><![CDATA[:Language]]></data>
       <data key="d6">
         <y:GenericNode configuration="ShinyPlateNode3">
-          <y:Geometry height="30.0" width="70.0" x="67.2211213099115" y="236.55798494479598"/>
+          <y:Geometry height="30.0" width="70.0" x="-14.378878690088499" y="202.957984944796"/>
           <y:Fill color="#FFCC99" transparent="false"/>
           <y:BorderStyle color="#990033" type="dotted" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Colonna MT" fontSize="14" fontStyle="italic" hasBackgroundColor="false" hasLineColor="false" height="20.0" horizontalTextPosition="right" iconTextGap="2" image="3" modelName="internal" modelPosition="tl" textColor="#990033" verticalTextPosition="bottom" visible="true" width="49.275390625" x="4.0" y="4.0">XML</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Colonna MT" fontSize="14" fontStyle="italic" hasBackgroundColor="false" hasLineColor="false" height="20.48828125" horizontalTextPosition="right" iconTextGap="2" image="3" modelName="internal" modelPosition="tl" textColor="#990033" verticalTextPosition="bottom" visible="true" width="50.287109375" x="4.0" y="4.0">XML</y:NodeLabel>
           <y:StyleProperties>
             <y:Property class="java.lang.Double" name="ModernNodeRadius" value="5.0"/>
           </y:StyleProperties>
@@ -94,10 +94,10 @@
       <data key="d5"><![CDATA[:Language]]></data>
       <data key="d6">
         <y:GenericNode configuration="ShinyPlateNode3">
-          <y:Geometry height="30.0" width="70.0" x="73.65417781286548" y="-149.04689024575964"/>
+          <y:Geometry height="30.0" width="70.0" x="-14.378878690088499" y="-98.64689024575962"/>
           <y:Fill color="#FFCC99" transparent="false"/>
           <y:BorderStyle color="#990033" type="dotted" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Colonna MT" fontSize="14" fontStyle="italic" hasBackgroundColor="false" hasLineColor="false" height="20.0" horizontalTextPosition="right" iconTextGap="2" image="3" modelName="internal" modelPosition="tl" textColor="#990033" verticalTextPosition="bottom" visible="true" width="46.6435546875" x="4.0" y="4.0">XSD</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Colonna MT" fontSize="14" fontStyle="italic" hasBackgroundColor="false" hasLineColor="false" height="20.48828125" horizontalTextPosition="right" iconTextGap="2" image="3" modelName="internal" modelPosition="tl" textColor="#990033" verticalTextPosition="bottom" visible="true" width="48.7900390625" x="4.0" y="4.0">XSD</y:NodeLabel>
           <y:StyleProperties>
             <y:Property class="java.lang.Double" name="ModernNodeRadius" value="5.0"/>
           </y:StyleProperties>
@@ -109,7 +109,7 @@
       <data key="d5"><![CDATA[:FunctionApplication]]></data>
       <data key="d6">
         <y:GenericNode configuration="ShinyPlateNode3">
-          <y:Geometry height="30.0" width="115.0" x="193.4741778128654" y="115.47655487712018"/>
+          <y:Geometry height="30.0" width="115.0" x="193.4741778128654" y="112.27655487712019"/>
           <y:Fill color="#99FF99" transparent="false"/>
           <y:BorderStyle color="#006600" type="dotted" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="15" fontStyle="italic" hasBackgroundColor="false" hasLineColor="false" height="21.666015625" horizontalTextPosition="right" iconTextGap="4" image="4" modelName="internal" modelPosition="tl" textColor="#006600" verticalTextPosition="top" visible="true" width="102.18603515625" x="4.0" y="4.0">deserialize</y:NodeLabel>
@@ -124,10 +124,10 @@
       <data key="d5"><![CDATA[:Language]]></data>
       <data key="d6">
         <y:GenericNode configuration="ShinyPlateNode3">
-          <y:Geometry height="30.0" width="101.0" x="58.15417781286547" y="-5.162860135351593"/>
+          <y:Geometry height="30.0" width="101.0" x="58.15417781286547" y="4.79512480944436"/>
           <y:Fill color="#FFCC99" transparent="false"/>
           <y:BorderStyle color="#990033" type="dotted" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Colonna MT" fontSize="14" fontStyle="italic" hasBackgroundColor="false" hasLineColor="false" height="20.0" horizontalTextPosition="right" iconTextGap="2" image="5" modelName="internal" modelPosition="tl" textColor="#990033" verticalTextPosition="bottom" visible="true" width="79.75" x="4.0" y="4.0">xmlTypes</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Colonna MT" fontSize="14" fontStyle="italic" hasBackgroundColor="false" hasLineColor="false" height="20.48828125" horizontalTextPosition="right" iconTextGap="2" image="5" modelName="internal" modelPosition="tl" textColor="#990033" verticalTextPosition="bottom" visible="true" width="87.6181640625" x="4.0" y="4.0">xmlTypes</y:NodeLabel>
           <y:StyleProperties>
             <y:Property class="java.lang.Double" name="ModernNodeRadius" value="5.0"/>
           </y:StyleProperties>
@@ -139,7 +139,7 @@
       <data key="d5"><![CDATA[:ExecutableFile]]></data>
       <data key="d6">
         <y:GenericNode configuration="ShinyPlateNode3">
-          <y:Geometry height="30.0" width="85.6943359375" x="202.81325862118342" y="-5.604875190555617"/>
+          <y:Geometry height="30.0" width="85.6943359375" x="202.81325862118342" y="4.79512480944436"/>
           <y:Fill color="#9999FF" transparent="false"/>
           <y:BorderStyle hasColor="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="21.666015625" horizontalTextPosition="right" iconData="6" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000080" verticalTextPosition="bottom" visible="true" width="80.94580078125" x="4.0" y="4.0">xsd.exe</y:NodeLabel>
@@ -154,10 +154,10 @@
       <data key="d5"><![CDATA[:Language]]></data>
       <data key="d6">
         <y:GenericNode configuration="ShinyPlateNode3">
-          <y:Geometry height="30.0" width="101.0" x="344.32667536700137" y="-5.604875190555617"/>
+          <y:Geometry height="30.0" width="101.0" x="344.32667536700137" y="4.79512480944436"/>
           <y:Fill color="#FFCC99" transparent="false"/>
           <y:BorderStyle color="#990033" type="dotted" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Colonna MT" fontSize="14" fontStyle="italic" hasBackgroundColor="false" hasLineColor="false" height="20.0" horizontalTextPosition="right" iconTextGap="2" image="5" modelName="internal" modelPosition="tl" textColor="#990033" verticalTextPosition="bottom" visible="true" width="71.4375" x="4.0" y="4.0">ooTypes</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Colonna MT" fontSize="14" fontStyle="italic" hasBackgroundColor="false" hasLineColor="false" height="20.48828125" horizontalTextPosition="right" iconTextGap="2" image="5" modelName="internal" modelPosition="tl" textColor="#990033" verticalTextPosition="bottom" visible="true" width="79.1142578125" x="4.0" y="4.0">ooTypes</y:NodeLabel>
           <y:StyleProperties>
             <y:Property class="java.lang.Double" name="ModernNodeRadius" value="5.0"/>
           </y:StyleProperties>
@@ -169,18 +169,16 @@
       <data key="d9"><![CDATA[:elementOf]]></data>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="5.786655520467889" sy="14.998445122879787" tx="7.578655520467862" ty="1.8788036206298386">
-            <y:Point x="408.8408333333333" y="190.99799637937002"/>
-            <y:Point x="410.6328333333333" y="190.99799637937002"/>
-          </y:Path>
+          <y:Path sx="5.786655520467889" sy="14.998445122879787" tx="7.578655520467862" ty="1.8788036206298386"/>
           <y:LineStyle color="#993300" type="dotted" width="1.0"/>
           <y:Arrows source="none" target="transparent_circle"/>
-          <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="9" fontStyle="italic" hasLineColor="false" height="14.599609375" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#993300" visible="true" width="49.298828125" x="-23.753401041666734" y="38.178736735815335">elementOf<y:LabelModel>
+          <y:EdgeLabel alignment="center" anchorX="3.5169546625011208" anchorY="15.838213138478466" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="9" fontStyle="italic" hasLineColor="false" height="14.599609375" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#993300" upX="0.7742881535242783" upY="-0.6328331970685195" visible="true" width="49.298828125" x="3.5169546625011208" y="6.599095661745686">elementOf<y:LabelModel>
               <y:RotatedDiscreteEdgeLabelModel angle="0.0" autoRotationEnabled="true" candidateMask="128" distance="0.0" positionRelativeToSegment="false"/>
             </y:LabelModel>
             <y:ModelParameter>
               <y:RotatedDiscreteEdgeLabelModelParameter position="center"/>
             </y:ModelParameter>
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
           </y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
@@ -194,12 +192,13 @@
           <y:Path sx="0.0" sy="0.0" tx="-5.7269434970460225" ty="0.0"/>
           <y:LineStyle color="#993300" type="dotted" width="1.0"/>
           <y:Arrows source="none" target="transparent_circle"/>
-          <y:EdgeLabel alignment="center" anchorX="-7.299805646607183" anchorY="20.903927625801828" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="9" fontStyle="italic" hasLineColor="false" height="14.599609375" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#993300" upX="1.0" upY="1.8369701987210297E-16" visible="true" width="49.298828125" x="-7.299805646607192" y="20.903927625801828">elementOf<y:LabelModel>
+          <y:EdgeLabel alignment="center" anchorX="-16.25107912605459" anchorY="7.146618265277482" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="9" fontStyle="italic" hasLineColor="false" height="14.599609375" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#993300" upX="0.7433483023395162" upY="0.6689045532876565" visible="true" width="49.298828125" x="-49.227289730612675" y="7.146618265277482">elementOf<y:LabelModel>
               <y:RotatedDiscreteEdgeLabelModel angle="0.0" autoRotationEnabled="true" candidateMask="128" distance="0.0" positionRelativeToSegment="false"/>
             </y:LabelModel>
             <y:ModelParameter>
               <y:RotatedDiscreteEdgeLabelModelParameter position="center"/>
             </y:ModelParameter>
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
           </y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
@@ -212,13 +211,14 @@
           <y:Path sx="0.0" sy="3.348145960539938" tx="-56.31999999999999" ty="3.348145960539938"/>
           <y:LineStyle color="#66FF66" type="line" width="7.0"/>
           <y:Arrows source="none" target="short"/>
-          <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="9" fontStyle="plain" hasLineColor="false" hasText="false" height="4.0" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#009900" visible="true" width="4.0" x="28.953400835326363" y="-2.0000061935898827">
+          <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="9" fontStyle="plain" hasLineColor="false" hasText="false" height="4.0" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#009900" visible="true" width="4.0" x="28.953400835326363" y="-1.9999939865586214">
             <y:LabelModel>
               <y:RotatedDiscreteEdgeLabelModel angle="0.0" autoRotationEnabled="true" candidateMask="128" distance="2.0" positionRelativeToSegment="false"/>
             </y:LabelModel>
             <y:ModelParameter>
               <y:RotatedDiscreteEdgeLabelModelParameter position="center"/>
             </y:ModelParameter>
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
           </y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
@@ -231,13 +231,14 @@
           <y:Path sx="57.51342773437497" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#66FF66" type="line" width="7.0"/>
           <y:Arrows source="none" target="short"/>
-          <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="9" fontStyle="plain" hasLineColor="false" hasText="false" height="4.0" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#009900" visible="true" width="4.0" x="28.983281816771637" y="-2.0000076228798207">
+          <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="9" fontStyle="plain" hasLineColor="false" hasText="false" height="4.0" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#009900" visible="true" width="4.0" x="30.183281816771625" y="-2.0000030452430906">
             <y:LabelModel>
               <y:RotatedDiscreteEdgeLabelModel angle="0.0" autoRotationEnabled="true" candidateMask="128" distance="2.0" positionRelativeToSegment="false"/>
             </y:LabelModel>
             <y:ModelParameter>
               <y:RotatedDiscreteEdgeLabelModelParameter position="center"/>
             </y:ModelParameter>
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
           </y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
@@ -248,18 +249,16 @@
       <data key="d9"><![CDATA[:elementOf]]></data>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="108.65417781286547" y="-62.10487519055562"/>
-            <y:Point x="108.65417781286548" y="-62.10487519055562"/>
-          </y:Path>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#993300" type="dotted" width="1.0"/>
           <y:Arrows source="none" target="transparent_circle"/>
-          <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="9" fontStyle="italic" hasLineColor="false" height="14.599609375" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#993300" visible="true" width="49.298828125" x="-24.64941105432203" y="-64.24219046384053">elementOf<y:LabelModel>
+          <y:EdgeLabel alignment="center" anchorX="-9.736886588322335" anchorY="-22.70446307884921" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="9" fontStyle="italic" hasLineColor="false" height="14.599609375" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#993300" upX="-0.7615492041718858" upY="0.6481070973420731" visible="true" width="49.298828125" x="-52.80612788753349" y="-60.247946404049536">elementOf<y:LabelModel>
               <y:RotatedDiscreteEdgeLabelModel angle="0.0" autoRotationEnabled="true" candidateMask="128" distance="0.0" positionRelativeToSegment="false"/>
             </y:LabelModel>
             <y:ModelParameter>
               <y:RotatedDiscreteEdgeLabelModelParameter position="center"/>
             </y:ModelParameter>
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
           </y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
@@ -273,12 +272,13 @@
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#993300" type="dotted" width="1.0"/>
           <y:Arrows source="none" target="transparent_circle"/>
-          <y:EdgeLabel alignment="center" anchorX="7.299819898251371" anchorY="-32.04800348002897" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="9" fontStyle="italic" hasLineColor="false" height="14.599609375" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#993300" upX="-1.0" upY="-6.123233995736766E-17" visible="true" width="49.298828125" x="-7.299789476748629" y="-81.34683160502897">elementOf<y:LabelModel>
+          <y:EdgeLabel alignment="center" anchorX="17.530504876690372" anchorY="-12.355783488224024" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="9" fontStyle="italic" hasLineColor="false" height="14.599609375" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#993300" upX="-0.8199087289366846" upY="-0.5724942586728973" visible="true" width="49.298828125" x="5.560157711062017" y="-61.13451554031536">elementOf<y:LabelModel>
               <y:RotatedDiscreteEdgeLabelModel angle="0.0" autoRotationEnabled="true" candidateMask="128" distance="0.0" positionRelativeToSegment="false"/>
             </y:LabelModel>
             <y:ModelParameter>
               <y:RotatedDiscreteEdgeLabelModelParameter position="center"/>
             </y:ModelParameter>
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
           </y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
@@ -289,17 +289,17 @@
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="160.19730220139945" y="9.837139864648407"/>
-            <y:Point x="160.19730220139945" y="9.395124809444383"/>
+            <y:Point x="160.19730220139945" y="19.79512480944436"/>
           </y:Path>
           <y:LineStyle color="#009900" type="line" width="7.0"/>
           <y:Arrows source="none" target="short"/>
-          <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="9" fontStyle="plain" hasLineColor="false" height="14.599609375" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#009900" visible="true" width="12.18701171875" x="16.246338760900812" y="-7.741819961368606">in<y:LabelModel>
+          <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="9" fontStyle="plain" hasLineColor="false" height="14.599609375" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#009900" visible="true" width="12.18701171875" x="16.246338760900812" y="-7.299803932010718">in<y:LabelModel>
               <y:RotatedDiscreteEdgeLabelModel angle="0.0" autoRotationEnabled="true" candidateMask="128" distance="2.0" positionRelativeToSegment="false"/>
             </y:LabelModel>
             <y:ModelParameter>
               <y:RotatedDiscreteEdgeLabelModelParameter position="center"/>
             </y:ModelParameter>
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
           </y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
@@ -312,12 +312,13 @@
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
           <y:LineStyle color="#009900" type="line" width="7.0"/>
           <y:Arrows source="none" target="short"/>
-          <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="9" fontStyle="plain" hasLineColor="false" height="14.599609375" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#009900" visible="true" width="18.47998046875" x="18.653279982373647" y="-7.299804313480426">out<y:LabelModel>
+          <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="9" fontStyle="plain" hasLineColor="false" height="14.599609375" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#009900" visible="true" width="18.47998046875" x="18.653279982373647" y="-7.299803932010722">out<y:LabelModel>
               <y:RotatedDiscreteEdgeLabelModel angle="0.0" autoRotationEnabled="true" candidateMask="128" distance="2.0" positionRelativeToSegment="false"/>
             </y:LabelModel>
             <y:ModelParameter>
               <y:RotatedDiscreteEdgeLabelModelParameter position="center"/>
             </y:ModelParameter>
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
           </y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
@@ -330,12 +331,13 @@
           <y:Path sx="0.0" sy="0.0" tx="-12.159999999999997" ty="0.0"/>
           <y:LineStyle color="#3300CC" type="dotted" width="1.0"/>
           <y:Arrows source="none" target="circle"/>
-          <y:EdgeLabel alignment="center" anchorX="7.299803728392817" anchorY="-17.101575480678207" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="9" fontStyle="italic" hasLineColor="false" height="14.599609375" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#3300CC" upX="-1.0" upY="-6.123233995736766E-17" visible="true" width="56.453125" x="-7.299805646607183" y="-73.5547004806782">conformsTo<y:LabelModel>
+          <y:EdgeLabel alignment="center" anchorX="7.299803728392817" anchorY="-10.5307800297646" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="9" fontStyle="italic" hasLineColor="false" height="14.599609375" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#3300CC" upX="-1.0" upY="-6.123233995736766E-17" visible="true" width="56.453125" x="-7.299805646607183" y="-66.9839050297646">conformsTo<y:LabelModel>
               <y:RotatedDiscreteEdgeLabelModel angle="0.0" autoRotationEnabled="true" candidateMask="128" distance="0.0" positionRelativeToSegment="false"/>
             </y:LabelModel>
             <y:ModelParameter>
               <y:RotatedDiscreteEdgeLabelModelParameter position="center"/>
             </y:ModelParameter>
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
           </y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
@@ -345,18 +347,16 @@
       <data key="d9"><![CDATA[:conformsTo]]></data>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="9.116157966331969" ty="7.041675190555566">
-            <y:Point x="403.0541778128654" y="73.45667743856006"/>
-            <y:Point x="403.94283333333334" y="73.45667743856006"/>
-          </y:Path>
+          <y:Path sx="0.0" sy="0.0" tx="9.116157966331969" ty="7.041675190555566"/>
           <y:LineStyle color="#3300CC" type="dotted" width="1.0"/>
           <y:Arrows source="none" target="circle"/>
-          <y:EdgeLabel alignment="center" anchorX="8.188469319661465" anchorY="-38.31739263820481" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="9" fontStyle="italic" hasLineColor="false" height="14.599609375" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#3300CC" upX="-1.0" upY="-6.123233995736766E-17" visible="true" width="56.453125" x="-6.411140055338535" y="-94.77051763820481">conformsTo<y:LabelModel>
+          <y:EdgeLabel alignment="center" anchorX="7.140094257472754" anchorY="-10.669111450064406" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="9" fontStyle="italic" hasLineColor="false" height="14.599609375" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#3300CC" upX="-0.999886808998673" upY="0.015045570459484157" visible="true" width="56.453125" x="-8.307232042968673" y="-67.11584646431763">conformsTo<y:LabelModel>
               <y:RotatedDiscreteEdgeLabelModel angle="0.0" autoRotationEnabled="true" candidateMask="128" distance="0.0" positionRelativeToSegment="false"/>
             </y:LabelModel>
             <y:ModelParameter>
               <y:RotatedDiscreteEdgeLabelModelParameter position="center"/>
             </y:ModelParameter>
+            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
           </y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
